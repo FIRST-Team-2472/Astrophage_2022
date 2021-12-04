@@ -18,13 +18,14 @@ public abstract class TimerBase implements Actionable{
 	public abstract void endAction();
 
 	public boolean isFinished() {
-		if (System.currentTimeMillis() > endTime) {
+		if (System.currentTimeMillis() >= endTime) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
+	//returns how much time is left
 	public String toString() {
 		return "Action life:"+lifetime;
 		
