@@ -8,15 +8,19 @@ public abstract class TimerBase implements Actionable{
 	public TimerBase (double getLifetime) {
 		lifetime = getLifetime;
 	}
-    
+	
+	@Override
 	public void startAction() {
 		endTime = System.currentTimeMillis() + (long)(1000 * lifetime);		
 	}
 	
+	@Override
 	public abstract void periodic();
 
+	@Override
 	public abstract void endAction();
 
+	@Override
 	public boolean isFinished() {
 		if (System.currentTimeMillis() >= endTime) {
 			return true;

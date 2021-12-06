@@ -9,7 +9,9 @@ public class Constants {
 	public static final int motorFL = 2;
     public static final int motorFR = 3;
     
-    //Joysticks
+    //Joysticks & xbox controller
     public static final int jstickL = 0;
     public static final int jstickR = 1;
+    public static final int xboxcontroller = 2;
+
 }
