@@ -1,7 +1,6 @@
-package frc.robot.Subsystems
+package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Drive {
@@ -30,12 +29,12 @@ public class Drive {
         //x is the x axis of the SAME joystick
 
         if (Math.abs(x) + Math.abs(y) < .75) {
-            tankDriveVelocity(y - x, y + x);
+            tankDrive(y - x, y + x);
         } else {
             // limits the motors from ever going over 75% speed
             double betterX = (x/(Math.abs(x)+Math.abs(y)))*.75;
             double betterY = (y/(Math.abs(x)+Math.abs(y)))*.75;
-            tankDriveVelocity(betterY - betterX, betterY + betterX);
+            tankDrive(betterY - betterX, betterY + betterX);
         }
     }
 
