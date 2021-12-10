@@ -1,6 +1,6 @@
 package frc.robot.Miscellaneous;
 
-public class SmartDashBoard {
+public class SmartDashBoardHub {
     
     public void update() {
 
