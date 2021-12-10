@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ActionQueue {
     private ArrayList<Actionable> queue;
-    boolean inProgress = true;
+    boolean inProgress = false;
 
     public ActionQueue() {
         queue = new ArrayList<Actionable>();
