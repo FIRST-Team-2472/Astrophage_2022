@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class ActionQueue {
     private ArrayList<Actionable> queue;
     boolean inProgress = true;
+    boolean start = true;
 
     public ActionQueue() {
         queue = new ArrayList<Actionable>();
@@ -17,17 +18,22 @@ public class ActionQueue {
     public void step() {
         if (!queue.isEmpty()) {
             Actionable action = queue.get(0);
-
+            if (start == true) {
+                action.startAction();
+                start = false;
+            }
             action.periodic();
 
             inProgress = true;
 
             if (action.isFinished()) {
                 action.endAction();
-
                 queue.remove(0);
-                action = queue.get(0);
-                action.startAction();
+
+                if (!queue.isEmpty()) {
+                    action = queue.get(0);
+                    action.startAction();
+                }
             }
         } else inProgress = false;
     }

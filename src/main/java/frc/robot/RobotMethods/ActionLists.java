@@ -7,6 +7,7 @@ public class ActionLists {
     
     public void DriveSome(ActionQueue action) {
         action.addAction(new DriveStraightTime(.3, 4));
-        action.addAction(new DriveStraightTime(-.3, 2));
+        action.addAction(new DriveStraightTime(-.3, 4));
+        action.addAction(new DriveStraightTime(.3, 4));
     }
 }
