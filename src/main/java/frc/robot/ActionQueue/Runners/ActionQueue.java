@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class ActionQueue {
     private ArrayList<Actionable> queue;
-    boolean inProgress = true;
-    boolean start = true;
+    boolean inProgress, start;
 
     public ActionQueue() {
         queue = new ArrayList<Actionable>();
+        inProgress = false;
+        start = true;
     }
 
     public void addAction(Actionable action) {
