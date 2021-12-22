@@ -15,7 +15,7 @@ public class Drive {
     private TalonSRX leftMaster;
     private TalonSRX leftSlave;
 
-    //Assigns IDs talons to hand instructions to dum kopf motors
+    //Assigns IDs talons to hand instructions to stupid motors
     public Drive(int backRightID, int frontRightID, int backLeftID, int frontLeftID) {
         rightMaster = new TalonSRX(backRightID);
         rightSlave = new TalonSRX(frontRightID);
@@ -135,7 +135,7 @@ public class Drive {
     }
 
     public void runRight(double speed) {
-        rightMaster.set(ControlMode.Velocity, speed * -6250);
+        rightMaster.set(ControlMode.Velocity, speed * -6250);coc
     }
 
     public void zeroEncoders(){
@@ -189,12 +189,12 @@ public class Drive {
         //x is the x axis of the SAME joystick
 
         if (Math.abs(x) + Math.abs(y) < .75) {
-            tankDrivePower(y + x, y - x);
+            tankDrivePower(y - x, y + x);
         } else {
             // limits the motors from ever going over 75% speed
             double betterX = (x/(Math.abs(x)+Math.abs(y)))*.75;
             double betterY = (y/(Math.abs(x)+Math.abs(y)))*.75;
-            tankDrivePower(betterY + betterX, betterY - betterX);
+            tankDrivePower(betterY - betterX, betterY + betterX);
         }
     }
 
