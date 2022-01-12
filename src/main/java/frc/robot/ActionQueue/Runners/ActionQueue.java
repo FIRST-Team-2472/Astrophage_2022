@@ -1,3 +1,5 @@
+//Built to run autonomous actions. step() runs each action in the action queues and then deletes them from the queue when the action is done.
+
 package frc.robot.ActionQueue.Runners;
 
 import java.util.ArrayList;
@@ -18,11 +20,12 @@ public class ActionQueue {
 
     public void step() {
         if (!queue.isEmpty()) {
-            Actionable action = queue.get(0);
             if (start == true) {
+                Actionable action = queue.get(0);
                 action.startAction();
                 start = false;
             }
+
             action.periodic();
 
             inProgress = true;

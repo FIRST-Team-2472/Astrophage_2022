@@ -9,5 +9,5 @@ public interface Actionable {
 	public void endAction();
 
 	public boolean isFinished();
-		
+	
 }
