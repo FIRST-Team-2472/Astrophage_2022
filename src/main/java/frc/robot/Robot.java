@@ -12,36 +12,40 @@ import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
-  public static final Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
+  public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
 
-  public static final Joystick rightJoystick = new Joystick(Constants.jstickR);
-  public static final Joystick leftJoystick = new Joystick(Constants.jstickL);
-  public static final edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
+  public static Joystick rightJoystick = new Joystick(Constants.jstickR);
+  public static Joystick leftJoystick = new Joystick(Constants.jstickL);
+  public edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
 
-  public static final ActionLists actionList = new ActionLists();
-  public static final TeleopMethods teleopMethods = new TeleopMethods();
-  public static final TestMethods testMethods = new TestMethods();
+  public ActionLists actionList = new ActionLists();
+  public TeleopMethods teleopMethods = new TeleopMethods();
+  public TestMethods testMethods = new TestMethods();
 
-  private final ActionQueue autoActions = new ActionQueue();
-  private final ActionQueue teleopActions = new ActionQueue();
+  private ActionQueue autoActions = new ActionQueue();
+  private ActionQueue teleopActions = new ActionQueue();
 
   @Override
+  //Robot does this when waking up
   public void robotInit() {
     SmartDashboard.putString("RobotState", "Robot Disabled");
   }
 
   @Override
+  //Robot constantly does this at all times
   public void robotPeriodic() {}
-
+  //Vibe
   
 
   @Override
+  //Robot does this when starting "autonomous" mode
   public void autonomousInit() {
     SmartDashboard.putString("RobotState", "Autonomous");
     actionList.DriveSome(autoActions);
   }
 
   @Override
+  //Robot does this constantly when in "autonomous" mode
   public void autonomousPeriodic() {
     autoActions.step();
   }
@@ -49,11 +53,13 @@ public class Robot extends TimedRobot {
 
 
   @Override
+  //Robot does this when starting "teleop" (human controlled) mode
   public void teleopInit() {
     teleopMethods.init();
   }
 
   @Override
+  //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
     teleopMethods.drive();
   }
@@ -61,12 +67,14 @@ public class Robot extends TimedRobot {
 
 
   @Override
+  //Robot does this when starting "test" mode
   public void testInit() {
     SmartDashboard.putString("RobotState", "Testing");
     testMethods.resetTimer();
   }
 
   @Override
+  //Robot does this constantly when in "test" mode
   public void testPeriodic() {
     testMethods.runEachMotor();
   }
@@ -74,6 +82,7 @@ public class Robot extends TimedRobot {
 
 
   @Override
+  //Robot does this when starting "disabled" mode
   public void disabledInit() {
     SmartDashboard.putString("RobotState", "Robot Disabled");
   }
