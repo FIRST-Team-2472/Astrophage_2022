@@ -1,12 +1,13 @@
 package frc.robot.Miscellaneous;
 
-public class SmartDashBoardHub {
+public class ShuffleBoardHub {
     
     public void update() {
 
     }
 
-    public void smartDashBoardTest() {
+    public void ShuffleBoardHub() {
 
     }
 }
+
