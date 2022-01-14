@@ -47,7 +47,8 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "autonomous" mode
   public void autonomousPeriodic() {
-    autoActions.step();
+    //TODO uncommit once step is fixed
+    //autoActions.step();
   }
 
 
