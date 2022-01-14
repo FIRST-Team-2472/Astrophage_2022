@@ -1,9 +1,10 @@
-package frc.subsystems;
+package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Intake
@@ -15,7 +16,9 @@ public class Intake
   public Intake (int conveyorID, int frontWheelsID, int pcmID, int frontWheelForwardID, int frontWheelBackID) 
   {
       conveyor = new TalonSRX(conveyorID);
-      frontWheelPush = new DoubleSolenoid(pcmID, frontWheelForwardID, frontWheelBackID);
+      frontWheels = new TalonSRX(frontWheelsID);
+      //Don't know what PnuematicsModuelType does, but it works.
+      frontWheelPush = new DoubleSolenoid(pcmID, PneumaticsModuleType.CTREPCM, frontWheelForwardID, frontWheelBackID);
       conveyor.setInverted(true);
   }
 
