@@ -13,7 +13,7 @@ public class Intake
   private final TalonSRX frontWheels;
   private final DoubleSolenoid frontWheelPush;
 
-  public Intake (int conveyorID, int frontWheelsID, int pcmID, int frontWheelForwardID, int frontWheelBackID) 
+  public Intake (int conveyorID, int frontWheelsID, int pcmID, int frontWheelForwardID, int frontWheelBackID)
   {
       conveyor = new TalonSRX(conveyorID);
       frontWheels = new TalonSRX(frontWheelsID);

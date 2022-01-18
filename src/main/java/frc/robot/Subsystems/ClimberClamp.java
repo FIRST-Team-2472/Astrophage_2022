@@ -9,10 +9,10 @@ public class ClimberClamp {
     private DoubleSolenoid ClampTwo;
     private DoubleSolenoid Clamp;
 
-    public ClimberClamp (int ClampOneID, int ClampTwoID, int pcmID) 
+    public ClimberClamp (int ClampOneID, int ClampTwoID)
     {
         //Don't know what PnuematicsModuelType does, but it works.
-        Clamp = new DoubleSolenoid(pcmID, PneumaticsModuleType.CTREPCM, ClampOneID, ClampTwoID);
+        Clamp = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ClampOneID, ClampTwoID);
     }
 
     public void pushUpClamps() 
