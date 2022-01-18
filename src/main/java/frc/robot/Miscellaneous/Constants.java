@@ -14,4 +14,21 @@ public class Constants {
     public static final int jstickR = 1;
     public static final int xboxcontroller = 2;
 
+    //Climber stuff
+    public static final int ClampOne = 42;
+    public static final int ClampTwo = 42;
+    public static final int climberClawEins = 42;
+    public static final int climberClawZwei = 42;
+    public static final int climberMoveEins = 42;
+    public static final int climberMoveZwei = 42;
+
+    //Intake things
+    public static final int conveyor = 42;
+    public static final int frontWheels = 42;
+    public static final int frontWheelPush = 42;
+
+    //Shooter things
+    public static final int flyWheel = 42;
+
+
 }

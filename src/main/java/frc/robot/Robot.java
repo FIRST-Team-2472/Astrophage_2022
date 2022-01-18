@@ -86,5 +86,6 @@ public class Robot extends TimedRobot {
   //Robot does this when starting "disabled" mode
   public void disabledInit() {
     SmartDashboard.putString("RobotState", "Robot Disabled");
+    
   }
 }
