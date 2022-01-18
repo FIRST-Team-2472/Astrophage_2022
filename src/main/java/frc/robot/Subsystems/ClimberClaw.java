@@ -5,28 +5,28 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class ClimberClaw 
 {
-  private TalonSRX climberClawEins;
-  private TalonSRX climberClawZwei;
+  private TalonSRX climberClaw_1;
+  private TalonSRX climberClaw_2;
 
-  public ClimberClaw (int climberClawEinsID, int climberClawZweiID)
+  public ClimberClaw (int climberClaw_1ID, int climberClaw_2ID)
   {
-    climberClawEins = new TalonSRX(climberClawEinsID);
-    climberClawZwei = new TalonSRX(climberClawZweiID);
+    climberClaw_1 = new TalonSRX(climberClaw_1ID);
+    climberClaw_2 = new TalonSRX(climberClaw_2ID);
   }
   
-  public void runclimberClawEins(double speed)
+  public void runclimberClaw_1(double speed)
   {
-    climberClawEins.set(ControlMode.PercentOutput, speed);
+    climberClaw_1.set(ControlMode.PercentOutput, speed);
   }
 
-  public void runclimberClawZwei(double speed)
+  public void runclimberClaw_2(double speed)
   {
-    climberClawZwei.set(ControlMode.PercentOutput, speed);
+    climberClaw_2.set(ControlMode.PercentOutput, speed);
   }
 
   public void runclimberClawBoth(double speed)
   {
-    climberClawEins.set(ControlMode.PercentOutput, speed);
-    climberClawZwei.set(ControlMode.PercentOutput, speed);
+    climberClaw_1.set(ControlMode.PercentOutput, speed);
+    climberClaw_2.set(ControlMode.PercentOutput, speed);
   }
 }

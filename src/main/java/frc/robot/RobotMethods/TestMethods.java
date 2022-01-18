@@ -30,6 +30,29 @@ public class TestMethods {
               break;
             case 2:
               Robot.drive.runRight(0);
+              break;
+            case 3:
+              Robot.intake.runFrontWheels(.5);
+              break;
+            case 4:
+              Robot.intake.runConveyorPower(.5);
+              break;
+            case 5:
+              Robot.shooter.runFlyWheelPower(.5);
+              break;
+            case 6:
+              Robot.climberClaw.runclimberClaw_2(.5);
+              break;
+            case 7:
+              Robot.climberClaw.runclimberClaw_1(.5);
+            break;
+            case 8:
+              Robot.climberMove.runclimberMove_2(.5);
+              break;
+            case 9:
+              Robot.climberMove.runclimberMove_1(.5);
+              break;
+
 
             default:
         }
