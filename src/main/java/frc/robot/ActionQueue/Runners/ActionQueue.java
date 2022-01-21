@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class ActionQueue {
     private ArrayList<Actionable> queue;
     boolean inProgress, start;
-    Actionable runningAction;
 
     public ActionQueue() {
         queue = new ArrayList<Actionable>();
@@ -20,25 +19,26 @@ public class ActionQueue {
     }
 
     //TODO sawyer fix action var is not declared
+    /*
     public void step() {
         if (!queue.isEmpty()) {
             if (start == true) {
-                runningAction = queue.get(0);
-                runningAction.startAction();
+                Actionable action = queue.get(0);
+                action.startAction();
                 start = false;
             }
 
-            runningAction.periodic();
+            action.periodic();
 
             inProgress = true;
 
-            if (runningAction.isFinished()) {
-                runningAction.endAction();
+            if (action.isFinished()) {
+                action.endAction();
                 queue.remove(0);
 
                 if (!queue.isEmpty()) {
-                    runningAction = queue.get(0);
-                    runningAction.startAction();
+                    action = queue.get(0);
+                    action.startAction();
                 }
             }
         } else inProgress = false;
@@ -53,4 +53,5 @@ public class ActionQueue {
     public boolean isInProgress() {
         return inProgress;
     }
+    */
 }
