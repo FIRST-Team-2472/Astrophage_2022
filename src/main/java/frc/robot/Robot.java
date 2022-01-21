@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
 // These declare an instace of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
-  public edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
+  public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
 
   public ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
