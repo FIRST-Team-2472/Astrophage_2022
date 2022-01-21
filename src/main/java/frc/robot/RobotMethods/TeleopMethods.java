@@ -4,8 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.ActionQueue;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.XboxController;
+
 
 
 
@@ -54,17 +53,31 @@ public class TeleopMethods
         else Robot.shooter.runFlyWheelPower(0);
     }
 
-    public void climberclamp()
+    public void climberClamp()
     {
-        /*
-        if (Robot.xboxcontroller.getBumper(GenericHID.Hand.kRight))
+        
+        if (Robot.xboxcontroller.getRightBumper())
         {
             if (clamp == false) clamp = true;
             else clamp = false;
             
             if (clamp == false) Robot.climberClamp.pushInClamps();
             else Robot.climberClamp.pushUpClamps();
-        }*/
+        }
+    }
+    
+    public void climberClaw()
+    {
+        if (Robot.xboxcontroller.getPOV() == 0) Robot.climberClaw.runclimberClawBoth(.5);
+        else if (Robot.xboxcontroller.getPOV() == 180) Robot.climberClaw.runclimberClawBoth(-.5);
+        else Robot.climberClaw.runclimberClawBoth(0);
+    }
+
+    public void ClimberMove()
+    {
+        if (Robot.xboxcontroller.getRightTriggerAxis() >= .6) Robot.climberMove.runclimberMoveBoth(.5);
+        else if (Robot.xboxcontroller.getLeftTriggerAxis() >= .6) Robot.climberMove.runclimberMoveBoth(-.5);
+        else Robot.climberMove.runclimberMoveBoth(0);
     }
 }
 
