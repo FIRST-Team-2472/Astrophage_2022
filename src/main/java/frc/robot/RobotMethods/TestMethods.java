@@ -19,7 +19,7 @@ public class TestMethods {
             switchMotor++;
             timer.reset();
         }  
-
+/*
         switch (switchMotor) {
             case 0:
               Robot.drive.runLeft(.75);
@@ -55,6 +55,6 @@ public class TestMethods {
 
 
             default:
-        }
+        }*/
     }
 }
