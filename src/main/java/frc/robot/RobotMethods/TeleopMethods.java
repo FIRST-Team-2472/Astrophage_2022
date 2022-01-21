@@ -78,5 +78,4 @@ public class TeleopMethods
         else if (Robot.xboxcontroller.getLeftTriggerAxis() >= .6) Robot.climberMove.runclimberMoveBoth(-.5);
         else Robot.climberMove.runclimberMoveBoth(0);
     }
-*/
 }
