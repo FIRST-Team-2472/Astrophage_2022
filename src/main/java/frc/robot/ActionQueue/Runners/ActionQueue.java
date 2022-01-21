@@ -19,7 +19,6 @@ public class ActionQueue {
         queue.add(action);
     }
 
-    //TODO sawyer fix action var is not declared
     public void step() {
         if (!queue.isEmpty()) {
             if (start == true) {

@@ -16,7 +16,7 @@ public class TeleopMethods {
         Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, Robot.leftJoystick.getX()*.5);
     }
 
-
+/*
     public void shooting () {
         if (Robot.xboxcontroller.getXButton()) {
             Robot.shooter.runFlyWheel(1);
@@ -25,5 +25,5 @@ public class TeleopMethods {
             Robot.shooter.runFlyWheel(0);
         }
     }
-
+*/
 }
