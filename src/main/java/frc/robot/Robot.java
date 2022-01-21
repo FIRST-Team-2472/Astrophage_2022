@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
   //Robot does this constantly when in "autonomous" mode
   public void autonomousPeriodic() {
     //TODO uncommit once step is fixed
-    //autoActions.step();
+    autoActions.step();
   }
 
 
