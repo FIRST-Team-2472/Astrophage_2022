@@ -2,8 +2,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+
+import javax.swing.Action;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Miscellaneous.*;
@@ -12,16 +16,17 @@ import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
-  public static ClimberClamp climberClamp = new ClimberClamp(Constants.ClampOne, Constants.ClampTwo);
-  public static ClimberClaw climberClaw = new ClimberClaw(Constants.climberClawEins, Constants.climberClawZwei);
-  public static ClimberMove climberMove = new ClimberMove(Constants.climberMoveEins, Constants.climberMoveZwei);
+ // public static ClimberClamp climberClamp = new ClimberClamp(Constants.ClampOne, Constants.ClampTwo);
+  //public static ClimberClaw climberClaw = new ClimberClaw(Constants.climberClawEins, Constants.climberClawZwei);
+  //public static ClimberMove climberMove = new ClimberMove(Constants.climberMoveEins, Constants.climberMoveZwei);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
-  public static Intake intake = new Intake(Constants.conveyor, Constants.frontWheels, Constants.pcmID, Constants.frontWheelForwardID, Constants.frontWheelBackID);
-  public static Shooter shooter = new Shooter(Constants.flyWheel);
+  //public static Intake intake = new Intake(Constants.conveyor, Constants.frontWheels, Constants.pcmID, Constants.frontWheelForwardID, Constants.frontWheelBackID);
+  //public static Shooter shooter = new Shooter(Constants.flyWheel);
 // These declare an instace of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
   public edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
+  public static limelight limelight = new limelight();
 
   public ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
@@ -34,6 +39,7 @@ public class Robot extends TimedRobot {
   //Robot does this when waking up
   public void robotInit() {
     SmartDashboard.putString("RobotState", "Robot Disabled");
+    limelight.setPipeLine(0);
   }
 
   @Override
@@ -67,7 +73,13 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
-    teleopMethods.drive();
+    if (leftJoystick.getRawButton(1)) {
+      teleopMethods.aimForBall();
+    }
+    else {
+      teleopMethods.drive();
+    }
+    
   }
 
 
