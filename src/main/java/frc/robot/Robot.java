@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 import frc.robot.Miscellaneous.*;
 import frc.robot.RobotMethods.*;
 import frc.robot.Subsystems.*;
@@ -18,7 +19,7 @@ public class Robot extends TimedRobot {
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
   public static Intake intake = new Intake(Constants.conveyor, Constants.frontWheels, Constants.pcmID, Constants.frontWheelForwardID, Constants.frontWheelBackID);
   public static Shooter shooter = new Shooter(Constants.flyWheel);
-// These declare an instace of a script as a variable and setup the constant talons or other objects.
+// These declare an instance of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
