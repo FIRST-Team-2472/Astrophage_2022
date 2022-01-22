@@ -12,7 +12,7 @@ public class Constants {
     //Joysticks & xbox controller
     public static final int jstickL = 0;
     public static final int jstickR = 1;
-    public static final int xboxcontroller = 2;
+    public static final int switches = 2;
 
     //Climber stuff
     public static final int ClampOne = 42;

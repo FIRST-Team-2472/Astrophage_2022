@@ -25,7 +25,7 @@ public class TeleopMethods
         Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, Robot.leftJoystick.getX()*.5);
     }
 
-    public void intake()
+    /*public void intake()
     {
 
         if (Robot.xboxcontroller.getAButton()) Robot.intake.runFrontWheels(.5);
@@ -44,7 +44,7 @@ public class TeleopMethods
 
         if (Robot.xboxcontroller.getBButton()) Robot.intake.runConveyorPower(.5);
         else Robot.intake.runConveyorPower(0);
-    }
+    }*/
 
     public void aimForBall() {
     double limelightkP = 0.02;
@@ -52,7 +52,7 @@ public class TeleopMethods
     Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-1 * (limelightkP * Robot.limelight.targetXAngleFromCenter())));
     }
 
-    public void shooter()
+    /*public void shooter()
     {
         if (Robot.xboxcontroller.getXButtonPressed()) Robot.shooter.runFlyWheelPower(.5);
         else Robot.shooter.runFlyWheelPower(0);
@@ -83,5 +83,5 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getRightTriggerAxis() >= .6) Robot.climberMove.runclimberMoveBoth(.5);
         else if (Robot.xboxcontroller.getLeftTriggerAxis() >= .6) Robot.climberMove.runclimberMoveBoth(-.5);
         else Robot.climberMove.runclimberMoveBoth(0);
-    }
+    }*/
 }
