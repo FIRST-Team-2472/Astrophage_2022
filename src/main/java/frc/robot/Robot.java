@@ -25,8 +25,6 @@ public class Robot extends TimedRobot {
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
   public static limelight limelight = new limelight();
-  public static DistanceSensor distanceSensor = new DistanceSensor();
-  public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
 
   public ActionLists actionList = new ActionLists();
@@ -59,7 +57,7 @@ public class Robot extends TimedRobot {
   //Robot does this constantly when in "autonomous" mode
   public void autonomousPeriodic() {
     //TODO uncommit once step is fixed
-    autoActions.step();
+
   }
 
 
@@ -74,6 +72,10 @@ public class Robot extends TimedRobot {
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
     teleopMethods.drive();
+    
+    if (leftJoystick.getRawButton(1)) {
+      teleopMethods.aimForBall();
+    }
 
 
     /*SmartDashboard.putNumber("Distance", distanceSensor.getDistance());
