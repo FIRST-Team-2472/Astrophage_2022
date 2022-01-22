@@ -32,7 +32,7 @@ public class limelight {
         return limelight.getEntry("tv").getDouble(0) == 1.0;
     }
 
-    public double targetXAngleFromCenter() {
+    public static double targetXAngleFromCenter() {
         return limelight.getEntry("tx").getDouble(Double.NaN);
 
     }

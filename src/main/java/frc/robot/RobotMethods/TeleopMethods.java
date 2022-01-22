@@ -16,22 +16,14 @@ public class TeleopMethods {
         Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, Robot.leftJoystick.getX()*.5);
     }
 
-    public void aimForBall() {
 
-        double limelightkP = 0.02;
-     
-			Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-1 * (limelightkP * Robot.limelight.targetXAngleFromCenter())));
-            
-
-        
-    }
-}
-
-    /*public void shooting () {
+    public void shooting () {
         if (Robot.xboxcontroller.getXButton()) {
             Robot.shooter.runFlyWheel(1);
 
         } else {
             Robot.shooter.runFlyWheel(0);
         }
-    }*/
+    }
+
+}
