@@ -20,8 +20,8 @@ public class ColorSensor {
     ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
     RawColor colorSensorV3 = m_colorSensor.getRawColor();
 
-    {
-
+    
+    public void getShade() {
     if (((m_colorSensor.getRed() + m_colorSensor.getBlue() + m_colorSensor.getGreen()) / 3) < 12) {
       System.out.println("Ready to Climb");
       SmartDashboard.putBoolean("Seeing Black?", true);
