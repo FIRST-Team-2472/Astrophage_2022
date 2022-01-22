@@ -31,7 +31,7 @@ public class TestMethods {
             case 2:
               Robot.drive.runRight(0);
               break;
-            case 3:
+            /*case 3:
               Robot.intake.runFrontWheels(.5);
               break;
             case 4:
@@ -51,7 +51,7 @@ public class TestMethods {
               break;
             case 9:
               Robot.climberMove.runclimberMove_1(.5);
-              break;
+              break;*/
 
 
             default:
