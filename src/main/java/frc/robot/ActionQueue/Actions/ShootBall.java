@@ -10,7 +10,7 @@ public class ShootBall extends TimerBase
     public double conveyorSpeed;
     public double shooterSpeed;
 
-    public ShootBall(double givenConevyorSpeed, double givenShooterSpeed, double seconds)
+    public ShootBall(double givenConveyorSpeed, double givenShooterSpeed, double seconds)
     {
         super(seconds);
         conveyorSpeed = givenConveyorSpeed;
@@ -19,7 +19,7 @@ public class ShootBall extends TimerBase
 
     public void StartAction()
     {
-        super.StartAction();
+        super.startAction();
         SmartDashboard.putString("ActionName", "Shoot Ball");
         Robot.intake.runConveyorPower(conveyorSpeed);
         Robot.shooter.runFlyWheelPower(shooterSpeed);
@@ -32,5 +32,17 @@ public class ShootBall extends TimerBase
     {
         Robot.intake.runConveyorPower(0);
         Robot.shooter.runFlyWheelPower(0);
+    }
+
+    @Override
+    public void periodic() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void endAction() {
+        // TODO Auto-generated method stub
+        
     }
 }
