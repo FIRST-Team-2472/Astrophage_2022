@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
+    if ()
     if (leftJoystick.getRawButton(1)) {
       teleopMethods.aimForBall();
     }
