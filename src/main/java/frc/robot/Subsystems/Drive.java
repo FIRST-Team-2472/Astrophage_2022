@@ -3,25 +3,25 @@ package frc.robot.Subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive {
     //Talon Definition: an instruction reader that gives instructions to the stupid motors after reading the instructions from the big instruction reader that reads instructions from the instruction manual written by the instruction man
-    private TalonSRX rightMaster;
-    private TalonSRX rightSlave;
-    private TalonSRX leftMaster;
-    private TalonSRX leftSlave;
+    private TalonFX rightMaster;
+    private TalonFX rightSlave;
+    private TalonFX leftMaster;
+    private TalonFX leftSlave;
 
     //Assigns IDs talons to hand instructions to dum kopf motors
     public Drive(int backRightID, int frontRightID, int backLeftID, int frontLeftID) {
-        rightMaster = new TalonSRX(backRightID);
-        rightSlave = new TalonSRX(frontRightID);
+        rightMaster = new TalonFX(backRightID);
+        rightSlave = new TalonFX(frontRightID);
 
-        leftMaster = new TalonSRX(frontLeftID);
-        leftSlave = new TalonSRX(backLeftID);
+        leftMaster = new TalonFX(frontLeftID);
+        leftSlave = new TalonFX(backLeftID);
 
         //Talon is not dumb, doesn't need correcting
         rightMaster.setInverted(false);
@@ -214,7 +214,7 @@ public class Drive {
         rightMaster.set(ControlMode.PercentOutput, speed);
     }
 
-    public void magicNumber(TalonSRX Freddy){
+    public void magicNumber(TalonFX Freddy){
         double suggestKF = 0;
         double velocity;
         double error;
