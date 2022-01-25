@@ -53,15 +53,15 @@ public class TeleopMethods
 
     public void climberclamp()
     {
-        /*
-        if (Robot.xboxcontroller.getBumper(GenericHID.Hand.kRight))
+        
+        if (Robot.xboxcontroller.getRightBumperPressed())
         {
             if (clamp == false) clamp = true;
             else clamp = false;
             
             if (clamp == false) Robot.climberClamp.pushInClamps();
             else Robot.climberClamp.pushUpClamps();
-        }*/
+        }
     }
-*/
+
 }
