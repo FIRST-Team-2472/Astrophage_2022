@@ -5,60 +5,62 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class ClimberClamp {
-    private DoubleSolenoid ClampOne;
-    private DoubleSolenoid ClampTwo;
-    private DoubleSolenoid Clamp;
+    private DoubleSolenoid clamp1;
+    private DoubleSolenoid clamp2;
 
-    public ClimberClamp (int ClampOneID, int ClampTwoID)
+    public ClimberClamp (int clamp1ForwardID, int clamp1BackwardID, int clamp2ForwardID, int clamp2BackwardID)
     {
         //Don't know what PnuematicsModuelType does, but it works.
-        Clamp = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ClampOneID, ClampTwoID);
+        clamp1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clamp1ForwardID, clamp1BackwardID);
+        clamp2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clamp2ForwardID, clamp2BackwardID);
     }
 
     public void pushUpClamps() 
     {
-        pushUpClampOne();
-        pushUpClampTwo();
+        pushUpclamp1();
+        pushUpclamp2();
     }
 
     public void pushInClamps()
     {
-        pushInClampOne();
-        pushInClampTwo();
+        pushInclamp1();
+        pushInclamp2();
     }
 
     public void turnOffClamps()
     {
-        turnOffClampOne();
-        turnOffClampTwo();
+        turnOffclamp1();
+        turnOffclamp2();
     }
 
     //This is for the clamp on the immobile climbing arm at work
-    public void pushUpClampOne() 
+    public void pushUpclamp1() 
     {
-        ClampOne.set(Value.kForward);
+        clamp1.set(Value.kForward);
     }
 
-    public void turnOffClampOne()
+    public void turnOffclamp1()
     {
-        ClampOne.set(Value.kOff);
+        clamp1.set(Value.kOff);
     }
   
-    public void pushInClampOne() 
+    public void pushInclamp1() 
     {
-        ClampOne.set(Value.kReverse);
+        clamp1.set(Value.kReverse);
     }
-    public void pushUpClampTwo() 
+
+    public void pushUpclamp2() 
     {
-        ClampTwo.set(Value.kForward);
+        clamp2.set(Value.kForward);
     }
-    public void turnOffClampTwo()
+    
+    public void turnOffclamp2()
     {
-        ClampTwo.set(Value.kOff);
+        clamp2.set(Value.kOff);
     }
   
-    public void pushInClampTwo() 
+    public void pushInclamp2() 
     {
-        ClampTwo.set(Value.kReverse);
+        clamp2.set(Value.kReverse);
     }
 }
