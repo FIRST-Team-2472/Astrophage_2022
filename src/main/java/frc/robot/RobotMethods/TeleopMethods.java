@@ -6,7 +6,6 @@ import frc.robot.Robot;
 
 
 
-
 public class TeleopMethods 
 {
     boolean intakeWheel = false;
@@ -52,30 +51,17 @@ public class TeleopMethods
         else Robot.shooter.runFlyWheelPower(0);
     }
 
-    public void climberClamp()
+    public void climberclamp()
     {
-        
-        if (Robot.xboxcontroller.getRightBumper())
+        /*
+        if (Robot.xboxcontroller.getBumper(GenericHID.Hand.kRight))
         {
             if (clamp == false) clamp = true;
             else clamp = false;
             
             if (clamp == false) Robot.climberClamp.pushInClamps();
             else Robot.climberClamp.pushUpClamps();
-        }
+        }*/
     }
-    
-    public void climberClaw()
-    {
-        if (Robot.xboxcontroller.getPOV() == 0) Robot.climberClaw.runclimberClawBoth(.5);
-        else if (Robot.xboxcontroller.getPOV() == 180) Robot.climberClaw.runclimberClawBoth(-.5);
-        else Robot.climberClaw.runclimberClawBoth(0);
-    }
-
-    public void ClimberMove()
-    {
-        if (Robot.xboxcontroller.getRightTriggerAxis() >= .6) Robot.climberMove.runclimberMoveBoth(.5);
-        else if (Robot.xboxcontroller.getLeftTriggerAxis() >= .6) Robot.climberMove.runclimberMoveBoth(-.5);
-        else Robot.climberMove.runclimberMoveBoth(0);
-    }
+*/
 }
