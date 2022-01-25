@@ -15,7 +15,7 @@ import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
-  public static ClimberClamp climberClamp = new ClimberClamp(Constants.ClampOne, Constants.ClampTwo);
+  public static ClimberClamp climberClamp = new ClimberClamp(Constants.clamp1Forward, Constants.clamp1Backward, Constants.clamp2Forward, Constants.clamp2Backward);
   public static ClimberClaw climberClaw = new ClimberClaw(Constants.climberClawEins, Constants.climberClawZwei);
   public static ClimberMove climberMove = new ClimberMove(Constants.climberMoveEins, Constants.climberMoveZwei);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
@@ -57,7 +57,6 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "autonomous" mode
   public void autonomousPeriodic() {
-    //TODO uncommit once step is fixed
     autoActions.step();
   }
 
