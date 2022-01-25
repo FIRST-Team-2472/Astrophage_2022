@@ -15,8 +15,10 @@ public class Constants {
     public static final int xboxcontroller = 2;
 
     //Climber stuff
-    public static final int ClampOne = 42;
-    public static final int ClampTwo = 42;
+    public static final int clamp1Forward = 42;
+    public static final int clamp1Backward = 42;
+    public static final int clamp2Forward = 42;
+    public static final int clamp2Backward = 42;
     public static final int climberClawEins = 42;
     public static final int climberClawZwei = 42;
     public static final int climberMoveEins = 42;
