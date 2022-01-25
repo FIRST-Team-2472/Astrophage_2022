@@ -14,6 +14,7 @@ public class ClimberClaw
     climberClaw_2 = new TalonSRX(climberClaw_2ID);
   }
   
+  //All this jazz just runs the pistons which extend the claws on the moving arm.
   public void runclimberClaw_1(double speed)
   {
     climberClaw_1.set(ControlMode.PercentOutput, speed);

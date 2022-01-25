@@ -33,6 +33,7 @@ public class ClimberClamp {
         turnOffClampTwo();
     }
 
+    //This is for the clamp on the immobile climbing arm at work
     public void pushUpClampOne() 
     {
         ClampOne.set(Value.kForward);

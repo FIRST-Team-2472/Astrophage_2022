@@ -14,6 +14,7 @@ public class ClimberMove
       climberMove_2 = new TalonSRX(climberMove_2ID);
     }
     
+    //All this jazz just runs the pistons that allows the moving arm to move up an down.
     public void runclimberMove_1(double speed)
   {
     climberMove_1.set(ControlMode.PercentOutput, speed);
@@ -31,3 +32,5 @@ public class ClimberMove
   }
 }
 //Hi!
+
+//Goodbye! :)
