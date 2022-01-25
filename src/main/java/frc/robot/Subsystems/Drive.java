@@ -23,9 +23,7 @@ public class Drive {
         leftMaster = new TalonFX(frontLeftID);
         leftSlave = new TalonFX(backLeftID);
 
-        //Talon is not dumb, doesn't need correcting
         rightMaster.setInverted(false);
-        //Talon is "special", needed correcting
         leftMaster.setInverted(true);
 
         rightSlave.follow(rightMaster);
@@ -181,7 +179,7 @@ public class Drive {
 
 
 
-
+    //power drive hopefully not have to use
 
     //Better tankDrive used exclussively with joystick(s)
     public void arcadeDrivePower(double y, double x) {
