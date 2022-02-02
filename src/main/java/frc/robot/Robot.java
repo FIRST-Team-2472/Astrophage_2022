@@ -2,11 +2,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-<<<<<<< Updated upstream
-=======
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
->>>>>>> Stashed changes
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,19 +26,15 @@ public class Robot extends TimedRobot {
 // These declare an instance of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
-<<<<<<< Updated upstream
   public static DistanceSensor distanceSensor = new DistanceSensor();
   public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
-=======
-  private Joystick leverOne = new Joystick(Constants.switches);
   public static limelight limelight = new limelight();
   //public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
   private DigitalInput input;
   private DigitalInput switchOne;
   private DigitalOutput Arduino;
 
->>>>>>> Stashed changes
 
   public ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
@@ -54,11 +47,8 @@ public class Robot extends TimedRobot {
   //Robot does this when waking up
   public void robotInit() {
     SmartDashboard.putString("RobotState", "Robot Disabled");
-<<<<<<< Updated upstream
-=======
     switchOne = new DigitalInput(1);
     Arduino = new DigitalOutput(4);
->>>>>>> Stashed changes
   }
 
   @Override
@@ -96,7 +86,7 @@ public class Robot extends TimedRobot {
     teleopMethods.drive();
 
     SmartDashboard.putNumber("Distance", distanceSensor.getDistance());
-    SmartDashboard.putNumber("Seeing Black?", colorSensor.getShade());
+    //SmartDashboard.putNumber("Seeing Black?", colorSensor.getShade());
   }
 
 
