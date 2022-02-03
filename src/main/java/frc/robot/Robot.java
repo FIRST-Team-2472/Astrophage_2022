@@ -2,6 +2,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,6 +29,12 @@ public class Robot extends TimedRobot {
   public static DistanceSensor distanceSensor = new DistanceSensor();
   public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
+  public static limelight limelight = new limelight();
+  //public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
+  private DigitalInput input;
+  private DigitalInput switchOne;
+  private DigitalOutput Arduino;
+
 
   public ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
@@ -39,6 +47,8 @@ public class Robot extends TimedRobot {
   //Robot does this when waking up
   public void robotInit() {
     SmartDashboard.putString("RobotState", "Robot Disabled");
+    switchOne = new DigitalInput(1);
+    Arduino = new DigitalOutput(4);
   }
 
   @Override
@@ -52,6 +62,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     SmartDashboard.putString("RobotState", "Autonomous");
     actionList.DriveSome(autoActions);
+    Arduino.disablePWM();
+    Arduino.set(true);
   }
 
   @Override
@@ -74,6 +86,10 @@ public class Robot extends TimedRobot {
     teleopMethods.drive();
 
     SmartDashboard.putNumber("Distance", distanceSensor.getDistance());
+<<<<<<< HEAD
+=======
+    //SmartDashboard.putNumber("Seeing Black?", colorSensor.getShade());
+>>>>>>> a1d64843ae57789d775abb6c8e5d27a2e53eca88
   }
 
 
