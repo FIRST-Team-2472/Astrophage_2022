@@ -6,13 +6,15 @@ import java.util.ArrayList;
 
 public class ActionQueue {
     private ArrayList<Actionable> queue;
-    boolean inProgress, start;
+    boolean inProgress, start, breakTime;
+    //breaktime originally called bruh
     Actionable runningAction;
 
     public ActionQueue() {
         queue = new ArrayList<Actionable>();
         inProgress = false;
         start = true;
+        breakTime = false;
     }
 
     public void addAction(Actionable action) {
@@ -20,7 +22,7 @@ public class ActionQueue {
     }
 
     public void step() {
-        if (!queue.isEmpty()) {
+        if (!queue.isEmpty() && !breakTime) {
             if (start == true) {
                 runningAction = queue.get(0);
                 runningAction.startAction();
@@ -51,5 +53,13 @@ public class ActionQueue {
 
     public boolean isInProgress() {
         return inProgress;
+    }
+
+    public void pause() {
+        breakTime = true;
+    }
+
+    public void resume() {
+        breakTime = false;
     }
 }
