@@ -32,6 +32,8 @@ public class Drive {
         leftSlave.follow(leftMaster);
         leftSlave.setInverted(InvertType.FollowMaster);
 
+
+        //kP formula is (x/1023)/4096
         leftMaster.config_kP(0, 0.05);
         leftMaster.config_kI(0, 0);
         leftMaster.config_kD(0, 0.05);
