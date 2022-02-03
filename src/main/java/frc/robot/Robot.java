@@ -74,7 +74,6 @@ public class Robot extends TimedRobot {
     teleopMethods.drive();
 
     SmartDashboard.putNumber("Distance", distanceSensor.getDistance());
-    SmartDashboard.putNumber("Seeing Black?", colorSensor.getShade());
   }
 
 
