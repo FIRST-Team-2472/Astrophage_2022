@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
   //Robot constantly does this at all times
   public void robotPeriodic() {}
   //Vibe
-  
+
 
   @Override
   //Robot does this when starting "autonomous" mode
