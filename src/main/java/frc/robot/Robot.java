@@ -18,8 +18,7 @@ import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
   public static ClimberClamp climberClamp = new ClimberClamp(Constants.clamp1Forward, Constants.clamp1Backward, Constants.clamp2Forward, Constants.clamp2Backward);
-  public static ClimberClaw climberClaw = new ClimberClaw(Constants.climberClawEins, Constants.climberClawZwei);
-  public static ClimberMove climberMove = new ClimberMove(Constants.climberMoveEins, Constants.climberMoveZwei);
+  public static SuperClimber superClimber = new SuperClimber(Constants.climberEx1, Constants.climberEx2, Constants.climberRo1, Constants.climberRo2);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
   public static Intake intake = new Intake(Constants.conveyor, Constants.frontWheels, Constants.pcmID, Constants.frontWheelForwardID, Constants.frontWheelBackID);
   public static Shooter shooter = new Shooter(Constants.flyWheel);
@@ -86,10 +85,7 @@ public class Robot extends TimedRobot {
     teleopMethods.drive();
 
     SmartDashboard.putNumber("Distance", distanceSensor.getDistance());
-<<<<<<< HEAD
-=======
     //SmartDashboard.putNumber("Seeing Black?", colorSensor.getShade());
->>>>>>> a1d64843ae57789d775abb6c8e5d27a2e53eca88
   }
 
 

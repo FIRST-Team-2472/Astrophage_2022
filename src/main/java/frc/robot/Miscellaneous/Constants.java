@@ -19,10 +19,10 @@ public class Constants {
     public static final int clamp1Backward = 42;
     public static final int clamp2Forward = 42;
     public static final int clamp2Backward = 42;
-    public static final int climberClawEins = 42;
-    public static final int climberClawZwei = 42;
-    public static final int climberMoveEins = 42;
-    public static final int climberMoveZwei = 42;
+    public static final int climberEx1 = 42;
+    public static final int climberEx2 = 42;
+    public static final int climberRo1 = 42;
+    public static final int climberRo2 = 42;
 
     //Intake things
     public static final int conveyor = 42;
