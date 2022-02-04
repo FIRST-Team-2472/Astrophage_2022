@@ -29,7 +29,6 @@ public class Robot extends TimedRobot {
   public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
   public static limelight limelight = new limelight();
-  //public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
   private DigitalInput input;
   private DigitalInput switchOne;
   private DigitalOutput Arduino;

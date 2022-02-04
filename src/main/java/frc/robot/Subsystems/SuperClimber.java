@@ -11,6 +11,10 @@ public class SuperClimber {
   private TalonSRX rotato1;
   private TalonSRX rotato2;
 
+  //TODO need to find a special number
+  private final double encoderToFeet = 1000;
+  private final double encoderToAngle = 1001;
+
   public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID) {
     extendo1 = new TalonSRX(extendo1ID);
     extendo2 = new TalonSRX(extendo2ID);
@@ -153,5 +157,21 @@ public class SuperClimber {
   public void runBothRotato(double speed) {
     runRotato1(speed);
     runRotato2(speed);
+  }
+
+  public double getExtendo1Height() {
+    return extendo1.getSelectedSensorPosition() * encoderToFeet;
+  }
+
+  public double getExtendo2Height() {
+    return extendo2.getSelectedSensorPosition() * encoderToFeet;
+  }    
+
+  public double getRotato1Angle() {
+    return rotato1.getSelectedSensorPosition() * encoderToAngle;
+  }
+
+  public double getRotato2Angle() {
+    return rotato2.getSelectedSensorPosition() * encoderToAngle;
   }
 }
