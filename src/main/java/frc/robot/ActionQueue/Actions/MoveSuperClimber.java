@@ -3,7 +3,7 @@ package frc.robot.ActionQueue.Actions;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.ActionQueue.Runners.Actionable;
 
-public class MoveLeadingClimber implements Actionable {
+public class MoveSuperClimber implements Actionable {
 
     @Override
     public void startAction() 
