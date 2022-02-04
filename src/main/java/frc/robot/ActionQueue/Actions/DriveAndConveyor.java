@@ -25,7 +25,6 @@ public class DriveAndConveyor extends TimerBase
         super.startAction();
         SmartDashboard.putString("ActionName", "Drive and Conveyor");
         Robot.drive.tankDrive(speed, speed);
-        Robot.intake.runFrontWheels(intakeSpeed);
         Robot.intake.runConveyorPower(conveyorSpeed);
     }
 
@@ -37,7 +36,6 @@ public class DriveAndConveyor extends TimerBase
     public void endAction() 
     {
         Robot.drive.tankDrive(0, 0);
-        Robot.intake.runFrontWheels(0);
         Robot.intake.runConveyorPower(0);
     }
 
