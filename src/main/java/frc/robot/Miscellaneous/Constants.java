@@ -26,10 +26,9 @@ public class Constants {
 
     //Intake things
     public static final int conveyor = 42;
-    public static final int frontWheels = 42;
     public static final int frontWheelPush = 42;
-    public static final int frontWheelForwardID = 42;
-    public static final int frontWheelBackID = 42;
+    public static final int frontWheelForward = 42;
+    public static final int frontWheelBack = 42;
     public static final int pcmID = 42;
 
     //Shooter things

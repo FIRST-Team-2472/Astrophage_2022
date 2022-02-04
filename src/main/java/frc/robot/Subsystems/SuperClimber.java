@@ -2,11 +2,12 @@ package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class SuperClimber {
-  private TalonSRX extendo1;
-  private TalonSRX extendo2;
+  private TalonFX extendo1;
+  private TalonFX extendo2;
 
   private TalonSRX rotato1;
   private TalonSRX rotato2;
@@ -16,8 +17,8 @@ public class SuperClimber {
   private final double encoderToAngle = 1001;
 
   public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID) {
-    extendo1 = new TalonSRX(extendo1ID);
-    extendo2 = new TalonSRX(extendo2ID);
+    extendo1 = new TalonFX(extendo1ID);
+    extendo2 = new TalonFX(extendo2ID);
 
     rotato1 = new TalonSRX(rotato1ID);
     rotato2 = new TalonSRX(rotato2ID);
@@ -130,7 +131,7 @@ public class SuperClimber {
     rotato2.setSelectedSensorPosition(0, 0, 30);
   }
 
-  
+
   
   //All this jazz just runs the pistons which extend the claws on the moving arm.
   public void runExtendo1(double speed) {
