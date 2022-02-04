@@ -20,9 +20,9 @@ public class Robot extends TimedRobot {
   public static ClimberClamp climberClamp = new ClimberClamp(Constants.clamp1Forward, Constants.clamp1Backward, Constants.clamp2Forward, Constants.clamp2Backward);
   public static SuperClimber superClimber = new SuperClimber(Constants.climberEx1, Constants.climberEx2, Constants.climberRo1, Constants.climberRo2);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
-  public static Intake intake = new Intake(Constants.conveyor, Constants.frontWheels, Constants.pcmID, Constants.frontWheelForwardID, Constants.frontWheelBackID);
+  public static Intake intake = new Intake(Constants.conveyor, Constants.pcmID, Constants.frontWheelForward, Constants.frontWheelBack);
   public static Shooter shooter = new Shooter(Constants.flyWheel);
-// These declare an instance of a script as a variable and setup the constant talons or other objects.
+  //These declare an instance of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
   public static DistanceSensor distanceSensor = new DistanceSensor();
