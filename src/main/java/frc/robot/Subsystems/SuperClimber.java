@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 public class SuperClimber {
   private TalonFX extendo1;
   private TalonFX extendo2;
@@ -16,15 +18,20 @@ public class SuperClimber {
   private final double encoderToFeet = 1000;
   private final double encoderToAngle = 1001;
 
-  public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID) {
+  DigitalInput barStopperL;
+
+  public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID, 
+      int barStopperLID, int barStopperRID, int rotationLimitLID, int rotationLimitRID, int clawLimitLID, int clawLimitRID) {
     extendo1 = new TalonFX(extendo1ID);
     extendo2 = new TalonFX(extendo2ID);
 
     rotato1 = new TalonSRX(rotato1ID);
     rotato2 = new TalonSRX(rotato2ID);
 
-    // encoders
+    //limit Switches
+    barStopperL = new DigitalInput(barStopperLID);
 
+    // encoders
     extendo1.setSensorPhase(true); // correct encoder to motor direction
 
     // Tell the talon that he has a quad encoder
@@ -174,5 +181,9 @@ public class SuperClimber {
 
   public double getRotato2Angle() {
     return rotato2.getSelectedSensorPosition() * encoderToAngle;
+  }
+
+  public boolean isTouchingBar() {
+    return barStopperL.get();
   }
 }
