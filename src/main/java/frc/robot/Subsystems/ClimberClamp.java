@@ -1,5 +1,6 @@
 package frc.robot.Subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -8,11 +9,17 @@ public class ClimberClamp {
     private DoubleSolenoid clamp1;
     private DoubleSolenoid clamp2;
 
-    public ClimberClamp (int clamp1ForwardID, int clamp1BackwardID, int clamp2ForwardID, int clamp2BackwardID)
+    private DigitalInput clawLimitL, clawLimitR;
+
+    public ClimberClamp (int clamp1ForwardID, int clamp1BackwardID, int clamp2ForwardID, int clamp2BackwardID, int clawLimitLID, int clawLimitRID)
     {
         //Don't know what PnuematicsModuelType does, but it works.
         clamp1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clamp1ForwardID, clamp1BackwardID);
         clamp2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clamp2ForwardID, clamp2BackwardID);
+
+        //Limit Switches
+        clawLimitL = new DigitalInput(clawLimitLID);
+        clawLimitR = new DigitalInput(clawLimitRID);
     }
 
     public void pushUpClamps() 

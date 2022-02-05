@@ -2,151 +2,156 @@ package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class SuperClimber {
-  private TalonFX extendo1;
-  private TalonFX extendo2;
+  private TalonFX extendoL;
+  private TalonFX extendoR;
 
-  private TalonSRX rotato1;
-  private TalonSRX rotato2;
+  private TalonSRX rotatoL;
+  private TalonSRX rotatoR;
 
   //TODO need to find a special number
   private final double encoderToFeet = 1000;
   private final double encoderToAngle = 1001;
 
-  DigitalInput barStopperL;
+  private DigitalInput barStopperL, barStopperR;
 
   public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID, 
-      int barStopperLID, int barStopperRID, int rotationLimitLID, int rotationLimitRID, int clawLimitLID, int clawLimitRID) {
-    extendo1 = new TalonFX(extendo1ID);
-    extendo2 = new TalonFX(extendo2ID);
+      int barStopperLID, int barStopperRID, int rotationLimitLID, int rotationLimitRID) {
+    extendoL = new TalonFX(extendo1ID);
+    extendoR = new TalonFX(extendo2ID);
 
-    rotato1 = new TalonSRX(rotato1ID);
-    rotato2 = new TalonSRX(rotato2ID);
+    rotatoL = new TalonSRX(rotato1ID);
+    rotatoR = new TalonSRX(rotato2ID);
 
     //limit Switches
     barStopperL = new DigitalInput(barStopperLID);
+    barStopperR = new DigitalInput(barStopperRID);
+    rotatoL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, rotationLimitLID);
+    rotatoR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, rotationLimitRID);
 
     // encoders
-    extendo1.setSensorPhase(true); // correct encoder to motor direction
+    extendoL.setSensorPhase(true); // correct encoder to motor direction
 
     // Tell the talon that he has a quad encoder
-    extendo1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+    extendoL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
 
     // Set minimum output (closed loop) to 0 for now
-    extendo1.configNominalOutputForward(0, 30);
-    extendo1.configNominalOutputReverse(0, 30);
+    extendoL.configNominalOutputForward(0, 30);
+    extendoL.configNominalOutputReverse(0, 30);
 
     // Set maximum forward and backward to full speed
-    extendo1.configPeakOutputForward(1, 30);
-    extendo1.configPeakOutputReverse(-1, 30);
+    extendoL.configPeakOutputForward(1, 30);
+    extendoL.configPeakOutputReverse(-1, 30);
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
-    extendo1.configMotionCruiseVelocity(500, 30);
-    extendo1.configMotionCruiseVelocity(3000, 30);
-    extendo1.configMotionCruiseVelocity(3000, 30);
+    extendoL.configMotionCruiseVelocity(500, 30);
+    extendoL.configMotionCruiseVelocity(3000, 30);
+    extendoL.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
-    extendo1.configMotionAcceleration(100, 30);
+    extendoL.configMotionAcceleration(100, 30);
 
     // Zero the sensor once on robot boot up
-    extendo1.setSelectedSensorPosition(0, 0, 30);
+    extendoL.setSelectedSensorPosition(0, 0, 30);
 
     /* the other one */
 
-    extendo2.setSensorPhase(true); // correct encoder to motor direction
+    extendoR.setSensorPhase(true); // correct encoder to motor direction
 
     // Tell the talon that he has a quad encoder
-    extendo2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+    extendoR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
 
     // Set minimum output (closed loop) to 0 for now
-    extendo2.configNominalOutputForward(0, 30);
-    extendo2.configNominalOutputReverse(0, 30);
+    extendoR.configNominalOutputForward(0, 30);
+    extendoR.configNominalOutputReverse(0, 30);
 
     // Set maximum forward and backward to full speed
-    extendo2.configPeakOutputForward(1, 30);
-    extendo2.configPeakOutputReverse(-1, 30);
+    extendoR.configPeakOutputForward(1, 30);
+    extendoR.configPeakOutputReverse(-1, 30);
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
-    extendo2.configMotionCruiseVelocity(500, 30);
-    extendo2.configMotionCruiseVelocity(3000, 30);
-    extendo2.configMotionCruiseVelocity(3000, 30);
+    extendoR.configMotionCruiseVelocity(500, 30);
+    extendoR.configMotionCruiseVelocity(3000, 30);
+    extendoR.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
-    extendo2.configMotionAcceleration(100, 30);
+    extendoR.configMotionAcceleration(100, 30);
 
     // Zero the sensor once on robot boot up
-    extendo2.setSelectedSensorPosition(0, 0, 30);
+    extendoR.setSelectedSensorPosition(0, 0, 30);
 
 
 
     //set up rotato encoders
 
-    rotato1.setSensorPhase(true); // correct encoder to motor direction
+    rotatoL.setSensorPhase(true); // correct encoder to motor direction
 
     // Tell the talon that he has a quad encoder
-    rotato1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+    rotatoL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
 
     // Set minimum output (closed loop) to 0 for now
-    rotato1.configNominalOutputForward(0, 30);
-    rotato1.configNominalOutputReverse(0, 30);
+    rotatoL.configNominalOutputForward(0, 30);
+    rotatoL.configNominalOutputReverse(0, 30);
 
     // Set maximum forward and backward to full speed
-    rotato1.configPeakOutputForward(1, 30);
-    rotato1.configPeakOutputReverse(-1, 30);
+    rotatoL.configPeakOutputForward(1, 30);
+    rotatoL.configPeakOutputReverse(-1, 30);
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
-    rotato1.configMotionCruiseVelocity(500, 30);
-    rotato1.configMotionCruiseVelocity(3000, 30);
-    rotato1.configMotionCruiseVelocity(3000, 30);
+    rotatoL.configMotionCruiseVelocity(500, 30);
+    rotatoL.configMotionCruiseVelocity(3000, 30);
+    rotatoL.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
-    rotato1.configMotionAcceleration(100, 30);
+    rotatoL.configMotionAcceleration(100, 30);
 
     // Zero the sensor once on robot boot up
-    rotato1.setSelectedSensorPosition(0, 0, 30);
+    rotatoL.setSelectedSensorPosition(0, 0, 30);
 
     
     /* the other one */
 
-    rotato2.setSensorPhase(true); // correct encoder to motor direction
+    rotatoR.setSensorPhase(true); // correct encoder to motor direction
 
     // Tell the talon that he has a quad encoder
-    rotato2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+    rotatoR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
 
     // Set minimum output (closed loop) to 0 for now
-    rotato2.configNominalOutputForward(0, 30);
-    rotato2.configNominalOutputReverse(0, 30);
+    rotatoR.configNominalOutputForward(0, 30);
+    rotatoR.configNominalOutputReverse(0, 30);
 
     // Set maximum forward and backward to full speed
-    rotato2.configPeakOutputForward(1, 30);
-    rotato2.configPeakOutputReverse(-1, 30);
+    rotatoR.configPeakOutputForward(1, 30);
+    rotatoR.configPeakOutputReverse(-1, 30);
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
-    rotato2.configMotionCruiseVelocity(500, 30);
-    rotato2.configMotionCruiseVelocity(3000, 30);
-    rotato2.configMotionCruiseVelocity(3000, 30);
+    rotatoR.configMotionCruiseVelocity(500, 30);
+    rotatoR.configMotionCruiseVelocity(3000, 30);
+    rotatoR.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
-    rotato2.configMotionAcceleration(100, 30);
+    rotatoR.configMotionAcceleration(100, 30);
 
     // Zero the sensor once on robot boot up
-    rotato2.setSelectedSensorPosition(0, 0, 30);
+    rotatoR.setSelectedSensorPosition(0, 0, 30);
   }
 
 
   
   //All this jazz just runs the pistons which extend the claws on the moving arm.
   public void runExtendo1(double speed) {
-    extendo1.set(ControlMode.Velocity, speed);
+    extendoL.set(ControlMode.Velocity, speed);
   }
 
   public void runExtendo2(double speed) {
-    extendo2.set(ControlMode.Velocity, speed);
+    extendoR.set(ControlMode.Velocity, speed);
   }
 
   public void runBothExtendo(double speed) {
@@ -155,11 +160,11 @@ public class SuperClimber {
   }
 
   public void runRotato1(double speed) {
-    rotato1.set(ControlMode.Velocity, speed);
+    rotatoL.set(ControlMode.Velocity, speed);
   }
 
   public void runRotato2(double speed) {
-    rotato2.set(ControlMode.Velocity, speed);
+    rotatoR.set(ControlMode.Velocity, speed);
   }
 
   public void runBothRotato(double speed) {
@@ -168,22 +173,26 @@ public class SuperClimber {
   }
 
   public double getExtendo1Height() {
-    return extendo1.getSelectedSensorPosition() * encoderToFeet;
+    return extendoL.getSelectedSensorPosition() * encoderToFeet;
   }
 
   public double getExtendo2Height() {
-    return extendo2.getSelectedSensorPosition() * encoderToFeet;
+    return extendoR.getSelectedSensorPosition() * encoderToFeet;
   }    
 
   public double getRotato1Angle() {
-    return rotato1.getSelectedSensorPosition() * encoderToAngle;
+    return rotatoL.getSelectedSensorPosition() * encoderToAngle;
   }
 
   public double getRotato2Angle() {
-    return rotato2.getSelectedSensorPosition() * encoderToAngle;
+    return rotatoR.getSelectedSensorPosition() * encoderToAngle;
   }
 
-  public boolean isTouchingBar() {
+  public boolean isTouchingBarLeft() {
     return barStopperL.get();
+  }
+
+  public boolean isTouchingBarRight() {
+    return barStopperR.get();
   }
 }

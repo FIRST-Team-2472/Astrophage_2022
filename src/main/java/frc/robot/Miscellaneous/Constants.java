@@ -24,6 +24,14 @@ public class Constants {
     public static final int climberRo1 = 42;
     public static final int climberRo2 = 42;
 
+    //Limit switches
+    public static final int barStopperL = 69;
+    public static final int barStopperR = 69;
+    public static final int rotationLimitL = 69;
+    public static final int rotationLimitR = 69;
+    public static final int clawLimitL = 69;
+    public static final int clawLimitR = 69;
+
     //Intake things
     public static final int conveyor = 42;
     public static final int frontWheelPush = 42;
