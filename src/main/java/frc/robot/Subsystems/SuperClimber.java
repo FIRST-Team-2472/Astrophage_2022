@@ -52,8 +52,6 @@ public class SuperClimber {
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
     extendoL.configMotionCruiseVelocity(500, 30);
-    extendoL.configMotionCruiseVelocity(3000, 30);
-    extendoL.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
     extendoL.configMotionAcceleration(100, 30);
@@ -78,8 +76,6 @@ public class SuperClimber {
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
     extendoR.configMotionCruiseVelocity(500, 30);
-    extendoR.configMotionCruiseVelocity(3000, 30);
-    extendoR.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
     extendoR.configMotionAcceleration(100, 30);
@@ -106,8 +102,6 @@ public class SuperClimber {
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
     rotatoL.configMotionCruiseVelocity(500, 30);
-    rotatoL.configMotionCruiseVelocity(3000, 30);
-    rotatoL.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
     rotatoL.configMotionAcceleration(100, 30);
@@ -133,8 +127,6 @@ public class SuperClimber {
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
     rotatoR.configMotionCruiseVelocity(500, 30);
-    rotatoR.configMotionCruiseVelocity(3000, 30);
-    rotatoR.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
     rotatoR.configMotionAcceleration(100, 30);
