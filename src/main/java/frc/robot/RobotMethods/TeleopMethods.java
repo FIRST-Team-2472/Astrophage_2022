@@ -27,9 +27,6 @@ public class TeleopMethods
     public void intake()
     {
 
-        if (Robot.xboxcontroller.getAButton()) Robot.intake.runFrontWheels(.5);
-        else Robot.intake.runFrontWheels(0);
-
         if (Robot.xboxcontroller.getYButtonPressed())
         {
             if (intakeWheel == false) intakeWheel = true;

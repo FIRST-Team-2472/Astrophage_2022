@@ -19,17 +19,24 @@ public class Constants {
     public static final int clamp1Backward = 42;
     public static final int clamp2Forward = 42;
     public static final int clamp2Backward = 42;
-    public static final int climberClawEins = 42;
-    public static final int climberClawZwei = 42;
-    public static final int climberMoveEins = 42;
-    public static final int climberMoveZwei = 42;
+    public static final int climberEx1 = 42;
+    public static final int climberEx2 = 42;
+    public static final int climberRo1 = 42;
+    public static final int climberRo2 = 42;
+
+    //Limit switches
+    public static final int barStopperL = 69;
+    public static final int barStopperR = 69;
+    public static final int rotationLimitL = 69;
+    public static final int rotationLimitR = 69;
+    public static final int clawLimitL = 69;
+    public static final int clawLimitR = 69;
 
     //Intake things
     public static final int conveyor = 42;
-    public static final int frontWheels = 42;
     public static final int frontWheelPush = 42;
-    public static final int frontWheelForwardID = 42;
-    public static final int frontWheelBackID = 42;
+    public static final int frontWheelForward = 42;
+    public static final int frontWheelBack = 42;
     public static final int pcmID = 42;
 
     //Shooter things
