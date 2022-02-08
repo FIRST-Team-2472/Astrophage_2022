@@ -29,8 +29,6 @@ public class ClimberMove {
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
     climberMove_1.configMotionCruiseVelocity(500, 30);
-    climberMove_1.configMotionCruiseVelocity(3000, 30);
-    climberMove_1.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
     climberMove_1.configMotionAcceleration(100, 30);
@@ -56,8 +54,6 @@ public class ClimberMove {
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
     climberMove_2.configMotionCruiseVelocity(500, 30);
-    climberMove_2.configMotionCruiseVelocity(3000, 30);
-    climberMove_2.configMotionCruiseVelocity(3000, 30);
 
     // Motion magic acceleration is 50 counts
     climberMove_2.configMotionAcceleration(100, 30);

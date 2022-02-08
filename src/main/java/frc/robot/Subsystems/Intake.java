@@ -37,8 +37,6 @@ public class Intake {
 
         // Motion magic cruise (max speed) is 100 counts per 100 ms
         conveyor.configMotionCruiseVelocity(500, 30);
-        conveyor.configMotionCruiseVelocity(3000, 30);
-        conveyor.configMotionCruiseVelocity(3000, 30);
 
         // Motion magic acceleration is 50 counts
         conveyor.configMotionAcceleration(100, 30);
@@ -64,8 +62,6 @@ public class Intake {
 
         // Motion magic cruise (max speed) is 100 counts per 100 ms
         frontWheels.configMotionCruiseVelocity(500, 30);
-        frontWheels.configMotionCruiseVelocity(3000, 30);
-        frontWheels.configMotionCruiseVelocity(3000, 30);
 
         // Motion magic acceleration is 50 counts
         frontWheels.configMotionAcceleration(100, 30);

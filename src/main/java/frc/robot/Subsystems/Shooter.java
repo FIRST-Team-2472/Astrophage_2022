@@ -27,8 +27,6 @@ public class Shooter {
 
         // Motion magic cruise (max speed) is 100 counts per 100 ms
         flyWheel.configMotionCruiseVelocity(500, 30);
-        flyWheel.configMotionCruiseVelocity(3000, 30);
-        flyWheel.configMotionCruiseVelocity(3000, 30);
 
         // Motion magic acceleration is 50 counts
         flyWheel.configMotionAcceleration(100, 30);
