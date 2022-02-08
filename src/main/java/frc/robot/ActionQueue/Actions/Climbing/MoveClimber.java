@@ -18,6 +18,7 @@ public class MoveClimber implements Actionable{
     @Override
     public void startAction() 
     {
+        //TODO need to use motion magic
         SmartDashboard.putString("ActionName", "Moving Climber");
         if (upDog) Robot.superClimber.runBothExtendo(0.3);
         else Robot.superClimber.runBothExtendo(-.3);
