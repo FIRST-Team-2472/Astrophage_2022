@@ -9,7 +9,6 @@ import frc.robot.Robot;
 public class TeleopMethods 
 {
     boolean intakeWheel = false;
-    boolean clamp = false;
     
     public void init() 
     {
@@ -47,18 +46,4 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getXButtonPressed()) Robot.shooter.runFlyWheelPower(.5);
         else Robot.shooter.runFlyWheelPower(0);
     }
-
-    public void climberclamp()
-    {
-        
-        if (Robot.xboxcontroller.getRightBumperPressed())
-        {
-            if (clamp == false) clamp = true;
-            else clamp = false;
-            
-            if (clamp == false) Robot.climberClamp.pushInClamps();
-            else Robot.climberClamp.pushUpClamps();
-        }
-    }
-
 }

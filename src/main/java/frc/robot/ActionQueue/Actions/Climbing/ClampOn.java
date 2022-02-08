@@ -14,7 +14,7 @@ public class ClampOn extends TimerBase{
     public void startAction() 
     {
         SmartDashboard.putString("ActionName", "clamped");
-        Robot.climberClamp.pushUpClamps();
+        Robot.climberClamp.setClamps();
     }
 
 

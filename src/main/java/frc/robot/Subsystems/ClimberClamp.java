@@ -22,16 +22,16 @@ public class ClimberClamp {
         clawLimitR = new DigitalInput(clawLimitRID);
     }
 
-    public void pushUpClamps() 
+    public void setClamps() 
     {
-        pushUpclamp1();
-        pushUpclamp2();
+        setClamp1();
+        setClamp2();
     }
 
-    public void pushInClamps()
+    public void disengageClamps()
     {
-        pushInclamp1();
-        pushInclamp2();
+        disengageClamp1();
+        disengageClamp2();
     }
 
     public void turnOffClamps()
@@ -41,33 +41,43 @@ public class ClimberClamp {
     }
 
     //This is for the clamp on the immobile climbing arm at work
-    public void pushUpclamp1() 
+    public void setClamp1() 
     {
         clamp1.set(Value.kForward);
     }
 
-    public void turnOffclamp1()
+    public void setClamp2()
     {
-        clamp1.set(Value.kOff);
+        clamp1.set(Value.kForward);
     }
   
-    public void pushInclamp1() 
+    public void disengageClamp1() 
     {
         clamp1.set(Value.kReverse);
     }
 
-    public void pushUpclamp2() 
-    {
-        clamp2.set(Value.kForward);
-    }
-    
-    public void turnOffclamp2()
-    {
-        clamp2.set(Value.kOff);
-    }
-  
-    public void pushInclamp2() 
+    public void disengageClamp2() 
     {
         clamp2.set(Value.kReverse);
+    }
+    
+    public void turnOffclamp1() {
+        clamp1.set(Value.kOff);
+    }
+  
+    public void turnOffclamp2() {
+        clamp2.set(Value.kOff);
+    }
+
+    public boolean isFullyClamped() {
+        return isClampedL() && isClampedR();
+    }
+
+    public boolean isClampedL() {
+        return clawLimitL.get();
+    }
+    
+    public boolean isClampedR() {
+        return clawLimitR.get();
     }
 }
