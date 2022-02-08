@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
   public static SuperClimber superClimber = new SuperClimber(Constants.climberEx1, Constants.climberEx2, Constants.climberRo1, Constants.climberRo2,
     Constants.barStopperL, Constants.barStopperR, Constants.rotationLimitL, Constants.rotationLimitR);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
-  public static Intake intake = new Intake(Constants.conveyor, Constants.pcmID, Constants.frontWheelForward, Constants.frontWheelBack);
+  public static Intake intake = new Intake(Constants.conveyor);
   public static Shooter shooter = new Shooter(Constants.flyWheel);
   //These declare an instance of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
@@ -29,7 +29,6 @@ public class Robot extends TimedRobot {
   public static DistanceSensor distanceSensor = new DistanceSensor();
   public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
-  public static limelight limelight = new limelight();
   private DigitalInput input;
   private DigitalInput switchOne;
   private DigitalOutput Arduino;

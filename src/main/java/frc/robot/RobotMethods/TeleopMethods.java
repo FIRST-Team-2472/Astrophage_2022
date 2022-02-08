@@ -27,17 +27,6 @@ public class TeleopMethods
     public void intake()
     {
 
-        if (Robot.xboxcontroller.getYButtonPressed())
-        {
-            if (intakeWheel == false) intakeWheel = true;
-            else intakeWheel = false;
-            
-            if (intakeWheel == false) Robot.intake.pushinfrontwheel();
-            else Robot.intake.pushoutfrontwheel();
-        }
-
-
-
         if (Robot.xboxcontroller.getBButton()) Robot.intake.runConveyorPower(.5);
         else Robot.intake.runConveyorPower(0);
     }

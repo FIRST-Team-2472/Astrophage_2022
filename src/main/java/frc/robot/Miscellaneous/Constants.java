@@ -2,7 +2,6 @@ package frc.robot.Miscellaneous;
 
 public class Constants {
 
-    //Talions
     //Drive Train Wheels
     public static final int motorBL = 6;
     public static final int motorBR = 5;
@@ -34,10 +33,6 @@ public class Constants {
 
     //Intake things
     public static final int conveyor = 42;
-    public static final int frontWheelPush = 42;
-    public static final int frontWheelForward = 42;
-    public static final int frontWheelBack = 42;
-    public static final int pcmID = 42;
 
     //Shooter things
     public static final int flyWheel = 42;
