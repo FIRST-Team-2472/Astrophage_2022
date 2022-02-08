@@ -11,9 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Miscellaneous.*;
 import frc.robot.RobotMethods.*;
-import frc.robot.Sensors.ColorSensor;
-import frc.robot.Sensors.DistanceSensor;
-import frc.robot.Sensors.limelight;
+import frc.robot.Sensors.*;
 import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
@@ -30,6 +28,8 @@ public class Robot extends TimedRobot {
   public static DistanceSensor distanceSensor = new DistanceSensor();
   public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
+  public static IMU imu = new IMU(Constants.pigeonID);
+
   private DigitalInput input;
   private DigitalInput switchOne;
   private DigitalOutput Arduino;
