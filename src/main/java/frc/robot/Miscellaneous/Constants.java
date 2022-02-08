@@ -3,9 +3,9 @@ package frc.robot.Miscellaneous;
 public class Constants {
 
     //Drive Train Wheels
-    public static final int motorBL = 6;
-    public static final int motorBR = 5;
-	public static final int motorFL = 1;
+    public static final int motorBL = 0;
+    public static final int motorBR = 1;
+	public static final int motorFL = 2;
     public static final int motorFR = 3;
     
     //Joysticks & xbox controller
@@ -30,6 +30,9 @@ public class Constants {
     public static final int rotationLimitR = 69;
     public static final int clawLimitL = 69;
     public static final int clawLimitR = 69;
+
+    // IMU/gyroscope
+    public static final int pigeonID = 9000;
 
     //Intake things
     public static final int conveyor = 42;

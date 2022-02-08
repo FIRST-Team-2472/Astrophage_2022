@@ -2,13 +2,13 @@ package frc.robot.Sensors;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class IMU {
 
-    public PigeonIMU pigeon = new PigeonIMU(2);
+    public PigeonIMU pigeon;
 
-    public void IMU(){
+    public void IMU(int pigeonID){
+        pigeon = new PigeonIMU(pigeonID);
+
         PigeonIMU.GeneralStatus genStatus = new PigeonIMU.GeneralStatus();
     
         PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
@@ -30,11 +30,6 @@ public class IMU {
         boolean angleIsGood = (pigeon.getState() == PigeonIMU.PigeonState.Ready) ? true : false;
 
         double currentAngularRate = xyz_dps[2];
-    
-        SmartDashboard.putBoolean("Pigeon Is Working?", angleIsGood);
-        SmartDashboard.putNumber("Angle", yaw);
-        SmartDashboard.putNumber("Rate", currentAngularRate);
-
     }
 
     public int getCurrentAngle() {
