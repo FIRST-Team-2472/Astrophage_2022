@@ -54,7 +54,7 @@ public class RotateClimber implements Actionable {
     @Override
     public boolean isFinished()
     {
-    if ((Math.abs(degrees - Robot.imu.getCurrentAngle()) < 0.1) && (Math.abs(degrees - Robot.superClimber.getRotato2Angle()) < 0.1))   {
+    if ((Math.abs(degrees - Robot.superClimber.getRotato1Angle()) < 0.1) && (Math.abs(degrees - Robot.superClimber.getRotato2Angle()) < 0.1))   {
         return true;
         }
     
