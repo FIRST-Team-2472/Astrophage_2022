@@ -60,10 +60,10 @@ public class Drive {
         rightMaster.configPeakOutputReverse(-1, 30);
     
         // Motion magic cruise (max speed) is 100 counts per 100 ms
-        rightMaster.configMotionCruiseVelocity(500, 30);
+        rightMaster.configMotionCruiseVelocity(10000, 30);
     
         // Motion magic acceleration is 50 counts
-        rightMaster.configMotionAcceleration(100, 30);
+        rightMaster.configMotionAcceleration(4000, 30);
     
         // Zero the sensor once on robot boot up 
         rightMaster.setSelectedSensorPosition(0, 0, 30);
@@ -84,10 +84,10 @@ public class Drive {
             leftMaster.configPeakOutputReverse(-1, 30);
         
             // Motion magic cruise (max speed) is 100 counts per 100 ms
-            leftMaster.configMotionCruiseVelocity(500, 30);
+            leftMaster.configMotionCruiseVelocity(10000, 30);
         
             // Motion magic acceleration is 50 counts
-            leftMaster.configMotionAcceleration(100, 30);
+            leftMaster.configMotionAcceleration(4000, 30);
         
             // Zero the sensor once on robot boot up 
             leftMaster.setSelectedSensorPosition(0, 0, 30);
