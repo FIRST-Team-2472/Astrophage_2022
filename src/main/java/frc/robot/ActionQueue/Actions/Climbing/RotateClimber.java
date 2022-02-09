@@ -17,14 +17,23 @@ public class RotateClimber implements Actionable {
     public void startAction() 
     {
     SmartDashboard.putString("ActionName", "Twistin' her around");
-    if (Robot.imu.getCurrentAngle() < degrees) {
-        Robot.superClimber.runBothRotato(0.3);
+    if (Robot.superClimber.getRotato1Angle() < degrees) {
+        Robot.superClimber.runRotato1(0.3);
     }
-    else if (Robot.imu.getCurrentAngle() > degrees) {
+    else if (Robot.superClimber.getRotato1Angle() > degrees) {
         Robot.superClimber.runBothRotato(-0.3);
     }
-    else if (Math.abs(degrees - Robot.imu.getCurrentAngle()) < (0.1))  {
-        endAction();
+    else if (Math.abs(degrees - Robot.superClimber.getRotato1Angle()) < 1)  {
+        Robot.superClimber.runRotato2(0);
+    }
+    if (Robot.superClimber.getRotato2Angle() < degrees) {
+        Robot.superClimber.runRotato2(0.3);
+    }
+    else if (Robot.superClimber.getRotato2Angle() > degrees) {
+        Robot.superClimber.runRotato2(0.3);
+    }
+    else if (Math.abs(degrees - Robot.superClimber.getRotato2Angle()) < 1)  {
+        Robot.superClimber.runRotato2(0);
     }
     }
 
@@ -45,7 +54,7 @@ public class RotateClimber implements Actionable {
     @Override
     public boolean isFinished()
     {
-    if (Math.abs(degrees - Robot.imu.getCurrentAngle()) < (0.1))  {
+    if ((Math.abs(degrees - Robot.imu.getCurrentAngle()) < 0.1) && (Math.abs(degrees - Robot.superClimber.getRotato2Angle()) < 0.1))   {
         return true;
         }
     
