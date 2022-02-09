@@ -34,10 +34,8 @@ public class ClimberIn implements Actionable{
     @Override
     public boolean isFinished()
     {
-        //TODO fix max not wanting to do accual work
-        /*if(someunspeffiedlimitswtichison) return true;
-        else return false;*/
-        return false;
+        if(Robot.superClimber.isTouchingBar()) return true;
+        else return false;
     }
 
 }

@@ -6,8 +6,8 @@ import frc.robot.ActionQueue.Runners.TimerBase;
 
 public class ClampOff extends TimerBase{
 
-    public ClampOff(double seconds) {
-        super(seconds);
+    public ClampOff() {
+        super(.1);
     }
     
     @Override

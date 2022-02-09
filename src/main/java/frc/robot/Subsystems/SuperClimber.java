@@ -163,7 +163,9 @@ public class SuperClimber {
     runRotato1(speed);
     runRotato2(speed);
   }
+  
 
+  //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtendo1Height() {
     return extendoL.getSelectedSensorPosition() * encoderToFeet;
   }
@@ -172,12 +174,20 @@ public class SuperClimber {
     return extendoR.getSelectedSensorPosition() * encoderToFeet;
   }    
 
+
+  //these methods get the rotaion (in degrees) of the climbers based upon encoder values and a predetermined encoder to degrees ratio
   public double getRotato1Angle() {
     return rotatoL.getSelectedSensorPosition() * encoderToAngle;
   }
 
   public double getRotato2Angle() {
     return rotatoR.getSelectedSensorPosition() * encoderToAngle;
+  }
+
+
+  //these methods check if the limit switches on the sadle on being pressed
+  public boolean isTouchingBar() {
+    return isTouchingBarLeft() && isTouchingBarRight();
   }
 
   public boolean isTouchingBarLeft() {

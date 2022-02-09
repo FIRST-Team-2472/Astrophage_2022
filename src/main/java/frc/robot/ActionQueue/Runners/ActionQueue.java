@@ -57,9 +57,11 @@ public class ActionQueue {
 
     public void pause() {
         breakTime = true;
+        runningAction.endAction();
     }
 
     public void resume() {
         breakTime = false;
+        runningAction.startAction();
     }
 }

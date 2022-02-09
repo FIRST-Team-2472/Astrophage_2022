@@ -3,7 +3,6 @@ package frc.robot.ActionQueue.Actions.Climbing;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
-import frc.robot.Sensors.IMU;
 
 public class FindBar implements Actionable {
     
@@ -17,8 +16,7 @@ public class FindBar implements Actionable {
     public void startAction() 
     {
         SmartDashboard.putString("ActionName", "Gettin' that Bar");
-        if (Robot.imu.getCurrentAngle() < 2)   
-            Robot.superClimber.runBothRotato(0.3);
+        Robot.superClimber.runBothRotato(0.3);
     }
 
 
@@ -38,14 +36,8 @@ public class FindBar implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if (Robot.imu.getCurrentAngle() == 2)  {
+        if (Math.abs(Robot.imu.getCurrentAngle()) >= 2) 
             return true;
+        else return false;
     }
-    
-    //TODO fix max not wanting to do actual work
-    else {
-    return false;
-    }
-}
-
 }

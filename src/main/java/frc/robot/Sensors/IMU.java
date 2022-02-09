@@ -4,11 +4,15 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 public class IMU {
 
+    //TODO be able to find z axis or whichever axis we need
+
     public PigeonIMU pigeon;
 
-    public void IMU(int pigeonID){
+    public IMU (int pigeonID) {
         pigeon = new PigeonIMU(pigeonID);
+    }
 
+    public void setUpIMU(){
         PigeonIMU.GeneralStatus genStatus = new PigeonIMU.GeneralStatus();
     
         PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
@@ -26,8 +30,6 @@ public class IMU {
         double currentAngle = fusionStatus.heading;
 
         int yaw = ((int)currentAngle % 360);
-
-        boolean angleIsGood = (pigeon.getState() == PigeonIMU.PigeonState.Ready) ? true : false;
 
         double currentAngularRate = xyz_dps[2];
     }

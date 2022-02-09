@@ -14,8 +14,8 @@ public class AlignClimber implements Actionable{
     @Override
     public void startAction() 
     {
-        SmartDashboard.putString("ActionName", "Reeling her in");
-        Robot.superClimber.runBothExtendo(-0.3);
+        //TODO needs motion magic
+        SmartDashboard.putString("ActionName", "Straghting the climber");
     }
 
 
@@ -23,7 +23,18 @@ public class AlignClimber implements Actionable{
     @Override
     public void periodic() 
     {
-
+        if (Robot.superClimber.getRotato1Angle() < 0) 
+            Robot.superClimber.runRotato1(0.3);
+        else if (Robot.superClimber.getRotato1Angle() > 0) 
+            Robot.superClimber.runBothRotato(-0.3);
+        else if (Math.abs(Robot.superClimber.getRotato1Angle()) < 1)  
+            Robot.superClimber.runRotato2(0);
+        if (Robot.superClimber.getRotato2Angle() < 0)
+            Robot.superClimber.runRotato2(0.3);
+        else if (Robot.superClimber.getRotato2Angle() > 0) 
+            Robot.superClimber.runRotato2(0.3);
+        else if (Math.abs(Robot.superClimber.getRotato2Angle()) < 1)
+            Robot.superClimber.runRotato2(0);
     }
 
     @Override
@@ -35,10 +46,8 @@ public class AlignClimber implements Actionable{
     @Override
     public boolean isFinished()
     {
-        //TODO fix max not wanting to do accual work
-        /*if(someunspeffiedlimitswtichison) return true;
-        else return false;*/
-        return false;
+        if (Math.abs(Robot.superClimber.getRotato1Angle()) <= 1) return true;
+        else return false;
     }
 
 }
