@@ -51,10 +51,10 @@ public class SuperClimber {
     extendoL.configPeakOutputReverse(-1, 30);
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
-    extendoL.configMotionCruiseVelocity(500, 30);
+    extendoL.configMotionCruiseVelocity(10000, 30);
 
     // Motion magic acceleration is 50 counts
-    extendoL.configMotionAcceleration(100, 30);
+    extendoL.configMotionAcceleration(4000, 30);
 
     // Zero the sensor once on robot boot up
     extendoL.setSelectedSensorPosition(0, 0, 30);
@@ -75,10 +75,10 @@ public class SuperClimber {
     extendoR.configPeakOutputReverse(-1, 30);
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
-    extendoR.configMotionCruiseVelocity(500, 30);
+    extendoR.configMotionCruiseVelocity(10000, 30);
 
     // Motion magic acceleration is 50 counts
-    extendoR.configMotionAcceleration(100, 30);
+    extendoR.configMotionAcceleration(4000, 30);
 
     // Zero the sensor once on robot boot up
     extendoR.setSelectedSensorPosition(0, 0, 30);
@@ -101,10 +101,10 @@ public class SuperClimber {
     rotatoL.configPeakOutputReverse(-1, 30);
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
-    rotatoL.configMotionCruiseVelocity(500, 30);
+    rotatoL.configMotionCruiseVelocity(10000, 30);
 
     // Motion magic acceleration is 50 counts
-    rotatoL.configMotionAcceleration(100, 30);
+    rotatoL.configMotionAcceleration(4000, 30);
 
     // Zero the sensor once on robot boot up
     rotatoL.setSelectedSensorPosition(0, 0, 30);
@@ -126,10 +126,10 @@ public class SuperClimber {
     rotatoR.configPeakOutputReverse(-1, 30);
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
-    rotatoR.configMotionCruiseVelocity(500, 30);
+    rotatoR.configMotionCruiseVelocity(10000, 30);
 
     // Motion magic acceleration is 50 counts
-    rotatoR.configMotionAcceleration(100, 30);
+    rotatoR.configMotionAcceleration(4000, 30);
 
     // Zero the sensor once on robot boot up
     rotatoR.setSelectedSensorPosition(0, 0, 30);
