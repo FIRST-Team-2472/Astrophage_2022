@@ -4,8 +4,6 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 public class IMU {
 
-    //TODO be able to find z axis or whichever axis we need
-
     public PigeonIMU pigeon;
 
     public IMU (int pigeonID) {

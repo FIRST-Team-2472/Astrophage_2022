@@ -21,30 +21,31 @@ public class RotateClimber implements Actionable {
     @Override
     public void periodic() 
     {
-        if (Robot.superClimber.getRotato1Angle() < degrees) 
-            Robot.superClimber.runRotato1(0.3);
-        else if (Robot.superClimber.getRotato1Angle() > degrees) 
-            Robot.superClimber.runBothRotato(-0.3);
-        else if (Math.abs(degrees - Robot.superClimber.getRotato1Angle()) < 1)  
-            Robot.superClimber.runRotato2(0);
-        if (Robot.superClimber.getRotato2Angle() < degrees)
-            Robot.superClimber.runRotato2(0.3);
-        else if (Robot.superClimber.getRotato2Angle() > degrees) 
-            Robot.superClimber.runRotato2(0.3);
-        else if (Math.abs(degrees - Robot.superClimber.getRotato2Angle()) < 1)
-            Robot.superClimber.runRotato2(0);
+        if (Robot.superClimber.getRotationLAngle() < degrees) 
+            Robot.superClimber.runRotationL(.3);
+        else if (Robot.superClimber.getRotationLAngle() > degrees) 
+            Robot.superClimber.runRotationL(-.3);
+        else if (Math.abs(degrees - Robot.superClimber.getRotationLAngle()) < 1)  
+            Robot.superClimber.runRotationL(0);
+        
+        if (Robot.superClimber.getRotationRAngle() < degrees)
+            Robot.superClimber.runRotationR(0.3);
+        else if (Robot.superClimber.getRotationRAngle() > degrees) 
+            Robot.superClimber.runRotationR(0.3);
+        else if (Math.abs(degrees - Robot.superClimber.getRotationRAngle()) < 1)
+            Robot.superClimber.runRotationR(0);
     }
 
     @Override
     public void endAction() 
     {
-        Robot.superClimber.runBothRotato(0);
+        Robot.superClimber.runBothRotations(0);
     }
 
     @Override
     public boolean isFinished()
     {
-        if ((Math.abs(degrees - Robot.superClimber.getRotato1Angle()) < 0.1) && (Math.abs(degrees - Robot.superClimber.getRotato2Angle()) < 0.1))
+        if ((Math.abs(degrees - Robot.superClimber.getRotationLAngle()) < 0.1) && (Math.abs(degrees - Robot.superClimber.getRotationRAngle()) < 0.1))
             return true;
         else
             return false;
