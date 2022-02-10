@@ -2,6 +2,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -44,6 +46,8 @@ public class Robot extends TimedRobot {
 
   private ActionQueue autoActions = new ActionQueue();
   private ActionQueue teleopActions = new ActionQueue();
+  NetworkTableEntry bruh, getTeamColor;
+  NetworkTableInstance inst;
 
   @Override
   //Robot does this when waking up
@@ -51,6 +55,12 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("RobotState", "Robot Disabled");
     switchOne = new DigitalInput(1);
     Arduino = new DigitalOutput(4);
+    //declare a default instance of to access FMSInfo
+    inst = NetworkTableInstance.getDefault();
+    getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
+    if (getTeamColor.getBoolean(true)) 
+      limelight.setPipeLine(0);
+    else limelight.setPipeLine(3);
   }
 
   @Override
@@ -88,6 +98,11 @@ public class Robot extends TimedRobot {
     teleopMethods.drive();
 
     SmartDashboard.putNumber("Distance", distanceSensor.getDistance());
+    SmartDashboard.putNumber("Arduino", Arduino.getChannel());
+
+    if (rightJoystick.getRawButtonPressed(5)) {
+      Arduino.updateDutyCycle(3);
+    }
     //SmartDashboard.putNumber("Seeing Black?", colorSensor.getShade());
   }
 
