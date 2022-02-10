@@ -19,13 +19,13 @@ import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
+  //These declare an instance of a script as a variable and setup the constant talons or other objects.
   public static ClimberClamp climberClamp = new ClimberClamp(Constants.clamp1Forward, Constants.clamp1Backward, Constants.clamp2Forward, Constants.clamp2Backward, Constants.clawLimitL, Constants.clawLimitR);
   public static SuperClimber superClimber = new SuperClimber(Constants.climberEx1, Constants.climberEx2, Constants.climberRo1, Constants.climberRo2,
-    Constants.barStopperL, Constants.barStopperR, Constants.rotationLimitL, Constants.rotationLimitR);
+    Constants.barStopperL, Constants.barStopperR);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
   public static Intake intake = new Intake(Constants.conveyor);
   public static Shooter shooter = new Shooter(Constants.flyWheel);
-  //These declare an instance of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
   public static DistanceSensor distanceSensor = new DistanceSensor();
@@ -34,8 +34,8 @@ public class Robot extends TimedRobot {
   public static limelight limelight = new limelight();
   public static IMU imu = new IMU(Constants.pigeonID);
   private DigitalInput input;
-  private DigitalInput switchOne;
-  private DigitalOutput Arduino;
+  private DigitalInput switchOne = new DigitalInput(1);
+  private DigitalOutput Arduino  = new DigitalOutput(4);
 
 
   public ActionLists actionList = new ActionLists();
@@ -49,8 +49,6 @@ public class Robot extends TimedRobot {
   //Robot does this when waking up
   public void robotInit() {
     SmartDashboard.putString("RobotState", "Robot Disabled");
-    switchOne = new DigitalInput(1);
-    Arduino = new DigitalOutput(4);
   }
 
   @Override

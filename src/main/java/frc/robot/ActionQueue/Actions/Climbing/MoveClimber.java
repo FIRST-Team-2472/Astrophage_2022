@@ -11,7 +11,7 @@ public class MoveClimber implements Actionable{
 
     public MoveClimber(double ffeet) {
         feet = ffeet;
-        if (feet < Robot.superClimber.getExtendo1Height()) upDog = true;
+        if (feet < Robot.superClimber.getExtenderLHeight()) upDog = true;
         else upDog = false; /*:(*/
     }
     
@@ -20,8 +20,8 @@ public class MoveClimber implements Actionable{
     {
         //TODO need to use motion magic
         SmartDashboard.putString("ActionName", "Moving Climber");
-        if (upDog) Robot.superClimber.runBothExtendo(0.3);
-        else Robot.superClimber.runBothExtendo(-.3);
+        if (upDog) Robot.superClimber.runBothExtenders(0.3);
+        else Robot.superClimber.runBothExtenders(-.3);
     }
 
 
@@ -35,18 +35,18 @@ public class MoveClimber implements Actionable{
     @Override
     public void endAction() 
     {
-        Robot.superClimber.runBothExtendo(0);
+        Robot.superClimber.runBothExtenders(0);
     }
 
     @Override
     public boolean isFinished()
     {
         if (upDog) {
-            if (feet <= Robot.superClimber.getExtendo1Height()) return true;
+            if (feet <= Robot.superClimber.getExtenderLHeight()) return true;
             else return false;
         }
         else {
-            if (feet >= Robot.superClimber.getExtendo1Height()) return true;
+            if (feet >= Robot.superClimber.getExtenderLHeight()) return true;
             else return false;
         }
     }

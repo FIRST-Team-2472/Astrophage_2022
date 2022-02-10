@@ -26,8 +26,6 @@ public class Constants {
     //Limit switches
     public static final int barStopperL = 69;
     public static final int barStopperR = 69;
-    public static final int rotationLimitL = 69;
-    public static final int rotationLimitR = 69;
     public static final int clawLimitL = 69;
     public static final int clawLimitR = 69;
 
