@@ -16,7 +16,7 @@ public class FindBar implements Actionable {
     public void startAction() 
     {
         SmartDashboard.putString("ActionName", "Gettin' that Bar");
-        Robot.superClimber.runBothRotato(0.3);
+        Robot.superClimber.runBothRotations(0.3);
     }
 
 
@@ -30,7 +30,7 @@ public class FindBar implements Actionable {
     @Override
     public void endAction() 
     {
-    Robot.superClimber.runBothRotato(0);
+    Robot.superClimber.runBothRotations(0);
     }
 
     @Override

@@ -14,7 +14,7 @@ public class ClimberIn implements Actionable{
     public void startAction() 
     {
         SmartDashboard.putString("ActionName", "Reeling her in");
-        Robot.superClimber.runBothExtendo(-0.3);
+        Robot.superClimber.runBothExtenders(-0.3);
     }
 
 
@@ -28,7 +28,7 @@ public class ClimberIn implements Actionable{
     @Override
     public void endAction() 
     {
-        Robot.superClimber.runBothExtendo(0);
+        Robot.superClimber.runBothExtenders(0);
     }
 
     @Override
