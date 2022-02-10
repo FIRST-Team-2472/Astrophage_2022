@@ -38,22 +38,22 @@ public class TestMethods {
               break;
             case 4:
               Robot.shooter.runFlyWheelPower(0);
-              Robot.superClimber.runExtendo1(.5);
+              Robot.superClimber.runRotationL(.5);
               break;
             case 5:
-              Robot.superClimber.runExtendo1(0);
-              Robot.superClimber.runExtendo2(.5);
+              Robot.superClimber.runRotationL(0);
+              Robot.superClimber.runExtenderL(.5);
             break;
             case 6:
-              Robot.superClimber.runExtendo2(0);
-              Robot.superClimber.runRotato1(.5);
+              Robot.superClimber.runExtenderL(0);
+              Robot.superClimber.runRotationR(.5);
               break;
             case 7:
-              Robot.superClimber.runRotato1(0);
-              Robot.superClimber.runRotato2(.5);
+              Robot.superClimber.runRotationR(0);
+              Robot.superClimber.runExtenderR(.5);
               break;
             case 8:
-              Robot.superClimber.runRotato2(0);
+              Robot.superClimber.runExtenderR(0);
 
 
             default:
