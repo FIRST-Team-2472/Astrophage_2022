@@ -14,6 +14,9 @@ public class Drive {
     private TalonFX leftMaster;
     private TalonFX leftSlave;
 
+    //TODO find speical number
+    private double countToFeet = 00000000000;
+
     //Assigns IDs talons to hand instructions to dum kopf motors
     public Drive(int backRightID, int frontRightID, int backLeftID, int frontLeftID) {
         rightMaster = new TalonFX(backRightID);
@@ -32,11 +35,7 @@ public class Drive {
         leftSlave.setInverted(InvertType.FollowMaster);
 
 
-        //kP formula is (x/1023)/4096
-        leftMaster.config_kP(0, 0.05);
-        leftMaster.config_kI(0, 0);
-        leftMaster.config_kD(0, 0.05);
-        leftMaster.config_kF(0, -.19);
+
 
         rightMaster.config_kP(0, 0.05);
         rightMaster.config_kI(0, 0);
@@ -60,10 +59,10 @@ public class Drive {
         rightMaster.configPeakOutputReverse(-1, 30);
     
         // Motion magic cruise (max speed) is 100 counts per 100 ms
-        rightMaster.configMotionCruiseVelocity(10000, 30);
+        rightMaster.configMotionCruiseVelocity(2000, 30);
     
         // Motion magic acceleration is 50 counts
-        rightMaster.configMotionAcceleration(4000, 30);
+        rightMaster.configMotionAcceleration(2000, 30);
     
         // Zero the sensor once on robot boot up 
         rightMaster.setSelectedSensorPosition(0, 0, 30);
@@ -84,10 +83,10 @@ public class Drive {
             leftMaster.configPeakOutputReverse(-1, 30);
         
             // Motion magic cruise (max speed) is 100 counts per 100 ms
-            leftMaster.configMotionCruiseVelocity(10000, 30);
+            leftMaster.configMotionCruiseVelocity(2000, 30);
         
             // Motion magic acceleration is 50 counts
-            leftMaster.configMotionAcceleration(4000, 30);
+            leftMaster.configMotionAcceleration(2000, 30);
         
             // Zero the sensor once on robot boot up 
             leftMaster.setSelectedSensorPosition(0, 0, 30);
@@ -121,6 +120,11 @@ public class Drive {
         runRight(rightSpeed);
     }
 
+    public void runFeetDrive(double feet) {
+        setLeftTarget(feet / countToFeet);
+        setRightTarget(feet / countToFeet);
+    }
+
     public void runLeft(double speed) {
         leftMaster.set(ControlMode.Velocity, speed * -6250);
     }
@@ -130,11 +134,11 @@ public class Drive {
     }
 
     public void setLeftTarget(double feet) {
-        leftMaster.set(ControlMode.MotionMagic, feet * 1000);
+        leftMaster.set(ControlMode.MotionMagic, feet * countToFeet);
     }
 
     public void setRightTarget(double feet) {
-        leftMaster.set(ControlMode.MotionMagic, feet * 1000);
+        leftMaster.set(ControlMode.MotionMagic, feet * countToFeet);
     }
 
     public void zeroEncoders(){
@@ -142,12 +146,12 @@ public class Drive {
         leftMaster.setSelectedSensorPosition(0);
     }
 
-    public double getLeftDistance() {
-        return leftMaster.getSelectedSensorPosition();
+    public double getLeftFeet() {
+        return leftMaster.getSelectedSensorPosition() / countToFeet;
     }
 
-    public double getRightDistance() {
-        return rightMaster.getSelectedSensorPosition();
+    public double getRightFeet() {
+        return rightMaster.getSelectedSensorPosition() / countToFeet;
     }
 
     public double getRightSpeed() {
