@@ -16,7 +16,7 @@ public class SuperClimber {
   private TalonSRX rotationL;
   private TalonSRX rotationR;
 
-  //TODO need to find a special number
+  // TODO need to find a special number
   private final double encoderToFeet = 1000;
   public final double encoderToDegrees = 1001;
   private final double roatationLimit = 1002;
@@ -31,7 +31,10 @@ public class SuperClimber {
     rotationL = new TalonSRX(rotato1ID);
     rotationR = new TalonSRX(rotato2ID);
 
-    //limit Switches
+    setUpMotionMagicFX(extendoL, KF, KP, KI);
+    setUpMotionMagicFX(extendoR, KF, KP, KI);
+
+    // limit Switches
     barStopperL = new DigitalInput(barStopperLID);
     barStopperR = new DigitalInput(barStopperRID);
     rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -164,7 +167,6 @@ public class SuperClimber {
     runRotationL(speed);
     runRotationR(speed);
   }
-  
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
@@ -185,8 +187,7 @@ public class SuperClimber {
     return rotationR.getSelectedSensorPosition() * encoderToDegrees;
   }
 
-
-  //these methods check if the limit switches on the sadle on being pressed
+  // these methods check if the limit switches on the sadle on being pressed
   public boolean isTouchingBar() {
     return isTouchingBarLeft() && isTouchingBarRight();
   }
@@ -199,6 +200,40 @@ public class SuperClimber {
     return barStopperR.get();
   }
 
+  private void setUpMotionMagicFX(TalonFX motor, double KF, double KP, double KI) {
+    motor.configFactoryDefault();
+
+    // kP formula is (x/1023)/4096
+    motor.config_kP(0, KP);
+    motor.config_kI(0, KI);
+    motor.config_kF(0, KF);
+
+    //D stands for don't touch
+    motor.config_kD(0, 0);
+    
+    motor.setSensorPhase(true); // correct encoder to motor direction
+
+    // Tell the talon that he has a quad encoder
+    motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
+
+    // Set minimum output (closed loop) to 0 for now
+    motor.configNominalOutputForward(0, 30);
+    motor.configNominalOutputReverse(0, 30);
+
+    // Set maximum forward and backward to full speed
+    motor.configPeakOutputForward(1, 30);
+    motor.configPeakOutputReverse(-1, 30);
+
+    // Motion magic cruise (max speed) is 100 counts per 100 ms
+    motor.configMotionCruiseVelocity(2000, 30);
+
+    // Motion magic acceleration is 50 counts
+    motor.configMotionAcceleration(2000, 30);
+
+    // Zero the sensor once on robot boot up
+    motor.setSelectedSensorPosition(0, 0, 30);
+  }
+  
   public boolean getRoationLReverseLimit() {
     return rotationL.getSensorCollection().isRevLimitSwitchClosed();
   }
