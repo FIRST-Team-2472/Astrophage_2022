@@ -19,6 +19,11 @@ public class IMU {
 
         double [] xyz_dps = new double [3];
 
+        double [] ypr = new double [3];
+        pigeon.getPitch();
+        pigeon.getYaw();
+        pigeon.getRoll();
+
         /* grab some input data from Pigeon and gamepad*/
 
         pigeon.getGeneralStatus(genStatus);
@@ -27,18 +32,28 @@ public class IMU {
 
         pigeon.getFusedHeading(fusionStatus);
 
-        double currentAngle = fusionStatus.heading;
+        double currentXAngle = fusionStatus.heading;
 
-        int yaw = ((int)currentAngle % 360);
+        int yaw = ((int)currentXAngle % 360);
 
         double currentAngularRate = xyz_dps[2];
     }
 
-    public int getCurrentAngle() {
+    public int getCurrentXAngle() {
+        //a testament to the lost ages\
+        //TODO outdated
         PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
         pigeon.getFusedHeading(fusionStatus);
-        double currentAngle = fusionStatus.heading;
-        return (int)currentAngle;
+        double currentXAngle = fusionStatus.heading;
+        return (int)currentXAngle;
+    }
+
+    public int getCurrentYAngle() {
+        return (int)pigeon.getPitch();
+    }
+
+    public int getCurrentZAngle() {
+        return (int)pigeon.getRoll();
     }
 }
 

@@ -36,7 +36,7 @@ public class FindBar implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if (Math.abs(Robot.imu.getCurrentAngle()) >= 2) 
+        if (Math.abs(Robot.imu.getCurrentXAngle()) >= 2) 
             return true;
         else return false;
     }
