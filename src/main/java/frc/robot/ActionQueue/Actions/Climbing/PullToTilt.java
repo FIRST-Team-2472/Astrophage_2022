@@ -6,17 +6,11 @@ import frc.robot.ActionQueue.Runners.Actionable;
 
 public class PullToTilt implements Actionable {
     
-    public double degrees;
-
-    public PullToTilt(double ddegrees) {
-        degrees = ddegrees;
-    }
-    
     @Override
     public void startAction() 
     {
-        SmartDashboard.putString("ActionName", "Gettin' that Bar");
-        Robot.superClimber.runBothRotations(0.3);
+        SmartDashboard.putString("ActionName", "Latching to next Bar");
+        Robot.superClimber.runBothExtenders(-0.3);
     }
 
 
@@ -30,13 +24,13 @@ public class PullToTilt implements Actionable {
     @Override
     public void endAction() 
     {
-    Robot.superClimber.runBothRotations(0);
+        Robot.superClimber.runBothExtenders(0);
     }
 
     @Override
     public boolean isFinished()
     {
-        if (Math.abs(Robot.imu.getCurrentXAngle()) >= 2) 
+        if (Math.abs(Robot.imu.getCurrentXAngle()) >= 40) 
             return true;
         else return false;
     }
