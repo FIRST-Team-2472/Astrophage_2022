@@ -96,7 +96,6 @@ public class Drive {
 
 
     public void arcadeDrive(double y, double x) {
-        SmartDashboard.putNumber("hi",2);
         // y is the y axis of the joystick
         // x is the x axis of the SAME joystick
         if (Math.abs(x) < .1) x = 0;
@@ -120,7 +119,7 @@ public class Drive {
         runRight(rightSpeed);
     }
 
-    public void runFeetDrive(double feet) {
+    public void driveFeet(double feet) {
         setLeftTarget(feet / countToFeet);
         setRightTarget(feet / countToFeet);
     }

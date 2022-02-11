@@ -7,7 +7,6 @@ import frc.robot.Robot;
 
 public class TeleopMethods 
 {
-    boolean intakeWheel = false;
     
     public void init() 
     {
@@ -19,7 +18,7 @@ public class TeleopMethods
 
     public void drive() 
     {
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, Robot.leftJoystick.getX()*.5);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
     }
 
     public void intake()

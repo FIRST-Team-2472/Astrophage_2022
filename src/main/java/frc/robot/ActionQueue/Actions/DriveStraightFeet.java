@@ -17,7 +17,7 @@ public class DriveStraightFeet implements Actionable {
     public void startAction() 
     {
         SmartDashboard.putString("ActionName", "Drive Feet");
-        Robot.drive.runFeetDrive(feet);
+        Robot.drive.driveFeet(feet);
     }
 
     @Override

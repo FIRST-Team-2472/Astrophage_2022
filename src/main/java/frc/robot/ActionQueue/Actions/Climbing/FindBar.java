@@ -6,12 +6,6 @@ import frc.robot.ActionQueue.Runners.Actionable;
 
 public class FindBar implements Actionable {
     
-    public double degrees;
-
-    public FindBar (double ddegrees) {
-        degrees = ddegrees;
-    }
-    
     @Override
     public void startAction() 
     {
