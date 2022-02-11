@@ -20,6 +20,7 @@ public class SuperClimber {
   private final double encoderToFeet = 1000;
   public final double encoderToDegrees = 1001;
   private final double roatationLimit = 1002;
+  private final double KF = 0, KP = 0, KI = 0;
 
   private DigitalInput barStopperL, barStopperR;
 
@@ -31,8 +32,10 @@ public class SuperClimber {
     rotationL = new TalonSRX(rotato1ID);
     rotationR = new TalonSRX(rotato2ID);
 
-    setUpMotionMagicFX(extendoL, KF, KP, KI);
-    setUpMotionMagicFX(extendoR, KF, KP, KI);
+    setUpMotionMagicFX(extenderL, KF, KP, KI);
+    setUpMotionMagicFX(extenderR, KF, KP, KI);
+    setUpMotionMagicSRX(rotationL, KF, KP, KI);
+    setUpMotionMagicSRX(rotationR, KF, KP, KI);
 
     // limit Switches
     barStopperL = new DigitalInput(barStopperLID);
@@ -40,106 +43,33 @@ public class SuperClimber {
     rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
     rotationR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 
-    // encoders
-    extenderL.setSensorPhase(true); // correct encoder to motor direction
-
-    // Tell the talon that he has a quad encoder
-    extenderL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
-
-    // Set minimum output (closed loop) to 0 for now
-    extenderL.configNominalOutputForward(0, 30);
-    extenderL.configNominalOutputReverse(0, 30);
-
-    // Set maximum forward and backward to full speed
-    extenderL.configPeakOutputForward(1, 30);
-    extenderL.configPeakOutputReverse(-1, 30);
-
-    // Motion magic cruise (max speed) is 100 counts per 100 ms
-    extenderL.configMotionCruiseVelocity(10000, 30);
-
-    // Motion magic acceleration is 50 counts
-    extenderL.configMotionAcceleration(4000, 30);
-
-    // Zero the sensor once on robot boot up
-    extenderL.setSelectedSensorPosition(0, 0, 30);
-
-    /* the other one */
-
-    extenderR.setSensorPhase(true); // correct encoder to motor direction
-
-    // Tell the talon that he has a quad encoder
-    extenderR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
-
-    // Set minimum output (closed loop) to 0 for now
-    extenderR.configNominalOutputForward(0, 30);
-    extenderR.configNominalOutputReverse(0, 30);
-
-    // Set maximum forward and backward to full speed
-    extenderR.configPeakOutputForward(1, 30);
-    extenderR.configPeakOutputReverse(-1, 30);
-
-    // Motion magic cruise (max speed) is 100 counts per 100 ms
-    extenderR.configMotionCruiseVelocity(10000, 30);
-
-    // Motion magic acceleration is 50 counts
-    extenderR.configMotionAcceleration(4000, 30);
-
-    // Zero the sensor once on robot boot up
-    extenderR.setSelectedSensorPosition(0, 0, 30);
-
-
-
-    //set up rotato encoders
-
-    rotationL.setSensorPhase(true); // correct encoder to motor direction
-
-    // Tell the talon that he has a quad encoder
-    rotationL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
-
-    // Set minimum output (closed loop) to 0 for now
-    rotationL.configNominalOutputForward(0, 30);
-    rotationL.configNominalOutputReverse(0, 30);
-
-    // Set maximum forward and backward to full speed
-    rotationL.configPeakOutputForward(1, 30);
-    rotationL.configPeakOutputReverse(-1, 30);
-
-    // Motion magic cruise (max speed) is 100 counts per 100 ms
-    rotationL.configMotionCruiseVelocity(10000, 30);
-
-    // Motion magic acceleration is 50 counts
-    rotationL.configMotionAcceleration(4000, 30);
-
-    // Zero the sensor once on robot boot up
-    rotationL.setSelectedSensorPosition(0, 0, 30);
-
-    
-    /* the other one */
-
-    rotationR.setSensorPhase(true); // correct encoder to motor direction
-
-    // Tell the talon that he has a quad encoder
-    rotationR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 30);
-
-    // Set minimum output (closed loop) to 0 for now
-    rotationR.configNominalOutputForward(0, 30);
-    rotationR.configNominalOutputReverse(0, 30);
-
-    // Set maximum forward and backward to full speed
-    rotationR.configPeakOutputForward(1, 30);
-    rotationR.configPeakOutputReverse(-1, 30);
-
-    // Motion magic cruise (max speed) is 100 counts per 100 ms
-    rotationR.configMotionCruiseVelocity(10000, 30);
-
-    // Motion magic acceleration is 50 counts
-    rotationR.configMotionAcceleration(4000, 30);
-
-    // Zero the sensor once on robot boot up
-    rotationR.setSelectedSensorPosition(0, 0, 30);
   }
 
+  public void runTargetExtenderL(double feet) {
+    extenderL.set(ControlMode.MotionMagic, feet / encoderToFeet );
+  }
 
+  public void runTargetExtenderR(double feet) {
+    extenderR.set(ControlMode.MotionMagic, feet / encoderToFeet);
+  }
+
+  public void runBothExtendersTarget(double feet) {
+    runTargetExtenderL(feet);
+    runTargetExtenderR(feet);
+  }
+
+  public void runTargetRotationL(double angle) {
+    rotationL.set(ControlMode.MotionMagic, angle / encoderToDegrees);
+  }
+
+  public void runTargetRotationR(double angle) {
+    rotationR.set(ControlMode.MotionMagic, angle / encoderToDegrees);
+  }
+
+  public void runBothRotationsTarget(double angle) {
+    runTargetRotationL(angle);
+    runTargetRotationR(angle);
+  }
   
   //All this jazz just runs the pistons which extend the claws on the moving arm.
   public void runExtenderL(double speed) {
@@ -200,7 +130,62 @@ public class SuperClimber {
     return barStopperR.get();
   }
 
+
+  
+  public boolean getRoationLReverseLimit() {
+    return rotationL.getSensorCollection().isRevLimitSwitchClosed();
+  }
+
+  public boolean getRoationRReverseLimit() {
+    return rotationR.getSensorCollection().isRevLimitSwitchClosed();
+  }
+
+  public void zeroRotationEncoders() {
+    rotationL.setSelectedSensorPosition(0);
+    rotationL.configForwardSoftLimitEnable(true);
+    rotationL.configForwardSoftLimitThreshold(roatationLimit * encoderToDegrees);
+
+    rotationR.setSelectedSensorPosition(0);
+    rotationR.configForwardSoftLimitEnable(true);
+    rotationR.configForwardSoftLimitThreshold(roatationLimit * encoderToDegrees);
+  }
+
+
+
+
+
   private void setUpMotionMagicFX(TalonFX motor, double KF, double KP, double KI) {
+    motor.configFactoryDefault();
+
+    // kP formula is (x/1023)/4096
+    motor.config_kP(0, KP);
+    motor.config_kI(0, KI);
+    motor.config_kF(0, KF);
+
+    //D stands for don't touch
+    motor.config_kD(0, 0);
+    
+    motor.setSensorPhase(true); // correct encoder to motor direction
+
+    // Set minimum output (closed loop) to 0 for now
+    motor.configNominalOutputForward(0, 30);
+    motor.configNominalOutputReverse(0, 30);
+
+    // Set maximum forward and backward to full speed
+    motor.configPeakOutputForward(1, 30);
+    motor.configPeakOutputReverse(-1, 30);
+
+    // Motion magic cruise (max speed) is 100 counts per 100 ms
+    motor.configMotionCruiseVelocity(2000, 30);
+
+    // Motion magic acceleration is 50 counts
+    motor.configMotionAcceleration(2000, 30);
+
+    // Zero the sensor once on robot boot up
+    motor.setSelectedSensorPosition(0, 0, 30);
+  }
+
+  private void setUpMotionMagicSRX(TalonSRX motor, double KF, double KP, double KI) {
     motor.configFactoryDefault();
 
     // kP formula is (x/1023)/4096
@@ -232,23 +217,5 @@ public class SuperClimber {
 
     // Zero the sensor once on robot boot up
     motor.setSelectedSensorPosition(0, 0, 30);
-  }
-  
-  public boolean getRoationLReverseLimit() {
-    return rotationL.getSensorCollection().isRevLimitSwitchClosed();
-  }
-
-  public boolean getRoationRReverseLimit() {
-    return rotationR.getSensorCollection().isRevLimitSwitchClosed();
-  }
-
-  public void zeroRotationEncoders() {
-    rotationL.setSelectedSensorPosition(0);
-    rotationL.configForwardSoftLimitEnable(true);
-    rotationL.configForwardSoftLimitThreshold(roatationLimit * encoderToDegrees);
-
-    rotationR.setSelectedSensorPosition(0);
-    rotationR.configForwardSoftLimitEnable(true);
-    rotationR.configForwardSoftLimitThreshold(roatationLimit * encoderToDegrees);
   }
 }
