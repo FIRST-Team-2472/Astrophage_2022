@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
-public class FindBar implements Actionable {
+public class PullToTilt implements Actionable {
     
     public double degrees;
 
-    public FindBar (double ddegrees) {
+    public PullToTilt(double ddegrees) {
         degrees = ddegrees;
     }
     

@@ -4,9 +4,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,23 +24,24 @@ import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
+  //These declare an instance of a script as a variable and setup the constant talons or other objects.
   public static ClimberClamp climberClamp = new ClimberClamp(Constants.clamp1Forward, Constants.clamp1Backward, Constants.clamp2Forward, Constants.clamp2Backward, Constants.clawLimitL, Constants.clawLimitR);
   public static SuperClimber superClimber = new SuperClimber(Constants.climberEx1, Constants.climberEx2, Constants.climberRo1, Constants.climberRo2,
-    Constants.barStopperL, Constants.barStopperR, Constants.rotationLimitL, Constants.rotationLimitR);
+    Constants.barStopperL, Constants.barStopperR);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
   public static Intake intake = new Intake(Constants.conveyor);
   public static Shooter shooter = new Shooter(Constants.flyWheel);
-  //These declare an instance of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
   public static DistanceSensor distanceSensor = new DistanceSensor();
+  public static Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
   public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
   public static limelight limelight = new limelight();
   public static IMU imu = new IMU(Constants.pigeonID);
   private DigitalInput input;
-  private DigitalInput switchOne;
-  private DigitalOutput Arduino;
+  private DigitalInput switchOne = new DigitalInput(1);
+  private DigitalOutput Arduino  = new DigitalOutput(4);
 
 
   public ActionLists actionList = new ActionLists();
@@ -61,6 +65,8 @@ public class Robot extends TimedRobot {
     if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);
     else limelight.setPipeLine(3);
+    //runs the compressor
+    compressor.enabled();
   }
 
   @Override
@@ -101,7 +107,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Arduino", Arduino.getChannel());
 
     if (rightJoystick.getRawButtonPressed(5)) {
-      Arduino.updateDutyCycle(3);
+      Arduino.updateDutyCycle(1);
     }
     //SmartDashboard.putNumber("Seeing Black?", colorSensor.getShade());
   }

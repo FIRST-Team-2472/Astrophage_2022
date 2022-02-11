@@ -22,6 +22,7 @@ public class Constants {
     public static final int climberEx2 = 42;
     public static final int climberRo1 = 42;
     public static final int climberRo2 = 42;
+    public static final int COMPRESSOR = 42;
 
     //Limit switches
     public static final int barStopperL = 69;
