@@ -4,19 +4,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.TimerBase;
 
-public class DriveAndConveyor extends TimerBase 
+public class EndDriveToBall extends TimerBase 
 {
 
-    public double speed;
-    public double conveyorSpeed;
-    public double intakeSpeed;
 
-    public DriveAndConveyor(double givenSpeed, double givenConveyorSpeed, double givenIntakeSpeed, double seconds) 
+
+    public EndDriveToBall() 
     {
-        super(seconds);
-        speed = givenSpeed;
-        conveyorSpeed = givenConveyorSpeed;
-        intakeSpeed = givenIntakeSpeed;
+        super(1);
+
     }
 
     @Override
@@ -24,8 +20,7 @@ public class DriveAndConveyor extends TimerBase
     {
         super.startAction();
         SmartDashboard.putString("ActionName", "Drive and Conveyor");
-        Robot.drive.tankDrive(speed, speed);
-        Robot.intake.runConveyorPower(conveyorSpeed);
+        Robot.drive.tankDrivePower(0.2, 0.2);
     }
 
     @Override

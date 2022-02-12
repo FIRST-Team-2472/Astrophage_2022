@@ -4,18 +4,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.ActionQueue.Runners.Actionable;
 import frc.robot.Robot;
 
-public class DriveStraightLimelight implements Actionable {
+public class DriveToBall implements Actionable {
 
-    double limelightkP = 0.02;
-    double distance = (Robot.limelight.get_distance_in() * 12);
+    double limelightCorrection = 0.02;
+    double distance = Robot.limelight.get_distance_in();
 
     @Override
     public void startAction() 
     {
         SmartDashboard.putString("ActionName", "Drive Limelight");
- 
-     
-		Robot.drive.arcadeDrivePower((distance * limelightkP), (limelightkP * Robot.limelight.targetXAngleFromCenter()));
         //-1 * (limelightkP * Robot.limelight.targetXAngleFromCenter()));
 
         
@@ -24,7 +21,7 @@ public class DriveStraightLimelight implements Actionable {
     @Override
     public void periodic() 
     {
-        Robot.drive.arcadeDrivePower((distance * limelightkP), (limelightkP * Robot.limelight.targetXAngleFromCenter()));
+        Robot.drive.arcadeDrivePower(0.2, (limelightCorrection * Robot.limelight.targetXAngleFromCenter()));
     }
 
     @Override
@@ -36,9 +33,7 @@ public class DriveStraightLimelight implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if (Robot.limelight.get_distance_in() <= 0.5)
-        return true;
-
+        if (Robot.limelight.get_distance_in() <= 6) return true;
         else return false;
     }
 
