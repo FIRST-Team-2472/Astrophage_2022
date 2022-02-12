@@ -6,16 +6,16 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class ClimberClamp {
-    private DoubleSolenoid clamp1;
-    private DoubleSolenoid clamp2;
+    private DoubleSolenoid clampL;
+    private DoubleSolenoid clampR;
 
     private DigitalInput clawLimitL, clawLimitR;
 
-    public ClimberClamp (int clamp1ForwardID, int clamp1BackwardID, int clamp2ForwardID, int clamp2BackwardID, int clawLimitLID, int clawLimitRID)
+    public ClimberClamp (int clampLForwardID, int clampLBackwardID, int clampRForwardID, int clampRBackwardID, int clawLimitLID, int clawLimitRID)
     {
         //Don't know what PnuematicsModuelType does, but it works.
-        clamp1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clamp1ForwardID, clamp1BackwardID);
-        clamp2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clamp2ForwardID, clamp2BackwardID);
+        clampR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clampLForwardID, clampLBackwardID);
+        clampR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clampRForwardID, clampRBackwardID);
 
         //Limit Switches
         clawLimitL = new DigitalInput(clawLimitLID);
@@ -24,49 +24,49 @@ public class ClimberClamp {
 
     public void setClamps() 
     {
-        setClamp1();
-        setClamp2();
+        setClampR();
+        setClampL();
     }
 
     public void disengageClamps()
     {
-        disengageClamp1();
-        disengageClamp2();
+        disengageClampR();
+        disengageClampL();
     }
 
     public void turnOffClamps()
     {
-        turnOffclamp1();
-        turnOffclamp2();
+        turnOffclampR();
+        turnOffclampL();
     }
 
     //This is for the clamp on the immobile climbing arm at work
-    public void setClamp1() 
+    public void setClampL() 
     {
-        clamp1.set(Value.kForward);
+        clampL.set(Value.kForward);
     }
 
-    public void setClamp2()
+    public void setClampR()
     {
-        clamp1.set(Value.kForward);
+        clampR.set(Value.kForward);
     }
   
-    public void disengageClamp1() 
+    public void disengageClampL() 
     {
-        clamp1.set(Value.kReverse);
+        clampL.set(Value.kReverse);
     }
 
-    public void disengageClamp2() 
+    public void disengageClampR() 
     {
-        clamp2.set(Value.kReverse);
+        clampR.set(Value.kReverse);
     }
     
-    public void turnOffclamp1() {
-        clamp1.set(Value.kOff);
+    public void turnOffclampL() {
+        clampL.set(Value.kOff);
     }
   
-    public void turnOffclamp2() {
-        clamp2.set(Value.kOff);
+    public void turnOffclampR() {
+        clampR.set(Value.kOff);
     }
 
     public boolean isFullyClamped() {

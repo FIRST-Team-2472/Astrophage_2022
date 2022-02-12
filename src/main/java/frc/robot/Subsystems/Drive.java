@@ -1,7 +1,6 @@
 package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -140,6 +139,16 @@ public class Drive {
         // Zero the sensor once on robot boot up
         motor.setSelectedSensorPosition(0, 0, 30);
     }
+
+    public double leftDriveDistance() {
+        return leftMaster.getSelectedSensorPosition() * countToFeet;
+    }
+
+    public double rightDriveDistance() {
+        return rightMaster.getSelectedSensorPosition() * countToFeet;
+    }
+
+
 
 
     
