@@ -3,35 +3,34 @@ package frc.robot.RobotMethods;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class TeleopMethods {
+
+
+public class TeleopMethods 
+{
     
-    public void init() {
+    public void init() 
+    {
         //Displays a value to ShuffleBoard
         SmartDashboard.putString("RobotState", "Telop Enabled");
         Robot.drive.zeroEncoders();
     }
 
 
-    public void drive() {
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, Robot.leftJoystick.getX()*.5);
+    public void drive() 
+    {
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
     }
 
-    public void aimForBall() {
+    /*public void intake()
+    {
 
-        double limelightkP = 0.02;
-     
-			Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-1 * (limelightkP * Robot.limelight.targetXAngleFromCenter())));
-            
-
-        
+        if (Robot.xboxcontroller.getBButton()) Robot.intake.runConveyorPower(.5);
+        else Robot.intake.runConveyorPower(0);
     }
-}
 
-    /*public void shooting () {
-        if (Robot.xboxcontroller.getXButton()) {
-            Robot.shooter.runFlyWheel(1);
-
-        } else {
-            Robot.shooter.runFlyWheel(0);
-        }
+    public void shooter()
+    {
+        if (Robot.xboxcontroller.getXButtonPressed()) Robot.shooter.runFlyWheelPower(.5);
+        else Robot.shooter.runFlyWheelPower(0);
     }*/
+}

@@ -12,15 +12,16 @@ import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
-  public static ClimberClamp climberClamp = new ClimberClamp(Constants.ClampOne, Constants.ClampTwo);
-  public static ClimberClaw climberClaw = new ClimberClaw(Constants.climberClawEins, Constants.climberClawZwei);
-  public static ClimberMove climberMove = new ClimberMove(Constants.climberMoveEins, Constants.climberMoveZwei);
+  //public static ClimberClamp climberClamp = new ClimberClamp(Constants.ClampOne, Constants.ClampTwo);
+  //public static ClimberClaw climberClaw = new ClimberClaw(Constants.climberClawEins, Constants.climberClawZwei);
+  //public static ClimberMove climberMove = new ClimberMove(Constants.climberMoveEins, Constants.climberMoveZwei);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
-  public static Intake intake = new Intake(Constants.conveyor, Constants.frontWheels, Constants.pcmID, Constants.frontWheelForwardID, Constants.frontWheelBackID);
-  public static Shooter shooter = new Shooter(Constants.flyWheel);
+  //public static Intake intake = new Intake(Constants.conveyor, Constants.frontWheels, Constants.pcmID, Constants.frontWheelForwardID, Constants.frontWheelBackID);
+  //public static Shooter shooter = new Shooter(Constants.flyWheel);
 // These declare an instace of a script as a variable and setup the constant talons or other objects.
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
+  public static limelight limelight = new limelight();
   public edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
 
   public ActionLists actionList = new ActionLists();
@@ -46,7 +47,8 @@ public class Robot extends TimedRobot {
   //Robot does this when starting "autonomous" mode
   public void autonomousInit() {
     SmartDashboard.putString("RobotState", "Autonomous");
-    actionList.DriveSome(autoActions);
+    actionList.DriveLimelight(autoActions);
+    //actionList.DriveSome(autoActions);
   }
 
   @Override
