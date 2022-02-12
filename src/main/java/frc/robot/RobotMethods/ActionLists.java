@@ -1,6 +1,8 @@
 package frc.robot.RobotMethods;
 
+import frc.robot.ActionQueue.Actions.CenteringLimelight;
 import frc.robot.ActionQueue.Actions.DriveAndConveyor;
+import frc.robot.ActionQueue.Actions.DriveStraightFeet;
 import frc.robot.ActionQueue.Actions.DriveStraightTime;
 import frc.robot.ActionQueue.Actions.ShootBall;
 import frc.robot.ActionQueue.Actions.ZeroRotations;
@@ -12,8 +14,9 @@ public class ActionLists
     public void InitialAutonomous(ActionQueue action)
     {
         action.addAction(new ZeroRotations());
-        action.addAction(new DriveAndConveyor(-.3, .5, .5, 4));
-        action.addAction(new DriveStraightTime(.3, 4));
+        action.addAction(new CenteringLimelight());
+        action.addAction(new DriveStraightFeet(-10));
+        action.addAction(new DriveStraightFeet(10));
         action.addAction(new ShootBall(.5, .5, 4));
     }
 
