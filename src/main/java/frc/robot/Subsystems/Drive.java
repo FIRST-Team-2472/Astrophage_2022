@@ -159,18 +159,6 @@ public class Drive {
         return leftMaster.getSelectedSensorVelocity();
     }
 
-    public void getLeftMagicNumber(){
-        magicNumber(leftMaster);
-
-    }
-
-   public void getRightMagicNumber(){
-        magicNumber(rightMaster);
-        
-    }
-
-
-
 
 
 
@@ -212,92 +200,5 @@ public class Drive {
     //Commands rightMaster's speed with a percentage
     public void runRightPower(double speed) {
         rightMaster.set(ControlMode.PercentOutput, speed);
-    }
-
-    public void magicNumber(TalonFX Freddy){
-        double suggestKF = 0;
-        double velocity;
-        double error;
-        int  waitcount=0;
-        int AState=0;
-
-        if (waitcount > 0)
-        {
-          waitcount--;
-          return;
-        }
-    
-        switch (AState)
-        {
-          case 0:
-    
-            Freddy.set(ControlMode.PercentOutput, 0 );   // Stop
-            break;
-    
-          case 1:    
-            // Determine kF - find nominal speed
-            Freddy.set(ControlMode.PercentOutput, .75 );   // Set speed to .75 forward
-            SmartDashboard.putNumber("Joystick", .75);
-            waitcount = 50;
-            AState = 2;
-            System.out.println("State 1");
-            break;
-    
-          case 2:
-            waitcount = -1;
-            velocity = Freddy.getSelectedSensorVelocity();
-    
-            // If sensor polarity is backward, notify
-            //    There is nothing else we can do
-            if (velocity < 0)
-            {
-              System.out.println("Sensor polarity is reversed");
-              System.out.println("Reverse parameter in Freddy.setSensorPhase(); statement");
-              AState = 0;   // Now quit
-              break;
-            }
-    
-            // Sensor polarity is correct - calculate suggested KF
-    
-            SmartDashboard.putNumber("Sensor Vel:", velocity);
-            suggestKF = .75 * 1023 / Freddy.getSelectedSensorVelocity();
-            System.out.print("Suggested kF: " );
-            System.out.println(suggestKF);
-            Freddy.set(ControlMode.PercentOutput, 0 );   // Set speed to .75 forward
-            Freddy.config_kF(0, suggestKF, 30);
-            SmartDashboard.putNumber("KF", 0);
-            waitcount = 50;
-    
-            //  Now, go into closed loop mode with the new KF and try for 75% speed again.
-            Freddy.set(ControlMode.Velocity, velocity);
-    
-            AState = 3;
-            break;
-    
-            // We have now gone about 1 second trying for 75% speed closed loop
-            //   Catch the error and suggest a new KP
-    
-          case 3:
-            error = Freddy.getClosedLoopError(0);
-            System.out.print("Closed loop error (KP = 0): " );
-            System.out.println(error);
-            AState = 4;
-            break;
-    
-          case 4:
-            
-            
-    
-          default:
-            System.out.print("Unsupported case: ");
-            System.out.println(AState);
-            AState = 0;
-    
-            break;
-    
-
-        }
-      
-    }
-    
+    }  
 }
