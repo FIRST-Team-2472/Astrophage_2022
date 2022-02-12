@@ -13,7 +13,7 @@ public class ClimberClamp {
 
     public ClimberClamp (int clampLForwardID, int clampLBackwardID, int clampRForwardID, int clampRBackwardID, int clawLimitLID, int clawLimitRID)
     {
-        //Don't know what PnuematicsModuelType does, but it works.
+        //Initializes the pistons as, get this, pistons.
         clampR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clampLForwardID, clampLBackwardID);
         clampR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clampRForwardID, clampRBackwardID);
 
@@ -22,61 +22,72 @@ public class ClimberClamp {
         clawLimitR = new DigitalInput(clawLimitRID);
     }
 
+    //Hooks the hooks.
     public void setClamps() 
     {
         setClampR();
         setClampL();
     }
 
+    //Unhooks the hooks.
     public void disengageClamps()
     {
         disengageClampR();
         disengageClampL();
     }
 
+    //Turns off the pistons for the hooks.
     public void turnOffClamps()
     {
         turnOffclampR();
         turnOffclampL();
     }
 
-    //This is for the clamp on the immobile climbing arm at work
+    //Hooks the left hook.
     public void setClampL() 
     {
         clampL.set(Value.kForward);
     }
 
+    //Hooks the right hook.
     public void setClampR()
     {
         clampR.set(Value.kForward);
     }
   
+    //Unhooks the left hook.
     public void disengageClampL() 
     {
         clampL.set(Value.kReverse);
     }
 
+    //Unhooks the right hook.
     public void disengageClampR() 
     {
         clampR.set(Value.kReverse);
     }
     
+    //Turns of the left hook's piston.
     public void turnOffclampL() {
         clampL.set(Value.kOff);
     }
   
+    //Turns off the right hook's piston.
     public void turnOffclampR() {
         clampR.set(Value.kOff);
     }
 
+    //Returns if both hooks being hooked.
     public boolean isFullyClamped() {
         return isClampedL() && isClampedR();
     }
 
+    //Returns if the left hook being hooked.
     public boolean isClampedL() {
         return clawLimitL.get();
     }
     
+    //Returns if the right hook being hooked.
     public boolean isClampedR() {
         return clawLimitR.get();
     }
