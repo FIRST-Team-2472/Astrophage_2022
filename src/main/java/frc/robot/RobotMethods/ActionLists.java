@@ -31,9 +31,7 @@ public class ActionLists
         for (int i = 0; i < 2; i++) {
             //small
             action.addAction(new MoveClimber(99999));
-            //maybe have next two run at same time
-            action.addAction(new RotateClimber(999999));
-            action.addAction(new MoveClimber(99999));
+            action.addAction(new ExtendAndRotateClimber(99999, 999999));
             action.addAction(new FindBar());
             action.addAction(new PullToTilt());
             action.addAction(new ClampOff());

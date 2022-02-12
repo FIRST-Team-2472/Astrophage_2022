@@ -6,10 +6,10 @@ import frc.robot.ActionQueue.Runners.Actionable;
 
 public class RotateClimber implements Actionable {
     
-    public double degrees;
+    public double angle;
 
-    public RotateClimber(double ddegrees) {
-        degrees = ddegrees;
+    public RotateClimber(double angle) {
+        this.angle = angle;
     }
     
     @Override
@@ -21,18 +21,18 @@ public class RotateClimber implements Actionable {
     @Override
     public void periodic() 
     {
-        if (Robot.superClimber.getRotationLAngle() < degrees) 
+        if (Robot.superClimber.getRotationLAngle() < angle) 
             Robot.superClimber.runRotationL(.3);
-        else if (Robot.superClimber.getRotationLAngle() > degrees) 
+        else if (Robot.superClimber.getRotationLAngle() > angle) 
             Robot.superClimber.runRotationL(-.3);
-        else if (Math.abs(degrees - Robot.superClimber.getRotationLAngle()) < 1)  
+        else if (Math.abs(angle - Robot.superClimber.getRotationLAngle()) < 1)  
             Robot.superClimber.runRotationL(0);
         
-        if (Robot.superClimber.getRotationRAngle() < degrees)
+        if (Robot.superClimber.getRotationRAngle() < angle)
             Robot.superClimber.runRotationR(0.3);
-        else if (Robot.superClimber.getRotationRAngle() > degrees) 
+        else if (Robot.superClimber.getRotationRAngle() > angle) 
             Robot.superClimber.runRotationR(0.3);
-        else if (Math.abs(degrees - Robot.superClimber.getRotationRAngle()) < 1)
+        else if (Math.abs(angle - Robot.superClimber.getRotationRAngle()) < 1)
             Robot.superClimber.runRotationR(0);
     }
 
@@ -45,7 +45,7 @@ public class RotateClimber implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if ((Math.abs(degrees - Robot.superClimber.getRotationLAngle()) < 0.1) && (Math.abs(degrees - Robot.superClimber.getRotationRAngle()) < 0.1))
+        if ((Math.abs(angle - Robot.superClimber.getRotationLAngle()) < 0.1) && (Math.abs(angle - Robot.superClimber.getRotationRAngle()) < 0.1))
             return true;
         else
             return false;

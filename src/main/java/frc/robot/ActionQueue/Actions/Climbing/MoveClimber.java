@@ -9,8 +9,8 @@ public class MoveClimber implements Actionable{
     public double feet;
     public boolean upDog;
 
-    public MoveClimber(double ffeet) {
-        feet = ffeet;
+    public MoveClimber(double feet) {
+        this.feet = feet;
         if (feet < Robot.superClimber.getExtenderLHeight()) upDog = true;
         else upDog = false; /*:(*/
     }
