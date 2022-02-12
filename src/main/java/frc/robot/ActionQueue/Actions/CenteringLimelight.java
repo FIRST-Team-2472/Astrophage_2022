@@ -3,7 +3,7 @@ package frc.robot.ActionQueue.Actions;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
-import frc.robot.Subsystems.limelight;
+import frc.robot.Sensors.limelight;
 
 
 public class CenteringLimelight implements Actionable {

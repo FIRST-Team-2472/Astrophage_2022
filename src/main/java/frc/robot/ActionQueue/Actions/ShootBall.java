@@ -17,7 +17,8 @@ public class ShootBall extends TimerBase
         shooterSpeed = givenShooterSpeed;
     }
 
-    public void StartAction()
+    @Override
+    public void startAction()
     {
         super.startAction();
         SmartDashboard.putString("ActionName", "Shoot Ball");
@@ -25,24 +26,14 @@ public class ShootBall extends TimerBase
         Robot.shooter.runFlyWheelPower(shooterSpeed);
     }
 
-    public void Periodic()
+    @Override
+    public void periodic()
     {}
 
-    public void EndAction()
+    @Override
+    public void endAction()
     {
         Robot.intake.runConveyorPower(0);
         Robot.shooter.runFlyWheelPower(0);
-    }
-
-    @Override
-    public void periodic() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void endAction() {
-        // TODO Auto-generated method stub
-        
     }
 }

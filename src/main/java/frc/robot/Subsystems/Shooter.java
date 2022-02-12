@@ -4,22 +4,19 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-public class Shooter 
-{
-  private final TalonSRX flyWheel;
+public class Shooter {
+    private final TalonSRX flyWheel;
 
-  public Shooter(final int FlyWheelID) 
-  {
-      flyWheel = new TalonSRX(FlyWheelID);
-  }
+    public Shooter(final int FlyWheelID) {
+        flyWheel = new TalonSRX(FlyWheelID);
+    }
 
-  public void runFlyWheelPower(double speed) 
-  {
-      flyWheel.set(ControlMode.PercentOutput, speed);    
-  }
+    public void runFlyWheelPower(double speed) {
+        flyWheel.set(ControlMode.Velocity, speed);
+    }
 
-  public double runSensorVelocity() 
-  {
-      return flyWheel.getSelectedSensorVelocity();
-  }
+    public double runSensorVelocity() {
+        return flyWheel.getSelectedSensorVelocity();
+    }
 }
+//Gayman
