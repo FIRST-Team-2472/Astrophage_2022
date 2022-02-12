@@ -20,12 +20,15 @@ public class EndDriveToBall extends TimerBase
     {
         super.startAction();
         SmartDashboard.putString("ActionName", "Drive and Conveyor");
-        Robot.drive.tankDrivePower(0.2, 0.2);
+        Robot.drive.tankDrivePower(0.5, 0.5);
+        Robot.intake.runConveyorPower(0.5);
     }
 
     @Override
     public void periodic() 
-    {}
+    {
+
+    }
 
     @Override
     public void endAction() 
