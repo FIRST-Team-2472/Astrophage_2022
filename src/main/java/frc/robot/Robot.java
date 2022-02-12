@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -50,7 +49,7 @@ public class Robot extends TimedRobot {
 
   private ActionQueue autoActions = new ActionQueue();
   private ActionQueue teleopActions = new ActionQueue();
-  NetworkTableEntry bruh, getTeamColor;
+  NetworkTableEntry getTeamColor;
   NetworkTableInstance inst;
 
   @Override

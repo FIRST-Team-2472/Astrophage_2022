@@ -1,7 +1,6 @@
 package frc.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Shooter {
@@ -19,4 +18,3 @@ public class Shooter {
         return flyWheel.getSelectedSensorVelocity();
     }
 }
-//Gayman

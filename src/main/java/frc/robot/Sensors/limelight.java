@@ -28,76 +28,76 @@ public class limelight {
     public enum Pipeline {}
     
 
-    public static boolean isTargetSpotted() {
+    public boolean isTargetSpotted() {
         return limelight.getEntry("tv").getDouble(0) == 1.0;
     }
 
-    public static double targetXAngleFromCenter() {
+    public double targetXAngleFromCenter() {
         return limelight.getEntry("tx").getDouble(Double.NaN);
 
     }
 
-    public static double targetYAngleFromCenter() {
+    public double targetYAngleFromCenter() {
         return limelight.getEntry("ty").getDouble(Double.NaN);
     }
 
-    public static double targetArea() {
+    public double targetArea() {
         return limelight.getEntry("ta").getDouble(Double.NaN);
     }
 
-    public static double targetRotation() {
+    public double targetRotation() {
         return limelight.getEntry("ts").getDouble(Double.NaN);
     }
 
-    public static double timeSinceLastUpdate() {
+    public double timeSinceLastUpdate() {
         return limelight.getEntry("tl").getDouble(Double.NaN);
     }
 
-    public static double targetShortestSideLength() {
+    public double targetShortestSideLength() {
         return limelight.getEntry("tshort").getDouble(Double.NaN);
     }
 
-    public static double targetLongestSideLength() {
+    public double targetLongestSideLength() {
         return limelight.getEntry("tlong").getDouble(Double.NaN);
     }
 
-    public static double targetHorizontalSideLength() {
+    public double targetHorizontalSideLength() {
         return limelight.getEntry("thor").getDouble(Double.NaN);
     }
 
-    public static double targetVerticalSideLength() {
+    public double targetVerticalSideLength() {
         return limelight.getEntry("tvert").getDouble(Double.NaN);
     }
 
-    public static double limelightPipeline() {
+    public double limelightPipeline() {
         return limelight.getEntry("getpipe").getDouble(-1);
     }
     
-    public static void setLedMode(int mode) {
+    public void setLedMode(int mode) {
         // This assert will never fail unless the api changes
         limelight.getEntry("ledMode").setNumber(mode);
     }
 
-    public static void setDriverCamMode(boolean yes) {
+    public void setDriverCamMode(boolean yes) {
         limelight.getEntry("ledMode").setNumber(yes ? 1 : 0 );
         // ?: operater means if yes is true assign the value of 1 to result otherwise use value of 2
     }
 
-    public static void setPipeLine(int pipelineMode) {
+    public void setPipeLine(int pipelineMode) {
         limelight.getEntry("pipeLine").setNumber(pipelineMode);
     }
 
-    public static void setStream(int streamMode) {
+    public void setStream(int streamMode) {
         // This assert will never fail unless the api changes
         limelight.getEntry("stream").setNumber(streamMode);
     }
 
 
-    public static void setSnapshot(int snapshotMode) {
+    public void setSnapshot(int snapshotMode) {
         limelight.getEntry("pipeLine").setNumber(snapshotMode);
     }
 
-    public static double get_distance_in() {
+    public double get_distance_in() {
         double targetAngle = targetYAngleFromCenter();
         double cameraHeight = 28;
         double targetHeight = 4.75;
