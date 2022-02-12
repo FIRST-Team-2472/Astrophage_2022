@@ -7,6 +7,7 @@ import frc.robot.Robot;
 public class DriveStraightLimelight implements Actionable {
 
     double limelightkP = 0.02;
+    double distance = (Robot.limelight.get_distance_in() * 12);
 
     @Override
     public void startAction() 
@@ -14,7 +15,8 @@ public class DriveStraightLimelight implements Actionable {
         SmartDashboard.putString("ActionName", "Drive Limelight");
  
      
-		Robot.drive.arcadeDrivePower(, (-1 * (limelightkP * Robot.limelight.targetXAngleFromCenter())));
+		Robot.drive.arcadeDrivePower((distance * limelightkP), (limelightkP * Robot.limelight.targetXAngleFromCenter()));
+        //-1 * (limelightkP * Robot.limelight.targetXAngleFromCenter()));
 
         
     }
