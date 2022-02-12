@@ -18,7 +18,7 @@ public class TeleopMethods
 
     public void drive() 
     {
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
+        Robot.drive.arcadeDrive(Robot.leftJoystick.getY(), -Robot.leftJoystick.getX());
     }
 
     /*public void intake()

@@ -112,12 +112,12 @@ public class Drive {
         if (Math.abs(x) < .1) x = 0;
 
         if (Math.abs(x) + Math.abs(y) < .75) {
-            tankDrive(y - x, y + x);
+            tankDrive(y + x, y - x);
         } else {
             // limits the motors from ever going over 75% speed
             double betterX = (x / (Math.abs(x) + Math.abs(y))) * .75;
             double betterY = (y / (Math.abs(x) + Math.abs(y))) * .75;
-            tankDrive(betterY - betterX, betterY + betterX);
+            tankDrive(betterY + betterX, betterY - betterX);
         }
     }
 
