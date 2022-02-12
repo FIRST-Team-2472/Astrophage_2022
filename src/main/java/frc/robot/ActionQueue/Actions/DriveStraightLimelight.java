@@ -24,19 +24,22 @@ public class DriveStraightLimelight implements Actionable {
     @Override
     public void periodic() 
     {
-
+        Robot.drive.arcadeDrivePower((distance * limelightkP), (limelightkP * Robot.limelight.targetXAngleFromCenter()));
     }
 
     @Override
     public void endAction() 
     {
-
+        Robot.drive.arcadeDrivePower(0, 0);
     }
 
     @Override
     public boolean isFinished()
     {
-        return false;
+        if (Robot.limelight.get_distance_in() <= 0.5)
+        return true;
+
+        else return false;
     }
 
 }
