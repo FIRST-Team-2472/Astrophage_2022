@@ -4,17 +4,24 @@ package frc.robot.ActionQueue.Runners;
 
 import java.util.ArrayList;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import frc.robot.Robot;
+
 public class ActionQueue {
     private ArrayList<Actionable> queue;
     boolean inProgress, start, breakTime;
     //breaktime originally called bruh
     Actionable runningAction;
+    NetworkTableEntry actionNameD, actionNameP;
 
     public ActionQueue() {
         queue = new ArrayList<Actionable>();
         inProgress = false;
         start = true;
         breakTime = false;
+        //set up shuffleboard
+        actionNameD = Robot.driverBoard.add("Current Action", "null").getEntry();
+        actionNameP = Robot.programmerBoard.add("Current Action", "null").getEntry();
     }
 
     public void addAction(Actionable action) {
@@ -26,6 +33,9 @@ public class ActionQueue {
             if (start == true) {
                 runningAction = queue.get(0);
                 runningAction.startAction();
+                //add action's name to suffleboard
+                actionNameD.setString(runningAction.getClass().getSimpleName());
+                actionNameP.setString(runningAction.getClass().getSimpleName());
                 start = false;
             }
 

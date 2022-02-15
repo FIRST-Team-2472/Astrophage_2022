@@ -1,6 +1,5 @@
 package frc.robot.RobotMethods;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 
@@ -10,8 +9,6 @@ public class TeleopMethods
     
     public void init() 
     {
-        //Displays a value to ShuffleBoard
-        SmartDashboard.putString("RobotState", "Telop Enabled");
         Robot.drive.zeroEncoders();
     }
 
