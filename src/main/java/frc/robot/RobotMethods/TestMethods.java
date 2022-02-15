@@ -124,26 +124,42 @@ public class TestMethods {
   }
 
   public void runPneumatics() {
-      if (Robot.leftJoystick.getRawButtonPressed(4)) {
-        if (!flipLeft) { 
-          Robot.climberClamp.setClampL();
-          flipLeft = true;
-        }
-        else  {
-          Robot.climberClamp.disengageClampL();
-          flipLeft = false;
-        }
+    if (Robot.leftJoystick.getRawButtonPressed(4)) {
+      if (!flipLeft) { 
+        Robot.climberClamp.setClampL();
+        flipLeft = true;
       }
+      else  {
+        Robot.climberClamp.disengageClampL();
+        flipLeft = false;
+      }
+    }
 
-      if (Robot.leftJoystick.getRawButtonPressed(5)) {
-        if (!flipRight) {
-          Robot.climberClamp.setClampR();
-          flipRight = true;
-        }
-        else {
-          Robot.climberClamp.disengageClampR();
-          flipRight = false;
-        }
+    if (Robot.leftJoystick.getRawButtonPressed(5)) {
+      if (!flipRight) {
+        Robot.climberClamp.setClampR();
+        flipRight = true;
       }
+      else {
+        Robot.climberClamp.disengageClampR();
+        flipRight = false;
+      }
+    }
+  }
+
+  double baseSpeed;
+  public void testClimber() {
+    double climberSpeed = 0;
+
+    climberSpeed+=Robot.leftJoystick.getY();
+    
+    if (Robot.leftJoystick.getRawButtonPressed(1)) baseSpeed += .05;
+    if (Robot.leftJoystick.getRawButtonPressed(2)) baseSpeed += .01;
+    if (Robot.leftJoystick.getRawButtonPressed(3)) baseSpeed -= .02;
+
+    if (climberSpeed+baseSpeed >= 1) climberSpeed = 1;
+    else climberSpeed+=baseSpeed;
+
+    Robot.superClimber.runBothExtenders(climberSpeed);
   }
 }

@@ -1,4 +1,4 @@
-package frc.robot.ActionQueue.Actions;
+package frc.robot.ActionQueue.Actions.Misc;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -10,11 +10,11 @@ public class ShootBall extends TimerBase
     public double conveyorSpeed;
     public double shooterSpeed;
 
-    public ShootBall(double givenConveyorSpeed, double givenShooterSpeed, double seconds)
+    public ShootBall(double seconds)
     {
         super(seconds);
-        conveyorSpeed = givenConveyorSpeed;
-        shooterSpeed = givenShooterSpeed;
+        conveyorSpeed = .25;
+        shooterSpeed = .75;
     }
 
     @Override

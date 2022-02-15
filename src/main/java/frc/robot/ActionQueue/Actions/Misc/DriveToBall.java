@@ -1,4 +1,4 @@
-package frc.robot.ActionQueue.Actions;
+package frc.robot.ActionQueue.Actions.Misc;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.ActionQueue.Runners.Actionable;

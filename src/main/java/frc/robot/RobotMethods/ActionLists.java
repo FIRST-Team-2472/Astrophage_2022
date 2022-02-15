@@ -1,13 +1,13 @@
 package frc.robot.RobotMethods;
 
-import frc.robot.ActionQueue.Actions.CenteringLimelight;
-import frc.robot.ActionQueue.Actions.EndDriveToBall;
-import frc.robot.ActionQueue.Actions.DriveStraightFeet;
-import frc.robot.ActionQueue.Actions.DriveStraightTime;
-import frc.robot.ActionQueue.Actions.DriveToBall;
-import frc.robot.ActionQueue.Actions.ShootBall;
-import frc.robot.ActionQueue.Actions.ZeroRotations;
 import frc.robot.ActionQueue.Actions.Climbing.*;
+import frc.robot.ActionQueue.Actions.Misc.CenteringLimelight;
+import frc.robot.ActionQueue.Actions.Misc.DriveStraightFeet;
+import frc.robot.ActionQueue.Actions.Misc.DriveStraightTime;
+import frc.robot.ActionQueue.Actions.Misc.DriveToBall;
+import frc.robot.ActionQueue.Actions.Misc.EndDriveToBall;
+import frc.robot.ActionQueue.Actions.Misc.ShootBall;
+import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class ActionLists 

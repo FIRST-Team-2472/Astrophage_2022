@@ -1,40 +1,35 @@
-package frc.robot.ActionQueue.Actions;
+package frc.robot.ActionQueue.Actions.Misc;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.TimerBase;
 
-public class EndDriveToBall extends TimerBase 
+public class DriveStraightTime extends TimerBase 
 {
 
+    public double speed;
 
-
-    public EndDriveToBall() 
+    public DriveStraightTime(double givenSpeed, double seconds) 
     {
-        super(1);
-
+        super(seconds);
+        speed = givenSpeed;
     }
 
     @Override
     public void startAction() 
     {
         super.startAction();
-        SmartDashboard.putString("ActionName", "Drive and Conveyor");
-        Robot.drive.tankDrivePower(0.5, 0.5);
-        Robot.intake.runConveyorPower(0.5);
+        SmartDashboard.putString("ActionName", "Drive Straight Time");
+        Robot.drive.tankDrive(speed, speed);
     }
 
     @Override
     public void periodic() 
-    {
-
-    }
+    {}
 
     @Override
     public void endAction() 
     {
         Robot.drive.tankDrive(0, 0);
-        Robot.intake.runConveyorPower(0);
     }
-
 }
