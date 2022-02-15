@@ -1,6 +1,7 @@
 package frc.robot.Miscellaneous;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -15,24 +16,16 @@ public class ShuffleBoard {
 
     private UsbCamera camera1;
     private UsbCamera camera2;
-    private int cameraStream1 = 0;
-    private int cameraStream2 = 1;
-    private ShuffleboardTab driverBoard, programmerBoard;
-    private NetworkTableEntry robotState;
+    private HttpCamera limelightFeed;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     public ShuffleBoard() {
 
-        camera1 = CameraServer.startAutomaticCapture(0);
-        camera2 = CameraServer.startAutomaticCapture(1);
-
-        driverBoard = Shuffleboard.getTab("Driver Board");
-        programmerBoard = Shuffleboard.getTab("Programmer Board");
         
-        robotState = driverBoard.add("Robot State", "").getEntry();
-        cameraDisplay1 = driverBoard.addCamera("camera1", camera1, "USB Camera 0").getEntry();
+        //driverBoard.addCamera("camera 1", "camera1", "mjpeg:http://roboRIO-2016-FRC.local:1181/?action=stream");
+        //driverBoard.addCamera("camera 2", "camera2", "mjpeg:http://roboRIO-2016-FRC.local:1182/?action=stream");
+        //driverBoard.addCamera("Limelight", "Limelight", ""http://limelight.local:5801/stream.mjpg");
         
-
         
         
     }
