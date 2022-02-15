@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
   private DigitalInput input;
   private DigitalInput switchOne = new DigitalInput(1);
   private DigitalOutput Arduino  = new DigitalOutput(4);
+  public static ShuffleboardTab driverBoard, programmerBoard;
 
 
   public ActionLists actionList = new ActionLists();
@@ -52,23 +55,28 @@ public class Robot extends TimedRobot {
 
   private ActionQueue autoActions = new ActionQueue();
   private ActionQueue teleopActions = new ActionQueue();
-  NetworkTableEntry getTeamColor;
-  NetworkTableInstance inst;
+  private NetworkTableEntry getTeamColor, robotState;
+  private NetworkTableInstance inst;
   private HttpCamera limelightFeed;
 
   @Override
   //Robot does this when waking up
   public void robotInit() {
-    SmartDashboard.putString("RobotState", "Robot Disabled");
+    driverBoard = Shuffleboard.getTab("Driver Board");
+    programmerBoard = Shuffleboard.getTab("Programmer Board");
+    robotState = driverBoard.add("Robot State", "on").getEntry();
+
     limelightFeed = new HttpCamera ("limelight","http://limelight.local:5801/stream.mjpg");
     switchOne = new DigitalInput(1);
     Arduino = new DigitalOutput(4);
     //declare a default instance of to access FMSInfo
+
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
     if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);
     else limelight.setPipeLine(3);
+
     //runs the compressor
     compressor.enabled();
     /*camera1 = CameraServer.startAutomaticCapture(0);
@@ -84,7 +92,7 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when starting "autonomous" mode
   public void autonomousInit() {
-    SmartDashboard.putString("RobotState", "Autonomous");
+    robotState.setString("Autonomous");
     actionList.DriveSome(autoActions);
     Arduino.disablePWM();
     Arduino.set(true);
@@ -101,6 +109,7 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when starting "teleop" (human controlled) mode
   public void teleopInit() {
+    robotState.setString("Teleop");
     teleopMethods.init();
   }
 
@@ -123,7 +132,7 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when starting "test" mode
   public void testInit() {
-    SmartDashboard.putString("RobotState", "Testing");
+    robotState.setString("Testing");
     testMethods.resetTimer();
   }
 
@@ -140,7 +149,6 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when starting "disabled" mode
   public void disabledInit() {
-    SmartDashboard.putString("RobotState", "Robot Disabled");
-    
+    robotState.setString("Off");
   }
 }

@@ -17,7 +17,6 @@ public class ShuffleBoard {
     private UsbCamera camera2;
     private int cameraStream1 = 0;
     private int cameraStream2 = 1;
-    private ShuffleboardTab driverBoard, programmerBoard;
     private NetworkTableEntry robotState;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
@@ -26,11 +25,9 @@ public class ShuffleBoard {
         camera1 = CameraServer.startAutomaticCapture(0);
         camera2 = CameraServer.startAutomaticCapture(1);
 
-        driverBoard = Shuffleboard.getTab("Driver Board");
-        programmerBoard = Shuffleboard.getTab("Programmer Board");
         
-        robotState = driverBoard.add("Robot State", "").getEntry();
-        cameraDisplay1 = driverBoard.addCamera("camera1", camera1, "USB Camera 0").getEntry();
+        
+        cameraDisplay1 = Robot.driverBoard.addCamera("camera1", camera1, "USB Camera 0").getEntry();
         
 
         
