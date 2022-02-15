@@ -30,9 +30,9 @@ public class ShuffleBoard {
         programmerBoard = Shuffleboard.getTab("Programmer Board");
         
         robotState = driverBoard.add("Robot State", "").getEntry();
-        cameraDisplay1 = driverBoard.addCamera("camera1", camera1, "USB Camera 0").getEntry();
+        driverBoard.addCamera("camera 1", "camera1", "mjpeg:http://roboRIO-2016-FRC.local:1181/?action=stream");
+        driverBoard.addCamera("camera 2", "camera2", "mjpeg:http://roboRIO-2016-FRC.local:1182/?action=stream");
         
-
         
         
     }
