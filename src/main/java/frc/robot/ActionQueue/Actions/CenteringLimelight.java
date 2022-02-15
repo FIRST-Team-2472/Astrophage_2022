@@ -3,7 +3,6 @@ package frc.robot.ActionQueue.Actions;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
-import frc.robot.Sensors.limelight;
 
 
 public class CenteringLimelight implements Actionable {
@@ -13,18 +12,16 @@ public class CenteringLimelight implements Actionable {
 		SmartDashboard.putString("ActionName", "Centering Limelight");
 	}
 	
-	private double tankDrive = .2;
+	private double limelightCorrection = 0.02;
 
 	@Override
 	public void periodic() {
-		if (Robot.limelight.targetXAngleFromCenter() < 0) {
-			Robot.drive.runRight(tankDrive);
+		if (Robot.limelight.targetXAngleFromCenter() >= -0.5) {
+			Robot.drive.runRight(limelightCorrection * Robot.limelight.targetXAngleFromCenter());
 		}
-		else if (Robot.limelight.targetXAngleFromCenter() > 0) {
-			Robot.drive.runLeft(tankDrive);
+		else if (Robot.limelight.targetXAngleFromCenter() <= 0.5) {
+			Robot.drive.runLeft(limelightCorrection * Robot.limelight.targetXAngleFromCenter());
 		}
-		else if (Robot.limelight.targetXAngleFromCenter() == 0);
-		endAction();
 	}
 
 	@Override
