@@ -27,48 +27,28 @@ public class limelight {
     
     public enum Pipeline {}
     
-
+    //Returns if target is spotted.
     public boolean isTargetSpotted() {
         return limelight.getEntry("tv").getDouble(0) == 1.0;
     }
 
+    //Finds target's X-Angle.
     public double targetXAngleFromCenter() {
         return limelight.getEntry("tx").getDouble(Double.NaN);
 
     }
 
+    //Finds target's Y-Angle
     public double targetYAngleFromCenter() {
         return limelight.getEntry("ty").getDouble(Double.NaN);
     }
 
+    //Amount of area target has on camera.
     public double targetArea() {
         return limelight.getEntry("ta").getDouble(Double.NaN);
     }
 
-    public double targetRotation() {
-        return limelight.getEntry("ts").getDouble(Double.NaN);
-    }
-
-    public double timeSinceLastUpdate() {
-        return limelight.getEntry("tl").getDouble(Double.NaN);
-    }
-
-    public double targetShortestSideLength() {
-        return limelight.getEntry("tshort").getDouble(Double.NaN);
-    }
-
-    public double targetLongestSideLength() {
-        return limelight.getEntry("tlong").getDouble(Double.NaN);
-    }
-
-    public double targetHorizontalSideLength() {
-        return limelight.getEntry("thor").getDouble(Double.NaN);
-    }
-
-    public double targetVerticalSideLength() {
-        return limelight.getEntry("tvert").getDouble(Double.NaN);
-    }
-
+    //Returns what mode the limelight is in.
     public double limelightPipeline() {
         return limelight.getEntry("getpipe").getDouble(-1);
     }

@@ -18,8 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Miscellaneous.*;
 import frc.robot.RobotMethods.*;
-import frc.robot.Sensors.ColorSensor;
-import frc.robot.Sensors.DistanceSensor;
+import frc.robot.Sensors.*;
 
 import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Runners.ActionQueue;

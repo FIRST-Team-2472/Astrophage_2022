@@ -15,7 +15,7 @@ public class TeleopMethods
         Robot.drive.zeroEncoders();
     }
 
-
+    //All three of these are for drivers communicating with the subsystems.
     public void drive() 
     {
         Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());

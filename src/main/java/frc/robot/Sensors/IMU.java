@@ -6,6 +6,7 @@ public class IMU {
 
     public PigeonIMU pigeon;
 
+    //Initializes the gyroscope (pigeon) as a gyroscope
     public IMU (int pigeonID) {
         pigeon = new PigeonIMU(pigeonID);
     }
@@ -19,10 +20,12 @@ public class IMU {
         return (int)currentXAngle;
     }
 
+    //Grabs the Y-Angle
     public int getCurrentYAngle() {
         return (int)pigeon.getPitch();
     }
 
+    //Grabs the Z-Angle
     public int getCurrentZAngle() {
         return (int)pigeon.getRoll();
     }
