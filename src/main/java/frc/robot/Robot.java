@@ -2,6 +2,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
@@ -51,11 +54,13 @@ public class Robot extends TimedRobot {
   private ActionQueue teleopActions = new ActionQueue();
   NetworkTableEntry getTeamColor;
   NetworkTableInstance inst;
+  private HttpCamera limelightFeed;
 
   @Override
   //Robot does this when waking up
   public void robotInit() {
     SmartDashboard.putString("RobotState", "Robot Disabled");
+    limelightFeed = new HttpCamera ("limelight","http://limelight.local:5801/stream.mjpg");
     switchOne = new DigitalInput(1);
     Arduino = new DigitalOutput(4);
     //declare a default instance of to access FMSInfo
@@ -66,6 +71,8 @@ public class Robot extends TimedRobot {
     else limelight.setPipeLine(3);
     //runs the compressor
     compressor.enabled();
+    /*camera1 = CameraServer.startAutomaticCapture(0);
+    camera2 = CameraServer.startAutomaticCapture(1);*/
   }
 
   @Override
