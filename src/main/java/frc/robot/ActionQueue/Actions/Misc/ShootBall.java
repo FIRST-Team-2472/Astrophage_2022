@@ -7,14 +7,10 @@ import frc.robot.ActionQueue.Runners.TimerBase;
 public class ShootBall extends TimerBase
 {
 
-    public double conveyorSpeed;
-    public double shooterSpeed;
-
     public ShootBall(double seconds)
     {
         super(seconds);
-        conveyorSpeed = .25;
-        shooterSpeed = .75;
+
     }
 
     @Override
@@ -22,8 +18,8 @@ public class ShootBall extends TimerBase
     {
         super.startAction();
         SmartDashboard.putString("ActionName", "Shoot Ball");
-        Robot.intake.runConveyorPower(conveyorSpeed);
-        Robot.shooter.runFlyWheelPower(shooterSpeed);
+        Robot.shooter.runFlyWheelPower(1);
+        Robot.intake.runConveyorPower(.5);
     }
 
     @Override
