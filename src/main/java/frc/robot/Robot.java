@@ -55,7 +55,6 @@ public class Robot extends TimedRobot {
   private ActionQueue teleopActions = new ActionQueue();
   private NetworkTableEntry getTeamColor, robotState;
   private NetworkTableInstance inst;
-  private HttpCamera limelightFeed;
 
   @Override
   //Robot does this when waking up
@@ -64,21 +63,16 @@ public class Robot extends TimedRobot {
     programmerBoard = Shuffleboard.getTab("Programmer Board");
     robotState = driverBoard.add("Robot State", "on").getEntry();
 
-    limelightFeed = new HttpCamera ("limelight","http://limelight.local:5801/stream.mjpg");
-    switchOne = new DigitalInput(1);
-    Arduino = new DigitalOutput(4);
     //declare a default instance of to access FMSInfo
-
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
+    
     if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);
     else limelight.setPipeLine(3);
 
     //runs the compressor
     compressor.enabled();
-    /*camera1 = CameraServer.startAutomaticCapture(0);
-    camera2 = CameraServer.startAutomaticCapture(1);*/
   }
 
   @Override
@@ -93,7 +87,6 @@ public class Robot extends TimedRobot {
     robotState.setString("Autonomous");
     actionList.DriveSome(autoActions);
     Arduino.disablePWM();
-    Arduino.set(true);
   }
 
   @Override
