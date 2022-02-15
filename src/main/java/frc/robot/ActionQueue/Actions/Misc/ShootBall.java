@@ -1,4 +1,4 @@
-package frc.robot.ActionQueue.Actions;
+package frc.robot.ActionQueue.Actions.Misc;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -18,7 +18,8 @@ public class ShootBall extends TimerBase
     {
         super.startAction();
         SmartDashboard.putString("ActionName", "Shoot Ball");
-        Robot.shooter.runFlyWheelPower(0.5);
+        Robot.shooter.runFlyWheelPower(1);
+        Robot.intake.runConveyorPower(.5);
     }
 
     @Override
