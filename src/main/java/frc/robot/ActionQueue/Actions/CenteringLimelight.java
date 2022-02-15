@@ -22,8 +22,6 @@ public class CenteringLimelight implements Actionable {
 		else if (Robot.limelight.targetXAngleFromCenter() <= 0.5) {
 			Robot.drive.runLeft(limelightCorrection * Robot.limelight.targetXAngleFromCenter());
 		}
-		else if (Math.abs(Robot.limelight.targetXAngleFromCenter()) <= 1);
-		endAction();
 	}
 
 	@Override
@@ -33,8 +31,7 @@ public class CenteringLimelight implements Actionable {
 
 	@Override
 	public boolean isFinished() {
-		if (Math.abs(Robot.limelight.targetXAngleFromCenter()) <= 1)
-		return true;
-		else return false;
+		if (Robot.limelight.isTargetSpotted()) return Math.abs(Robot.limelight.targetXAngleFromCenter()) < 2;
+		else return true;
     }
 }
