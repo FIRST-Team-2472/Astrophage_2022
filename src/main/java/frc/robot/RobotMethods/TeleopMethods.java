@@ -7,27 +7,31 @@ import frc.robot.Robot;
 public class TeleopMethods 
 {
     
-    public void init() 
-    {
-        Robot.drive.zeroEncoders();
+    public void init() {
     }
 
     //All three of these are for drivers communicating with the subsystems.
-    public void drive() 
-    {
+    public void drive() {
         Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
     }
 
-    public void intake()
-    {
+    public void climb() {
 
-        if (Robot.xboxcontroller.getBButton()) Robot.intake.runConveyorPower(.5);
-        else Robot.intake.runConveyorPower(0);
     }
 
-    public void shooter()
-    {
-        if (Robot.xboxcontroller.getXButtonPressed()) Robot.shooter.runFlyWheelPower(.5);
-        else Robot.shooter.runFlyWheelPower(0);
+    public void shoot() {
+
+    }
+
+    public void manualAutoOveride() {
+
+    }
+
+    public void grabBall() {
+
+    }
+
+    public void manualClimb() {
+
     }
 }
