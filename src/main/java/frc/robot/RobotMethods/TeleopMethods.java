@@ -24,8 +24,12 @@ public class TeleopMethods
     }
 
     public void climb() {
+<<<<<<< HEAD
+        if (manualOverride) 
+=======
         if (manualOverride && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
             Robot.actionList.Climb(teleopActions);
+>>>>>>> 2e975a479e0f4b957223f334c6f7eda0961c141f
     }
 
     public void shoot() {
