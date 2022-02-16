@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
   public static ShuffleboardTab driverBoard, programmerBoard;
 
 
-  public ActionLists actionList = new ActionLists();
+  public static ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
   public TestMethods testMethods = new TestMethods();
 

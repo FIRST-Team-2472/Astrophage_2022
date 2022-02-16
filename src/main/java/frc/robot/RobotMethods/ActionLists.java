@@ -30,6 +30,12 @@ public class ActionLists
         action.addAction(new DriveStraightTime(.3, 4));
     }
 
+    public void LimelightGrab(ActionQueue action)
+    {
+        action.addAction(new CenteringLimelight());
+        action.addAction(new DriveToBall());
+    }
+
     //What the robot does when it's time to climb the monkey bars.
     public void Climb(ActionQueue action) {
         action.addAction(new MoveClimber(9999));

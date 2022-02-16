@@ -34,10 +34,11 @@ public class TeleopMethods
     }
 
     public void seeBall() {
-
+        
     }
 
     public void gimmeBall() {
+    if (Robot.xboxcontroller.getStartButtonPressed())
         Robot.actionList.LimelightGrab(teleopActions);
     }
 
