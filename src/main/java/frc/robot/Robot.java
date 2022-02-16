@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
   public static ShuffleBoard shuffleBoard = new ShuffleBoard();
   //public static DistanceSensor distanceSensor = new DistanceSensor();
-  public static Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
+  public static Compressor compressor = new Compressor(Constants.COMPRESSOR, PneumaticsModuleType.CTREPCM);
   //public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
   //public static limelight limelight = new limelight();
