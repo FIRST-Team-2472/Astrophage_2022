@@ -23,6 +23,7 @@ import frc.robot.RobotMethods.*;
 import frc.robot.Sensors.*;
 
 import frc.robot.Subsystems.*;
+import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
@@ -47,14 +48,15 @@ public class Robot extends TimedRobot {
   public static ShuffleboardTab driverBoard, programmerBoard;
 
 
-  public ActionLists actionList = new ActionLists();
+  public static ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
   public TestMethods testMethods = new TestMethods();
 
-  private ActionQueue autoActions = new ActionQueue();
-  private ActionQueue teleopActions = new ActionQueue();
+  public ActionQueue autoActions = new ActionQueue();
   private NetworkTableEntry getTeamColor, robotState;
   private NetworkTableInstance inst;
+
+ boolean enabled = false;
 
   @Override
   //Robot does this when waking up
@@ -85,6 +87,10 @@ public class Robot extends TimedRobot {
   //Robot does this when starting "autonomous" mode
   public void autonomousInit() {
     robotState.setString("Autonomous");
+
+    autoActions.addAction(new ZeroEncoders());
+    enabled = true;
+
     actionList.DriveSome(autoActions);
     Arduino.disablePWM();
   }
@@ -101,7 +107,8 @@ public class Robot extends TimedRobot {
   //Robot does this when starting "teleop" (human controlled) mode
   public void teleopInit() {
     robotState.setString("Teleop");
-    teleopMethods.init();
+
+    teleopMethods.init(enabled);
   }
 
   @Override
