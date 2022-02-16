@@ -24,7 +24,9 @@ public class TeleopMethods
     }
 
     public void climb() {
-        if ()
+        if (manualOverride) 
+
+        )
     }
 
     public void shoot() {
@@ -36,11 +38,10 @@ public class TeleopMethods
     }
 
     public void seeBall() {
-        
+
     }
 
     public void gimmeBall() {
-    if (Robot.xboxcontroller.getStartButtonPressed())
         Robot.actionList.LimelightGrab(teleopActions);
     }
 
