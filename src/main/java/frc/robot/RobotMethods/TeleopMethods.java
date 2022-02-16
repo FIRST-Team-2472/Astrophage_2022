@@ -29,7 +29,8 @@ public class TeleopMethods
     }
 
     public void shoot() {
-
+        if (Robot.xboxcontroller.getXButtonPressed())
+            Robot.shooter.setFlyWheelTarget(5);
     }
 
     public void manualAutoOveride() {
