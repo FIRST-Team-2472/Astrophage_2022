@@ -25,8 +25,6 @@ public class TeleopMethods
 
     public void climb() {
         if (manualOverride) 
-
-        )
     }
 
     public void shoot() {
