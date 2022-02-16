@@ -150,6 +150,11 @@ public class SuperClimber {
     rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
   }
 
+  public void zeroExtenderEncoders() {
+    extenderL.setSelectedSensorPosition(0);
+    extenderR.setSelectedSensorPosition(0);
+  }
+
 
 
 
