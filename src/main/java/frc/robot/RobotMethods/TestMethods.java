@@ -47,7 +47,7 @@ public class TestMethods {
     timer.reset();
   }
 
-  public void runEverything() {
+  public void runEverything() {/*
     leftRotationLSSB.setBoolean(Robot.superClimber.getRoationLReverseLimit());
     rightRotationLSSB.setBoolean(Robot.superClimber.getRoationRReverseLimit());
     leftSadleLSSB.setBoolean(Robot.superClimber.isTouchingBarLeft());
@@ -120,10 +120,11 @@ public class TestMethods {
       Robot.superClimber.runExtenderL(0);
       Robot.superClimber.runRotationR(0);
       Robot.superClimber.runExtenderR(0);
-    }
+    }*/
   }
 
   public void runPneumatics() {
+    /*
     if (Robot.leftJoystick.getRawButtonPressed(4)) {
       if (!flipLeft) { 
         Robot.climberClamp.setClampL();
@@ -144,11 +145,11 @@ public class TestMethods {
         Robot.climberClamp.disengageClampR();
         flipRight = false;
       }
-    }
+    }*/
   }
 
   double baseSpeed;
-  public void testClimber() {
+  public void testClimber() {/*
     double climberSpeed = 0;
 
     climberSpeed+=Robot.leftJoystick.getY();
@@ -160,6 +161,6 @@ public class TestMethods {
     if (climberSpeed+baseSpeed >= 1) climberSpeed = 1;
     else climberSpeed+=baseSpeed;
 
-    Robot.superClimber.runBothExtenders(climberSpeed);
+    Robot.superClimber.runBothExtenders(climberSpeed);*/
   }
 }

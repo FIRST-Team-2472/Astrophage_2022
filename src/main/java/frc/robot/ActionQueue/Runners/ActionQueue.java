@@ -20,8 +20,8 @@ public class ActionQueue {
         start = true;
         breakTime = false;
         //set up shuffleboard
-        actionNameD = Robot.driverBoard.add("Current Action", "null").getEntry();
-        actionNameP = Robot.programmerBoard.add("Current Action", "null").getEntry();
+        //actionNameD = Robot.driverBoard.add("Current Action", "null").getEntry();
+        //actionNameP = Robot.programmerBoard.add("Current Action", "null").getEntry();
     }
 
     public void addAction(Actionable action) {
@@ -34,8 +34,8 @@ public class ActionQueue {
                 runningAction = queue.get(0);
                 runningAction.startAction();
                 //add action's name to suffleboard
-                actionNameD.setString(runningAction.getClass().getSimpleName());
-                actionNameP.setString(runningAction.getClass().getSimpleName());
+                //actionNameD.setString(runningAction.getClass().getSimpleName());
+                //actionNameP.setString(runningAction.getClass().getSimpleName());
                 start = false;
             }
 

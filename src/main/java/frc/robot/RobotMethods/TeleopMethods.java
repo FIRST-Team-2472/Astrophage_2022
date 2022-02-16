@@ -15,9 +15,12 @@ public class TeleopMethods
 
     public void drive() 
     {
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.leftJoystick.getX());
     }
 
+
+
+    /*
     public void intake()
     {
 
@@ -29,5 +32,5 @@ public class TeleopMethods
     {
         if (Robot.xboxcontroller.getXButtonPressed()) Robot.shooter.runFlyWheelPower(.5);
         else Robot.shooter.runFlyWheelPower(0);
-    }
+    }*/
 }
