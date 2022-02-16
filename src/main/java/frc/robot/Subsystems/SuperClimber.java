@@ -19,7 +19,7 @@ public class SuperClimber {
   // TODO need to find a special number
   private final double encoderToFeet = 1000;
   public final double encoderToDegrees = 1001;
-  private final double roatationLimit = 1002;
+  private final double rotationLimit = 1002;
   private final double KF = 0, KP = 0, KI = 0;
 
   private DigitalInput barStopperL, barStopperR;
@@ -143,11 +143,11 @@ public class SuperClimber {
   public void zeroRotationEncoders() {
     rotationL.setSelectedSensorPosition(0);
     rotationL.configForwardSoftLimitEnable(true);
-    rotationL.configForwardSoftLimitThreshold(roatationLimit * encoderToDegrees);
+    rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
 
     rotationR.setSelectedSensorPosition(0);
     rotationR.configForwardSoftLimitEnable(true);
-    rotationR.configForwardSoftLimitThreshold(roatationLimit * encoderToDegrees);
+    rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
   }
 
 

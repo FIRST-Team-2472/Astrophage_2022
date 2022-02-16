@@ -18,7 +18,7 @@ public class ShuffleBoard {
     private int cameraStream1 = 0;
     private int cameraStream2 = 1;
     private NetworkTableEntry robotState;
-    private ShuffleboardTab driverBoard;
+      private ShuffleboardTab driverBoard;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     public ShuffleBoard() {

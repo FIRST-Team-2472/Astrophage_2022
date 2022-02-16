@@ -1,12 +1,18 @@
 package frc.robot.RobotMethods;
 
+import javax.swing.Action;
+
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Robot;
+import frc.robot.ActionQueue.Runners.ActionQueue;
 
 
 
 public class TeleopMethods 
 {
-    
+    boolean manualOverride = false;
+    private ActionQueue teleopActions = new ActionQueue();
+
     public void init() {
     }
 
@@ -27,11 +33,22 @@ public class TeleopMethods
 
     }
 
-    public void grabBall() {
+    public void seeBall() {
 
     }
 
-    public void manualClimb() {
+    public void gimmeBall() {
+        Robot.actionList.LimelightGrab(teleopActions);
+    }
 
+    
+
+    public void manualClimb() {
+        if (Robot.leftJoystick.getRawButtonPressed(3)) manualOverride = true;
+
+        if(manualOverride)  {
+            Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
+            Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
+        }
     }
 }
