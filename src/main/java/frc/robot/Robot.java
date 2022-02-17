@@ -2,9 +2,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.HttpCamera;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
@@ -116,13 +113,15 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     teleopMethods.drive();
 
-    SmartDashboard.putNumber("Distance", distanceSensor.getDistance());
-    SmartDashboard.putNumber("Arduino", Arduino.getChannel());
+    teleopMethods.shoot();
 
-    if (rightJoystick.getRawButtonPressed(5)) {
-      Arduino.updateDutyCycle(1);
-    }
-    //SmartDashboard.putNumber("Seeing Black?", colorSensor.getShade());
+    teleopMethods.gimmeBall();
+
+    teleopMethods.manualClimb();
+
+    teleopMethods.seeBall();
+
+    teleopMethods.autoStop();
   }
 
 

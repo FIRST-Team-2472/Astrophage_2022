@@ -1,40 +1,71 @@
 package frc.robot.RobotMethods;
 
-import javax.swing.Action;
-
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Runners.ActionQueue;
+import frc.robot.Miscellaneous.Timer;
 
 
 
 public class TeleopMethods 
 {
-    boolean manualOverride = false;
+    private boolean manualOverride, breakSwitch, TwoB;
+    private Timer abortTimer = new Timer(.5);
+
     private ActionQueue teleopActions = new ActionQueue();
+
 
     public void init(boolean enabled) {
         if (!enabled)  teleopActions.addAction(new ZeroEncoders());
+        manualOverride = false;
+        breakSwitch = false;
+        TwoB = false;
     }
 
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
+        Robot.drive.arcadeDrive(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
     }
 
     public void climb() {
-        if (manualOverride && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
+        if ((manualOverride /*||endgame started*/) && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
             Robot.actionList.Climb(teleopActions);
     }
 
     public void shoot() {
-        if (Robot.xboxcontroller.getXButtonPressed())
-            Robot.shooter.setFlyWheelTarget(5);
+        if (Robot.xboxcontroller.getXButton()) {
+            Robot.shooter.runFlyWheelPower(1);
+            Robot.intake.runConveyorPower(.5);
+        } else {
+            Robot.shooter.runFlyWheelPower(0);
+            Robot.intake.runConveyorPower(0);
+        }
     }
 
-    public void manualAutoOveride() {
+    public void autoStop() {
+        if (Robot.xboxcontroller.getYButtonPressed()) {
+            if (!breakSwitch) {
+                teleopActions.pause();
+                breakSwitch = true;
+            }
+            else {
+                Robot.superClimber.runBothExtenders(0);
+                Robot.superClimber.runBothRotations(0);
+                teleopActions.resume();
+                breakSwitch = false;
+            }
+        }
 
+        if (Robot.xboxcontroller.getBButtonPressed() && TwoB) 
+            teleopActions.clear();
+        
+        if (Robot.xboxcontroller.getBButtonPressed() && !TwoB) {
+            TwoB = true;
+            abortTimer.reset();
+        }
+
+        if (abortTimer.isTimedOut())
+            TwoB = false;
     }
 
     public void seeBall() {
@@ -44,16 +75,14 @@ public class TeleopMethods
 
 
     public void gimmeBall() {
-        if (Robot.xboxcontroller.getStartButtonPressed())
-        Robot.actionList.LimelightGrab(teleopActions);
+        if (Robot.rightJoystick.getRawButtonPressed(1))
+            Robot.actionList.LimelightGrab(teleopActions);
     }
 
-    
-
     public void manualClimb() {
-        if (Robot.leftJoystick.getRawButtonPressed(3)) manualOverride = true;
+        if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
 
-        if(manualOverride)  {
+        if (manualOverride /*||endgame started*/ && breakSwitch)  {
             Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
             Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
         }
