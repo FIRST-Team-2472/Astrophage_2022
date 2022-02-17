@@ -9,17 +9,22 @@ import frc.robot.Miscellaneous.Timer;
 
 public class TeleopMethods 
 {
-    private boolean manualOverride, breakSwitch, TwoB;
+    private boolean manualOverride, breakSwitch, TwoB, climbTime;
     private Timer abortTimer = new Timer(.5);
 
     private ActionQueue teleopActions = new ActionQueue();
 
 
     public void init(boolean enabled) {
-        if (!enabled)  teleopActions.addAction(new ZeroEncoders());
+        if (!enabled)  {
+            teleopActions.addAction(new ZeroEncoders());
+            Robot.matchTimer.beginMatch();
+        }
+
         manualOverride = false;
         breakSwitch = false;
         TwoB = false;
+        climbTime = false;
     }
 
     //All three of these are for drivers communicating with the subsystems.
@@ -28,7 +33,9 @@ public class TeleopMethods
     }
 
     public void climb() {
-        if ((manualOverride /*||endgame started*/) && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
+        if (Robot.matchTimer.matchTime() >= 120) climbTime = true;
+
+        if ((manualOverride || climbTime) && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
             Robot.actionList.Climb(teleopActions);
     }
 
@@ -82,7 +89,7 @@ public class TeleopMethods
     public void manualClimb() {
         if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
 
-        if (manualOverride /*||endgame started*/ && breakSwitch)  {
+        if ((manualOverride || climbTime) && breakSwitch)  {
             Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
             Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
         }

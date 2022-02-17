@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
   private DigitalInput switchOne = new DigitalInput(1);
   private DigitalOutput Arduino  = new DigitalOutput(4);
   public static ShuffleboardTab driverBoard, programmerBoard;
-
+  public static MatchTimer matchTimer = new MatchTimer();
 
   public static ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
   private NetworkTableEntry getTeamColor, robotState;
   private NetworkTableInstance inst;
 
- boolean enabled = false;
+  boolean enabled = false;
 
   @Override
   //Robot does this when waking up
@@ -86,6 +86,7 @@ public class Robot extends TimedRobot {
     robotState.setString("Autonomous");
 
     autoActions.addAction(new ZeroEncoders());
+    matchTimer.beginMatch();
     enabled = true;
 
     actionList.DriveSome(autoActions);
@@ -97,8 +98,6 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     autoActions.step();
   }
-
-
 
   @Override
   //Robot does this when starting "teleop" (human controlled) mode
