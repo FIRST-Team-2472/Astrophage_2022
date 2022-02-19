@@ -29,20 +29,22 @@ public class SuperClimber {
     extenderL = new TalonFX(extendo1ID);
     extenderR = new TalonFX(extendo2ID);
 
-    rotationL = new TalonSRX(rotato1ID);
-    rotationR = new TalonSRX(rotato2ID);
+    //rotationL = new TalonSRX(rotato1ID);
+    //rotationR = new TalonSRX(rotato2ID);
 
+    extenderL.setInverted(true);
+    extenderR.setInverted(true);
     setUpMotionMagicFX(extenderL, KF, KP, KI);
     setUpMotionMagicFX(extenderR, KF, KP, KI);
-    setUpMotionMagicSRX(rotationL, KF, KP, KI);
-    setUpMotionMagicSRX(rotationR, KF, KP, KI);
+    //setUpMotionMagicSRX(rotationL, KF, KP, KI);
+    //setUpMotionMagicSRX(rotationR, KF, KP, KI);
 
     // limit Switches
-    barStopperL = new DigitalInput(barStopperLID);
-    barStopperR = new DigitalInput(barStopperRID);
-    rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-    rotationR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-
+    //barStopperL = new DigitalInput(barStopperLID);
+    //barStopperR = new DigitalInput(barStopperRID);
+    //rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    //rotationR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+      
   }
 
   public void runTargetExtenderL(double feet) {
@@ -217,5 +219,10 @@ public class SuperClimber {
 
     // Zero the sensor once on robot boot up
     motor.setSelectedSensorPosition(0, 0, 30);
+  }
+
+  public void runExtenderPower(double speed) {
+    extenderL.set(ControlMode.PercentOutput, speed);
+    extenderR.set(ControlMode.PercentOutput, speed);
   }
 }

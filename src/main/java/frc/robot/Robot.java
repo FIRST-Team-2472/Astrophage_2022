@@ -28,9 +28,9 @@ import frc.robot.ActionQueue.Runners.ActionQueue;
 public class Robot extends TimedRobot {
   //These declare an instance of a script as a variable and setup the constant talons or other objects.
   //public static ClimberClamp climberClamp = new ClimberClamp(Constants.clamp1Forward, Constants.clamp1Backward, Constants.clamp2Forward, Constants.clamp2Backward, Constants.clawLimitL, Constants.clawLimitR);
-  //public static SuperClimber superClimber = new SuperClimber(Constants.climberEx1, Constants.climberEx2, Constants.climberRo1, Constants.climberRo2, Constants.barStopperL, Constants.barStopperR);
+  public static SuperClimber superClimber = new SuperClimber(Constants.climberEx1, Constants.climberEx2, Constants.climberRo1, Constants.climberRo2, Constants.barStopperL, Constants.barStopperR);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
-  //public static Intake intake = new Intake(Constants.conveyor);
+  public static Intake intake = new Intake(Constants.conveyor);
   //public static Shooter shooter = new Shooter(Constants.flyWheel);
   public static Joystick rightJoystick = new Joystick(Constants.jstickR);
   public static Joystick leftJoystick = new Joystick(Constants.jstickL);
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
   public TestMethods testMethods = new TestMethods();
 
   private ActionQueue autoActions = new ActionQueue();
-  private ActionQueue teleopActions = new ActionQueue();
+  //private ActionQueue teleopActions = new ActionQueue();
   private NetworkTableEntry getTeamColor, robotState;
   private NetworkTableInstance inst;
 
@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
     else limelight.setPipeLine(3);*/
 
     //runs the compressor
-    compressor.enabled();
+    compressor.disable();
   }
 
   @Override
@@ -109,8 +109,9 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     teleopMethods.drive();
 
+    teleopMethods.climber();
 
-
+    teleopMethods.intake();
   }
 
 

@@ -17,9 +17,9 @@ public class ActionLists
 
     public void DriveSome(ActionQueue action) 
     {
-        action.addAction(new DriveStraightTime(.3, 4));
-        action.addAction(new DriveStraightTime(-.3, 4));
-        action.addAction(new DriveStraightTime(.3, 4));
+        action.addAction(new DriveStraightTime(.1, 5));
+        action.addAction(new DriveStraightTime(-.1, 5));
+        action.addAction(new DriveStraightTime(.1, 5));
     }
 /*
     public void Climb(ActionQueue action) {

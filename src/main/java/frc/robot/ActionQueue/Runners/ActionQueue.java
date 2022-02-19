@@ -3,7 +3,6 @@
 package frc.robot.ActionQueue.Runners;
 
 import java.util.ArrayList;
-import frc.robot.Robot;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -22,12 +21,13 @@ public class ActionQueue {
         start = true;
         breakTime = false;
         //set up shuffleboard
-        //TODO fix
-        //ShuffleboardTab ree = Shuffleboard.getTab("Programmer Board");
-        //ShuffleboardTab bee = Shuffleboard.getTab("Driver Board");
-
-        //actionNameD = ree.add("wee", "null").getEntry();
-        //actionNameP = bee.add("Current Action", "null").getEntry();
+        ShuffleboardTab ree = Shuffleboard.getTab("Programmer Board");
+        ShuffleboardTab bee = Shuffleboard.getTab("Driver Board");
+        
+        try{
+            actionNameD = ree.add("Current Action", "nein").getEntry();
+            actionNameP = bee.add("Current Action", "nein").getEntry();
+        }catch(IllegalArgumentException e) {}
     }
 
     public void addAction(Actionable action) {
@@ -40,8 +40,8 @@ public class ActionQueue {
                 runningAction = queue.get(0);
                 runningAction.startAction();
                 //add action's name to suffleboard
-                //actionNameD.setString(runningAction.getClass().getSimpleName());
-                //actionNameP.setString(runningAction.getClass().getSimpleName());
+                actionNameD.setString(runningAction.getClass().getSimpleName());
+                actionNameP.setString(runningAction.getClass().getSimpleName());
                 start = false;
             }
 
@@ -52,13 +52,19 @@ public class ActionQueue {
             if (runningAction.isFinished()) {
                 runningAction.endAction();
                 queue.remove(0);
+                
 
                 if (!queue.isEmpty()) {
                     runningAction = queue.get(0);
                     runningAction.startAction();
+                    
                 }
             }
-        } else inProgress = false;
+        } else {
+            inProgress = false;
+            actionNameD.setString("Done Bro");
+            actionNameP.setString("Done Bro");
+        }
     }
 
     public void clear() {

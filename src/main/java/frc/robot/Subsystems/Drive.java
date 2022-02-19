@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive {
     // Talon Definition: an instruction reader that gives instructions to the stupid
@@ -58,10 +57,6 @@ public class Drive {
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        SmartDashboard.putNumber("hi", 1);
-        SmartDashboard.putNumber("Left Encoder", getLeftSpeed());
-        SmartDashboard.putNumber("Right Encoder", getRightSpeed());
-
         runLeft(leftSpeed);
         runRight(rightSpeed);
     }

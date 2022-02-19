@@ -18,8 +18,8 @@ public class Constants {
     public static final int clamp1Backward = 42;
     public static final int clamp2Forward = 42;
     public static final int clamp2Backward = 42;
-    public static final int climberEx1 = 42;
-    public static final int climberEx2 = 42;
+    public static final int climberEx1 = 14;
+    public static final int climberEx2 = 15;
     public static final int climberRo1 = 42;
     public static final int climberRo2 = 42;
     public static final int COMPRESSOR = 1;
@@ -34,7 +34,7 @@ public class Constants {
     public static final int pigeonID = 2;
 
     //Intake things
-    public static final int conveyor = 42;
+    public static final int conveyor = 41;
 
     //Shooter things
     public static final int flyWheel = 42;
