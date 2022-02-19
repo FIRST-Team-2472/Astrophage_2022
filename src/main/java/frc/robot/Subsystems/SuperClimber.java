@@ -35,8 +35,8 @@ public class SuperClimber {
     extenderL = new TalonFX(extendo1ID);
     extenderR = new TalonFX(extendo2ID);
 
-    //rotationL = new TalonSRX(rotato1ID);
-    //rotationR = new TalonSRX(rotato2ID);
+    rotationL = new TalonSRX(rotato1ID);
+    rotationR = new TalonSRX(rotato2ID);
 
     extenderL.setInverted(true);
     extenderR.setInverted(true);
