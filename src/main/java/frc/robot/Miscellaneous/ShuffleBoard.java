@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Robot;
+import frc.robot.Subsystems.SuperClimber;
 
 public class ShuffleBoard {
 
@@ -26,8 +27,6 @@ public class ShuffleBoard {
         rightPos = ree.add("right Pos", 0).getEntry();
         leftVel = ree.add("left Vel", 0).getEntry();
         leftPos = ree.add("left Pos", 0).getEntry();
-
-        
         
     }
 

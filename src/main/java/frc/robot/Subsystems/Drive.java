@@ -16,9 +16,13 @@ public class Drive {
 
     // TODO find speical number
     private double countToFeet = 1;
-    private double KP = 0, KF = 0, KI = 0;
+    private double rightMasterError = rightMaster.getClosedLoopError(0);
+    private double leftMasterError = leftMaster.getClosedLoopError(0);
+    private double suggestedKF = (0.75 * 1023) / ((rightMaster.getSelectedSensorVelocity() * leftMaster.getSelectedSensorVelocity()) * 2);
+    private double suggestedKP = ((1 / (rightMasterError * rightMasterError)) * (1 / (leftMasterError *leftMasterError)) / 2);
+    private double KP = suggestedKP, KF = suggestedKF, KI = 0;
 
-    // Assigns IDs talons to hand instructions to dum kopf motors
+    // Assigns IDs talons to hand instructions to dum kopf motors   
     public Drive(int backRightID, int frontRightID, int backLeftID, int frontLeftID) {
         rightMaster = new TalonFX(backRightID);
         rightSlave = new TalonFX(frontRightID);

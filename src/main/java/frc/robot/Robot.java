@@ -107,6 +107,8 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
+    System.out.println(superClimber.suggestedKP);
+
     teleopMethods.drive();
 
     teleopMethods.climber();

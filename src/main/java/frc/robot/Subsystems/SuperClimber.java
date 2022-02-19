@@ -21,6 +21,12 @@ public class SuperClimber {
   public final double encoderToDegrees = 1001;
   private final double roatationLimit = 1002;
   private final double KF = 0, KP = 0, KI = 0;
+  public double extenderRError = extenderR.getClosedLoopError(0);
+  public double extenderLError = extenderL.getClosedLoopError(0);
+
+  //kP value equation is 1/(error^2)
+  public double suggestedKP = (((1 / (extenderRError * extenderRError)) * (1 / (extenderLError * extenderLError))) / 2);
+  public double suggestedKF = 0;
 
   private DigitalInput barStopperL, barStopperR;
 
