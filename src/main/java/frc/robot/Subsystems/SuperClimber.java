@@ -20,6 +20,7 @@ public class SuperClimber {
   private final double encoderToFeet = 1000;
   public final double encoderToDegrees = 1001;
   private final double rotationLimit = 1002;
+  private final double extenderLimit = 1002;
   private final double KF = 0, KP = 0, KI = 0;
 
   private DigitalInput barStopperL, barStopperR;
@@ -152,7 +153,12 @@ public class SuperClimber {
 
   public void zeroExtenderEncoders() {
     extenderL.setSelectedSensorPosition(0);
+    extenderL.configForwardSoftLimitEnable(true);
+    extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+
     extenderR.setSelectedSensorPosition(0);
+    extenderR.configForwardSoftLimitEnable(true);
+    extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
   }
 
 
