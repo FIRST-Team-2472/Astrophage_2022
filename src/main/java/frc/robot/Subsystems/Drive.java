@@ -16,7 +16,7 @@ public class Drive {
     private TalonFX leftSlave;
 
     // TODO find speical number
-    private double countToFeet = 00000000000;
+    private double countToFeet = 1;
     private double KP = 0, KF = 0, KI = 0;
 
     // Assigns IDs talons to hand instructions to dum kopf motors

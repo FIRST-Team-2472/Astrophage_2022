@@ -7,8 +7,6 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-
 public class SuperClimber {
   private TalonFX extenderL;
   private TalonFX extenderR;
@@ -17,8 +15,8 @@ public class SuperClimber {
   private TalonSRX rotationR;
 
   // TODO need to find a special number
-  private final double encoderToFeet = 1000;
-  public final double encoderToDegrees = 1001;
+  private final double encoderToFeet = 1;
+  public final double encoderToDegrees = 1;
   private final double rotationLimit = 1002;
   private final double extenderLimit = 1002;
   private final double KF = 0, KP = 0, KI = 0;
