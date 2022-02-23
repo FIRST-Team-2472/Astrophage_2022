@@ -38,8 +38,8 @@ public class Robot extends TimedRobot {
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
   public static limelight limelight = new limelight();
   public static IMU imu = new IMU(Constants.pigeonID);
-  private DigitalInput switchOne = new DigitalInput(1);
-  private DigitalOutput Arduino  = new DigitalOutput(4);
+  //private DigitalInput switchOne = new DigitalInput(1);
+  //private DigitalOutput Arduino  = new DigitalOutput(4);
   public static MatchTimer matchTimer = new MatchTimer();
 
   public static ActionLists actionList = new ActionLists();
