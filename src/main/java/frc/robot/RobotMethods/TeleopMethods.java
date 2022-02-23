@@ -29,7 +29,7 @@ public class TeleopMethods
 
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        Robot.drive.arcadeDrive(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
+        Robot.intake.runConveyorPower(0.5);
     }
 
     public void climb() {

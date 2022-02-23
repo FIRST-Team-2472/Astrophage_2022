@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
     enabled = true;
 
     actionList.DriveSome(autoActions);
-    Arduino.disablePWM();
+    //Arduino.disablePWM();
   }
 
   @Override
