@@ -21,11 +21,12 @@ public class ActionQueue {
         start = true;
         breakTime = false;
         //set up shuffleboard
-        try() {
+        try{
             ShuffleboardTab driverBoard = Shuffleboard.getTab("Driver Board");
             ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
             actionNameD = driverBoard.add("Current Action", "null").getEntry();
             actionNameP = programmerBoard.add("Current Action", "null").getEntry();
+        }catch(IllegalArgumentException e) {}
     }
 
     public void addAction(Actionable action) {
