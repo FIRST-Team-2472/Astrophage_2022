@@ -229,4 +229,30 @@ public class SuperClimber {
     // Zero the sensor once on robot boot up
     motor.setSelectedSensorPosition(0, 0, 30);
   }
+
+  public void runExtenderPowerL(double speed) {
+    extenderL.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void runExtenderPowerR(double speed) {
+    extenderR.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void runBothExtendersPower(double speed) {
+    runExtenderPowerL(speed);
+    runExtenderPowerR(speed);
+  }
+
+  public void runRotationPowerL(double speed) {
+    rotationL.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void runRotationPowerR(double speed) {
+    rotationR.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void runBothRotationsPower(double speed) {
+    runRotationPowerL(speed);
+    runRotationPowerR(speed);
+  }
 }

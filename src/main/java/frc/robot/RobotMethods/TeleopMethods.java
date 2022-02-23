@@ -29,7 +29,7 @@ public class TeleopMethods
 
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        Robot.drive.arcadeDrive(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
     }
 
     public void climb() {
@@ -74,11 +74,11 @@ public class TeleopMethods
         if (abortTimer.isTimedOut())
             TwoB = false;
     }
-
+/*
     public void seeBall() {
         if (Robot.leftJoystick.getRawButton(1)) 
             Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-1 * (0.02 * Robot.limelight.targetXAngleFromCenter())));
-    }
+    }*/
 
 
     public void gimmeBall() {
@@ -88,10 +88,12 @@ public class TeleopMethods
 
     public void manualClimb() {
         if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
-
+/*
         if ((manualOverride || climbTime) && breakSwitch)  {
             Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
             Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
-        }
+        }*/
+        Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY());
+        Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightX());
     }
 }
