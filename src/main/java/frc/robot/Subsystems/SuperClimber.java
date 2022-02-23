@@ -23,10 +23,8 @@ public class SuperClimber {
   private final double extenderLimit = 1002;
   private final double KF = 0, KP = 0, KI = 0;
 
-  private DigitalInput barStopperL, barStopperR;
 
-  public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID, 
-      int barStopperLID, int barStopperRID) {
+  public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID) {
     extenderL = new TalonFX(extendo1ID);
     extenderR = new TalonFX(extendo2ID);
 
@@ -39,8 +37,6 @@ public class SuperClimber {
     setUpMotionMagicSRX(rotationR, KF, KP, KI);
 
     // limit Switches
-    barStopperL = new DigitalInput(barStopperLID);
-    barStopperR = new DigitalInput(barStopperRID);
     rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
     rotationR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 
@@ -124,21 +120,25 @@ public class SuperClimber {
   }
 
   public boolean isTouchingBarLeft() {
-    return barStopperL.get();
+    if (extenderL.getSensorCollection().isFwdLimitSwitchClosed() != 0)
+    return true;
+    else return false;
   }
 
   public boolean isTouchingBarRight() {
-    return barStopperR.get();
+    if (extenderR.getSensorCollection().isFwdLimitSwitchClosed() != 0)
+    return true;
+    else return false;
   }
 
 
   
-  public boolean getRoationLReverseLimit() {
-    return rotationL.getSensorCollection().isRevLimitSwitchClosed();
+  public boolean isLeftVertical() {
+    return rotationL.getSensorCollection().isFwdLimitSwitchClosed();
   }
 
-  public boolean getRoationRReverseLimit() {
-    return rotationR.getSensorCollection().isRevLimitSwitchClosed();
+  public boolean isRightVertical() {
+    return rotationR.getSensorCollection().isFwdLimitSwitchClosed();
   }
 
   public void zeroRotationEncoders() {

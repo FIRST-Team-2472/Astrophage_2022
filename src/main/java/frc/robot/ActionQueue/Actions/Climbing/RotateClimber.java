@@ -1,6 +1,5 @@
 package frc.robot.ActionQueue.Actions.Climbing;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
@@ -15,7 +14,6 @@ public class RotateClimber implements Actionable {
     @Override
     public void startAction() 
     {
-        SmartDashboard.putString("ActionName", "Twistin' her around");
     }
 
     @Override

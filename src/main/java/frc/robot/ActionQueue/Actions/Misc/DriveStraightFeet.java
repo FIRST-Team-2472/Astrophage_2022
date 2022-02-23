@@ -1,6 +1,5 @@
 package frc.robot.ActionQueue.Actions.Misc;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
@@ -16,7 +15,6 @@ public class DriveStraightFeet implements Actionable {
     @Override
     public void startAction() 
     {
-        SmartDashboard.putString("ActionName", "Drive Feet");
         Robot.drive.driveFeet(feet);
     }
 

@@ -48,8 +48,8 @@ public class TestMethods {
   }
 
   public void runEverything() {
-    leftRotationLSSB.setBoolean(Robot.superClimber.getRoationLReverseLimit());
-    rightRotationLSSB.setBoolean(Robot.superClimber.getRoationRReverseLimit());
+    leftRotationLSSB.setBoolean(Robot.superClimber.isLeftVertical());
+    rightRotationLSSB.setBoolean(Robot.superClimber.isRightVertical());
     leftSadleLSSB.setBoolean(Robot.superClimber.isTouchingBarLeft());
     rightSadleLSSB.setBoolean(Robot.superClimber.isTouchingBarRight());
     leftClawLSSB.setBoolean(Robot.climberClamp.isClampedL());

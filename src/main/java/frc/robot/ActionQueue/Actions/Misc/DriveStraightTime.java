@@ -1,6 +1,5 @@
 package frc.robot.ActionQueue.Actions.Misc;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.TimerBase;
 
@@ -19,7 +18,6 @@ public class DriveStraightTime extends TimerBase
     public void startAction() 
     {
         super.startAction();
-        SmartDashboard.putString("ActionName", "Drive Straight Time");
         Robot.drive.tankDrive(speed, speed);
     }
 

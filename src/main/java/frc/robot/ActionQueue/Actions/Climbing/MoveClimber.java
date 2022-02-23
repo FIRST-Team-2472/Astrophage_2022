@@ -1,6 +1,5 @@
 package frc.robot.ActionQueue.Actions.Climbing;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
@@ -19,7 +18,6 @@ public class MoveClimber implements Actionable{
     public void startAction() 
     {
         //TODO need to use motion magic
-        SmartDashboard.putString("ActionName", "Moving Climber");
         if (upDog) Robot.superClimber.runBothExtendersTarget(feet);
         else Robot.superClimber.runBothExtendersTarget(feet);
     }

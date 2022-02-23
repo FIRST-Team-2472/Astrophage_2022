@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import frc.robot.Robot;
 
 public class ActionQueue {
     private ArrayList<Actionable> queue;
@@ -56,7 +55,11 @@ public class ActionQueue {
                     runningAction.startAction();
                 }
             }
-        } else inProgress = false;
+        } else {
+            actionNameD.setString("done");
+            actionNameP.setString("done");
+            inProgress = false;
+        }
     }
 
     public void clear() {

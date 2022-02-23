@@ -1,6 +1,5 @@
 package frc.robot.ActionQueue.Actions.Misc;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.ActionQueue.Runners.Actionable;
 import frc.robot.Robot;
 
@@ -12,7 +11,6 @@ public class DriveToBall implements Actionable {
     @Override
     public void startAction() 
     {
-        SmartDashboard.putString("ActionName", "Drive Limelight");
         //-1 * (limelightkP * Robot.limelight.targetXAngleFromCenter()));
 
         

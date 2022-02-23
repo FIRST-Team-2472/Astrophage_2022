@@ -1,6 +1,5 @@
 package frc.robot.ActionQueue.Actions.Climbing;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
@@ -16,7 +15,6 @@ public class AlignClimber implements Actionable{
     public void startAction() 
     {
         //TODO needs motion magic
-        SmartDashboard.putString("ActionName", "Straghting the climber");
     }
 
 

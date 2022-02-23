@@ -1,6 +1,5 @@
 package frc.robot.ActionQueue.Actions.Misc;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
@@ -9,7 +8,6 @@ public class CenteringLimelight implements Actionable {
 
 	@Override
 	public void startAction() {
-		SmartDashboard.putString("ActionName", "Centering Limelight");
 	}
 	
 	private double limelightCorrection = 0.02;
