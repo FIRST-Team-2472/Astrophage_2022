@@ -21,17 +21,16 @@ public class SuperClimber {
   public final double encoderToDegrees = 1001;
   private final double roatationLimit = 1002;
   private final double KF = 0, KP = 0, KI = 0;
-  public double extenderRError = extenderR.getClosedLoopError(0);
-  public double extenderLError = extenderL.getClosedLoopError(0);
+  //public double extenderRError = extenderR.getClosedLoopError(0);
+  //public double extenderLError = extenderL.getClosedLoopError(0);
 
   //kP value equation is 1/(error^2)
-  public double suggestedKP = (((1 / (extenderRError * extenderRError)) * (1 / (extenderLError * extenderLError))) / 2);
-  public double suggestedKF = 0;
+  //public double suggestedKP = (((1 / (extenderRError * extenderRError)) * (1 / (extenderLError * extenderLError))) / 2);
+  //public double suggestedKF = 0;
 
-  private DigitalInput barStopperL, barStopperR;
+  private DigitalInput barStopperL, barStopperR, barVerticalL, barVerticalR;
 
-  public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID, 
-      int barStopperLID, int barStopperRID) {
+  public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID, int barVerticalLID, int barVerticalRID) {
     extenderL = new TalonFX(extendo1ID);
     extenderR = new TalonFX(extendo2ID);
 
@@ -48,8 +47,10 @@ public class SuperClimber {
     // limit Switches
     //barStopperL = new DigitalInput(barStopperLID);
     //barStopperR = new DigitalInput(barStopperRID);
-    //rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-    //rotationR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    //barVerticalL = new DigitalInput(barVerticalLID);
+    //barVerticalR = new DigitalInput(barVerticalRID);
+    rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    rotationR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
       
   }
 
@@ -81,11 +82,11 @@ public class SuperClimber {
   
   //All this jazz just runs the pistons which extend the claws on the moving arm.
   public void runExtenderL(double speed) {
-    extenderL.set(ControlMode.Velocity, speed);
+    extenderL.set(ControlMode.PercentOutput, speed);
   }
 
   public void runExtenderR(double speed) {
-    extenderR.set(ControlMode.Velocity, speed);
+    extenderR.set(ControlMode.PercentOutput, speed);
   }
 
   public void runBothExtenders(double speed) {
@@ -94,11 +95,11 @@ public class SuperClimber {
   }
 
   public void runRotationL(double speed) {
-    rotationL.set(ControlMode.Velocity, speed);
+    rotationL.set(ControlMode.PercentOutput, speed);
   }
 
   public void runRotationR(double speed) {
-    rotationR.set(ControlMode.Velocity, speed);
+    rotationR.set(ControlMode.PercentOutput, speed);
   }
 
   public void runBothRotations(double speed) {
@@ -113,7 +114,7 @@ public class SuperClimber {
 
   public double getExtenderRHeight() {
     return extenderR.getSelectedSensorPosition() * encoderToFeet;
-  }    
+  } 
 
 
   //these methods get the rotaion (in degrees) of the climbers based upon encoder values and a predetermined encoder to degrees ratio
@@ -131,22 +132,32 @@ public class SuperClimber {
   }
 
   public boolean isTouchingBarLeft() {
-    return barStopperL.get();
+    if (extenderL.getSensorCollection().isFwdLimitSwitchClosed() != 0)
+    return true;
+    else return false;
   }
 
   public boolean isTouchingBarRight() {
-    return barStopperR.get();
+    if (extenderR.getSensorCollection().isFwdLimitSwitchClosed() != 0)
+    return true;
+    else return false;
   }
 
+  public boolean isBarVerticalLeft() {
+    return rotationL.getSensorCollection().isFwdLimitSwitchClosed();
+  }
 
-  
-  public boolean getRoationLReverseLimit() {
+  public boolean isBarVerticalRight() {
+    return rotationR.getSensorCollection().isFwdLimitSwitchClosed();
+  }
+
+  /*public boolean getRoationLReverseLimit() {
     return rotationL.getSensorCollection().isRevLimitSwitchClosed();
   }
 
   public boolean getRoationRReverseLimit() {
     return rotationR.getSensorCollection().isRevLimitSwitchClosed();
-  }
+  }*/
 
   public void zeroRotationEncoders() {
     rotationL.setSelectedSensorPosition(0);

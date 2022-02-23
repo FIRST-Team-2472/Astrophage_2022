@@ -20,8 +20,9 @@ public class TeleopMethods
 
     public void climber()
     {
-        Robot.superClimber.runExtenderPower(Robot.rightJoystick.getY() * 0.1);
-        Robot.superClimber.runBothRotations(Robot.xboxcontroller.getLeftY() * 0.1);
+    Robot.superClimber.runBothExtenders(Robot.rightJoystick.getY());
+
+    Robot.superClimber.runRotationR(Robot.xboxcontroller.getRightY());
     }
 
     

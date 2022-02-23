@@ -20,13 +20,15 @@ public class Constants {
     public static final int clamp2Backward = 42;
     public static final int climberEx1 = 14;
     public static final int climberEx2 = 15;
-    public static final int climberRo1 = 22;
-    public static final int climberRo2 = 20;
+    public static final int climberRo1 = 20;
+    public static final int climberRo2 = 22;
     public static final int COMPRESSOR = 1;
 
     //Limit switches
-    public static final int barStopperL = 69;
-    public static final int barStopperR = 69;
+    //public static final int barStopperL = 20;
+    //public static final int barStopperR = 22;
+    public static final int barVerticalL = 20;
+    public static final int barVerticalR = 22;
     public static final int clawLimitL = 69;
     public static final int clawLimitR = 69;
 
