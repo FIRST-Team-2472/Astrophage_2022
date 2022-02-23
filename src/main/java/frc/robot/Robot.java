@@ -42,7 +42,6 @@ public class Robot extends TimedRobot {
   private DigitalInput input;
   private DigitalInput switchOne = new DigitalInput(1);
   private DigitalOutput Arduino  = new DigitalOutput(4);
-  public static ShuffleboardTab driverBoard, programmerBoard;
   public static MatchTimer matchTimer = new MatchTimer();
 
   public static ActionLists actionList = new ActionLists();
@@ -58,8 +57,8 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when waking up
   public void robotInit() {
-    driverBoard = Shuffleboard.getTab("Driver Board");
-    programmerBoard = Shuffleboard.getTab("Programmer Board");
+    ShuffleboardTab driverBoard = Shuffleboard.getTab("Driver Board");
+    ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
     robotState = driverBoard.add("Robot State", "on").getEntry();
 
     //declare a default instance of to access FMSInfo

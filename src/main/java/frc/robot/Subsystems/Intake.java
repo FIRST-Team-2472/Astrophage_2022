@@ -10,7 +10,7 @@ public class Intake {
     //Initializes the motor as, no way, absolutely not, a motor.
     public Intake(int conveyorID) {
         conveyor = new CANSparkMax(conveyorID, MotorType.kBrushless);
-        conveyor.setInverted(true);
+        conveyor.setInverted(false);
 
     }
 

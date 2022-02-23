@@ -3,10 +3,10 @@ package frc.robot.Miscellaneous;
 public class Constants {
 
     //Drive Train Wheels
-    public static final int motorBL = 0;
-    public static final int motorBR = 1;
-	public static final int motorFL = 2;
-    public static final int motorFR = 3;
+    public static final int motorBL = 11;
+    public static final int motorBR = 12;
+	public static final int motorFL = 10;
+    public static final int motorFR = 13;
     
     //Joysticks & xbox controller
     public static final int jstickL = 0;
@@ -18,26 +18,26 @@ public class Constants {
     public static final int clamp1Backward = 42;
     public static final int clamp2Forward = 42;
     public static final int clamp2Backward = 42;
-    public static final int climberEx1 = 42;
-    public static final int climberEx2 = 42;
-    public static final int climberRo1 = 42;
-    public static final int climberRo2 = 42;
-    public static final int COMPRESSOR = 42;
+    public static final int climberEx1 = 14;
+    public static final int climberEx2 = 15;
+    public static final int climberRo1 = 20;
+    public static final int climberRo2 = 22;
+    public static final int COMPRESSOR = 1;
 
     //Limit switches
-    public static final int barStopperL = 69;
-    public static final int barStopperR = 69;
+    public static final int barStopperL = 20;
+    public static final int barStopperR = 22;
     public static final int clawLimitL = 69;
     public static final int clawLimitR = 69;
 
     // IMU/gyroscope
-    public static final int pigeonID = 9000;
+    public static final int pigeonID = 2;
 
     //Intake things
-    public static final int conveyor = 42;
+    public static final int conveyor = 41;
 
     //Shooter things
-    public static final int flyWheel = 42;
+    public static final int flyWheel = 21;
 
 
 }

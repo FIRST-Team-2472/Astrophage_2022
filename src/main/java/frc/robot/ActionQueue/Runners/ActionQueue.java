@@ -5,6 +5,8 @@ package frc.robot.ActionQueue.Runners;
 import java.util.ArrayList;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Robot;
 
 public class ActionQueue {
@@ -20,8 +22,10 @@ public class ActionQueue {
         start = true;
         breakTime = false;
         //set up shuffleboard
-        actionNameD = Robot.driverBoard.add("Current Action", "null").getEntry();
-        actionNameP = Robot.programmerBoard.add("Current Action", "null").getEntry();
+        ShuffleboardTab driverBoard = Shuffleboard.getTab("Driver Board");
+        ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
+        actionNameD = driverBoard.add("Current Action", "null").getEntry();
+        actionNameP = programmerBoard.add("Current Action", "null").getEntry();
     }
 
     public void addAction(Actionable action) {
