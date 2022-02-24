@@ -12,7 +12,8 @@ public class ShuffleBoard {
 
     private UsbCamera camera1;
     private UsbCamera camera2;
-    private NetworkTableEntry exLimitL, exLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL, roEcoderR, drEcoderL, drEcoderR, IMU_X, IMU_Y, IMU_Z, pressure, shEcoder;
+    private NetworkTableEntry exLimitL, exLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
+     roEcoderR, drEcoderL, drEcoderR, IMU_X, IMU_Y, IMU_Z, pressure, shEcoder, actionNameP, actionNameD;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     public ShuffleBoard() {
@@ -41,6 +42,8 @@ public class ShuffleBoard {
       IMU_Z = programmerBoard.add("IMU Z", 0).getEntry(); 
       pressure = programmerBoard.add("Pressure", 0).getEntry(); 
 
+      actionNameD = driverBoard.add("Current Action", "nein").getEntry();
+      actionNameP = programmerBoard.add("Current Action", "nein").getEntry();
     }
 
     public void update() {
@@ -68,5 +71,9 @@ public class ShuffleBoard {
       pressure.setNumber((int)Robot.compressor.getPressure());
     }
 
+    public void setAction(String actionName) {
+      actionNameD.setString(actionName);
+      actionNameP.setString(actionName);
+    }
 }
 

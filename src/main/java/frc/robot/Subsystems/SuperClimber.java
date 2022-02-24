@@ -22,12 +22,22 @@ public class SuperClimber {
   private final double KF = 0, KP = 0, KI = 0;
 
 
-  public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID) {
-    extenderL = new TalonFX(extendo1ID);
-    extenderR = new TalonFX(extendo2ID);
+  public SuperClimber(int extenderLID, int extenderRID, int rotationLID, int rotationRID) {
+    extenderL = new TalonFX(extenderLID);
+    extenderR = new TalonFX(extenderRID);
 
-    rotationL = new TalonSRX(rotato1ID);
-    rotationR = new TalonSRX(rotato2ID);
+    rotationL = new TalonSRX(rotationLID);
+    rotationR = new TalonSRX(rotationRID);
+
+    extenderL.configFactoryDefault();
+    extenderR.configFactoryDefault();
+    rotationL.configFactoryDefault();
+    rotationR.configFactoryDefault();
+
+    extenderL.setInverted(true);
+    extenderR.setInverted(true);
+    rotationL.setInverted(true);
+    rotationR.setInverted(true);
 
     setUpMotionMagicFX(extenderL, KF, KP, KI);
     setUpMotionMagicFX(extenderR, KF, KP, KI);
@@ -132,11 +142,11 @@ public class SuperClimber {
 
   
   public boolean isLeftVertical() {
-    return rotationL.getSensorCollection().isFwdLimitSwitchClosed();
+    return rotationL.getSensorCollection().isRevLimitSwitchClosed();
   }
 
   public boolean isRightVertical() {
-    return rotationR.getSensorCollection().isFwdLimitSwitchClosed();
+    return rotationR.getSensorCollection().isRevLimitSwitchClosed();
   }
 
   public void zeroRotationEncoders() {

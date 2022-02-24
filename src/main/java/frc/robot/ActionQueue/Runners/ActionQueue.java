@@ -4,29 +4,19 @@ package frc.robot.ActionQueue.Runners;
 
 import java.util.ArrayList;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.robot.Robot;
 
 public class ActionQueue {
     private ArrayList<Actionable> queue;
     boolean inProgress, start, breakTime;
-    //breaktime originally called bruh
+    // breaktime originally called bruh
     Actionable runningAction;
-    NetworkTableEntry actionNameD, actionNameP;
 
     public ActionQueue() {
         queue = new ArrayList<Actionable>();
         inProgress = false;
         start = true;
         breakTime = false;
-        //set up shuffleboard
-        try{
-            ShuffleboardTab driverBoard = Shuffleboard.getTab("Driver Board");
-            ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
-            actionNameD = driverBoard.add("Current Action", "null").getEntry();
-            actionNameP = programmerBoard.add("Current Action", "null").getEntry();
-        }catch(IllegalArgumentException e) {}
     }
 
     public void addAction(Actionable action) {
@@ -38,11 +28,12 @@ public class ActionQueue {
             if (start == true) {
                 runningAction = queue.get(0);
                 runningAction.startAction();
-                //add action's name to suffleboard
-                actionNameD.setString(runningAction.getClass().getSimpleName());
-                actionNameP.setString(runningAction.getClass().getSimpleName());
+
                 start = false;
             }
+
+            // add action's name to suffleboard
+            Robot.shuffleBoard.setAction(runningAction.getClass().getSimpleName());
 
             runningAction.periodic();
 
@@ -58,9 +49,9 @@ public class ActionQueue {
                 }
             }
         } else {
-            actionNameD.setString("done");
-            actionNameP.setString("done");
+            Robot.shuffleBoard.setAction("done");
             inProgress = false;
+            start = true;
         }
     }
 

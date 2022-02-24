@@ -18,7 +18,7 @@ public class Shooter {
 
     // Sets motor speed.
     public void runFlyWheelPower(double speed) {
-        flyWheel.set(ControlMode.Velocity, speed);
+        flyWheel.set(ControlMode.PercentOutput, speed);
     }
 
     // Resets the distance needed to travel to zero.
