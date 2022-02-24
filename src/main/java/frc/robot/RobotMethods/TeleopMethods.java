@@ -47,7 +47,8 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getXButton()) {
             Robot.shooter.runFlyWheelPower(1);
             if(Robot.shooter.getSpeed() > 900)Robot.intake.runConveyorPower(.5);
-        } else {
+        }
+        if(Robot.xboxcontroller.getXButtonReleased()) {
             Robot.shooter.runFlyWheelPower(0);
             Robot.intake.runConveyorPower(0);
         }
@@ -55,7 +56,7 @@ public class TeleopMethods
 
     public void convey() {
         if (Robot.xboxcontroller.getAButton()) Robot.intake.runConveyorPower(0.5);
-        else Robot.intake.runConveyorPower(0);
+        if (Robot.xboxcontroller.getAButtonReleased()) Robot.intake.runConveyorPower(0);
     }
     
     public void autoStop() {
