@@ -136,9 +136,10 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "test" mode
   public void testPeriodic() {
-    testMethods.runEverything();
+    Robot.intake.runConveyorPower(.2);
+    //testMethods.runEverything();
 
-    testMethods.runPneumatics();
+    //testMethods.runPneumatics();
   }
 
 
