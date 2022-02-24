@@ -2,6 +2,7 @@ package frc.robot.RobotMethods;
 
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
+import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 import frc.robot.Miscellaneous.Timer;
 
@@ -18,6 +19,7 @@ public class TeleopMethods
     public void init(boolean enabled) {
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
+            teleopActions.addAction(new ZeroRotations());
             Robot.matchTimer.beginMatch();
         }
 
@@ -25,6 +27,8 @@ public class TeleopMethods
         breakSwitch = false;
         TwoB = false;
         climbTime = false;
+        Robot.superClimber.zeroExtenderEncoders();
+        Robot.superClimber.zeroRotationEncoders();
     }
 
     //All three of these are for drivers communicating with the subsystems.
@@ -87,13 +91,18 @@ public class TeleopMethods
     }
 
     public void manualClimb() {
-        if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
-/*
+        //if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
+        /*
         if ((manualOverride || climbTime) && breakSwitch)  {
             Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
             Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
         }*/
-        Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY());
+        double bruh = Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight();
+        
+        if(Robot.xboxcontroller.getLeftY())Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY());
         Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY());
+
+        if(Robot.xboxcontroller.getRightBumperPressed()) Robot.climberClamp.setClamps();
+        if(Robot.xboxcontroller.getLeftBumperPressed()) Robot.climberClamp.disengageClamps();
     }
 }

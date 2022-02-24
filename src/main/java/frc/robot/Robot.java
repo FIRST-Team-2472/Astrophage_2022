@@ -26,7 +26,7 @@ import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
   //These declare an instance of a script as a variable and setup the constant talons or other objects.
-  //public static ClimberClamp climberClamp = new ClimberClamp(Constants.clamp1Forward, Constants.clamp1Backward, Constants.clamp2Forward, Constants.clamp2Backward, Constants.clawLimitL, Constants.clawLimitR);
+  public static ClimberClamp climberClamp = new ClimberClamp(Constants.clampLForward, Constants.clampLBackward, Constants.clampRForward, Constants.clampRBackward);
   public static SuperClimber superClimber = new SuperClimber(Constants.climberExL, Constants.climberExR, Constants.climberRoL, Constants.climberRoR);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
   public static Intake intake = new Intake(Constants.conveyor);
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
   private NetworkTableEntry getTeamColor, robotState;
   private NetworkTableInstance inst;
 
-  boolean enabled = false;
+  boolean enabled = true;
 
   @Override
   //Robot does this when waking up
@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
     else limelight.setPipeLine(3);*/
 
     //runs the compressor
-    //compressor.enabled();
+    compressor.enabled();
   }
 
   @Override
@@ -90,7 +90,7 @@ public class Robot extends TimedRobot {
     autoActions.addAction(new ZeroEncoders());
     autoActions.addAction(new ZeroRotations());
     matchTimer.beginMatch();
-    enabled = true;
+    enabled = false;
 
     //Arduino.disablePWM();
   }
@@ -116,13 +116,13 @@ public class Robot extends TimedRobot {
 
     teleopMethods.shoot();
 
-    teleopMethods.gimmeBall();
+    //teleopMethods.gimmeBall();
 
     teleopMethods.manualClimb();
 
     //teleopMethods.seeBall();
 
-    teleopMethods.autoStop();
+    //teleopMethods.autoStop();
   }
 
 

@@ -17,8 +17,8 @@ public class SuperClimber {
   // TODO need to find a special number
   private final double encoderToFeet = 1;
   public final double encoderToDegrees = 1;
-  private final double rotationLimit = 1002;
-  private final double extenderLimit = 1002;
+  private final double rotationLimit = 1000000000;
+  private final double extenderLimit = 100000000;
   private final double KF = 0, KP = 0, KI = 0;
 
 

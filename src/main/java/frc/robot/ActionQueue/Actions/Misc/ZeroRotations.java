@@ -11,10 +11,10 @@ public class ZeroRotations implements Actionable {
 
     @Override
     public void periodic() {
-        if (!Robot.superClimber.isLeftVertical()) Robot.superClimber.runRotationPowerL(-.3);
+        if (!Robot.superClimber.isLeftVertical()) Robot.superClimber.runRotationPowerL(-.4);
         else Robot.superClimber.runRotationPowerL(0);
 
-        if (!Robot.superClimber.isRightVertical()) Robot.superClimber.runRotationPowerR(-.3);
+        if (!Robot.superClimber.isRightVertical()) Robot.superClimber.runRotationPowerR(-.4);
         else Robot.superClimber.runRotationPowerR(0);
     }
 
