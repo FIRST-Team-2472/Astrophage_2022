@@ -46,7 +46,7 @@ public class TeleopMethods
     public void shoot() {
         if (Robot.xboxcontroller.getXButton()) {
             Robot.shooter.runFlyWheelPower(1);
-            Robot.intake.runConveyorPower(.5);
+            if(Robot.shooter.getSpeed() > 900)Robot.intake.runConveyorPower(.5);
         } else {
             Robot.shooter.runFlyWheelPower(0);
             Robot.intake.runConveyorPower(0);

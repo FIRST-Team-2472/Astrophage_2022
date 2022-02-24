@@ -31,6 +31,10 @@ public class Shooter {
         return flyWheel.getSelectedSensorPosition() / countToFeet;
     }
 
+    public double getSpeed() {
+        return flyWheel.getSelectedSensorVelocity();
+    }
+
     private void setUpMotionMagicSRX(TalonSRX motor, double KF, double KP, double KI) {
         motor.configFactoryDefault();
 
