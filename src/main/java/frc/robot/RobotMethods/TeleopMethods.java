@@ -53,6 +53,11 @@ public class TeleopMethods
         }
     }
 
+    public void convey() {
+        if (Robot.xboxcontroller.getAButton()) Robot.intake.runConveyorPower(0.5);
+        else Robot.intake.runConveyorPower(0);
+    }
+    
     public void autoStop() {
         if (Robot.xboxcontroller.getYButtonPressed()) {
             if (!breakSwitch) {
