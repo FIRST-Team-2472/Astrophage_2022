@@ -104,8 +104,8 @@ public class TeleopMethods
         }*/
         double bruh = Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight();
         
-        if(Robot.xboxcontroller.getLeftY())Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY());
-        Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY());
+        if(Math.abs(Robot.xboxcontroller.getLeftY()) < 0.1)Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY());
+        if(Math.abs(Robot.xboxcontroller.getRightY()) < 0.1)Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY());
 
         if(Robot.xboxcontroller.getRightBumperPressed()) Robot.climberClamp.setClamps();
         if(Robot.xboxcontroller.getLeftBumperPressed()) Robot.climberClamp.disengageClamps();
