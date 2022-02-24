@@ -21,12 +21,13 @@ import frc.robot.Sensors.*;
 
 import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
+import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
   //These declare an instance of a script as a variable and setup the constant talons or other objects.
   //public static ClimberClamp climberClamp = new ClimberClamp(Constants.clamp1Forward, Constants.clamp1Backward, Constants.clamp2Forward, Constants.clamp2Backward, Constants.clawLimitL, Constants.clawLimitR);
-  public static SuperClimber superClimber = new SuperClimber(Constants.climberEx1, Constants.climberEx2, Constants.climberRo1, Constants.climberRo2);
+  public static SuperClimber superClimber = new SuperClimber(Constants.climberExL, Constants.climberExR, Constants.climberRoL, Constants.climberRoR);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
   public static Intake intake = new Intake(Constants.conveyor);
   public static Shooter shooter = new Shooter(Constants.flyWheel);
@@ -41,7 +42,7 @@ public class Robot extends TimedRobot {
   //private DigitalInput switchOne = new DigitalInput(1);
   //private DigitalOutput Arduino  = new DigitalOutput(4);
   public static MatchTimer matchTimer = new MatchTimer();
-  private ShuffleBoard shuffleBoard = new ShuffleBoard();
+  public static ShuffleBoard shuffleBoard = new ShuffleBoard();
 
   public static ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
@@ -87,10 +88,10 @@ public class Robot extends TimedRobot {
     robotState.setString("Autonomous");
 
     autoActions.addAction(new ZeroEncoders());
+    autoActions.addAction(new ZeroRotations());
     matchTimer.beginMatch();
     enabled = true;
 
-    actionList.DriveSome(autoActions);
     //Arduino.disablePWM();
   }
 
