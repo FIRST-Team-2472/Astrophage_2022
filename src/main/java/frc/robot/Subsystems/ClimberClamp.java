@@ -14,8 +14,12 @@ public class ClimberClamp {
     public ClimberClamp (int clampLForwardID, int clampLBackwardID, int clampRForwardID, int clampRBackwardID)
     {
         //Initializes the pistons as, get this, pistons.
-        clampL = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clampLForwardID, clampLBackwardID);
-        clampR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, clampRForwardID, clampRBackwardID);
+        clampL = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM, clampLForwardID, clampLBackwardID);
+        clampR = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM, clampRForwardID, clampRBackwardID);
+
+        clampL.set(Value.kReverse);
+        clampR.set(Value.kReverse);
+        
 
         //Limit Switches
         //clawLimitL = new DigitalInput(clawLimitLID);
@@ -34,6 +38,12 @@ public class ClimberClamp {
     {
         disengageClampR();
         disengageClampL();
+    }
+
+    public void toggleClamps()
+    {
+        clampL.toggle();
+        clampR.toggle();
     }
 
     //Turns off the pistons for the hooks.

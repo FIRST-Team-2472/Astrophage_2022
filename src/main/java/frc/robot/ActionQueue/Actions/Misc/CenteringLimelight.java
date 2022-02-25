@@ -6,7 +6,6 @@ import frc.robot.ActionQueue.Runners.Actionable;
 
 public class CenteringLimelight implements Actionable {
 
-	//TODO add once have limelight
 	@Override
 	public void startAction() {
 	}
@@ -15,13 +14,13 @@ public class CenteringLimelight implements Actionable {
 
 	@Override
 	public void periodic() {
-		/*
+		
 		if (Robot.limelight.targetXAngleFromCenter() >= -0.5) {
 			Robot.drive.runRight(limelightCorrection * Robot.limelight.targetXAngleFromCenter());
 		}
 		else if (Robot.limelight.targetXAngleFromCenter() <= 0.5) {
 			Robot.drive.runLeft(limelightCorrection * Robot.limelight.targetXAngleFromCenter());
-		}*/
+		}
 	}
 
 	@Override
@@ -31,8 +30,7 @@ public class CenteringLimelight implements Actionable {
 
 	@Override
 	public boolean isFinished() {
-		//if (Robot.limelight.isTargetSpotted()) return Math.abs(Robot.limelight.targetXAngleFromCenter()) < 2;
-		//else return true;
-		return false;
+		if (Robot.limelight.isTargetSpotted()) return Math.abs(Robot.limelight.targetXAngleFromCenter()) < 2;
+		else return true;
     }
 }

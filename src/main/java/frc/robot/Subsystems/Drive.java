@@ -27,8 +27,11 @@ public class Drive {
         leftMaster = new TalonFX(frontLeftID);
         leftSlave = new TalonFX(backLeftID);
 
+        setUpMotionMagicFX(leftMaster, KF, KP, KI);
+        setUpMotionMagicFX(rightMaster, KF, KP, KI);
+
         rightMaster.setInverted(false);
-        leftMaster.setInverted(true);
+        leftMaster.setInverted(false);
 
         rightSlave.follow(rightMaster);
         rightSlave.setInverted(InvertType.FollowMaster);
@@ -36,8 +39,7 @@ public class Drive {
         leftSlave.follow(leftMaster);
         leftSlave.setInverted(InvertType.FollowMaster);
 
-        setUpMotionMagicFX(leftMaster, KF, KP, KI);
-        setUpMotionMagicFX(rightMaster, KF, KP, KI);
+
 
     }
 

@@ -52,8 +52,8 @@ public class TestMethods {
     rightRotationLSSB.setBoolean(Robot.superClimber.isRightVertical());
     leftSadleLSSB.setBoolean(Robot.superClimber.isTouchingBarLeft());
     rightSadleLSSB.setBoolean(Robot.superClimber.isTouchingBarRight());
-    //leftClawLSSB.setBoolean(Robot.climberClamp.isClampedL());
-    //rightClawLSSB.setBoolean(Robot.climberClamp.isClampedR());
+    leftClawLSSB.setBoolean(Robot.climberClamp.isClampedL());
+    rightClawLSSB.setBoolean(Robot.climberClamp.isClampedR());
 
     leftDriveEncoderSB.setDouble(Robot.drive.getLeftFeet());
     rightDriveEncoderSB.setDouble(Robot.drive.getRightFeet());
@@ -123,7 +123,7 @@ public class TestMethods {
     }
   }
 
-  public void runPneumatics() {/*
+  public void runPneumatics() {
     if (Robot.leftJoystick.getRawButtonPressed(4)) {
       if (!flipLeft) { 
         Robot.climberClamp.setClampL();
@@ -144,7 +144,7 @@ public class TestMethods {
         Robot.climberClamp.disengageClampR();
         flipRight = false;
       }
-    }*/
+    }
   }
 
   double baseSpeed;

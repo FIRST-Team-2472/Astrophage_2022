@@ -4,6 +4,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -37,12 +38,13 @@ public class Robot extends TimedRobot {
   public static Compressor compressor = new Compressor(Constants.COMPRESSOR, PneumaticsModuleType.CTREPCM);
   //public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
-  //public static limelight limelight = new limelight();
+  public static limelight limelight = new limelight();
   public static IMU imu = new IMU(Constants.pigeonID);
   //private DigitalInput switchOne = new DigitalInput(1);
   //private DigitalOutput Arduino  = new DigitalOutput(4);
   public static MatchTimer matchTimer = new MatchTimer();
   public static ShuffleBoard shuffleBoard = new ShuffleBoard();
+  public static AnalogInput pressureReader = new AnalogInput(3);
 
   public static ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
@@ -52,7 +54,7 @@ public class Robot extends TimedRobot {
   private NetworkTableEntry getTeamColor, robotState;
   private NetworkTableInstance inst;
 
-  boolean enabled = true;
+  boolean enabled = false;
 
   @Override
   //Robot does this when waking up
@@ -65,10 +67,10 @@ public class Robot extends TimedRobot {
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
     
-    /*
+    
     if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);
-    else limelight.setPipeLine(3);*/
+    else limelight.setPipeLine(3);
 
     //runs the compressor
     compressor.enabled();
@@ -90,7 +92,7 @@ public class Robot extends TimedRobot {
     autoActions.addAction(new ZeroEncoders());
     autoActions.addAction(new ZeroRotations());
     matchTimer.beginMatch();
-    enabled = false;
+    enabled = true;
 
     //Arduino.disablePWM();
   }
@@ -112,17 +114,21 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
+    teleopMethods.update();
+    
     teleopMethods.drive();
 
     teleopMethods.shoot();
 
-    //teleopMethods.gimmeBall();
+    teleopMethods.convey();
+
+    teleopMethods.gimmeBall();
 
     teleopMethods.manualClimb();
 
-    //teleopMethods.seeBall();
+    teleopMethods.seeBall();
 
-    //teleopMethods.autoStop();
+    teleopMethods.autoStop();
   }
 
 
@@ -137,10 +143,9 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "test" mode
   public void testPeriodic() {
-    Robot.intake.runConveyorPower(.2);
-    //testMethods.runEverything();
+    testMethods.runEverything();
 
-    //testMethods.runPneumatics();
+    testMethods.runPneumatics();
   }
 
 
