@@ -17,8 +17,8 @@ public class SuperClimber {
   // TODO need to find a special number
   private final double encoderToFeet = 1;
   public final double encoderToDegrees = 1;
-  private final double rotationLimit = 1002;
-  private final double extenderLimit = 1002;
+  private final double rotationLimit = 1000000000;
+  private final double extenderLimit = 100000000;
   private final double KF = 0, KP = 0, KI = 0;
 
 
@@ -29,20 +29,16 @@ public class SuperClimber {
     rotationL = new TalonSRX(rotationLID);
     rotationR = new TalonSRX(rotationRID);
 
-    extenderL.configFactoryDefault();
-    extenderR.configFactoryDefault();
-    rotationL.configFactoryDefault();
-    rotationR.configFactoryDefault();
-
-    extenderL.setInverted(true);
-    extenderR.setInverted(true);
-    rotationL.setInverted(true);
-    rotationR.setInverted(true);
-
     setUpMotionMagicFX(extenderL, KF, KP, KI);
     setUpMotionMagicFX(extenderR, KF, KP, KI);
     setUpMotionMagicSRX(rotationL, KF, KP, KI);
     setUpMotionMagicSRX(rotationR, KF, KP, KI);
+
+    extenderL.setInverted(false);
+    extenderR.setInverted(false);
+    rotationL.setInverted(false);
+    rotationR.setInverted(false);
+
 
     // limit Switches
     rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -105,11 +101,11 @@ public class SuperClimber {
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
-    return extenderL.getSelectedSensorPosition() * encoderToFeet;
+    return -extenderL.getSelectedSensorPosition() * encoderToFeet;
   }
 
   public double getExtenderRHeight() {
-    return extenderR.getSelectedSensorPosition() * encoderToFeet;
+    return -extenderR.getSelectedSensorPosition() * encoderToFeet;
   }    
 
 
@@ -151,22 +147,23 @@ public class SuperClimber {
 
   public void zeroRotationEncoders() {
     rotationL.setSelectedSensorPosition(0);
-    rotationL.configForwardSoftLimitEnable(true);
-    rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+    //TODO need to set up soft limits when get gud
+    //rotationL.configForwardSoftLimitEnable(true);
+    //rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
 
     rotationR.setSelectedSensorPosition(0);
-    rotationR.configForwardSoftLimitEnable(true);
-    rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+    //rotationR.configForwardSoftLimitEnable(true);
+    //rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
   }
 
   public void zeroExtenderEncoders() {
     extenderL.setSelectedSensorPosition(0);
-    extenderL.configForwardSoftLimitEnable(true);
-    extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+    //extenderL.configForwardSoftLimitEnable(true);
+    //extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
 
     extenderR.setSelectedSensorPosition(0);
-    extenderR.configForwardSoftLimitEnable(true);
-    extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+    //extenderR.configForwardSoftLimitEnable(true);
+    //extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
   }
 
 
@@ -246,9 +243,9 @@ public class SuperClimber {
     extenderR.set(ControlMode.PercentOutput, speed);
   }
 
-  public void runBothExtendersPower(double speed) {
-    runExtenderPowerL(speed);
-    runExtenderPowerR(speed);
+  public void runBothExtendersPower(double speedL, double speedR) {
+    runExtenderPowerL(speedL *0.4);
+    runExtenderPowerR(speedR* 0.4);
   }
 
   public void runRotationPowerL(double speed) {
@@ -259,8 +256,8 @@ public class SuperClimber {
     rotationR.set(ControlMode.PercentOutput, speed);
   }
 
-  public void runBothRotationsPower(double speed) {
-    runRotationPowerL(speed);
-    runRotationPowerR(speed);
+  public void runBothRotationsPower(double speedL, double speedR) {
+    runRotationPowerL(speedL);
+    runRotationPowerR(speedR);
   }
 }

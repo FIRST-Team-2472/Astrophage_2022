@@ -28,6 +28,7 @@ public class ActionLists
     {
         action.addAction(new CenteringLimelight());
         action.addAction(new DriveToBall());
+        action.addAction(new DriveStraightTime(0.5,3));
     }
 
     //What the robot does when it's time to climb the monkey bars.

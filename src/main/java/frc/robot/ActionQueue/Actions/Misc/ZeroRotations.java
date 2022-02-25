@@ -21,7 +21,7 @@ public class ZeroRotations implements Actionable {
     @Override
     public void endAction() {
         Robot.superClimber.zeroRotationEncoders();
-        Robot.superClimber.runBothRotationsPower(0);
+        Robot.superClimber.runBothRotationsPower(0,0);
     }
     
     @Override
