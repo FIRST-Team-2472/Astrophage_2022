@@ -126,13 +126,13 @@ public class Robot extends TimedRobot {
 
     teleopMethods.convey();
 
-    teleopMethods.gimmeBall();
+    //teleopMethods.gimmeBall();
 
     teleopMethods.manualClimb();
 
-    teleopMethods.seeBall();
+    //teleopMethods.seeBall();
 
-    teleopMethods.autoStop();
+    //teleopMethods.autoStop();
   }
 
 

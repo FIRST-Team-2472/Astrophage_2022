@@ -34,10 +34,10 @@ public class SuperClimber {
     setUpMotionMagicSRX(rotationL, KF, KP, KI);
     setUpMotionMagicSRX(rotationR, KF, KP, KI);
 
-    extenderL.setInverted(false);
-    extenderR.setInverted(false);
-    rotationL.setInverted(false);
-    rotationR.setInverted(false);
+    extenderL.setInverted(true);
+    extenderR.setInverted(true);
+    rotationL.setInverted(true);
+    rotationR.setInverted(true);
 
 
     // limit Switches

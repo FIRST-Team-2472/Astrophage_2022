@@ -14,6 +14,7 @@ public class TeleopMethods
     private Timer abortTimer = new Timer(.5);
 
     private ActionQueue teleopActions = new ActionQueue();
+    private double broske = 1;
 
 
     public void init(boolean enabled) {
@@ -35,7 +36,10 @@ public class TeleopMethods
     }
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5, Robot.leftJoystick.getX() *0.5);
+        if(Robot.leftJoystick.getRawButton(1)) broske = 0.5;
+        else broske = 1;
+
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * broske, Robot.leftJoystick.getX() *0.5 *broske);
 
     }
 
@@ -60,6 +64,8 @@ public class TeleopMethods
     public void convey() {
         if (Robot.xboxcontroller.getAButton()) Robot.intake.runConveyorPower(0.5);
         if (Robot.xboxcontroller.getAButtonReleased()) Robot.intake.runConveyorPower(0);
+        if (Robot.xboxcontroller.getBButton()) Robot.intake.runConveyorPower(-0.5);
+        if (Robot.xboxcontroller.getBButtonReleased()) Robot.intake.runConveyorPower(0);
     }
     
     public void autoStop() {

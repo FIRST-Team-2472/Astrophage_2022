@@ -9,11 +9,8 @@ public class ActionLists
     //What the robot does in the first 15 seconds of autonomous
     public void InitialAutonomous(ActionQueue action)
     {
-        action.addAction(new ZeroRotations());
-        action.addAction(new DriveToBall());
-        action.addAction(new EndDriveToBall());
-        action.addAction(new DriveStraightFeet(10));
         action.addAction(new ShootBall(2));
+        action.addAction(new DriveStraightTime(-0.5, 4));
     }
 
     //If the drivers decide that driving is too hard.

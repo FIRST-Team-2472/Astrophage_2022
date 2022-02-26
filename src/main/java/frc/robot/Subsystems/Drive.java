@@ -31,7 +31,7 @@ public class Drive {
         setUpMotionMagicFX(rightMaster, KF, KP, KI);
 
         rightMaster.setInverted(false);
-        leftMaster.setInverted(false);
+        leftMaster.setInverted(true);
 
         rightSlave.follow(rightMaster);
         rightSlave.setInverted(InvertType.FollowMaster);
