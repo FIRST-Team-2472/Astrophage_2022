@@ -118,8 +118,6 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
-    teleopMethods.update();
-    
     teleopMethods.drive();
 
     teleopMethods.shoot();
@@ -133,6 +131,8 @@ public class Robot extends TimedRobot {
     //teleopMethods.seeBall();
 
     //teleopMethods.autoStop();
+
+    teleopMethods.update();
   }
 
 
