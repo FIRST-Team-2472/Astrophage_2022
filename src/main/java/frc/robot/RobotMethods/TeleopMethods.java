@@ -14,7 +14,7 @@ public class TeleopMethods
     private Timer abortTimer = new Timer(.5);
 
     private ActionQueue teleopActions = new ActionQueue();
-    private double broske = 1;
+    private double driveSpeed = 1;
 
 
     public void init(boolean enabled) {
@@ -34,12 +34,13 @@ public class TeleopMethods
     {
         teleopActions.step();
     }
+
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        if(Robot.leftJoystick.getRawButton(1)) broske = 0.5;
-        else broske = 1;
+        if(Robot.leftJoystick.getRawButton(1)) driveSpeed = 0.5;
+        else driveSpeed = 1;
 
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * broske, Robot.leftJoystick.getX() *0.5 *broske);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.leftJoystick.getX() *0.5 *driveSpeed);
 
     }
 
@@ -64,8 +65,8 @@ public class TeleopMethods
     public void convey() {
         if (Robot.xboxcontroller.getAButton()) Robot.intake.runConveyorPower(0.5);
         if (Robot.xboxcontroller.getAButtonReleased()) Robot.intake.runConveyorPower(0);
-        if (Robot.xboxcontroller.getBButton()) Robot.intake.runConveyorPower(-0.5);
-        if (Robot.xboxcontroller.getBButtonReleased()) Robot.intake.runConveyorPower(0);
+        if (Robot.xboxcontroller.getRightBumper()) Robot.intake.runConveyorPower(-0.5);
+        if (Robot.xboxcontroller.getRightBumperReleased()) Robot.intake.runConveyorPower(0);
     }
     
     public void autoStop() {
@@ -106,23 +107,11 @@ public class TeleopMethods
     }
 
     public void manualClimb() {
-        //if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
-        /*
-        if ((manualOverride || climbTime) && breakSwitch)  {
+        if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
+        
+        if (manualOverride || climbTime)  {
             Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
             Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
-        }*/
-
-        double bruh = -(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) * 0.00001;
-        double bruh2 = (Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.00001;
-
-
-        if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY(), Robot.xboxcontroller.getLeftY() + bruh);
-        else if (!teleopActions.isInProgress())Robot.superClimber.runBothExtendersPower(0, 0);
-        if(Math.abs(Robot.xboxcontroller.getRightY()) > 0.1)Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY(), Robot.xboxcontroller.getRightY() + bruh2);
-        else if (!teleopActions.isInProgress()) Robot.superClimber.runBothRotationsPower(0, 0);
-
-        if(Robot.xboxcontroller.getRightBumperPressed()) Robot.climberClamp.toggleClamps();
-        //if(Robot.xboxcontroller.getLeftBumperPressed()) Robot.climberClamp.disengageClamps();
+        }
     }
 }
