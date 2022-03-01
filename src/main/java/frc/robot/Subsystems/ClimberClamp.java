@@ -26,13 +26,6 @@ public class ClimberClamp {
         //clawLimitR = new DigitalInput(clawLimitRID);
     }
 
-    //Hooks the hooks.
-    public void setClamps() 
-    {
-        setClampR();
-        setClampL();
-    }
-
     //Unhooks the hooks.
     public void disengageClamps()
     {
@@ -54,13 +47,13 @@ public class ClimberClamp {
     }
 
     //Hooks the left hook.
-    public void setClampL() 
+    public void engageClampL() 
     {
         clampL.set(Value.kForward);
     }
 
     //Hooks the right hook.
-    public void setClampR()
+    public void engageClampR()
     {
         clampR.set(Value.kForward);
     }

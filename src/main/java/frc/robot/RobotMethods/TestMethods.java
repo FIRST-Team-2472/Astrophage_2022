@@ -126,7 +126,7 @@ public class TestMethods {
   public void runPneumatics() {
     if (Robot.leftJoystick.getRawButtonPressed(4)) {
       if (!flipLeft) { 
-        Robot.climberClamp.setClampL();
+        Robot.climberClamp.engageClampL();
         flipLeft = true;
       }
       else  {
@@ -137,7 +137,7 @@ public class TestMethods {
 
     if (Robot.leftJoystick.getRawButtonPressed(5)) {
       if (!flipRight) {
-        Robot.climberClamp.setClampR();
+        Robot.climberClamp.engageClampR();
         flipRight = true;
       }
       else {

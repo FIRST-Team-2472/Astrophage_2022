@@ -18,7 +18,7 @@ public class DriveStraightTime extends TimerBase
     public void startAction() 
     {
         super.startAction();
-        Robot.drive.tankDrive(speed, speed);
+        Robot.drive.arcadeDrivePower(-speed, 0);
     }
 
     @Override

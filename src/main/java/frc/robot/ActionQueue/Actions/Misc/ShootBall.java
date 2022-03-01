@@ -17,6 +17,7 @@ public class ShootBall extends TimerBase
     {
         super.startAction();
         Robot.shooter.runFlyWheelPower(1);
+        //if(Robot.shooter.getSpeed() < -60000)Robot.intake.runConveyorPower(.5);
         Robot.intake.runConveyorPower(.5);
     }
 

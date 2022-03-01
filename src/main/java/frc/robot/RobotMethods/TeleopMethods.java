@@ -36,12 +36,13 @@ public class TeleopMethods
     }
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        if(Robot.leftJoystick.getRawButton(1)) broske = 0.5;
+        if(Robot.rightJoystick.getRawButton(1)) broske = 0.5;
         else broske = 1;
 
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * broske, Robot.leftJoystick.getX() *0.5 *broske);
+        if(!teleopActions.isInProgress())Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() * 0.5 * broske, Robot.rightJoystick.getX() * 0.5 * broske);
 
     }
+    //i am monke oo ee oo ee oo
 
     public void climb() {
         if (Robot.matchTimer.matchTime() >= 120) climbTime = true;
@@ -95,8 +96,8 @@ public class TeleopMethods
     }
 
     public void seeBall() {
-        if (Robot.leftJoystick.getRawButton(1)) 
-            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-1 * (0.02 * Robot.limelight.targetXAngleFromCenter())));
+        if (Robot.leftJoystick.getRawButton(1))
+            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
     }
 
 

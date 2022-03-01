@@ -147,6 +147,7 @@ public class Drive {
 
         // Motion magic acceleration is 50 counts
         motor.configMotionAcceleration(2000, 30);
+        motor.configOpenloopRamp(1.5);
 
         // Zero the sensor once on robot boot up
         motor.setSelectedSensorPosition(0, 0, 30);

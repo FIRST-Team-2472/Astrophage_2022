@@ -69,14 +69,14 @@ public class Robot extends TimedRobot {
     //declare a default instance of to access FMSInfo
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
-    
-    
-    if (getTeamColor.getBoolean(true)) 
+    driverBoard.add("blue == false", getTeamColor.getBoolean(false));
+    /*if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);
-    else limelight.setPipeLine(3);
+    else limelight.setPipeLine(3);*/
+    limelight.setPipeLine(0);
 
     //runs the compressor
-    compressor.enabled();
+    compressor.disable();
   }
 
   @Override
@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
     autoActions.addAction(new ZeroEncoders());
     autoActions.addAction(new ZeroRotations());
     actionList.InitialAutonomous(autoActions);
+    //actionList.LimelightGrab(autoActions);
     matchTimer.beginMatch();
     enabled = true;
 
@@ -128,7 +129,7 @@ public class Robot extends TimedRobot {
 
     teleopMethods.manualClimb();
 
-    //teleopMethods.seeBall();
+    teleopMethods.seeBall();
 
     //teleopMethods.autoStop();
 

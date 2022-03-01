@@ -16,7 +16,8 @@ public class DriveToBall implements Actionable {
     @Override
     public void periodic() 
     {
-        Robot.drive.arcadeDrivePower(0.2, (limelightCorrection * Robot.limelight.targetXAngleFromCenter()));
+        Robot.drive.arcadeDrivePower(0.5, -1 * (limelightCorrection * Robot.limelight.targetXAngleFromCenter()));
+        Robot.intake.runConveyorPower(0.5);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class DriveToBall implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if (Robot.limelight.get_distance_in() <= 6) return true;
+        if (Robot.limelight.isTargetSpotted() == false) return true;
         else return false;
     }
 
