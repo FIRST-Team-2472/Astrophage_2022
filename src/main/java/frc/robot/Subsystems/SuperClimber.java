@@ -145,25 +145,38 @@ public class SuperClimber {
     return rotationR.getSensorCollection().isRevLimitSwitchClosed();
   }
 
+  public boolean isVertical(){
+    return isLeftVertical() && isRightVertical();
+  }
+
   public void zeroRotationEncoders() {
     rotationL.setSelectedSensorPosition(0);
-    //TODO need to set up soft limits when get gud
-    //rotationL.configForwardSoftLimitEnable(true);
-    //rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+
 
     rotationR.setSelectedSensorPosition(0);
-    //rotationR.configForwardSoftLimitEnable(true);
-    //rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+
   }
 
   public void zeroExtenderEncoders() {
     extenderL.setSelectedSensorPosition(0);
-    //extenderL.configForwardSoftLimitEnable(true);
-    //extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+
 
     extenderR.setSelectedSensorPosition(0);
-    //extenderR.configForwardSoftLimitEnable(true);
-    //extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+
+  }
+
+  private void setUpSoftLimits() {
+    rotationL.configForwardSoftLimitEnable(true);
+    rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+
+    extenderR.configForwardSoftLimitEnable(true);
+    extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+
+    extenderL.configForwardSoftLimitEnable(true);
+    extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+
+    rotationR.configForwardSoftLimitEnable(true);
+    rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
   }
 
 

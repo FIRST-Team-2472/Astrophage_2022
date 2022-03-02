@@ -49,20 +49,20 @@ public class TeleopMethods
         else driveSpeed = 1;
 
         
-    camera1 = CameraServer.startAutomaticCapture(0);
-    camera2 = CameraServer.startAutomaticCapture(1);
+        camera1 = CameraServer.startAutomaticCapture(0);
+        camera2 = CameraServer.startAutomaticCapture(1);
 
-    if (Robot.leftJoystick.getRawButtonPressed(3) && flipInvert) {
-      System.out.println("Setting camera 2");
-      server.setSource(camera2);
-      flipInvert = false;
-      Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.leftJoystick.getX() *0.5 *driveSpeed);
-    } else if (Robot.leftJoystick.getRawButtonPressed(3) && !flipInvert) {
-      System.out.println("Setting camera 1");
-      server.setSource(camera1);
-      flipInvert = true;
-      Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * -driveSpeed, Robot.leftJoystick.getX() *0.5 * -driveSpeed);
-    }
+        if (Robot.leftJoystick.getRawButtonPressed(3) && flipInvert) {
+            System.out.println("Setting camera 2");
+            server.setSource(camera2);
+            flipInvert = false;
+            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.leftJoystick.getX() *0.5 *driveSpeed);
+        } else if (Robot.leftJoystick.getRawButtonPressed(3) && !flipInvert) {
+            System.out.println("Setting camera 1");
+            server.setSource(camera1);
+            flipInvert = true;
+            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * -driveSpeed, Robot.leftJoystick.getX() *0.5 * -driveSpeed);
+        }
     }
 
     public void climb() {
@@ -118,7 +118,7 @@ public class TeleopMethods
 
     public void seeBall() {
         if (Robot.leftJoystick.getRawButton(1)) 
-            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-1 * (0.02 * Robot.limelight.targetXAngleFromCenter())));
+            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
     }
 
 
@@ -131,8 +131,12 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
         
         if (manualOverride || climbTime)  {
-            Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
-            Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
+            double bruh = -(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) * 0.00001;
+            double bruh2 = (Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.00001;
+            if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY(), Robot.xboxcontroller.getLeftY() + bruh);
+            else Robot.superClimber.runBothExtendersPower(0, 0);
+            if(Math.abs(Robot.xboxcontroller.getRightY()) > 0.1)Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY(), Robot.xboxcontroller.getRightY() + bruh2);
+            else Robot.superClimber.runBothExtendersPower(0, 0);
         }
     }
 

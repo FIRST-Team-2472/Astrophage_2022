@@ -12,7 +12,7 @@ public class ShuffleBoard {
 
 
     private NetworkTableEntry exLimitL, exLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
-     roEcoderR, drEcoderL, drEcoderR, IMU_X, IMU_Y, IMU_Z, pressure, shEcoder, actionNameP, actionNameD,
+     roEcoderR, drEcoderL, drEcoderR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
      shSpeed, cameraSelection;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
@@ -35,7 +35,6 @@ public class ShuffleBoard {
       roEcoderR = programmerBoard.add("Arm Rotation Right", 0).getEntry(); 
       drEcoderL = programmerBoard.add("Drive Distance Left", 0).getEntry();
       drEcoderR = programmerBoard.add("Drive Distance Right", 0).getEntry(); 
-      shEcoder = programmerBoard.add("Shooter Distance", 0).getEntry(); 
       shSpeed = programmerBoard.add("Shooter Speed", 0).getEntry();
 
       IMU_X = programmerBoard.add("IMU X", 0).getEntry(); 
@@ -61,7 +60,6 @@ public class ShuffleBoard {
       roEcoderR.setNumber(Robot.superClimber.getRotationRAngle());
       drEcoderL.setNumber(Robot.drive.getLeftFeet());
       drEcoderR.setNumber(Robot.drive.getRightFeet());
-      shEcoder.setNumber(Robot.shooter.getFeet());
       shSpeed.setNumber(Robot.shooter.getSpeed());
 
       //IMU

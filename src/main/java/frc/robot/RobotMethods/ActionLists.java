@@ -41,7 +41,7 @@ public class ActionLists
             action.addAction(new FindBar());
             action.addAction(new PullToTilt());
             action.addAction(new ClampOff());
-            action.addAction(new AlignClimber());
+            action.addAction(new ZeroRotations());
             action.addAction(new ClimberIn());
             action.addAction(new ClampOn());
         }
