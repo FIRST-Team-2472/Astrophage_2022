@@ -16,7 +16,7 @@ public class TeleopMethods
     private UsbCamera camera1;
     private UsbCamera camera2;
     private VideoSink server;
-
+    private boolean flipInver = false;
     private ActionQueue teleopActions = new ActionQueue();
     private double driveSpeed = 1;
 
@@ -48,8 +48,21 @@ public class TeleopMethods
         if(Robot.leftJoystick.getRawButton(1)) driveSpeed = 0.5;
         else driveSpeed = 1;
 
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.leftJoystick.getX() *0.5 *driveSpeed);
+        
+    camera1 = CameraServer.startAutomaticCapture(0);
+    camera2 = CameraServer.startAutomaticCapture(1);
 
+    if (Robot.leftJoystick.getRawButtonPressed(3) && flipInvert) {
+      System.out.println("Setting camera 2");
+      server.setSource(camera2);
+      flipInvert = false;
+      Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.leftJoystick.getX() *0.5 *driveSpeed);
+    } else if (Robot.leftJoystick.getRawButtonPressed(3) && !flipInvert) {
+      System.out.println("Setting camera 1");
+      server.setSource(camera1);
+      flipInvert = true;
+      Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * -driveSpeed, Robot.leftJoystick.getX() *0.5 * -driveSpeed);
+    }
     }
 
     public void climb() {
@@ -124,15 +137,5 @@ public class TeleopMethods
     }
 
     public void cameraInversion() {
-    camera1 = CameraServer.startAutomaticCapture(0);
-    camera2 = CameraServer.startAutomaticCapture(1);
 
-    if (Robot.leftJoystick.getRawButtonPressed(3)) {
-      System.out.println("Setting camera 2");
-      server.setSource(camera2);
-    } else if (Robot.leftJoystick.getRawButtonReleased(3)) {
-      System.out.println("Setting camera 1");
-      server.setSource(camera1);
-        
-    }
 }
