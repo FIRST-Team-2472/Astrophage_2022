@@ -10,19 +10,18 @@ import frc.robot.Robot;
 
 public class ShuffleBoard {
 
-    private UsbCamera camera1;
-    private UsbCamera camera2;
+
     private NetworkTableEntry exLimitL, exLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
      roEcoderR, drEcoderL, drEcoderR, IMU_X, IMU_Y, IMU_Z, pressure, shEcoder, actionNameP, actionNameD,
-     shSpeed;
+     shSpeed, cameraSelection;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     public ShuffleBoard() {
 
-      //camera1 = CameraServer.startAutomaticCapture(0);
-      //camera2 = CameraServer.startAutomaticCapture(1);
+
       ShuffleboardTab driverBoard = Shuffleboard.getTab("Driver Board");
       ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
+
         
       //driverBoard.addCamera("camera 1", "camera1", "mjpeg:http://roboRIO-2016-FRC.local:1181/?action=stream");
       //driverBoard.addCamera("camera 2", "camera2", "mjpeg:http://roboRIO-2016-FRC.local:1182/?action=stream");

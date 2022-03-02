@@ -10,11 +10,19 @@ import frc.robot.Miscellaneous.Timer;
 
 public class TeleopMethods 
 {
+    private NetworkTableEntry cameraSelection;
     private boolean manualOverride, breakSwitch, TwoB, climbTime;
     private Timer abortTimer = new Timer(.5);
+    private UsbCamera camera1;
+    private UsbCamera camera2;
+    private VideoSink server;
 
     private ActionQueue teleopActions = new ActionQueue();
     private double driveSpeed = 1;
+
+    cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
+
+    server = CameraServer.getServer();
 
 
     public void init(boolean enabled) {
@@ -113,5 +121,18 @@ public class TeleopMethods
             Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
             Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
         }
+    }
+
+    public void cameraInversion() {
+    camera1 = CameraServer.startAutomaticCapture(0);
+    camera2 = CameraServer.startAutomaticCapture(1);
+
+    if (Robot.leftJoystick.getRawButtonPressed(3)) {
+      System.out.println("Setting camera 2");
+      server.setSource(camera2);
+    } else if (Robot.leftJoystick.getRawButtonReleased(3)) {
+      System.out.println("Setting camera 1");
+      server.setSource(camera1);
+        
     }
 }
