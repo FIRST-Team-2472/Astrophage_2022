@@ -1,5 +1,8 @@
 package frc.robot.RobotMethods;
 
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoSink;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;

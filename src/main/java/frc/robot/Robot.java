@@ -118,6 +118,8 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
+    SmartDashboard.getNumber("Limelight Distance", Robot.limelight.get_distance_in());
+
     teleopMethods.drive();
 
     teleopMethods.shoot();
