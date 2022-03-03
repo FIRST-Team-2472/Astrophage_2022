@@ -15,10 +15,10 @@ public class Constants {
 
     //Climber stuff
     //TODO replace clamp constant vaules
-    public static final int clampLForward = 0;
-    public static final int clampLBackward = 1;
-    public static final int clampRForward = 2;
-    public static final int clampRBackward = 3;
+    public static final int clampLForward = 6;
+    public static final int clampLBackward = 4;
+    public static final int clampRForward = 7;
+    public static final int clampRBackward = 5;
     public static final int climberExL = 14;
     public static final int climberExR = 15;
     public static final int climberRoR = 20;
