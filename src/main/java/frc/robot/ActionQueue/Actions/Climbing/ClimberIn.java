@@ -32,7 +32,7 @@ public class ClimberIn implements Actionable{
     @Override
     public boolean isFinished()
     {
-        if(Robot.superClimber.isTouchingBar()) return true;
+        if(Robot.climberClamp.isFullyClamped()) return true;
         else return false;
     }
 

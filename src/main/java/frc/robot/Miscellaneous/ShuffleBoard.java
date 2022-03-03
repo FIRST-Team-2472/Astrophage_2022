@@ -11,7 +11,7 @@ import frc.robot.Robot;
 public class ShuffleBoard {
 
 
-    private NetworkTableEntry exLimitL, exLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
+    private NetworkTableEntry clLimitL, clLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
      roEcoderR, drEcoderL, drEcoderR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
      shSpeed, cameraSelection;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
@@ -25,8 +25,8 @@ public class ShuffleBoard {
         
       //driverBoard.addCamera("camera 1", "camera1", "mjpeg:http://roboRIO-2016-FRC.local:1181/?action=stream");
       //driverBoard.addCamera("camera 2", "camera2", "mjpeg:http://roboRIO-2016-FRC.local:1182/?action=stream");
-      exLimitL = programmerBoard.add("Touching Bar Left", false).getEntry();
-      exLimitR = programmerBoard.add("Touching Bar Right", false).getEntry();
+      clLimitL = programmerBoard.add("Touching Bar Left", false).getEntry();
+      clLimitR = programmerBoard.add("Touching Bar Right", false).getEntry();
       roLimitL = programmerBoard.add("Left Arm Vertical", false).getEntry();
       roLimitR = programmerBoard.add("Right Arm Vertical", false).getEntry(); 
       exEcoderL = programmerBoard.add("Arm Distance Left", 0).getEntry();
@@ -49,8 +49,8 @@ public class ShuffleBoard {
 
     public void update() {
       //limitSwtiches
-      exLimitL.setBoolean(Robot.superClimber.isTouchingBarLeft());
-      exLimitR.setBoolean(Robot.superClimber.isTouchingBarRight());
+      clLimitL.setBoolean(Robot.climberClamp.isClampedL());
+      clLimitR.setBoolean(Robot.climberClamp.isClampedR());
       roLimitL.setBoolean(Robot.superClimber.isLeftVertical());
       roLimitR.setBoolean(Robot.superClimber.isRightVertical());
 

@@ -30,7 +30,7 @@ import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
   //These declare an instance of a script as a variable and setup the constant talons or other objects.
-  public static ClimberClamp climberClamp = new ClimberClamp(Constants.clampLForward, Constants.clampLBackward, Constants.clampRForward, Constants.clampRBackward);
+  public static ClimberClamp climberClamp = new ClimberClamp(Constants.clampLForward, Constants.clampLBackward, Constants.clampRForward, Constants.clampRBackward, Constants.clawLimitL, Constants.clawLimitR);
   public static SuperClimber superClimber = new SuperClimber(Constants.climberExL, Constants.climberExR, Constants.climberRoL, Constants.climberRoR);
   public static Drive drive = new Drive(Constants.motorBR, Constants.motorFR, Constants.motorBL, Constants.motorFL);
   public static Intake intake = new Intake(Constants.conveyor);

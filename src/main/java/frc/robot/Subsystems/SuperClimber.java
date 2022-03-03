@@ -15,10 +15,10 @@ public class SuperClimber {
   private TalonSRX rotationR;
 
   // TODO need to find a special number
-  private final double encoderToFeet = 1;
-  public final double encoderToDegrees = 1;
-  private final double rotationLimit = 1000000000;
-  private final double extenderLimit = 100000000;
+  private final double encoderToFeet = 300000;
+  public final double encoderToDegrees = 1330000;
+  private final double rotationLimit = -10;
+  private final double extenderLimit = 2;
   private final double KF = 0, KP = 0, KI = 0;
 
 
@@ -117,25 +117,6 @@ public class SuperClimber {
   public double getRotationRAngle() {
     return rotationR.getSelectedSensorPosition() * encoderToDegrees;
   }
-
-  // these methods check if the limit switches on the sadle on being pressed
-  public boolean isTouchingBar() {
-    return isTouchingBarLeft() && isTouchingBarRight();
-  }
-
-  public boolean isTouchingBarLeft() {
-    if (extenderL.getSensorCollection().isFwdLimitSwitchClosed() != 0)
-    return true;
-    else return false;
-  }
-
-  public boolean isTouchingBarRight() {
-    if (extenderR.getSensorCollection().isFwdLimitSwitchClosed() != 0)
-    return true;
-    else return false;
-  }
-
-
   
   public boolean isLeftVertical() {
     return rotationL.getSensorCollection().isRevLimitSwitchClosed();
@@ -151,35 +132,23 @@ public class SuperClimber {
 
   public void zeroRotationEncoders() {
     rotationL.setSelectedSensorPosition(0);
-
-
-    rotationR.setSelectedSensorPosition(0);
-
-  }
-
-  public void zeroExtenderEncoders() {
-    extenderL.setSelectedSensorPosition(0);
-
-
-    extenderR.setSelectedSensorPosition(0);
-
-  }
-
-  private void setUpSoftLimits() {
     rotationL.configForwardSoftLimitEnable(true);
     rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
 
-    extenderR.configForwardSoftLimitEnable(true);
-    extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
-
-    extenderL.configForwardSoftLimitEnable(true);
-    extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
-
+    rotationR.setSelectedSensorPosition(0);
     rotationR.configForwardSoftLimitEnable(true);
     rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
   }
 
+  public void zeroExtenderEncoders() {
+    extenderL.setSelectedSensorPosition(0);
+    extenderR.configForwardSoftLimitEnable(true);
+    extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
 
+    extenderR.setSelectedSensorPosition(0);
+    extenderL.configForwardSoftLimitEnable(true);
+    extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+  }
 
 
 

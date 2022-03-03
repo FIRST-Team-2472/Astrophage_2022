@@ -16,25 +16,29 @@ import frc.robot.Miscellaneous.Timer;
 public class TeleopMethods 
 {
     private NetworkTableEntry cameraSelection;
-    private boolean manualOverride, breakSwitch, TwoB, climbTime;
+    private boolean breakSwitch, TwoB, climbTime, flipInvert;
     private Timer abortTimer = new Timer(.5);
     private UsbCamera camera1;
     private UsbCamera camera2;
     private VideoSink server;
-    private boolean flipInvert = false;
     private ActionQueue teleopActions = new ActionQueue();
     private double driveSpeed = 1;
 
 
 
+
     public void init(boolean enabled) {
+        cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
+
+        server = CameraServer.getServer();
+
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
             teleopActions.addAction(new ZeroRotations());
             Robot.matchTimer.beginMatch();
         }
 
-        manualOverride = false;
+        flipInvert = false;
         breakSwitch = false;
         TwoB = false;
         climbTime = false;
@@ -49,11 +53,6 @@ public class TeleopMethods
     public void drive() {
         if(Robot.leftJoystick.getRawButton(1)) driveSpeed = 0.5;
         else driveSpeed = 1;
-
-        cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
-
-        server = CameraServer.getServer();
-
         
         camera1 = CameraServer.startAutomaticCapture(0);
         camera2 = CameraServer.startAutomaticCapture(1);
@@ -62,19 +61,21 @@ public class TeleopMethods
             System.out.println("Setting camera 2");
             server.setSource(camera2);
             flipInvert = false;
-            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.leftJoystick.getX() *0.5 *driveSpeed);
+            driveSpeed = Math.abs(driveSpeed);
         } else if (Robot.leftJoystick.getRawButtonPressed(3) && !flipInvert) {
             System.out.println("Setting camera 1");
             server.setSource(camera1);
             flipInvert = true;
-            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * -driveSpeed, Robot.leftJoystick.getX() *0.5 * -driveSpeed);
+            driveSpeed = Math.abs(driveSpeed) * -1;
         }
+        
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.rightJoystick.getX() *0.5 *driveSpeed);
     }
 
     public void climb() {
         if (Robot.matchTimer.matchTime() >= 120) climbTime = true;
 
-        if ((manualOverride || climbTime) && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
+        if (climbTime && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
             Robot.actionList.Climb(teleopActions);
     }
 
@@ -134,9 +135,8 @@ public class TeleopMethods
     }
 
     public void manualClimb() {
-        if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
         
-        if (manualOverride || climbTime)  {
+        if (climbTime)  {
             double bruh = -(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) * 0.00001;
             double bruh2 = (Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.00001;
             if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY(), Robot.xboxcontroller.getLeftY() + bruh);

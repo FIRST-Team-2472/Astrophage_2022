@@ -11,7 +11,7 @@ public class ClimberClamp {
 
     private DigitalInput clawLimitL, clawLimitR;
 
-    public ClimberClamp (int clampLForwardID, int clampLBackwardID, int clampRForwardID, int clampRBackwardID)
+    public ClimberClamp (int clampLForwardID, int clampLBackwardID, int clampRForwardID, int clampRBackwardID, int clawLimitLID, int clawLimitRID)
     {
         //Initializes the pistons as, get this, pistons.
         clampL = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM, clampLForwardID, clampLBackwardID);
@@ -22,8 +22,8 @@ public class ClimberClamp {
         
 
         //Limit Switches
-        //clawLimitL = new DigitalInput(clawLimitLID);
-        //clawLimitR = new DigitalInput(clawLimitRID);
+        clawLimitL = new DigitalInput(clawLimitLID);
+        clawLimitR = new DigitalInput(clawLimitRID);
     }
 
     //Hooks the hooks.
