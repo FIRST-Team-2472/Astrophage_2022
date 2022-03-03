@@ -37,8 +37,8 @@ public class ActionLists
             //for a small boi
             //on a small street
             //during a small time
-            action.addAction(new MoveClimberPower(99999));
-            action.addAction(new ExtendAndRotateClimber(99999, 999999));
+            action.addAction(new MoveClimberPower(2));
+            action.addAction(new ExtendAndRotateClimber(2, 2));
             action.addAction(new FindBar());
             action.addAction(new PullToTilt());
             action.addAction(new ClampOff());

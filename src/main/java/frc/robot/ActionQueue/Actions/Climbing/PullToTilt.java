@@ -28,7 +28,7 @@ public class PullToTilt implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if (Math.abs(Robot.imu.getCurrentXAngle()) >= 40) 
+        if (Math.abs(Robot.imu.getCurrentXAngle()) >= 5) 
             return true;
         else return false;
     }

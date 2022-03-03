@@ -162,4 +162,9 @@ public class TestMethods {
 
     Robot.superClimber.runBothExtenders(climberSpeed);
   }
+
+  public void setupClimber() {
+    Robot.superClimber.runExtenderPowerL(Robot.leftJoystick.getY());
+    Robot.superClimber.runExtenderPowerR(Robot.rightJoystick.getY());
+  }
 }

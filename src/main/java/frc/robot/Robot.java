@@ -149,9 +149,9 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "test" mode
   public void testPeriodic() {
-    testMethods.runEverything();
-
-    testMethods.runPneumatics();
+    //testMethods.runEverything();
+    testMethods.setupClimber();
+    //testMethods.runPneumatics();
   }
 
 
