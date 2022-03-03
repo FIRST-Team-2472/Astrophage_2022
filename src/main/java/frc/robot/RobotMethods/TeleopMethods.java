@@ -29,9 +29,13 @@ public class TeleopMethods
 
 
     public void init(boolean enabled) {
-        cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
+        //TODO needs both cameras mounted
+        /*cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
         server = CameraServer.getServer();
+
+        camera1 = CameraServer.startAutomaticCapture(0);
+        camera2 = CameraServer.startAutomaticCapture(1);*/
 
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
@@ -55,8 +59,6 @@ public class TeleopMethods
         if(Robot.leftJoystick.getRawButton(1)) driveSpeed = 0.5;
         else driveSpeed = 1;
         
-        camera1 = CameraServer.startAutomaticCapture(0);
-        camera2 = CameraServer.startAutomaticCapture(1);
 
         if (Robot.leftJoystick.getRawButtonPressed(3) && flipInvert) {
             System.out.println("Setting camera 2");
@@ -127,13 +129,13 @@ public class TeleopMethods
     }
 
     public void seeBall() {
-        if (Robot.leftJoystick.getRawButton(1)) 
+        if (Robot.leftJoystick.getRawButton(2)) 
             Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
     }
 
 
     public void gimmeBall() {
-        if (Robot.rightJoystick.getRawButtonPressed(1))
+        if (Robot.rightJoystick.getRawButtonPressed(2))
             Robot.actionList.LimelightGrab(teleopActions);
     }
 
