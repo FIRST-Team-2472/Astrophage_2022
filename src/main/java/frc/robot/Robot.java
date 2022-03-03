@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -69,7 +70,8 @@ public class Robot extends TimedRobot {
     //declare a default instance of to access FMSInfo
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
-    
+    Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
+    Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
     
     if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(3);

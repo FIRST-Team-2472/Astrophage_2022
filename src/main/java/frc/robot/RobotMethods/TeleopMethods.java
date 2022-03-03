@@ -5,6 +5,7 @@ import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
@@ -81,6 +82,8 @@ public class TeleopMethods
 
     public void shoot() {
         if (Robot.xboxcontroller.getXButton()) {
+            Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
+            Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
             Robot.shooter.runFlyWheelPower(1);
             if(Robot.shooter.getSpeed() < -60000)Robot.intake.runConveyorPower(.5);
         }
