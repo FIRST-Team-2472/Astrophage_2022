@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
     limelight.setPipeLine(0);
 
     //runs the compressor
-    compressor.disable();
+    compressor.enabled();
   }
 
   @Override
@@ -119,17 +119,26 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
-    teleopMethods.drive();
+    if(leftJoystick.getRawButtonPressed(5)) climberClamp.engageClamps();
+    if(leftJoystick.getRawButtonPressed(6)) climberClamp.disengageClamps();
+    
+    //if(leftJoystick.getRawButton(3)) superClimber.runBothExtendersPower(.2, .2);
+    //else superClimber.runBothExtendersPower(0, 0);
+    if(leftJoystick.getRawButton(3)) superClimber.runBothRotationsPower(0.4, 0.4);
+    else if(leftJoystick.getRawButton(4)) superClimber.runBothRotationsPower(-.4, -.4);
+    else superClimber.runBothRotationsPower(0, 0);
+    superClimber.runBothExtendersPower(leftJoystick.getY(), leftJoystick.getY());
+    //teleopMethods.drive();
 
-    teleopMethods.shoot();
+    //teleopMethods.shoot();
 
-    teleopMethods.convey();
+    //teleopMethods.convey();
 
     //teleopMethods.gimmeBall();
 
-    teleopMethods.manualClimb();
+    //teleopMethods.manualClimb();
 
-    teleopMethods.seeBall();
+    //teleopMethods.seeBall();
 
     //teleopMethods.autoStop();
 

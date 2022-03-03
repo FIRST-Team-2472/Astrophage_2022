@@ -20,7 +20,8 @@ public class TeleopMethods
     public void init(boolean enabled) {
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
-            teleopActions.addAction(new ZeroRotations());
+            Robot.superClimber.zeroRotationEncoders();
+            //teleopActions.addAction(new ZeroRotations());
             Robot.matchTimer.beginMatch();
         }
 

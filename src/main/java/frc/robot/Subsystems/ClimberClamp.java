@@ -17,8 +17,8 @@ public class ClimberClamp {
         clampL = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM, clampLForwardID, clampLBackwardID);
         clampR = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM, clampRForwardID, clampRBackwardID);
 
-        clampL.set(Value.kReverse);
-        clampR.set(Value.kReverse);
+        clampL.set(Value.kOff);
+        clampR.set(Value.kOff);
         
 
         //Limit Switches
@@ -26,6 +26,11 @@ public class ClimberClamp {
         //clawLimitR = new DigitalInput(clawLimitRID);
     }
 
+    public void engageClamps()
+    {
+        engageClampL();
+        engageClampR();
+    }
     //Unhooks the hooks.
     public void disengageClamps()
     {

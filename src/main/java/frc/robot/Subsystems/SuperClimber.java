@@ -15,10 +15,10 @@ public class SuperClimber {
   private TalonSRX rotationR;
 
   // TODO need to find a special number
-  private final double encoderToFeet = 1;
-  public final double encoderToDegrees = 1;
-  private final double rotationLimit = 1000000000;
-  private final double extenderLimit = 100000000;
+  private final double encoderToFeet = 300000;
+  public final double encoderToDegrees = 1330000;
+  private final double rotationLimit = -10;
+  private final double extenderLimit = 2;
   private final double KF = 0, KP = 0, KI = 0;
 
 
@@ -39,7 +39,7 @@ public class SuperClimber {
     rotationL.setInverted(true);
     rotationR.setInverted(true);
 
-
+    //setupSoftLimits();
     // limit Switches
     rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
     rotationR.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -47,11 +47,11 @@ public class SuperClimber {
   }
 
   public void runTargetExtenderL(double feet) {
-    extenderL.set(ControlMode.MotionMagic, feet / encoderToFeet );
+    extenderL.set(ControlMode.MotionMagic, feet * encoderToFeet );
   }
 
   public void runTargetExtenderR(double feet) {
-    extenderR.set(ControlMode.MotionMagic, feet / encoderToFeet);
+    extenderR.set(ControlMode.MotionMagic, feet * encoderToFeet);
   }
 
   public void runBothExtendersTarget(double feet) {
@@ -60,11 +60,11 @@ public class SuperClimber {
   }
 
   public void runTargetRotationL(double angle) {
-    rotationL.set(ControlMode.MotionMagic, angle / encoderToDegrees);
+    rotationL.set(ControlMode.MotionMagic, angle * encoderToDegrees);
   }
 
   public void runTargetRotationR(double angle) {
-    rotationR.set(ControlMode.MotionMagic, angle / encoderToDegrees);
+    rotationR.set(ControlMode.MotionMagic, angle * encoderToDegrees);
   }
 
   public void runBothRotationsTarget(double angle) {
@@ -101,21 +101,21 @@ public class SuperClimber {
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
-    return -extenderL.getSelectedSensorPosition() * encoderToFeet;
+    return -extenderL.getSelectedSensorPosition();
   }
 
   public double getExtenderRHeight() {
-    return -extenderR.getSelectedSensorPosition() * encoderToFeet;
+    return -extenderR.getSelectedSensorPosition();
   }    
 
 
   //these methods get the rotaion (in degrees) of the climbers based upon encoder values and a predetermined encoder to degrees ratio
   public double getRotationLAngle() {
-    return rotationL.getSelectedSensorPosition() * encoderToDegrees;
+    return rotationL.getSelectedSensorPosition();
   }
 
   public double getRotationRAngle() {
-    return rotationR.getSelectedSensorPosition() * encoderToDegrees;
+    return rotationR.getSelectedSensorPosition();
   }
 
   // these methods check if the limit switches on the sadle on being pressed
@@ -147,23 +147,30 @@ public class SuperClimber {
 
   public void zeroRotationEncoders() {
     rotationL.setSelectedSensorPosition(0);
-    //TODO need to set up soft limits when get gud
-    //rotationL.configForwardSoftLimitEnable(true);
-    //rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
 
     rotationR.setSelectedSensorPosition(0);
-    //rotationR.configForwardSoftLimitEnable(true);
-    //rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+
   }
 
   public void zeroExtenderEncoders() {
     extenderL.setSelectedSensorPosition(0);
-    //extenderL.configForwardSoftLimitEnable(true);
-    //extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
 
     extenderR.setSelectedSensorPosition(0);
-    //extenderR.configForwardSoftLimitEnable(true);
-    //extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+
+  }
+
+  public void setupSoftLimits() {
+    rotationL.configForwardSoftLimitEnable(true);
+    rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+
+    rotationR.configForwardSoftLimitEnable(true);
+    rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+
+    extenderL.configForwardSoftLimitEnable(true);
+    extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+
+    extenderR.configForwardSoftLimitEnable(true);
+    extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
   }
 
 
