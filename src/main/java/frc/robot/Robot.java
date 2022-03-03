@@ -72,8 +72,8 @@ public class Robot extends TimedRobot {
     
     
     if (getTeamColor.getBoolean(true)) 
-      limelight.setPipeLine(0);
-    else limelight.setPipeLine(3);
+      limelight.setPipeLine(3);
+    else limelight.setPipeLine(0);
 
     //runs the compressor
     compressor.enabled();
@@ -118,7 +118,6 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
-    SmartDashboard.getNumber("Limelight Distance", Robot.limelight.get_distance_in());
 
     teleopMethods.drive();
 
@@ -126,7 +125,7 @@ public class Robot extends TimedRobot {
 
     teleopMethods.convey();
 
-    //teleopMethods.gimmeBall();
+    teleopMethods.gimmeBall();
 
     teleopMethods.manualClimb();
 

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Robot;
+import frc.robot.Sensors.limelight;
 
 
 public class ShuffleBoard {
@@ -13,7 +14,7 @@ public class ShuffleBoard {
 
     private NetworkTableEntry clLimitL, clLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
      roEcoderR, drEcoderL, drEcoderR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
-     shSpeed, cameraSelection;
+     shSpeed, cameraSelection, limelightDistance;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     public ShuffleBoard() {
@@ -36,6 +37,7 @@ public class ShuffleBoard {
       drEcoderL = programmerBoard.add("Drive Distance Left", 0).getEntry();
       drEcoderR = programmerBoard.add("Drive Distance Right", 0).getEntry(); 
       shSpeed = programmerBoard.add("Shooter Speed", 0).getEntry();
+      limelightDistance = programmerBoard.add("Limelight Distance", 0).getEntry();
 
 
       IMU_X = programmerBoard.add("IMU X", 0).getEntry(); 
@@ -62,6 +64,9 @@ public class ShuffleBoard {
       drEcoderL.setNumber(Robot.drive.getLeftFeet());
       drEcoderR.setNumber(Robot.drive.getRightFeet());
       shSpeed.setNumber(Robot.shooter.getSpeed());
+
+      //Limelight
+      limelightDistance.setNumber(Robot.limelight.get_distance_in());
 
       //IMU
       IMU_X.setNumber(Robot.imu.getCurrentXAngle());
