@@ -14,12 +14,8 @@ public class CenteringLimelight implements Actionable {
 
 	@Override
 	public void periodic() {
-<<<<<<< Updated upstream
-		if (Robot.limelight.targetXAngleFromCenter() >= -0.5) {
-=======
 		
 		if (Robot.limelight.targetXAngleFromCenter() <= -1) {
->>>>>>> Stashed changes
 			Robot.drive.runRight(limelightCorrection * Robot.limelight.targetXAngleFromCenter());
 		}
 		else if (Robot.limelight.targetXAngleFromCenter() >= 1) {

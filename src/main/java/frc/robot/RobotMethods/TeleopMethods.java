@@ -1,8 +1,10 @@
 package frc.robot.RobotMethods;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
@@ -19,13 +21,10 @@ public class TeleopMethods
     private UsbCamera camera1;
     private UsbCamera camera2;
     private VideoSink server;
-    private boolean flipInver = false;
+    private boolean flipInvert = false;
     private ActionQueue teleopActions = new ActionQueue();
     private double driveSpeed = 1;
 
-    cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
-
-    server = CameraServer.getServer();
 
 
     public void init(boolean enabled) {
@@ -50,6 +49,10 @@ public class TeleopMethods
     public void drive() {
         if(Robot.leftJoystick.getRawButton(1)) driveSpeed = 0.5;
         else driveSpeed = 1;
+
+        cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
+
+        server = CameraServer.getServer();
 
         
         camera1 = CameraServer.startAutomaticCapture(0);
@@ -142,7 +145,4 @@ public class TeleopMethods
             else Robot.superClimber.runBothExtendersPower(0, 0);
         }
     }
-
-    public void cameraInversion() {
-
 }

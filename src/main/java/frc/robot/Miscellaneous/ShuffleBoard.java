@@ -37,6 +37,7 @@ public class ShuffleBoard {
       drEcoderR = programmerBoard.add("Drive Distance Right", 0).getEntry(); 
       shSpeed = programmerBoard.add("Shooter Speed", 0).getEntry();
 
+
       IMU_X = programmerBoard.add("IMU X", 0).getEntry(); 
       IMU_Y = programmerBoard.add("IMU Y", 0).getEntry();
       IMU_Z = programmerBoard.add("IMU Z", 0).getEntry(); 
