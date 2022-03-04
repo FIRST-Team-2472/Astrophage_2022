@@ -82,7 +82,7 @@ public class limelight {
         double targetAngle = targetYAngleFromCenter();
         double cameraHeight = 36;
         double targetHeight = 9;
-        double cameraAngle = -15;
+        double cameraAngle = -22.1;
         double d = (targetHeight-cameraHeight) / (Math.tan(Math.toRadians(cameraAngle+targetAngle)));
         //The equation: d = (h2-h1) / tan(a1+a2)
         return d;

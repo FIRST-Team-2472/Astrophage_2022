@@ -27,7 +27,5 @@ public class IMU {
         return (int)pigeon.getRoll();
     }
 
-    public void zero() {
-    }
 }
 

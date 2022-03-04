@@ -166,5 +166,7 @@ public class TestMethods {
   public void setupClimber() {
     Robot.superClimber.runExtenderPowerL(Robot.leftJoystick.getY());
     Robot.superClimber.runExtenderPowerR(Robot.rightJoystick.getY());
+    Robot.superClimber.runRotationPowerL(Robot.xboxcontroller.getLeftY());
+    Robot.superClimber.runRotationPowerR(Robot.xboxcontroller.getRightY());
   }
 }

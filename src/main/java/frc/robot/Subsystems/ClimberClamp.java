@@ -94,11 +94,11 @@ public class ClimberClamp {
 
     //Returns if the left hook being hooked.
     public boolean isClampedL() {
-        return clawLimitL.get();
+        return !clawLimitL.get();
     }
     
     //Returns if the right hook being hooked.
     public boolean isClampedR() {
-        return clawLimitR.get();
+        return !clawLimitR.get();
     }
 }

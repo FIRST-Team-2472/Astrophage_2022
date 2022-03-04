@@ -17,8 +17,8 @@ public class SuperClimber {
   // TODO need to find a special number
   private final double encoderToFeet = 300000;
   public final double encoderToDegrees = 1330000;
-  private final double rotationLimit = -10;
-  private final double extenderLimit = 2;
+  private final double rotationLimit = 1330000;
+  private final double extenderLimit = -100000;
   private final double KF = 0, KP = 0, KI = 0;
 
 
@@ -101,21 +101,21 @@ public class SuperClimber {
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
-    return -extenderL.getSelectedSensorPosition() * encoderToFeet;
+    return -extenderL.getSelectedSensorPosition();
   }
 
   public double getExtenderRHeight() {
-    return -extenderR.getSelectedSensorPosition() * encoderToFeet;
+    return -extenderR.getSelectedSensorPosition();
   }    
 
 
   //these methods get the rotaion (in degrees) of the climbers based upon encoder values and a predetermined encoder to degrees ratio
   public double getRotationLAngle() {
-    return rotationL.getSelectedSensorPosition() * encoderToDegrees;
+    return rotationL.getSelectedSensorPosition();
   }
 
   public double getRotationRAngle() {
-    return rotationR.getSelectedSensorPosition() * encoderToDegrees;
+    return rotationR.getSelectedSensorPosition();
   }
   
   public boolean isLeftVertical() {
@@ -133,21 +133,21 @@ public class SuperClimber {
   public void zeroRotationEncoders() {
     rotationL.setSelectedSensorPosition(0);
     rotationL.configForwardSoftLimitEnable(true);
-    rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+    rotationL.configForwardSoftLimitThreshold(rotationLimit);
 
     rotationR.setSelectedSensorPosition(0);
     rotationR.configForwardSoftLimitEnable(true);
-    rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+    rotationR.configForwardSoftLimitThreshold(rotationLimit);
   }
 
   public void zeroExtenderEncoders() {
     extenderL.setSelectedSensorPosition(0);
-    extenderR.configForwardSoftLimitEnable(true);
-    extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+    extenderL.configReverseSoftLimitEnable(true);
+    extenderL.configReverseSoftLimitThreshold(extenderLimit);
 
     extenderR.setSelectedSensorPosition(0);
-    extenderL.configForwardSoftLimitEnable(true);
-    extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+    extenderR.configReverseSoftLimitEnable(true);
+    extenderR.configReverseSoftLimitThreshold(extenderLimit);
   }
 
 
