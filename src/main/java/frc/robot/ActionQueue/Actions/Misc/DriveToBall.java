@@ -12,8 +12,6 @@ public class DriveToBall implements Actionable {
     public void startAction() 
     {
         //-1 * (limelightkP * Robot.limelight.targetXAngleFromCenter()));
-
-        
     }
 
     @Override
