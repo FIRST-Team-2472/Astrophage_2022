@@ -7,7 +7,7 @@ public class ExtendAndRotateClimber implements Actionable{
     ActionDump dump = new ActionDump();
     
     public ExtendAndRotateClimber(double feet, double angle) {
-        dump.addAction(new MoveClimber(feet));
+        dump.addAction(new MoveClimberPower(feet));
         dump.addAction(new RotateClimber(angle));
     }
 

@@ -14,19 +14,20 @@ public class Constants {
     public static final int xboxcontroller = 2;
 
     //Climber stuff
-    public static final int clamp1Forward = 42;
-    public static final int clamp1Backward = 42;
-    public static final int clamp2Forward = 42;
-    public static final int clamp2Backward = 42;
-    public static final int climberEx1 = 14;
-    public static final int climberEx2 = 15;
-    public static final int climberRo1 = 20;
-    public static final int climberRo2 = 22;
+    //TODO replace clamp constant vaules
+    public static final int clampLForward = 6;
+    public static final int clampLBackward = 4;
+    public static final int clampRForward = 7;
+    public static final int clampRBackward = 5;
+    public static final int climberExL = 14;
+    public static final int climberExR = 15;
+    public static final int climberRoR = 20;
+    public static final int climberRoL = 22;
     public static final int COMPRESSOR = 1;
 
     //Limit switches
-    public static final int clawLimitL = 69;
-    public static final int clawLimitR = 69;
+    public static final int clawLimitL = 0;
+    public static final int clawLimitR = 1;
 
     // IMU/gyroscope
     public static final int pigeonID = 2;

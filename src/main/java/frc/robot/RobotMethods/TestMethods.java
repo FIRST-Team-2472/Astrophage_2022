@@ -50,8 +50,8 @@ public class TestMethods {
   public void runEverything() {
     leftRotationLSSB.setBoolean(Robot.superClimber.isLeftVertical());
     rightRotationLSSB.setBoolean(Robot.superClimber.isRightVertical());
-    leftSadleLSSB.setBoolean(Robot.superClimber.isTouchingBarLeft());
-    rightSadleLSSB.setBoolean(Robot.superClimber.isTouchingBarRight());
+    leftSadleLSSB.setBoolean(Robot.climberClamp.isClampedL());
+    rightSadleLSSB.setBoolean(Robot.climberClamp.isClampedR());
     leftClawLSSB.setBoolean(Robot.climberClamp.isClampedL());
     rightClawLSSB.setBoolean(Robot.climberClamp.isClampedR());
 
@@ -161,5 +161,12 @@ public class TestMethods {
     else climberSpeed+=baseSpeed;
 
     Robot.superClimber.runBothExtenders(climberSpeed);
+  }
+
+  public void setupClimber() {
+    Robot.superClimber.runExtenderPowerL(Robot.leftJoystick.getY());
+    Robot.superClimber.runExtenderPowerR(Robot.rightJoystick.getY());
+    Robot.superClimber.runRotationPowerL(Robot.xboxcontroller.getLeftY());
+    Robot.superClimber.runRotationPowerR(Robot.xboxcontroller.getRightY());
   }
 }

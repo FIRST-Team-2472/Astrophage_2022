@@ -8,10 +8,9 @@ public class EndDriveToBall extends TimerBase
 
 
 
-    public EndDriveToBall() 
+    public EndDriveToBall(double seconds) 
     {
-        super(1);
-
+        super(seconds);
     }
 
     @Override

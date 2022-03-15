@@ -9,15 +9,12 @@ public class IMU {
     //Initializes the gyroscope (pigeon) as a gyroscope
     public IMU (int pigeonID) {
         pigeon = new PigeonIMU(pigeonID);
+        pigeon.configFactoryDefault();
     }
 
     public int getCurrentXAngle() {
-        //a testament to the lost ages\
-        //TODO outdated
-        PigeonIMU.FusionStatus fusionStatus = new PigeonIMU.FusionStatus();
-        pigeon.getFusedHeading(fusionStatus);
-        double currentXAngle = fusionStatus.heading;
-        return (int)currentXAngle;
+
+        return (int)pigeon.getYaw();
     }
 
     //Grabs the Y-Angle
@@ -29,5 +26,6 @@ public class IMU {
     public int getCurrentZAngle() {
         return (int)pigeon.getRoll();
     }
+
 }
 

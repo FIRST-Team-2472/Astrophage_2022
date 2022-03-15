@@ -9,11 +9,8 @@ public class ActionLists
     //What the robot does in the first 15 seconds of autonomous
     public void InitialAutonomous(ActionQueue action)
     {
-        action.addAction(new ZeroRotations());
-        action.addAction(new DriveToBall());
-        action.addAction(new EndDriveToBall());
-        action.addAction(new DriveStraightFeet(10));
         action.addAction(new ShootBall(2));
+        action.addAction(new DriveStraightTime(-0.5, 4));
     }
 
     //If the drivers decide that driving is too hard.
@@ -28,23 +25,30 @@ public class ActionLists
     {
         action.addAction(new CenteringLimelight());
         action.addAction(new DriveToBall());
+        action.addAction(new DriveStraightTime(0.2,3));
     }
+    
 
-    //What the robot does when it's time to climb the monkey bars.
+    ////What the robot does when it's time to climb the monkey bars.
     public void Climb(ActionQueue action) {
-        action.addAction(new MoveClimber(9999));
-        action.addAction(new ClimberIn());
         action.addAction(new ClampOn());
         for (int i = 0; i < 2; i++) {
             //small
-            action.addAction(new MoveClimber(99999));
-            action.addAction(new ExtendAndRotateClimber(99999, 999999));
+            //for a small boi
+            //on a small street
+            //during a small time
+            action.addAction(new MoveClimberPower(2));
+            action.addAction(new ExtendAndRotateClimber(2, 2));
             action.addAction(new FindBar());
             action.addAction(new PullToTilt());
             action.addAction(new ClampOff());
-            action.addAction(new AlignClimber());
+            action.addAction(new ZeroRotations());
             action.addAction(new ClimberIn());
             action.addAction(new ClampOn());
         }
+    }
+
+    public void ClimbTest(ActionQueue action){
+        action.addAction(new MoveClimberPower(2));
     }
 }

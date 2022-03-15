@@ -1,8 +1,14 @@
 package frc.robot.RobotMethods;
 
-
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoSink;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
+import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 import frc.robot.Miscellaneous.Timer;
 
@@ -10,46 +16,92 @@ import frc.robot.Miscellaneous.Timer;
 
 public class TeleopMethods 
 {
-    private boolean manualOverride, breakSwitch, TwoB, climbTime;
+    private NetworkTableEntry cameraSelection;
+    private boolean breakSwitch, TwoB, climbTime, flipInvert;
     private Timer abortTimer = new Timer(.5);
-
+    private UsbCamera camera1;
+    private UsbCamera camera2;
+    private VideoSink server;
     private ActionQueue teleopActions = new ActionQueue();
+    private double driveSpeed = 1;
+
+
 
 
     public void init(boolean enabled) {
+        //TODO needs both cameras mounted
+        /*cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
+
+        server = CameraServer.getServer();
+
+        camera1 = CameraServer.startAutomaticCapture(0);
+        camera2 = CameraServer.startAutomaticCapture(1);*/
+
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
+            teleopActions.addAction(new ZeroRotations());
             Robot.matchTimer.beginMatch();
         }
 
-        manualOverride = false;
+        flipInvert = false;
         breakSwitch = false;
         TwoB = false;
         climbTime = false;
     }
 
+    public void update()
+    {
+        teleopActions.step();
+    }
+
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        Robot.drive.arcadeDrive(Robot.leftJoystick.getY(), Robot.rightJoystick.getX());
+        if(Robot.leftJoystick.getRawButton(1)) driveSpeed = 0.5;
+        else driveSpeed = 1;
+        
+
+        if (Robot.leftJoystick.getRawButtonPressed(3) && flipInvert) {
+            System.out.println("Setting camera 2");
+            server.setSource(camera2);
+            flipInvert = false;
+            driveSpeed = Math.abs(driveSpeed);
+        } else if (Robot.leftJoystick.getRawButtonPressed(3) && !flipInvert) {
+            System.out.println("Setting camera 1");
+            server.setSource(camera1);
+            flipInvert = true;
+            driveSpeed = Math.abs(driveSpeed) * -1;
+        }
+        
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.rightJoystick.getX() *0.5 *driveSpeed);
     }
 
     public void climb() {
         if (Robot.matchTimer.matchTime() >= 120) climbTime = true;
 
-        if ((manualOverride || climbTime) && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
+        if (climbTime && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
             Robot.actionList.Climb(teleopActions);
     }
 
     public void shoot() {
         if (Robot.xboxcontroller.getXButton()) {
+            Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
+            Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
             Robot.shooter.runFlyWheelPower(1);
-            Robot.intake.runConveyorPower(.5);
-        } else {
+            if(Robot.shooter.getSpeed() < -60000)Robot.intake.runConveyorPower(.5);
+        }
+        if(Robot.xboxcontroller.getXButtonReleased()) {
             Robot.shooter.runFlyWheelPower(0);
             Robot.intake.runConveyorPower(0);
         }
     }
 
+    public void convey() {
+        if (Robot.xboxcontroller.getAButton()) Robot.intake.runConveyorPower(0.5);
+        if (Robot.xboxcontroller.getAButtonReleased()) Robot.intake.runConveyorPower(0);
+        if (Robot.xboxcontroller.getRightBumper()) Robot.intake.runConveyorPower(-0.5);
+        if (Robot.xboxcontroller.getRightBumperReleased()) Robot.intake.runConveyorPower(0);
+    }
+    
     public void autoStop() {
         if (Robot.xboxcontroller.getYButtonPressed()) {
             if (!breakSwitch) {
@@ -77,22 +129,25 @@ public class TeleopMethods
     }
 
     public void seeBall() {
-        if (Robot.leftJoystick.getRawButton(1)) 
-            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-1 * (0.02 * Robot.limelight.targetXAngleFromCenter())));
+        if (Robot.leftJoystick.getRawButton(2)) 
+            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
     }
 
 
     public void gimmeBall() {
-        if (Robot.rightJoystick.getRawButtonPressed(1))
+        if (Robot.rightJoystick.getRawButtonPressed(2))
             Robot.actionList.LimelightGrab(teleopActions);
     }
 
     public void manualClimb() {
-        if (Robot.xboxcontroller.getStartButtonPressed()) manualOverride = true;
-
-        if ((manualOverride || climbTime) && breakSwitch)  {
-            Robot.superClimber.runBothExtenders(Robot.xboxcontroller.getLeftY());
-            Robot.superClimber.runBothRotations(Robot.xboxcontroller.getRightX());
-        }
+        
+        //if (climbTime)  {
+            double bruh = -(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) * 0.000001;
+            double bruh2 = 0;//-(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.000001;
+            if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY(), Robot.xboxcontroller.getLeftY() + bruh);
+            else Robot.superClimber.runBothExtendersPower(0, 0);
+            if(Math.abs(Robot.xboxcontroller.getRightY()) > 0.1)Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY(), Robot.xboxcontroller.getRightY() + bruh2);
+            else Robot.superClimber.runBothRotationsPower(0, 0);
+        //}
     }
 }

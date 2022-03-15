@@ -16,7 +16,7 @@ public class Drive {
     private TalonFX leftSlave;
 
     // TODO find speical number
-    private double countToFeet = 00000000000;
+    private double countToFeet = 1;
     private double KP = 0, KF = 0, KI = 0;
 
     // Assigns IDs talons to hand instructions to dum kopf motors
@@ -27,6 +27,9 @@ public class Drive {
         leftMaster = new TalonFX(frontLeftID);
         leftSlave = new TalonFX(backLeftID);
 
+        setUpMotionMagicFX(leftMaster, KF, KP, KI);
+        setUpMotionMagicFX(rightMaster, KF, KP, KI);
+
         rightMaster.setInverted(false);
         leftMaster.setInverted(true);
 
@@ -36,8 +39,7 @@ public class Drive {
         leftSlave.follow(leftMaster);
         leftSlave.setInverted(InvertType.FollowMaster);
 
-        setUpMotionMagicFX(leftMaster, KF, KP, KI);
-        setUpMotionMagicFX(rightMaster, KF, KP, KI);
+
 
     }
 

@@ -7,8 +7,6 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-
 public class SuperClimber {
   private TalonFX extenderL;
   private TalonFX extenderR;
@@ -17,24 +15,30 @@ public class SuperClimber {
   private TalonSRX rotationR;
 
   // TODO need to find a special number
-  private final double encoderToFeet = 1000;
-  public final double encoderToDegrees = 1001;
-  private final double rotationLimit = 1002;
-  private final double extenderLimit = 1002;
+  private final double encoderToFeet = 300000;
+  public final double encoderToDegrees = 1330000;
+  private final double rotationLimit = 1330000;
+  private final double extenderLimit = -100000;
   private final double KF = 0, KP = 0, KI = 0;
 
 
-  public SuperClimber(int extendo1ID, int extendo2ID, int rotato1ID, int rotato2ID) {
-    extenderL = new TalonFX(extendo1ID);
-    extenderR = new TalonFX(extendo2ID);
+  public SuperClimber(int extenderLID, int extenderRID, int rotationLID, int rotationRID) {
+    extenderL = new TalonFX(extenderLID);
+    extenderR = new TalonFX(extenderRID);
 
-    rotationL = new TalonSRX(rotato1ID);
-    rotationR = new TalonSRX(rotato2ID);
+    rotationL = new TalonSRX(rotationLID);
+    rotationR = new TalonSRX(rotationRID);
 
     setUpMotionMagicFX(extenderL, KF, KP, KI);
     setUpMotionMagicFX(extenderR, KF, KP, KI);
     setUpMotionMagicSRX(rotationL, KF, KP, KI);
     setUpMotionMagicSRX(rotationR, KF, KP, KI);
+
+    extenderL.setInverted(true);
+    extenderR.setInverted(true);
+    rotationL.setInverted(true);
+    rotationR.setInverted(true);
+
 
     // limit Switches
     rotationL.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -97,71 +101,54 @@ public class SuperClimber {
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
-    return extenderL.getSelectedSensorPosition() * encoderToFeet;
+    return -extenderL.getSelectedSensorPosition();
   }
 
   public double getExtenderRHeight() {
-    return extenderR.getSelectedSensorPosition() * encoderToFeet;
+    return -extenderR.getSelectedSensorPosition();
   }    
 
 
   //these methods get the rotaion (in degrees) of the climbers based upon encoder values and a predetermined encoder to degrees ratio
   public double getRotationLAngle() {
-    return rotationL.getSelectedSensorPosition() * encoderToDegrees;
+    return rotationL.getSelectedSensorPosition();
   }
 
   public double getRotationRAngle() {
-    return rotationR.getSelectedSensorPosition() * encoderToDegrees;
+    return rotationR.getSelectedSensorPosition();
   }
-
-  // these methods check if the limit switches on the sadle on being pressed
-  public boolean isTouchingBar() {
-    return isTouchingBarLeft() && isTouchingBarRight();
-  }
-
-  public boolean isTouchingBarLeft() {
-    if (extenderL.getSensorCollection().isFwdLimitSwitchClosed() != 0)
-    return true;
-    else return false;
-  }
-
-  public boolean isTouchingBarRight() {
-    if (extenderR.getSensorCollection().isFwdLimitSwitchClosed() != 0)
-    return true;
-    else return false;
-  }
-
-
   
   public boolean isLeftVertical() {
-    return rotationL.getSensorCollection().isFwdLimitSwitchClosed();
+    return rotationL.getSensorCollection().isRevLimitSwitchClosed();
   }
 
   public boolean isRightVertical() {
-    return rotationR.getSensorCollection().isFwdLimitSwitchClosed();
+    return rotationR.getSensorCollection().isRevLimitSwitchClosed();
+  }
+
+  public boolean isVertical(){
+    return isLeftVertical() && isRightVertical();
   }
 
   public void zeroRotationEncoders() {
     rotationL.setSelectedSensorPosition(0);
     rotationL.configForwardSoftLimitEnable(true);
-    rotationL.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+    rotationL.configForwardSoftLimitThreshold(rotationLimit);
 
     rotationR.setSelectedSensorPosition(0);
     rotationR.configForwardSoftLimitEnable(true);
-    rotationR.configForwardSoftLimitThreshold(rotationLimit * encoderToDegrees);
+    rotationR.configForwardSoftLimitThreshold(rotationLimit);
   }
 
   public void zeroExtenderEncoders() {
     extenderL.setSelectedSensorPosition(0);
-    extenderL.configForwardSoftLimitEnable(true);
-    extenderL.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+    extenderL.configReverseSoftLimitEnable(true);
+    extenderL.configReverseSoftLimitThreshold(extenderLimit);
 
     extenderR.setSelectedSensorPosition(0);
-    extenderR.configForwardSoftLimitEnable(true);
-    extenderR.configForwardSoftLimitThreshold(extenderLimit * encoderToFeet);
+    extenderR.configReverseSoftLimitEnable(true);
+    extenderR.configReverseSoftLimitThreshold(extenderLimit);
   }
-
-
 
 
 
@@ -228,5 +215,31 @@ public class SuperClimber {
 
     // Zero the sensor once on robot boot up
     motor.setSelectedSensorPosition(0, 0, 30);
+  }
+
+  public void runExtenderPowerL(double speed) {
+    extenderL.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void runExtenderPowerR(double speed) {
+    extenderR.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void runBothExtendersPower(double speedL, double speedR) {
+    runExtenderPowerL(speedL *0.4);
+    runExtenderPowerR(speedR* 0.4);
+  }
+
+  public void runRotationPowerL(double speed) {
+    rotationL.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void runRotationPowerR(double speed) {
+    rotationR.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void runBothRotationsPower(double speedL, double speedR) {
+    runRotationPowerL(speedL);
+    runRotationPowerR(speedR);
   }
 }
