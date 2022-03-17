@@ -17,8 +17,8 @@ public class ClimberClamp {
         clampL = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM, clampLForwardID, clampLBackwardID);
         clampR = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM, clampRForwardID, clampRBackwardID);
 
-        clampL.set(Value.kReverse);
-        clampR.set(Value.kReverse);
+       // clampL.set(Value.kReverse);
+        //clampR.set(Value.kReverse);
         
 
         //Limit Switches

@@ -164,9 +164,13 @@ public class TestMethods {
   }
 
   public void setupClimber() {
-    Robot.superClimber.runExtenderPowerL(Robot.leftJoystick.getY());
-    Robot.superClimber.runExtenderPowerR(Robot.rightJoystick.getY());
-    Robot.superClimber.runRotationPowerL(Robot.xboxcontroller.getLeftY());
-    Robot.superClimber.runRotationPowerR(Robot.xboxcontroller.getRightY());
+    if (Math.abs(Robot.leftJoystick.getY()) > 0.15) Robot.superClimber.runExtenderPowerL(Robot.leftJoystick.getY());
+    else Robot.superClimber.runExtenderPowerL(0);
+    if (Math.abs(Robot.rightJoystick.getY()) > 0.15) Robot.superClimber.runExtenderPowerR(Robot.rightJoystick.getY());
+    else Robot.superClimber.runExtenderPowerR(0);
+    if (Math.abs(Robot.xboxcontroller.getLeftY()) > 0.15) Robot.superClimber.runRotationPowerL(Robot.xboxcontroller.getLeftY());
+    else Robot.superClimber.runRotationPowerL(0);
+    if (Math.abs(Robot.xboxcontroller.getRightY()) > 0.15) Robot.superClimber.runRotationPowerR(Robot.xboxcontroller.getRightY());
+    else Robot.superClimber.runRotationPowerR(0);
   }
 }

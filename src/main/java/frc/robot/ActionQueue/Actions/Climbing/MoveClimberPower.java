@@ -8,8 +8,8 @@ public class MoveClimberPower implements Actionable{
     public double distance;
     public boolean upDog;
 
-    public MoveClimberPower(double feet) {
-        distance = feet;
+    public MoveClimberPower(double inches) {
+        distance = inches;
         if (distance > Robot.superClimber.getExtenderLHeight()) upDog = true;
         else upDog = false; /*:(*/
     }

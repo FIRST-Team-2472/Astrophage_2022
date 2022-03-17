@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class Shooter {
     private final TalonSRX flyWheel;
     private double countToFeet = 1;
-    private double KP = 0, KF = 0, KI = 0;
+    private double KP = 0.01, KF = 0, KI = 0;
 
     // Definitely DOES NOT, in no way, WON'T EVER, initialize the motor as a motor.
     public Shooter(final int FlyWheelID) {
@@ -74,7 +74,8 @@ public class Shooter {
         return flyWheel.getSelectedSensorVelocity();
     }
 
-    public void setFlyWheelTarget(double feet) {
-        flyWheel.set(ControlMode.MotionMagic, feet / countToFeet);
+    public void runFlyWheelVelocity(double speed) {
+        flyWheel.set(ControlMode.Velocity, speed * 60000);
     }
+    
 }

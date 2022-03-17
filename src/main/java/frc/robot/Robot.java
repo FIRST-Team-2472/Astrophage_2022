@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
 
     //actionList.InitialAutonomous(autoActions);
     actionList.ClimbTest(autoActions);
-    
+
     matchTimer.beginMatch();
     enabled = true;
 
@@ -126,7 +126,7 @@ public class Robot extends TimedRobot {
 
     teleopMethods.manualClimb();
 
-    //teleopMethods.seeBall();
+    teleopMethods.seeBall();
 
     //teleopMethods.autoStop();
 
@@ -149,6 +149,8 @@ public class Robot extends TimedRobot {
     //testMethods.runEverything();
     testMethods.setupClimber();
     //testMethods.runPneumatics();
+    if (leftJoystick.getRawButton(8)) climberClamp.setClamps();
+    else if (leftJoystick.getRawButton(7)) climberClamp.disengageClamps();
   }
 
 

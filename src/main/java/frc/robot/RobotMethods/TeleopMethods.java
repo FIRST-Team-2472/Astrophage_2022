@@ -7,6 +7,8 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.Robot;
+import frc.robot.ActionQueue.Actions.Climbing.ClampOff;
+import frc.robot.ActionQueue.Actions.Climbing.ClampOn;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
@@ -60,12 +62,12 @@ public class TeleopMethods
         else driveSpeed = 1;
         
 
-        if (Robot.leftJoystick.getRawButtonPressed(3) && flipInvert) {
+        if (Robot.rightJoystick.getRawButtonPressed(3) && flipInvert) {
             System.out.println("Setting camera 2");
             server.setSource(camera2);
             flipInvert = false;
             driveSpeed = Math.abs(driveSpeed);
-        } else if (Robot.leftJoystick.getRawButtonPressed(3) && !flipInvert) {
+        } else if (Robot.rightJoystick.getRawButtonPressed(3) && !flipInvert) {
             System.out.println("Setting camera 1");
             server.setSource(camera1);
             flipInvert = true;
@@ -83,16 +85,19 @@ public class TeleopMethods
     }
 
     public void shoot() {
+        if (Robot.xboxcontroller.getXButtonPressed()) Robot.climberClamp.setClamps();
         if (Robot.xboxcontroller.getXButton()) {
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
-            Robot.shooter.runFlyWheelPower(1);
-            if(Robot.shooter.getSpeed() < -60000)Robot.intake.runConveyorPower(.5);
+            Robot.shooter.runFlyWheelVelocity(0.75);
+            if(Robot.shooter.getSpeed() < -45000) Robot.intake.runConveyorPower(.5);
+            else Robot.intake.runConveyorPower(0);
         }
         if(Robot.xboxcontroller.getXButtonReleased()) {
+            Robot.climberClamp.disengageClamps();
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 0);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 0);
-            Robot.shooter.runFlyWheelPower(0);
+            Robot.shooter.runFlyWheelVelocity(0);
             Robot.intake.runConveyorPower(0);
         }
     }
@@ -131,8 +136,11 @@ public class TeleopMethods
     }
 
     public void seeBall() {
-        if (Robot.leftJoystick.getRawButton(1)) 
-            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
+        if (Robot.leftJoystick.getRawButton(1)) {
+            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*-.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
+            Robot.intake.runConveyorPower(0.5);
+        }
+        if (Robot.leftJoystick.getRawButtonReleased(1)) Robot.intake.runConveyorPower(0);
     }
 
 
@@ -146,7 +154,7 @@ public class TeleopMethods
         //if (climbTime)  {
             double bruh = -(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *6;
             double bruh2 = (Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.000001;
-            if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.2)Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY(), Robot.xboxcontroller.getLeftY() + bruh);
+            if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY(), Robot.xboxcontroller.getLeftY() + bruh);
             else Robot.superClimber.runBothExtendersPower(0, 0);
             if(Math.abs(Robot.xboxcontroller.getRightY()) > 0.1)Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY(), Robot.xboxcontroller.getRightY() + bruh2);
             else Robot.superClimber.runBothRotationsPower(0, 0);
