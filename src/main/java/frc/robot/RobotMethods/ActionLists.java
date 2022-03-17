@@ -50,13 +50,6 @@ public class ActionLists
     }
 
     public void ClimbTest(ActionQueue action){
-        action.addAction(new MoveClimberPower(5));
-        action.addAction(new MoveClimberPower(-5));
-        action.addAction(new MoveClimberPower(5));
-        action.addAction(new MoveClimberPower(-5));
-        action.addAction(new MoveClimberPower(5));
-        action.addAction(new MoveClimberPower(-5));
-
-
+        action.addAction(new MoveClimberPower(3));
     }
 }

@@ -56,7 +56,7 @@ public class TeleopMethods
 
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        if(Robot.leftJoystick.getRawButton(1)) driveSpeed = 0.5;
+        if(Robot.rightJoystick.getRawButton(1)) driveSpeed = 0.5;
         else driveSpeed = 1;
         
 
@@ -98,10 +98,10 @@ public class TeleopMethods
     }
 
     public void convey() {
-        if (Robot.xboxcontroller.getAButton()) Robot.intake.runConveyorPower(0.5);
-        if (Robot.xboxcontroller.getAButtonReleased()) Robot.intake.runConveyorPower(0);
-        if (Robot.xboxcontroller.getRightBumper()) Robot.intake.runConveyorPower(-0.5);
-        if (Robot.xboxcontroller.getRightBumperReleased()) Robot.intake.runConveyorPower(0);
+        if (Robot.leftJoystick.getRawButton(3)) Robot.intake.runConveyorPower(0.5);
+        if (Robot.leftJoystick.getRawButtonReleased(3)) Robot.intake.runConveyorPower(0);
+        if (Robot.leftJoystick.getRawButton(2)) Robot.intake.runConveyorPower(-0.5);
+        if (Robot.leftJoystick.getRawButtonReleased(2)) Robot.intake.runConveyorPower(0);
     }
     
     public void autoStop() {
@@ -131,7 +131,7 @@ public class TeleopMethods
     }
 
     public void seeBall() {
-        if (Robot.leftJoystick.getRawButton(2)) 
+        if (Robot.leftJoystick.getRawButton(1)) 
             Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
     }
 

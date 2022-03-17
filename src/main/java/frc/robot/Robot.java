@@ -7,8 +7,6 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
@@ -23,7 +21,6 @@ import frc.robot.Sensors.*;
 import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
-import frc.robot.ActionQueue.Actions.Climbing.MoveClimberPower;
 
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
@@ -68,8 +65,6 @@ public class Robot extends TimedRobot {
     //declare a default instance of to access FMSInfo
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
-    //Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
-    //Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
     
     if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(3);
@@ -84,7 +79,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     shuffleBoard.update();
   }
-  //Vibe
 
 
   @Override
@@ -97,6 +91,7 @@ public class Robot extends TimedRobot {
 
     //actionList.InitialAutonomous(autoActions);
     actionList.ClimbTest(autoActions);
+    
     matchTimer.beginMatch();
     enabled = true;
 

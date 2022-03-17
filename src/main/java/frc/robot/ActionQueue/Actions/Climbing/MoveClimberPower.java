@@ -8,9 +8,9 @@ public class MoveClimberPower implements Actionable{
     public double distance;
     public boolean upDog;
 
-    public MoveClimberPower(double distance) {
-        this.distance = distance;
-        if (distance < Robot.superClimber.getExtenderLHeight()) upDog = true;
+    public MoveClimberPower(double feet) {
+        distance = feet;
+        if (distance > Robot.superClimber.getExtenderLHeight()) upDog = true;
         else upDog = false; /*:(*/
     }
     
@@ -19,8 +19,18 @@ public class MoveClimberPower implements Actionable{
     {
         double bruh = -(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *6;
 
-        if (upDog) Robot.superClimber.runBothExtendersPower(0.6,0.6+bruh);
-        else Robot.superClimber.runBothExtendersPower(-0.6,-0.6+bruh);
+        if (upDog) {
+            if (distance >= Robot.superClimber.getExtenderRHeight())
+                Robot.superClimber.runExtenderPowerR(.6);
+            if (distance >= Robot.superClimber.getExtenderLHeight()) 
+                Robot.superClimber.runExtenderPowerL(.6+bruh);
+        }
+        else {
+            if (distance <= Robot.superClimber.getExtenderRHeight())
+                Robot.superClimber.runExtenderPowerR(-.6);
+            if (distance <= Robot.superClimber.getExtenderLHeight()) 
+                Robot.superClimber.runExtenderPowerL(-.6+bruh);
+        }
     }
 
 
@@ -40,12 +50,12 @@ public class MoveClimberPower implements Actionable{
     @Override
     public boolean isFinished()
     {
-        if (!upDog) {
-            if (distance <= Robot.superClimber.getExtenderLHeight()) return true;
+        if (upDog) {
+            if (distance <= Robot.superClimber.getExtenderLHeight() && distance <= Robot.superClimber.getExtenderRHeight()) return true;
             else return false;
         }
         else {
-            if (distance >= Robot.superClimber.getExtenderLHeight()) return true;
+            if (distance >= Robot.superClimber.getExtenderLHeight() && distance >= Robot.superClimber.getExtenderRHeight()) return true;
             else return false;
         }
     }
