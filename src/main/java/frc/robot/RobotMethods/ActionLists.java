@@ -31,6 +31,7 @@ public class ActionLists
 
     ////What the robot does when it's time to climb the monkey bars.
     public void Climb(ActionQueue action) {
+        action.addAction(new ClimberIn());
         action.addAction(new ClampOn());
         for (int i = 0; i < 2; i++) {
             //small
@@ -49,6 +50,13 @@ public class ActionLists
     }
 
     public void ClimbTest(ActionQueue action){
-        action.addAction(new MoveClimberPower(2));
+        action.addAction(new MoveClimberPower(5));
+        action.addAction(new MoveClimberPower(-5));
+        action.addAction(new MoveClimberPower(5));
+        action.addAction(new MoveClimberPower(-5));
+        action.addAction(new MoveClimberPower(5));
+        action.addAction(new MoveClimberPower(-5));
+
+
     }
 }

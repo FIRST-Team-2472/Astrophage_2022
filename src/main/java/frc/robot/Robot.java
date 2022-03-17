@@ -3,8 +3,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 
-import javax.naming.InitialContext;
-
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -14,10 +12,8 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 import frc.robot.Miscellaneous.*;
@@ -27,6 +23,8 @@ import frc.robot.Sensors.*;
 import frc.robot.Subsystems.*;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
+import frc.robot.ActionQueue.Actions.Climbing.MoveClimberPower;
+
 import frc.robot.ActionQueue.Runners.ActionQueue;
 
 public class Robot extends TimedRobot {
@@ -70,8 +68,8 @@ public class Robot extends TimedRobot {
     //declare a default instance of to access FMSInfo
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
-    Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
-    Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
+    //Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
+    //Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
     
     if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(3);
@@ -96,7 +94,9 @@ public class Robot extends TimedRobot {
 
     autoActions.addAction(new ZeroEncoders());
     autoActions.addAction(new ZeroRotations());
-    actionList.InitialAutonomous(autoActions);
+
+    //actionList.InitialAutonomous(autoActions);
+    actionList.ClimbTest(autoActions);
     matchTimer.beginMatch();
     enabled = true;
 
@@ -145,6 +145,7 @@ public class Robot extends TimedRobot {
   public void testInit() {
     robotState.setString("Testing");
     testMethods.resetTimer();
+    superClimber.zeroExtenderEncoders();
   }
 
   @Override

@@ -15,10 +15,10 @@ public class SuperClimber {
   private TalonSRX rotationR;
 
   // TODO need to find a special number
-  private final double encoderToFeet = 300000;
+  private final float exLFeet = 292625, exRFeet = 293433;
   public final double encoderToDegrees = 1330000;
   private final double rotationLimit = 1330000;
-  private final double extenderLimit = -100000;
+  private final double extenderLimit = -550000;
   private final double KF = 0, KP = 0, KI = 0;
 
 
@@ -47,11 +47,11 @@ public class SuperClimber {
   }
 
   public void runTargetExtenderL(double feet) {
-    extenderL.set(ControlMode.MotionMagic, feet / encoderToFeet );
+    extenderL.set(ControlMode.MotionMagic, feet / exLFeet);
   }
 
   public void runTargetExtenderR(double feet) {
-    extenderR.set(ControlMode.MotionMagic, feet / encoderToFeet);
+    extenderR.set(ControlMode.MotionMagic, feet / exRFeet);
   }
 
   public void runBothExtendersTarget(double feet) {
@@ -101,11 +101,11 @@ public class SuperClimber {
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
-    return -extenderL.getSelectedSensorPosition();
+    return -(extenderL.getSelectedSensorPosition() / exLFeet) * 12;
   }
 
   public double getExtenderRHeight() {
-    return -extenderR.getSelectedSensorPosition();
+    return -(extenderR.getSelectedSensorPosition() / exRFeet) * 12;
   }    
 
 
@@ -131,13 +131,14 @@ public class SuperClimber {
   }
 
   public void zeroRotationEncoders() {
+    //TODO after 5 hours of testing not working i give not really needed
     rotationL.setSelectedSensorPosition(0);
-    rotationL.configForwardSoftLimitEnable(true);
-    rotationL.configForwardSoftLimitThreshold(rotationLimit);
+    //rotationL.configReverseSoftLimitEnable(true);
+    //rotationL.configReverseSoftLimitThreshold(rotationLimit, 0);
 
     rotationR.setSelectedSensorPosition(0);
-    rotationR.configForwardSoftLimitEnable(true);
-    rotationR.configForwardSoftLimitThreshold(rotationLimit);
+    //rotationR.configReverseSoftLimitEnable(true);
+    //rotationR.configReverseSoftLimitThreshold(rotationLimit, 0);
   }
 
   public void zeroExtenderEncoders() {
@@ -149,7 +150,6 @@ public class SuperClimber {
     extenderR.configReverseSoftLimitEnable(true);
     extenderR.configReverseSoftLimitThreshold(extenderLimit);
   }
-
 
 
   private void setUpMotionMagicFX(TalonFX motor, double KF, double KP, double KI) {
@@ -178,6 +178,8 @@ public class SuperClimber {
 
     // Motion magic acceleration is 50 counts
     motor.configMotionAcceleration(2000, 30);
+    motor.configOpenloopRamp(1);
+
 
     // Zero the sensor once on robot boot up
     motor.setSelectedSensorPosition(0, 0, 30);
@@ -209,6 +211,8 @@ public class SuperClimber {
 
     // Motion magic cruise (max speed) is 100 counts per 100 ms
     motor.configMotionCruiseVelocity(2000, 30);
+    motor.configOpenloopRamp(1);
+
 
     // Motion magic acceleration is 50 counts
     motor.configMotionAcceleration(2000, 30);
