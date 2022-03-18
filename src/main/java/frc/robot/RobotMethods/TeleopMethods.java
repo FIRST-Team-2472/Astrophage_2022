@@ -85,7 +85,8 @@ public class TeleopMethods
     }
 
     public void shoot() {
-        if (Robot.xboxcontroller.getXButtonPressed()) Robot.climberClamp.setClamps();
+        if (Robot.xboxcontroller.getYButtonPressed()) Robot.climberClamp.toggleClamps();
+        
         if (Robot.xboxcontroller.getXButton()) {
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);

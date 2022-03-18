@@ -21,15 +21,15 @@ public class MoveClimberPower implements Actionable{
 
         if (upDog) {
             if (distance >= Robot.superClimber.getExtenderRHeight())
-                Robot.superClimber.runExtenderPowerR(.6);
+                Robot.superClimber.runExtenderPowerR(.4);
             if (distance >= Robot.superClimber.getExtenderLHeight()) 
-                Robot.superClimber.runExtenderPowerL(.6+bruh);
+                Robot.superClimber.runExtenderPowerL(.4+bruh);
         }
         else {
             if (distance <= Robot.superClimber.getExtenderRHeight())
-                Robot.superClimber.runExtenderPowerR(-.6);
+                Robot.superClimber.runExtenderPowerR(-.4);
             if (distance <= Robot.superClimber.getExtenderLHeight()) 
-                Robot.superClimber.runExtenderPowerL(-.6+bruh);
+                Robot.superClimber.runExtenderPowerL(-.4+bruh);
         }
     }
 
