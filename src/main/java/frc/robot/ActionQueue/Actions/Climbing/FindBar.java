@@ -8,7 +8,7 @@ public class FindBar implements Actionable {
     @Override
     public void startAction() 
     {
-        Robot.superClimber.runBothRotationsPower(0.3,0.3);
+        Robot.superClimber.runBothRotations(0.3);
     }
 
 
@@ -22,7 +22,7 @@ public class FindBar implements Actionable {
     @Override
     public void endAction() 
     {
-    Robot.superClimber.runBothRotations(0);
+        Robot.superClimber.runBothRotations(0);
     }
 
     @Override

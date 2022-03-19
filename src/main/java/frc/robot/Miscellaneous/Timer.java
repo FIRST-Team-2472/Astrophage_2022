@@ -9,6 +9,7 @@ public class Timer {
         countdown = seconds;
         //"System.currentTimeMillis" is how long program has been running; converts countdown's sec to millisec
         end = System.currentTimeMillis() + (long)(1000 * countdown);
+        
     }
 
     //Returns if timer has exceeded time set.
