@@ -22,7 +22,7 @@ public class RotateClimber implements Actionable {
     @Override
     public void periodic() 
     {
-        double correction = 0;//-(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) *4;
+        double correction = -(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) *0.0000007;
 
         if (forward) {
             if (angle >= Robot.superClimber.getRotationLAngle())

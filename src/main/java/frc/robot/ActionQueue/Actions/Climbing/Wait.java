@@ -1,6 +1,5 @@
 package frc.robot.ActionQueue.Actions.Climbing;
 
-import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.TimerBase;
 
 public class Wait extends TimerBase{
@@ -12,7 +11,7 @@ public class Wait extends TimerBase{
     @Override
     public void startAction() 
     {
-        
+
     }
 
 

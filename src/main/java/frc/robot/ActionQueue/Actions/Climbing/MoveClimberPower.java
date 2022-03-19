@@ -17,14 +17,14 @@ public class MoveClimberPower implements Actionable{
     @Override
     public void startAction() 
     {
-        double bruh = 0;//(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *2;
+        double correction = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *10;
 
         if (upDog) {
             if (distance >= Robot.superClimber.getExtenderRHeight())
                 Robot.superClimber.runExtenderPowerR(.4);
             else Robot.superClimber.runExtenderPowerR(0);
             if (distance >= Robot.superClimber.getExtenderLHeight()) 
-                Robot.superClimber.runExtenderPowerL(.4+bruh);
+                Robot.superClimber.runExtenderPowerL(.4+correction);
             else Robot.superClimber.runExtenderPowerL(0);
         }
         else {
@@ -32,7 +32,7 @@ public class MoveClimberPower implements Actionable{
                 Robot.superClimber.runExtenderPowerR(-.4);
             else Robot.superClimber.runExtenderPowerR(0);
             if (distance <= Robot.superClimber.getExtenderLHeight()) 
-                Robot.superClimber.runExtenderPowerL(-.4+bruh);
+                Robot.superClimber.runExtenderPowerL(-.4+correction);
             else Robot.superClimber.runExtenderPowerL(0);
         }
     }

@@ -50,12 +50,19 @@ public class ActionLists
     }
 
     public void ClimbTest(ActionQueue action){
-        action.addAction(new MoveClimberPower(3));
+        action.addAction(new ClampOff());
+        //action.addAction(new ClimberIn());
+        action.addAction(new ClampOn());
+        action.addAction(new ExtendAndRotateClimber(16, 3500000));
+        action.addAction(new RotateClimber(2950000));
+        //action.addAction(new PullToTilt());
+        //action.addAction(new RotateClimber(3500000));
+        /*action.addAction(new MoveClimberPower(3));
         action.addAction(new MoveClimberPower(0));
         action.addAction(new ClampOn());
         action.addAction(new Wait(2));
         action.addAction(new ClampOff());
-        action.addAction(new RotateClimber(-1330000));
+        action.addAction(new RotateClimber(1330000));*/
 
     }
 }

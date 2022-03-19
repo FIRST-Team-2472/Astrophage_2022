@@ -25,7 +25,7 @@ public class ActionQueue {
 
     public void step() {
         if (!queue.isEmpty() && !breakTime) {
-            if (start == true) {
+            if (start) {
                 runningAction = queue.get(0);
                 runningAction.startAction();
 
@@ -49,7 +49,8 @@ public class ActionQueue {
                 }
             }
         } else {
-            Robot.shuffleBoard.setAction("done");
+            if (breakTime) Robot.shuffleBoard.setAction("paused");
+            else Robot.shuffleBoard.setAction("done");
             inProgress = false;
             start = true;
         }
@@ -58,6 +59,7 @@ public class ActionQueue {
     public void clear() {
         while (queue.size() != 0)
             queue.remove(0);
+        runningAction = null;
     }
 
     public boolean isInProgress() {
@@ -65,12 +67,16 @@ public class ActionQueue {
     }
 
     public void pause() {
-        breakTime = true;
-        runningAction.endAction();
+        if (queue.size() != 0) {
+            breakTime = true;
+            runningAction.endAction();
+        }
     }
 
     public void resume() {
-        breakTime = false;
-        runningAction.startAction();
+        if (!start) {
+            breakTime = false;
+            runningAction.startAction();
+        }
     }
 }

@@ -116,6 +116,7 @@ public class Robot extends TimedRobot {
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
 
+  if(!teleopMethods.isActionGoing()){
     teleopMethods.drive();
 
     teleopMethods.shoot();
@@ -126,9 +127,12 @@ public class Robot extends TimedRobot {
 
     teleopMethods.manualClimb();
 
-    teleopMethods.seeBall();
+    teleopMethods.climb();
 
-    //teleopMethods.autoStop();
+    teleopMethods.seeBall();
+  }
+
+    teleopMethods.autoStop();
 
     teleopMethods.update();
   }
@@ -160,6 +164,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     robotState.setString("Off");
     autoActions.clear();
+    enabled = false;
   }
 
 

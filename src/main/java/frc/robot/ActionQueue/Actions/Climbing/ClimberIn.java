@@ -12,7 +12,7 @@ public class ClimberIn implements Actionable{
     @Override
     public void startAction() 
     {
-        Robot.superClimber.runBothExtenders(-0.3);
+        Robot.superClimber.runBothExtendersPower(-0.3, -0.3);
     }
 
 
@@ -27,7 +27,7 @@ public class ClimberIn implements Actionable{
     @Override
     public void endAction() 
     {
-        Robot.superClimber.runBothExtenders(0);
+        Robot.superClimber.runBothExtendersPower(0, 0);
     }
 
     @Override

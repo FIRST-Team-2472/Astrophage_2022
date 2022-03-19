@@ -27,8 +27,8 @@ public class Constants {
     public static final int COMPRESSOR = 1;
 
     //Limit switches
-    public static final int clawLimitL = 0;
-    public static final int clawLimitR = 1;
+    public static final int clawLimitL = 1;
+    public static final int clawLimitR = 0;
 
     // IMU/gyroscope
     public static final int pigeonID = 2;

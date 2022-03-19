@@ -1,14 +1,10 @@
 package frc.robot.RobotMethods;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.Robot;
-import frc.robot.ActionQueue.Actions.Climbing.ClampOff;
-import frc.robot.ActionQueue.Actions.Climbing.ClampOn;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
@@ -20,7 +16,7 @@ public class TeleopMethods
 {
     private NetworkTableEntry cameraSelection;
     private boolean breakSwitch, TwoB, climbTime, flipInvert;
-    private Timer abortTimer = new Timer(.5);
+    private Timer abortTimer = new Timer(2);
     private UsbCamera camera1;
     private UsbCamera camera2;
     private VideoSink server;
@@ -31,6 +27,7 @@ public class TeleopMethods
 
 
     public void init(boolean enabled) {
+        teleopActions.clear();
         //TODO needs both cameras mounted
         /*cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
@@ -45,6 +42,7 @@ public class TeleopMethods
             Robot.matchTimer.beginMatch();
         }
 
+        teleopActions.resume();
         flipInvert = false;
         breakSwitch = false;
         TwoB = false;
@@ -80,8 +78,8 @@ public class TeleopMethods
     public void climb() {
         if (Robot.matchTimer.matchTime() >= 120) climbTime = true;
 
-        if (climbTime && Robot.xboxcontroller.getLeftBumperPressed() && Robot.xboxcontroller.getRightBumperPressed())
-            Robot.actionList.Climb(teleopActions);
+        if (Robot.xboxcontroller.getLeftBumper() && Robot.xboxcontroller.getRightBumper() && !teleopActions.isInProgress())
+            Robot.actionList.ClimbTest(teleopActions);
     }
 
     public void shoot() {
@@ -125,7 +123,7 @@ public class TeleopMethods
             }
         }
 
-        if (Robot.xboxcontroller.getBButtonPressed() && TwoB) 
+        if (Robot.xboxcontroller.getBButtonPressed()) 
             teleopActions.clear();
         
         if (Robot.xboxcontroller.getBButtonPressed() && !TwoB) {
@@ -152,14 +150,20 @@ public class TeleopMethods
     }
 
     public void manualClimb() {
+        //if (Robot.xboxcontroller.getYButtonPressed()) Robot.climberClamp.setClamps();
+        //if (Robot.xboxcontroller.getXButtonReleased()) Robot.climberClamp.disengageClamps();
         
         //if (climbTime)  {
             double bruh = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *2;
-            double bruh2 = (Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.000001;
+            double bruh2 = 0;//(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.000001;
             if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(-Robot.xboxcontroller.getLeftY()*0.4, -Robot.xboxcontroller.getLeftY()*0.4 + bruh);
             else Robot.superClimber.runBothExtendersPower(0, 0);
             if(Math.abs(Robot.xboxcontroller.getRightY()) > 0.1)Robot.superClimber.runBothRotationsPower(-Robot.xboxcontroller.getRightY(), -Robot.xboxcontroller.getRightY() + bruh2);
             else Robot.superClimber.runBothRotationsPower(0, 0);
         //}
+    }
+
+    public boolean isActionGoing(){
+        return teleopActions.isInProgress();
     }
 }
