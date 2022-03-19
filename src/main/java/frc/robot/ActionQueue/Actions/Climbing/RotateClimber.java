@@ -6,9 +6,12 @@ import frc.robot.ActionQueue.Runners.Actionable;
 public class RotateClimber implements Actionable {
     
     public double angle;
+    public boolean forward;
 
     public RotateClimber(double angle) {
         this.angle = angle;
+        if (angle > Robot.superClimber.getRotationRAngle()) forward = true;
+        else forward = false;
     }
     
     @Override
@@ -19,19 +22,28 @@ public class RotateClimber implements Actionable {
     @Override
     public void periodic() 
     {
-        if (Robot.superClimber.getRotationLAngle() < angle) 
-            Robot.superClimber.runRotationL(.3);
-        else if (Robot.superClimber.getRotationLAngle() > angle) 
-            Robot.superClimber.runRotationL(-.3);
-        else if (Math.abs(angle - Robot.superClimber.getRotationLAngle()) < 1)  
-            Robot.superClimber.runRotationL(0);
-        
-        if (Robot.superClimber.getRotationRAngle() < angle)
-            Robot.superClimber.runRotationR(0.3);
-        else if (Robot.superClimber.getRotationRAngle() > angle) 
-            Robot.superClimber.runRotationR(0.3);
-        else if (Math.abs(angle - Robot.superClimber.getRotationRAngle()) < 1)
-            Robot.superClimber.runRotationR(0);
+        double correction = -(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) *4;
+
+        if (forward) {
+            if (angle >= Robot.superClimber.getExtenderRHeight())
+                Robot.superClimber.runRotationPowerL(.5);
+            else 
+                Robot.superClimber.runRotationPowerL(0);
+            if (angle >= Robot.superClimber.getExtenderLHeight()) 
+                Robot.superClimber.runRotationPowerR(.5+correction);
+            else 
+                Robot.superClimber.runRotationPowerR(0);
+        }
+        else {
+            if (angle <= Robot.superClimber.getExtenderRHeight())
+                Robot.superClimber.runRotationPowerL(-.5);
+            else 
+                Robot.superClimber.runRotationPowerL(0);
+            if (angle <= Robot.superClimber.getExtenderLHeight()) 
+                Robot.superClimber.runRotationPowerR(-.5+correction);
+            else 
+                Robot.superClimber.runRotationPowerL(0);
+        }
     }
 
     @Override
@@ -43,10 +55,13 @@ public class RotateClimber implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if ((Math.abs(angle - Robot.superClimber.getRotationLAngle()) < 0.1) && (Math.abs(angle - Robot.superClimber.getRotationRAngle()) < 0.1))
-            return true;
-        else
-            return false;
+        if (forward) {
+            if (angle <= Robot.superClimber.getRotationLAngle() && angle <= Robot.superClimber.getRotationRAngle()) return true;
+            else return false;
+        } else {
+            if (angle >= Robot.superClimber.getRotationLAngle() && angle >= Robot.superClimber.getRotationRAngle()) return true;
+            else return false;
+        }
     }
 }
 
