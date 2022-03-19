@@ -85,8 +85,8 @@ public class TeleopMethods
     }
 
     public void shoot() {
-        if (Robot.xboxcontroller.getYButtonPressed()) Robot.climberClamp.toggleClamps();
-        
+        if (Robot.xboxcontroller.getXButtonPressed()) Robot.climberClamp.setClamps();
+
         if (Robot.xboxcontroller.getXButton()) {
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
@@ -94,6 +94,7 @@ public class TeleopMethods
             if(Robot.shooter.getSpeed() < -45000) Robot.intake.runConveyorPower(.5);
             else Robot.intake.runConveyorPower(0);
         }
+        
         if(Robot.xboxcontroller.getXButtonReleased()) {
             Robot.climberClamp.disengageClamps();
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 0);
@@ -153,9 +154,9 @@ public class TeleopMethods
     public void manualClimb() {
         
         //if (climbTime)  {
-            double bruh = -(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *6;
+            double bruh = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *2;
             double bruh2 = (Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.000001;
-            if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(Robot.xboxcontroller.getLeftY(), Robot.xboxcontroller.getLeftY() + bruh);
+            if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(-Robot.xboxcontroller.getLeftY()*0.4, -Robot.xboxcontroller.getLeftY()*0.4 + bruh);
             else Robot.superClimber.runBothExtendersPower(0, 0);
             if(Math.abs(Robot.xboxcontroller.getRightY()) > 0.1)Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY(), Robot.xboxcontroller.getRightY() + bruh2);
             else Robot.superClimber.runBothRotationsPower(0, 0);

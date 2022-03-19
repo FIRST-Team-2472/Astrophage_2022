@@ -159,5 +159,8 @@ public class Robot extends TimedRobot {
   //Robot does this when starting "disabled" mode
   public void disabledInit() {
     robotState.setString("Off");
+    autoActions.clear();
   }
+
+
 }

@@ -34,8 +34,8 @@ public class SuperClimber {
     setUpMotionMagicSRX(rotationL, KF, KP, KI);
     setUpMotionMagicSRX(rotationR, KF, KP, KI);
 
-    extenderL.setInverted(true);
-    extenderR.setInverted(true);
+    extenderL.setInverted(false);
+    extenderR.setInverted(false);
     rotationL.setInverted(true);
     rotationR.setInverted(true);
 
@@ -101,11 +101,11 @@ public class SuperClimber {
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
-    return -(extenderL.getSelectedSensorPosition() / exLFeet) * 12;
+    return (extenderL.getSelectedSensorPosition() / exLFeet) * 12;
   }
 
   public double getExtenderRHeight() {
-    return -(extenderR.getSelectedSensorPosition() / exRFeet) * 12;
+    return (extenderR.getSelectedSensorPosition() / exRFeet) * 12;
   }    
 
 
@@ -230,8 +230,8 @@ public class SuperClimber {
   }
 
   public void runBothExtendersPower(double speedL, double speedR) {
-    runExtenderPowerL(speedL *0.4);
-    runExtenderPowerR(speedR* 0.4);
+    runExtenderPowerL(speedL);
+    runExtenderPowerR(speedR);
   }
 
   public void runRotationPowerL(double speed) {

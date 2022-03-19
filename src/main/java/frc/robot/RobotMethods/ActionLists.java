@@ -51,5 +51,11 @@ public class ActionLists
 
     public void ClimbTest(ActionQueue action){
         action.addAction(new MoveClimberPower(3));
+        action.addAction(new MoveClimberPower(0));
+        action.addAction(new ClampOn());
+        action.addAction(new Wait(2));
+        action.addAction(new ClampOff());
+        action.addAction(new RotateClimber(-1330000));
+
     }
 }

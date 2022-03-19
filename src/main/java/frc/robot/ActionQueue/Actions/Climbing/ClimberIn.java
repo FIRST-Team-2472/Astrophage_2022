@@ -20,7 +20,8 @@ public class ClimberIn implements Actionable{
     @Override
     public void periodic() 
     {
-
+        if(Robot.climberClamp.isClampedL()) Robot.superClimber.runExtenderPowerL(0);
+        if(Robot.climberClamp.isClampedR()) Robot.superClimber.runExtenderPowerR(0);
     }
 
     @Override

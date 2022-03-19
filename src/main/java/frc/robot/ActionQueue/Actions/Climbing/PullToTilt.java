@@ -8,7 +8,7 @@ public class PullToTilt implements Actionable {
     @Override
     public void startAction() 
     {
-        Robot.superClimber.runBothExtenders(-0.3);
+        Robot.superClimber.runBothExtendersPower(-0.3,-0.3);
     }
 
 
