@@ -13,6 +13,7 @@ import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 import frc.robot.Miscellaneous.Timer;
+import frc.robot.Sensors.limelight;
 
 
 
@@ -32,12 +33,12 @@ public class TeleopMethods
 
     public void init(boolean enabled) {
         //TODO needs both cameras mounted
-        /*cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
+        cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
         server = CameraServer.getServer();
 
         camera1 = CameraServer.startAutomaticCapture(0);
-        camera2 = CameraServer.startAutomaticCapture(1);*/
+        camera2 = CameraServer.startAutomaticCapture(1);
 
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
