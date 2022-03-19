@@ -50,7 +50,8 @@ public class Robot extends TimedRobot {
   public TeleopMethods teleopMethods = new TeleopMethods();
   public TestMethods testMethods = new TestMethods();
 
-  public ActionQueue autoActions = new ActionQueue();
+  public ActionQueue autoActions;
+  
   private NetworkTableEntry getTeamColor, robotState;
   private NetworkTableInstance inst;
 
@@ -85,6 +86,8 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when starting "autonomous" mode
   public void autonomousInit() {
+    autoActions = new ActionQueue();
+
     robotState.setString("Autonomous");
 
     autoActions.addAction(new ZeroEncoders());

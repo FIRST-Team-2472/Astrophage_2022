@@ -26,6 +26,4 @@ public class Wait extends TimerBase{
     public void endAction() 
     {
     }
-
-
 }

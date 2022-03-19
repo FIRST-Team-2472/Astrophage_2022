@@ -1,8 +1,10 @@
 package frc.robot.RobotMethods;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
@@ -21,21 +23,22 @@ public class TeleopMethods
     private UsbCamera camera1;
     private UsbCamera camera2;
     private VideoSink server;
-    private ActionQueue teleopActions = new ActionQueue();
+    private ActionQueue teleopActions;
     private double driveSpeed = 1;
 
 
 
 
     public void init(boolean enabled) {
-        teleopActions.clear();
+        teleopActions = new ActionQueue();
         //TODO needs both cameras mounted
+        /*
         cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
         server = CameraServer.getServer();
 
         camera1 = CameraServer.startAutomaticCapture(0);
-        camera2 = CameraServer.startAutomaticCapture(1);
+        camera2 = CameraServer.startAutomaticCapture(1);*/
 
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
@@ -43,7 +46,6 @@ public class TeleopMethods
             Robot.matchTimer.beginMatch();
         }
 
-        teleopActions.resume();
         flipInvert = false;
         breakSwitch = false;
         TwoB = false;
@@ -124,7 +126,7 @@ public class TeleopMethods
             }
         }
 
-        if (Robot.xboxcontroller.getBButtonPressed()) 
+        if (Robot.xboxcontroller.getBButtonPressed() && TwoB) 
             teleopActions.clear();
         
         if (Robot.xboxcontroller.getBButtonPressed() && !TwoB) {
