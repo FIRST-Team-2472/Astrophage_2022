@@ -158,7 +158,7 @@ public class TeleopMethods
             double bruh2 = (Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) * 0.000001;
             if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(-Robot.xboxcontroller.getLeftY()*0.4, -Robot.xboxcontroller.getLeftY()*0.4 + bruh);
             else Robot.superClimber.runBothExtendersPower(0, 0);
-            if(Math.abs(Robot.xboxcontroller.getRightY()) > 0.1)Robot.superClimber.runBothRotationsPower(Robot.xboxcontroller.getRightY(), Robot.xboxcontroller.getRightY() + bruh2);
+            if(Math.abs(Robot.xboxcontroller.getRightY()) > 0.1)Robot.superClimber.runBothRotationsPower(-Robot.xboxcontroller.getRightY(), -Robot.xboxcontroller.getRightY() + bruh2);
             else Robot.superClimber.runBothRotationsPower(0, 0);
         //}
     }

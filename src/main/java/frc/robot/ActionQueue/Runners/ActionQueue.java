@@ -56,9 +56,8 @@ public class ActionQueue {
     }
 
     public void clear() {
-        for (int i = 0; i < queue.size(); i++) {
-            queue.remove(i);
-        }
+        while (queue.size() != 0)
+            queue.remove(0);
     }
 
     public boolean isInProgress() {
