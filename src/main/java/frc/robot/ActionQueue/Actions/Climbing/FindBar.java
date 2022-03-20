@@ -4,7 +4,8 @@ import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
 public class FindBar implements Actionable {
-    
+    //Not currently used
+
     @Override
     public void startAction() 
     {

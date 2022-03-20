@@ -1,14 +1,15 @@
 package frc.robot.ActionQueue.Actions.Climbing;
 
+import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionDump;
 import frc.robot.ActionQueue.Runners.Actionable;
 
-public class ExtendAndRotateClimber implements Actionable{
+public class ClimbInAndGo90 implements Actionable {
     ActionDump dump = new ActionDump();
     
-    public ExtendAndRotateClimber(double feet, double angle) {
-        dump.addAction(new MoveClimberPower(feet));
-        dump.addAction(new RotateClimber(angle));
+    public ClimbInAndGo90() {
+        dump.addAction(new ClimberIn());
+        dump.addAction(new ZeroRotations());
     }
 
     public void startAction() {

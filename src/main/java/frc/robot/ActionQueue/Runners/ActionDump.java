@@ -31,6 +31,6 @@ public class ActionDump {
     }
 
     public boolean dumpEmpty() {
-        return dump.size() == 0;
+        return dump.isEmpty();
     }
 }

@@ -2,9 +2,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -39,7 +36,7 @@ public class Robot extends TimedRobot {
   public static Compressor compressor = new Compressor(Constants.COMPRESSOR, PneumaticsModuleType.CTREPCM);
   //public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
-  public static limelight limelight = new limelight();
+  public static Limelight limelight = new Limelight();
   public static IMU imu = new IMU(Constants.pigeonID);
   //private DigitalInput switchOne = new DigitalInput(1);
   //private DigitalOutput Arduino  = new DigitalOutput(4);

@@ -5,11 +5,11 @@ package frc.robot.ActionQueue.Runners;
 import java.util.ArrayList;
 
 import frc.robot.Robot;
+import frc.robot.Miscellaneous.Static;
 
 public class ActionQueue {
     private ArrayList<Actionable> queue;
     boolean inProgress, start, breakTime;
-    // breaktime originally called bruh
     Actionable runningAction;
 
     public ActionQueue() {
@@ -48,7 +48,8 @@ public class ActionQueue {
                     runningAction.startAction();
                 }
             }
-        } else {
+        } 
+        else {
             if (breakTime) Robot.shuffleBoard.setAction("paused");
             else Robot.shuffleBoard.setAction("done");
             inProgress = false;
@@ -57,7 +58,7 @@ public class ActionQueue {
     }
 
     public void clear() {
-        while (queue.size() != 0)
+        while (!queue.isEmpty())
             queue.remove(0);
         runningAction = null;
     }
@@ -67,9 +68,9 @@ public class ActionQueue {
     }
 
     public void pause() {
-        if (queue.size() != 0) {
+        if (!start) {
             breakTime = true;
-            runningAction.endAction();
+            Static.stopAll();
         }
     }
 
