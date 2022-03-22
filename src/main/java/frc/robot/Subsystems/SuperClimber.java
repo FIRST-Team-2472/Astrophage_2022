@@ -15,7 +15,7 @@ public class SuperClimber {
   private TalonSRX rotationR;
 
   // TODO need to find a special number
-  private final float exLFeet = 292625, exRFeet = 293433;
+  private final float exLFeet = 24675, exRFeet = 24675; //24675
   public final double encoderToDegrees = 121765;
   private final double extenderLimit = -550000;
   private final double KF = 0, KP = 0, KI = 0;
@@ -100,11 +100,11 @@ public class SuperClimber {
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
-    return (extenderL.getSelectedSensorPosition() / exLFeet) * 12;
+    return (extenderL.getSelectedSensorPosition() / exLFeet);
   }
 
   public double getExtenderRHeight() {
-    return (extenderR.getSelectedSensorPosition() / exRFeet) * 12;
+    return (extenderR.getSelectedSensorPosition() / exRFeet);
   }    
 
 
