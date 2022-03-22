@@ -51,11 +51,16 @@ public class ActionLists
 
     public void ClimbTest(ActionQueue action){
         action.addAction(new ClampOff());
-        //action.addAction(new ClimberIn());
+        action.addAction(new ClimberIn());
         action.addAction(new ClampOn());
         action.addAction(new ExtendAndRotateClimber(16, 3500000));
+        //for finding bar
         action.addAction(new RotateClimber(2950000));
-        //action.addAction(new PullToTilt());
+        action.addAction(new PullToTilt());
+        action.addAction(new ClampOff());
+        action.addAction(new MoveClimberPower(13));
+        action.addAction(new ClimbInAndGo90());
+        action.addAction(new ClampOn());
         //action.addAction(new RotateClimber(3500000));
         /*action.addAction(new MoveClimberPower(3));
         action.addAction(new MoveClimberPower(0));
