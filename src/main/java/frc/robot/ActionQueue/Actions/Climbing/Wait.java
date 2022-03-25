@@ -11,7 +11,7 @@ public class Wait extends TimerBase{
     @Override
     public void startAction() 
     {
-
+        super.startAction();
     }
 
 

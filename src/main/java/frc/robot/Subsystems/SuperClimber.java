@@ -16,7 +16,7 @@ public class SuperClimber {
 
   // TODO need to find a special number
   private final float exLFeet = 24675, exRFeet = 24675; //24675
-  public final double encoderToDegrees = 121765;
+  public final double encoderToDegrees = 0;
   private final double extenderLimit = -550000;
   private final double KF = 0, KP = 0, KI = 0;
 
@@ -107,6 +107,13 @@ public class SuperClimber {
     return (extenderR.getSelectedSensorPosition() / exRFeet);
   }    
 
+  public double getExtenderRSpeed() {
+    return extenderR.getSelectedSensorVelocity() / exRFeet;
+  } 
+
+  public double getExtenderLSpeed() {
+    return extenderL.getSelectedSensorVelocity() / exLFeet;
+  }
 
   //these methods get the rotaion (in degrees) of the climbers based upon encoder values and a predetermined encoder to degrees ratio
   public double getRotationLAngle() {

@@ -9,11 +9,13 @@ import frc.robot.Robot;
 
 public class ShuffleBoard {
 
-
+    private Timer record = new Timer(1);
     private NetworkTableEntry clLimitL, clLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
-     roEcoderR, drEcoderL, drEcoderR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
-     shSpeed, cameraSelection, limelightDistance;
+     roEcoderR, exSpeedL, exSpeedR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
+     shSpeed, cameraSelection, limelightDistance, matchTime;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
+
+    String temp;
 
     public ShuffleBoard() {
 
@@ -32,8 +34,8 @@ public class ShuffleBoard {
       exEcoderR = programmerBoard.add("Arm Distance Right", 0).getEntry();
       roEcoderL = programmerBoard.add("Arm Rotation Left", 0).getEntry();
       roEcoderR = programmerBoard.add("Arm Rotation Right", 0).getEntry(); 
-      drEcoderL = programmerBoard.add("Drive Distance Left", 0).getEntry();
-      drEcoderR = programmerBoard.add("Drive Distance Right", 0).getEntry(); 
+      exSpeedL = programmerBoard.add("Arm Speed Left", 0).getEntry();
+      exSpeedR = programmerBoard.add("Arm Speed Right", 0).getEntry(); 
       shSpeed = programmerBoard.add("Shooter Speed", 0).getEntry();
       limelightDistance = programmerBoard.add("Limelight Distance", 0).getEntry();
 
@@ -45,6 +47,8 @@ public class ShuffleBoard {
 
       actionNameD = driverBoard.add("Current Action", "nein").getEntry();
       actionNameP = programmerBoard.add("Current Action", "nein").getEntry();
+
+      matchTime = driverBoard.add("Match Time", -1).getEntry();
     }
 
     public void update() {
@@ -59,8 +63,8 @@ public class ShuffleBoard {
       exEcoderR.setNumber(Robot.superClimber.getExtenderRHeight());
       roEcoderL.setNumber(Robot.superClimber.getRotationLAngle());
       roEcoderR.setNumber(Robot.superClimber.getRotationRAngle());
-      drEcoderL.setNumber(Robot.drive.getLeftFeet());
-      drEcoderR.setNumber(Robot.drive.getRightFeet());
+      exSpeedL.setNumber(Robot.superClimber.getExtenderLSpeed());
+      exSpeedR.setNumber(Robot.superClimber.getExtenderRSpeed());
       shSpeed.setNumber(Robot.shooter.getSpeed());
 
       //Limelight
@@ -73,9 +77,17 @@ public class ShuffleBoard {
 
       //Compresser
       pressure.setNumber(Robot.pressureReader.getAverageValue());
+
+      matchTime.setNumber(Robot.matchTimer.matchTime());
+
+      if (record.isTimedOut()) {
+        System.out.println(temp + ": " + Robot.superClimber.getExtenderRSpeed() + " " + Robot.superClimber.getExtenderLSpeed());
+        record.reset();
+      }
     }
 
     public void setAction(String actionName) {
+      temp = actionName;
       actionNameD.setString(actionName);
       actionNameP.setString(actionName);
     }

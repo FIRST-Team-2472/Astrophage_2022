@@ -17,13 +17,15 @@ public class DriveToBall implements Actionable {
     @Override
     public void periodic() 
     {
-        Robot.drive.arcadeDrivePower(0.2, (limelightCorrection * Robot.limelight.targetXAngleFromCenter()));
+        Robot.drive.arcadeDrivePower(.4, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
+        Robot.intake.runConveyorPower(0.5);    
     }
 
     @Override
     public void endAction() 
     {
         Robot.drive.arcadeDrivePower(0, 0);
+        Robot.intake.runConveyorPower(0);
     }
 
     @Override

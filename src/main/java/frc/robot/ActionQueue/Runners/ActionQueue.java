@@ -75,9 +75,6 @@ public class ActionQueue {
     }
 
     public void resume() {
-        if (!start) {
-            breakTime = false;
-            runningAction.startAction();
-        }
+        breakTime = false;
     }
 }

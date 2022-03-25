@@ -23,51 +23,44 @@ public class ActionLists
 
     public void LimelightGrab(ActionQueue action)
     {
-        action.addAction(new CenteringLimelight());
         action.addAction(new DriveToBall());
-        action.addAction(new DriveStraightTime(0.2,3));
+        action.addAction(new EndDriveToBall(1.5));
     }
     
 
     ////What the robot does when it's time to climb the monkey bars.
     public void Climb(ActionQueue action) {
-        action.addAction(new ClimberIn());
-        action.addAction(new ClampOn());
-        for (int i = 0; i < 2; i++) {
-            //small
-            //for a small boi
-            //on a small street
-            //during a small time
-            action.addAction(new MoveClimberPower(2));
-            action.addAction(new ExtendAndRotateClimber(2, 2));
-            action.addAction(new FindBar());
-            action.addAction(new PullToTilt());
-            action.addAction(new ClampOff());
-            action.addAction(new ZeroRotations());
-            action.addAction(new ClimberIn());
-            action.addAction(new ClampOn());
-        }
-    }
-
-    public void ClimbTest(ActionQueue action){
+        action.addAction(new ZeroRotations());
         action.addAction(new ClampOff());
         action.addAction(new ClimberIn());
         action.addAction(new ClampOn());
-        action.addAction(new ExtendAndRotateClimber(16, 3500000));
+        action.addAction(new MoveClimberPower(2));
+        action.addAction(new ExtendAndRotateClimber(24, 3650000));
         //for finding bar
         action.addAction(new RotateClimber(2950000));
         action.addAction(new PullToTilt());
+        //action.addAction(new RotateClimber(3000000));
+        //action.addAction(new PullToTilt(-8));
         action.addAction(new ClampOff());
-        action.addAction(new MoveClimberPower(13));
+        action.addAction(new MoveClimberPower(22));
         action.addAction(new ClimbInAndGo90());
         action.addAction(new ClampOn());
-        //action.addAction(new RotateClimber(3500000));
-        /*action.addAction(new MoveClimberPower(3));
-        action.addAction(new MoveClimberPower(0));
-        action.addAction(new ClampOn());
-        action.addAction(new Wait(2));
-        action.addAction(new ClampOff());
-        action.addAction(new RotateClimber(1330000));*/
 
+        //transveal bar
+        action.addAction(new MoveClimberPower(3));
+        action.addAction(new ExtendAndRotateClimber(24, 3650000));
+        //for finding bar
+        action.addAction(new RotateClimber(2950000));
+        action.addAction(new PullToTilt());
+        //action.addAction(new ClampOff());
+    }
+
+    public void ClimbTest(ActionQueue action){
+        action.addAction(new MoveClimberPower(10));
+        action.addAction(new MoveClimberPower(0));
+        action.addAction(new MoveClimberPower(10));
+        action.addAction(new MoveClimberPower(0));
+        action.addAction(new MoveClimberPower(10));
+        action.addAction(new MoveClimberPower(-10));
     }
 }

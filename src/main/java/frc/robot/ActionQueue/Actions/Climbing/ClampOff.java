@@ -12,6 +12,7 @@ public class ClampOff extends TimerBase{
     @Override
     public void startAction() 
     {
+        super.startAction();
         Robot.climberClamp.disengageClamps();
     }
 

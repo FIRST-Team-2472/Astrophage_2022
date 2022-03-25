@@ -64,10 +64,6 @@ public class Robot extends TimedRobot {
     //declare a default instance of to access FMSInfo
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
-    
-    if (getTeamColor.getBoolean(true)) 
-      limelight.setPipeLine(3);
-    else limelight.setPipeLine(0);
 
     //runs the compressor
     compressor.enabled();
@@ -93,6 +89,9 @@ public class Robot extends TimedRobot {
     //actionList.InitialAutonomous(autoActions);
     actionList.ClimbTest(autoActions);
 
+    if (getTeamColor.getBoolean(true)) 
+      limelight.setPipeLine(0);
+    else limelight.setPipeLine(1);
     matchTimer.beginMatch();
     enabled = true;
 
@@ -110,28 +109,28 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     robotState.setString("Teleop");
 
-    teleopMethods.init(enabled);
+    teleopMethods.init(enabled, getTeamColor.getBoolean(true));
   }
 
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
 
-  if(!teleopMethods.isActionGoing()){
-    teleopMethods.drive();
+    if(!teleopMethods.isActionGoing()){
+      teleopMethods.drive();
 
-    teleopMethods.shoot();
+      teleopMethods.shoot();
 
-    teleopMethods.convey();
+      teleopMethods.convey();
 
-    teleopMethods.gimmeBall();
+      teleopMethods.gimmeBall();
 
-    teleopMethods.manualClimb();
+      teleopMethods.manualClimb();
 
-    teleopMethods.climb();
+      teleopMethods.climb();
 
-    teleopMethods.seeBall();
-  }
+      teleopMethods.seeBall();
+    }
 
     teleopMethods.autoStop();
 
@@ -164,8 +163,8 @@ public class Robot extends TimedRobot {
   //Robot does this when starting "disabled" mode
   public void disabledInit() {
     robotState.setString("Off");
-    autoActions.clear();
     enabled = false;
+    Static.stopAll();
   }
 
 

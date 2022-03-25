@@ -7,12 +7,11 @@ public abstract class TimerBase implements Actionable{
 	
 	public TimerBase (double getLifetime) {
 		lifetime = getLifetime;
-		endTime = System.currentTimeMillis() + (long)(1000 * lifetime);		
-
 	}
 	
 	@Override
 	public void startAction() {
+		endTime = System.currentTimeMillis() + (long)(1000 * lifetime);		
 	}
 	
 	@Override
