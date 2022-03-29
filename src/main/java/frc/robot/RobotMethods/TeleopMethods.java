@@ -11,6 +11,7 @@ import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 import frc.robot.Miscellaneous.Timer;
+import frc.robot.Sensors.Limelight;
 
 
 
@@ -19,8 +20,7 @@ public class TeleopMethods
     private NetworkTableEntry cameraSelection;
     private boolean breakSwitch, TwoB, climbTime, flipInvert;
     private Timer abortTimer = new Timer(2);
-    private UsbCamera camera1;
-    private UsbCamera camera2;
+    private UsbCamera camera1 , limelightFeed;
     private VideoSink server;
     private ActionQueue teleopActions;
     private double driveSpeed = 1;
@@ -31,13 +31,13 @@ public class TeleopMethods
     public void init(boolean enabled, boolean teamColor) {
         teleopActions = new ActionQueue();
         //TODO needs both cameras mounted
-        /*
+        
         cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
         server = CameraServer.getServer();
 
         camera1 = CameraServer.startAutomaticCapture(0);
-        camera2 = CameraServer.startAutomaticCapture(1);*/
+        limelightFeed = CameraServer.startAutomaticCapture(1);
 
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
@@ -67,7 +67,7 @@ public class TeleopMethods
 
         if (Robot.rightJoystick.getRawButtonPressed(3) && flipInvert) {
             System.out.println("Setting camera 2");
-            server.setSource(camera2);
+            server.setSource(limelightFeed);
             flipInvert = false;
             driveSpeed = Math.abs(driveSpeed);
         } else if (Robot.rightJoystick.getRawButtonPressed(3) && !flipInvert) {
@@ -143,6 +143,7 @@ public class TeleopMethods
             Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*-.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
             Robot.intake.runConveyorPower(0.5);
         }
+
         if (Robot.leftJoystick.getRawButtonReleased(1)) Robot.intake.runConveyorPower(0);
     }
 
