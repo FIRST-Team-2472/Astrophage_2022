@@ -77,7 +77,7 @@ public class TeleopMethods
             driveSpeed = Math.abs(driveSpeed) * -1;
         }
         
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *0.5 * driveSpeed, Robot.rightJoystick.getX() *0.5 *driveSpeed);
+        Robot.drive.tankDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed, Robot.rightJoystick.getY() *Math.abs(Robot.rightJoystick.getY()) *driveSpeed);
     }
 
     public void climb() {
