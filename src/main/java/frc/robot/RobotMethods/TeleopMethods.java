@@ -1,27 +1,21 @@
 package frc.robot.RobotMethods;
 
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.cscore.VideoSink;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.Robot;
+import frc.robot.ActionQueue.Actions.Climbing.MoveClimberPower;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
 import frc.robot.Miscellaneous.Timer;
-import frc.robot.Sensors.Limelight;
 
 
 
 public class TeleopMethods 
 {
-    private NetworkTableEntry cameraSelection;
+
     private boolean breakSwitch, TwoB, climbTime, flipInvert;
     private Timer abortTimer = new Timer(2);
-    private UsbCamera camera1 , limelightFeed;
-    private VideoSink server;
+
     private ActionQueue teleopActions;
     private double driveSpeed = 1;
 
@@ -29,15 +23,7 @@ public class TeleopMethods
 
 
     public void init(boolean enabled, boolean teamColor) {
-        teleopActions = new ActionQueue();
-        //TODO needs both cameras mounted
-        
-        cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
-
-        server = CameraServer.getServer();
-
-        camera1 = CameraServer.startAutomaticCapture(0);
-        limelightFeed = CameraServer.startAutomaticCapture(1);
+        teleopActions = new ActionQueue();        
 
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
@@ -67,12 +53,12 @@ public class TeleopMethods
 
         if (Robot.rightJoystick.getRawButtonPressed(3) && flipInvert) {
             System.out.println("Setting camera 2");
-            server.setSource(limelightFeed);
+            Robot.shuffleBoard.setCamera(1);
             flipInvert = false;
             driveSpeed = Math.abs(driveSpeed);
         } else if (Robot.rightJoystick.getRawButtonPressed(3) && !flipInvert) {
             System.out.println("Setting camera 1");
-            server.setSource(camera1);
+            Robot.shuffleBoard.setCamera(0);
             flipInvert = true;
             driveSpeed = Math.abs(driveSpeed) * -1;
         }
@@ -85,6 +71,9 @@ public class TeleopMethods
 
         if (Robot.xboxcontroller.getLeftBumper() && Robot.xboxcontroller.getRightBumper() && !teleopActions.isInProgress())
             Robot.actionList.Climb(teleopActions);
+
+        if(Robot.xboxcontroller.getLeftTriggerAxis() > 0.9)
+            teleopActions.addAction(new MoveClimberPower(16));
     }
 
     public void shoot() {
