@@ -31,7 +31,7 @@ public class ShuffleBoard {
       ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
 
       camera1 = CameraServer.startAutomaticCapture(0);
-     // limelightFeed = CameraServer.startAutomaticCapture(1);
+      limelightFeed = CameraServer.addAxisCamera("mjpeg:http://10.24.72.17:5800");
 
       cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
