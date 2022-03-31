@@ -149,7 +149,7 @@ public class TeleopMethods
     }
 
     public void manualClimb() {
-        if (Robot.xboxcontroller.getYButtonPressed()) Robot.climberClamp.setClamps();
+        //if (Robot.xboxcontroller.getYButtonPressed()) Robot.climberClamp.setClamps();
 
         //if (climbTime)  {
             double correctionEx = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *1.6;
