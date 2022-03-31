@@ -115,12 +115,15 @@ public class TeleopMethods
             }
         }
 
-        if (Robot.xboxcontroller.getBButtonPressed() && TwoB) 
-            teleopActions.clear();
-        
-        if (Robot.xboxcontroller.getBButtonPressed() && !TwoB) {
-            TwoB = true;
-            abortTimer.reset();
+        if (Robot.xboxcontroller.getBButtonPressed() && TwoB) {
+            if (TwoB) {
+                teleopActions.clear();
+                TwoB = false;
+            }
+            else {
+                TwoB = true;
+                abortTimer.reset();
+            }
         }
 
         if (abortTimer.isTimedOut())
@@ -146,7 +149,7 @@ public class TeleopMethods
     }
 
     public void manualClimb() {
-        if (Robot.xboxcontroller.getYButtonPressed()) Robot.climberClamp.setClamps();
+        //if (Robot.xboxcontroller.getYButtonPressed()) Robot.climberClamp.setClamps();
 
         //if (climbTime)  {
             double correctionEx = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *1.6;

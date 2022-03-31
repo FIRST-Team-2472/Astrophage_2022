@@ -53,7 +53,6 @@ public class ActionQueue {
             if (breakTime) Robot.shuffleBoard.setAction("paused");
             else Robot.shuffleBoard.setAction("done");
             inProgress = false;
-            start = true;
         }
     }
 
@@ -61,6 +60,7 @@ public class ActionQueue {
         while (!queue.isEmpty())
             queue.remove(0);
         runningAction = null;
+        start = true;
     }
 
     public boolean isInProgress() {
@@ -68,10 +68,9 @@ public class ActionQueue {
     }
 
     public void pause() {
-        if (!start) {
-            breakTime = true;
-            Static.stopAll();
-        }
+        breakTime = true;
+        start = true;
+        Static.stopAll();
     }
 
     public void resume() {
