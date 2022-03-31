@@ -31,6 +31,7 @@ public class ShuffleBoard {
       ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
 
       camera1 = CameraServer.startAutomaticCapture(0);
+     // limelightFeed = CameraServer.startAutomaticCapture(1);
 
       cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
@@ -38,6 +39,7 @@ public class ShuffleBoard {
 
       driverBoard.addCamera("front the of camera the", "camera1", "mjpeg:http://roboRIO-2472-FRC.local:1181/?action=stream");
       driverBoard.addCamera("back the of camera the", "limelightFeed", "mjpeg:http://10.24.72.17:5800");
+      
 
       clLimitL = programmerBoard.add("Touching Bar Left", false).getEntry();
       clLimitR = programmerBoard.add("Touching Bar Right", false).getEntry();

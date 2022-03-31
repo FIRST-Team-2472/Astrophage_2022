@@ -83,7 +83,7 @@ public class TeleopMethods
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
             Robot.shooter.runFlyWheelVelocity(0.75);
-            if(Robot.shooter.getSpeed() < -45000) Robot.intake.runConveyorPower(.5);
+            if(Robot.shooter.getSpeed() < -45000) Robot.intake.runConveyorPower(.75);
             else Robot.intake.runConveyorPower(0);
         }
         
@@ -115,7 +115,7 @@ public class TeleopMethods
             }
         }
 
-        if (Robot.xboxcontroller.getBButtonPressed() && TwoB) {
+        if (Robot.xboxcontroller.getBButtonPressed()) {
             if (TwoB) {
                 teleopActions.clear();
                 TwoB = false;
