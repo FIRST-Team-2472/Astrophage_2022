@@ -51,6 +51,7 @@ public class ActionLists
         action.addAction(new ExtendAndRotateClimber(24, 3650000));
         //for finding bar
         action.addAction(new RotateClimber(2950000));
+        action.addAction(new STOPswing());
         action.addAction(new PullToTilt());
         //action.addAction(new ClampOff());
     }
