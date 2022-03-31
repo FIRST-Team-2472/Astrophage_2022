@@ -73,7 +73,7 @@ public class TeleopMethods
             Robot.actionList.Climb(teleopActions);
 
         if(Robot.xboxcontroller.getLeftTriggerAxis() > 0.9)
-            teleopActions.addAction(new MoveClimberPower(16));
+            teleopActions.addAction(new MoveClimberPower(17));
     }
 
     public void shoot() {

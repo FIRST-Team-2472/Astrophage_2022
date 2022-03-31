@@ -94,10 +94,10 @@ public class ShuffleBoard {
 
       matchTime.setNumber(Robot.matchTimer.matchTime());
 
-      if (record.isTimedOut()) {
+      /*if (record.isTimedOut()) {
         System.out.println(temp + ": " + Robot.superClimber.getExtenderRSpeed() + " " + Robot.superClimber.getExtenderLSpeed());
         record.reset();
-      }
+      }*/
     }
 
     public void setAction(String actionName) {
