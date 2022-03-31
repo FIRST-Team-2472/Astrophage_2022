@@ -1,6 +1,7 @@
 package frc.robot.Miscellaneous;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -19,7 +20,8 @@ public class ShuffleBoard {
      shSpeed, cameraSelection, limelightDistance, matchTime;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
-    private UsbCamera camera1,limelightFeed;
+    private UsbCamera camera1;
+    private HttpCamera limelightFeed;
     private VideoSink server;
 
     String temp;
@@ -29,14 +31,13 @@ public class ShuffleBoard {
       ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
 
       camera1 = CameraServer.startAutomaticCapture(0);
-      limelightFeed = CameraServer.startAutomaticCapture(1);
 
       cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
       server = CameraServer.getServer();
 
       driverBoard.addCamera("front the of camera the", "camera1", "mjpeg:http://roboRIO-2472-FRC.local:1181/?action=stream");
-      driverBoard.addCamera("back the of camera the", "limelightFeed", "mjpeg:http://roboRIO-2472-FRC.local:1182/?action=stream");
+      driverBoard.addCamera("back the of camera the", "limelightFeed", "mjpeg:http://10.24.72.17:5800");
 
       clLimitL = programmerBoard.add("Touching Bar Left", false).getEntry();
       clLimitR = programmerBoard.add("Touching Bar Right", false).getEntry();
@@ -106,7 +107,7 @@ public class ShuffleBoard {
     
     public void setCamera(int toggle) {
       if(toggle == 0) server.setSource(camera1);
-      else server.setSource(limelightFeed);
+      else if (toggle == 1) server.setSource(limelightFeed);
     }
 }
 
