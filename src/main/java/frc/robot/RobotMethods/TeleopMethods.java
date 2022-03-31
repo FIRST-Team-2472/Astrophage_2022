@@ -115,12 +115,15 @@ public class TeleopMethods
             }
         }
 
-        if (Robot.xboxcontroller.getBButtonPressed() && TwoB) 
-            teleopActions.clear();
-        
-        if (Robot.xboxcontroller.getBButtonPressed() && !TwoB) {
-            TwoB = true;
-            abortTimer.reset();
+        if (Robot.xboxcontroller.getBButtonPressed() && TwoB) {
+            if (TwoB) {
+                teleopActions.clear();
+                TwoB = false;
+            }
+            else {
+                TwoB = true;
+                abortTimer.reset();
+            }
         }
 
         if (abortTimer.isTimedOut())

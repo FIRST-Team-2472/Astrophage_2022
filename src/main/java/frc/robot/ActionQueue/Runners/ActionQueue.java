@@ -68,10 +68,8 @@ public class ActionQueue {
     }
 
     public void pause() {
-        if (!start) {
-            breakTime = true;
-            Static.stopAll();
-        }
+        breakTime = true;
+        Static.stopAll();
     }
 
     public void resume() {
