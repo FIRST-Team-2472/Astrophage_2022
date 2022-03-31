@@ -14,10 +14,9 @@ public class SuperClimber {
   private TalonSRX rotationL;
   private TalonSRX rotationR;
 
-  // TODO need to find a special number
-  private final float exLFeet = 24675, exRFeet = 24675; //24675
-  public final double encoderToDegrees = 0;
-  private final double extenderLimit = -550000;
+  private final float exEcoderToIN = 24675; //24675
+  public final double encoderToDegrees = 24;
+  private final double extenderLimit = 550000;
   private final double KF = 0, KP = 0, KI = 0;
 
 
@@ -46,11 +45,11 @@ public class SuperClimber {
   }
 
   public void runTargetExtenderL(double feet) {
-    extenderL.set(ControlMode.MotionMagic, feet / exLFeet);
+    extenderL.set(ControlMode.MotionMagic, feet / exEcoderToIN);
   }
 
   public void runTargetExtenderR(double feet) {
-    extenderR.set(ControlMode.MotionMagic, feet / exRFeet);
+    extenderR.set(ControlMode.MotionMagic, feet / exEcoderToIN);
   }
 
   public void runBothExtendersTarget(double feet) {
@@ -100,19 +99,19 @@ public class SuperClimber {
 
   //these methods get the height of the climbers based upon encoder values and a predetermined encoder to foot ratio
   public double getExtenderLHeight() {
-    return (extenderL.getSelectedSensorPosition() / exLFeet);
+    return (extenderL.getSelectedSensorPosition() / exEcoderToIN);
   }
 
   public double getExtenderRHeight() {
-    return (extenderR.getSelectedSensorPosition() / exRFeet);
+    return (extenderR.getSelectedSensorPosition() / exEcoderToIN);
   }    
 
   public double getExtenderRSpeed() {
-    return extenderR.getSelectedSensorVelocity() / exRFeet;
+    return extenderR.getSelectedSensorVelocity() / exEcoderToIN;
   } 
 
   public double getExtenderLSpeed() {
-    return extenderL.getSelectedSensorVelocity() / exLFeet;
+    return extenderL.getSelectedSensorVelocity() / exEcoderToIN;
   }
 
   //these methods get the rotaion (in degrees) of the climbers based upon encoder values and a predetermined encoder to degrees ratio
@@ -137,7 +136,6 @@ public class SuperClimber {
   }
 
   public void zeroRotationEncoders() {
-    //TODO after 5 hours of testing not working i give not really needed
     rotationL.setSelectedSensorPosition(0);
     //rotationL.configReverseSoftLimitEnable(true);
     //rotationL.configReverseSoftLimitThreshold(rotationLimit, 0);
@@ -149,12 +147,12 @@ public class SuperClimber {
 
   public void zeroExtenderEncoders() {
     extenderL.setSelectedSensorPosition(0);
-    extenderL.configReverseSoftLimitEnable(true);
-    extenderL.configReverseSoftLimitThreshold(extenderLimit);
+    extenderL.configForwardSoftLimitEnable(true);
+    extenderL.configForwardSoftLimitThreshold(extenderLimit * exEcoderToIN);
 
     extenderR.setSelectedSensorPosition(0);
-    extenderR.configReverseSoftLimitEnable(true);
-    extenderR.configReverseSoftLimitThreshold(extenderLimit);
+    extenderR.configForwardSoftLimitEnable(true);
+    extenderR.configForwardSoftLimitThreshold(extenderLimit * exEcoderToIN);
   }
 
 

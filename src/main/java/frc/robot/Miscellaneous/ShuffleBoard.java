@@ -1,6 +1,11 @@
 package frc.robot.Miscellaneous;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -15,35 +20,43 @@ public class ShuffleBoard {
      shSpeed, cameraSelection, limelightDistance, matchTime;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
+    private UsbCamera camera1;
+    private HttpCamera limelightFeed;
+    private VideoSink server;
+
     String temp;
 
     public ShuffleBoard() {
-
-
       ShuffleboardTab driverBoard = Shuffleboard.getTab("Driver Board");
       ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
 
-        
-      driverBoard.addCamera("camera 1", "camera1", "mjpeg:http://roboRIO-2016-FRC.local:1181/?action=stream");
-      driverBoard.addCamera("camera 2", "camera2", "mjpeg:http://roboRIO-2016-FRC.local:1182/?action=stream");
+      camera1 = CameraServer.startAutomaticCapture(0);
+
+      cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
+
+      server = CameraServer.getServer();
+
+      driverBoard.addCamera("front the of camera the", "camera1", "mjpeg:http://roboRIO-2472-FRC.local:1181/?action=stream");
+      driverBoard.addCamera("back the of camera the", "limelightFeed", "mjpeg:http://10.24.72.17:5800");
+
       clLimitL = programmerBoard.add("Touching Bar Left", false).getEntry();
       clLimitR = programmerBoard.add("Touching Bar Right", false).getEntry();
       roLimitL = programmerBoard.add("Left Arm Vertical", false).getEntry();
       roLimitR = programmerBoard.add("Right Arm Vertical", false).getEntry(); 
-      exEcoderL = programmerBoard.add("Arm Distance Left", 0).getEntry();
-      exEcoderR = programmerBoard.add("Arm Distance Right", 0).getEntry();
-      roEcoderL = programmerBoard.add("Arm Rotation Left", 0).getEntry();
-      roEcoderR = programmerBoard.add("Arm Rotation Right", 0).getEntry(); 
-      exSpeedL = programmerBoard.add("Arm Speed Left", 0).getEntry();
-      exSpeedR = programmerBoard.add("Arm Speed Right", 0).getEntry(); 
-      shSpeed = programmerBoard.add("Shooter Speed", 0).getEntry();
-      limelightDistance = programmerBoard.add("Limelight Distance", 0).getEntry();
+      exEcoderL = programmerBoard.add("Arm Distance Left", -1).getEntry();
+      exEcoderR = programmerBoard.add("Arm Distance Right", -1).getEntry();
+      roEcoderL = programmerBoard.add("Arm Rotation Left", -1).getEntry();
+      roEcoderR = programmerBoard.add("Arm Rotation Right", -1).getEntry(); 
+      exSpeedL = programmerBoard.add("Arm Speed Left", -1).getEntry();
+      exSpeedR = programmerBoard.add("Arm Speed Right", -1).getEntry(); 
+      shSpeed = programmerBoard.add("Shooter Speed", -1).getEntry();
+      limelightDistance = programmerBoard.add("Limelight Distance", -1).getEntry();
 
 
-      IMU_X = programmerBoard.add("IMU X", 0).getEntry(); 
-      IMU_Y = programmerBoard.add("IMU Y", 0).getEntry();
-      IMU_Z = programmerBoard.add("IMU Z", 0).getEntry(); 
-      pressure = programmerBoard.add("Pressure", 0).getEntry(); 
+      IMU_X = programmerBoard.add("IMU X", -1).getEntry(); 
+      IMU_Y = programmerBoard.add("IMU Y", -1).getEntry();
+      IMU_Z = programmerBoard.add("IMU Z", -1).getEntry(); 
+      pressure = programmerBoard.add("Pressure", -1).getEntry(); 
 
       actionNameD = driverBoard.add("Current Action", "nein").getEntry();
       actionNameP = programmerBoard.add("Current Action", "nein").getEntry();
@@ -90,6 +103,11 @@ public class ShuffleBoard {
       temp = actionName;
       actionNameD.setString(actionName);
       actionNameP.setString(actionName);
+    }
+    
+    public void setCamera(int toggle) {
+      if(toggle == 0) server.setSource(camera1);
+      else if (toggle == 1) server.setSource(limelightFeed);
     }
 }
 

@@ -88,8 +88,7 @@ public class Robot extends TimedRobot {
     autoActions.addAction(new ZeroEncoders());
     autoActions.addAction(new ZeroRotations());
 
-    //actionList.InitialAutonomous(autoActions);
-    actionList.ClimbTest(autoActions);
+    actionList.InitialAutonomous(autoActions);
 
     if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);

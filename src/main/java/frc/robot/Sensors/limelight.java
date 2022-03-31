@@ -79,7 +79,7 @@ public class Limelight {
 
     public double get_distance_in() {
         double targetAngle = targetYAngleFromCenter();
-        double cameraHeight = 22;
+        double cameraHeight = 7;
         double targetHeight = 9;
         double cameraAngle = 0;
         double d = (targetHeight-cameraHeight) / (Math.tan(Math.toRadians(cameraAngle+targetAngle)));

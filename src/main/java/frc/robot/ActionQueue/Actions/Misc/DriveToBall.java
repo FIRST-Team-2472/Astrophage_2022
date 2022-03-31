@@ -1,6 +1,9 @@
 package frc.robot.ActionQueue.Actions.Misc;
 
 import frc.robot.ActionQueue.Runners.Actionable;
+
+import javax.lang.model.util.ElementScanner6;
+
 import frc.robot.Robot;
 
 public class DriveToBall implements Actionable {
@@ -17,8 +20,12 @@ public class DriveToBall implements Actionable {
     @Override
     public void periodic() 
     {
-        Robot.drive.arcadeDrivePower(.4, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
+        if (Robot.limelight.get_distance_in() <=1)
+            Robot.drive.arcadeDrivePower(.4, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
+        else Robot.drive.arcadeDrivePower(0, 0);
+
         Robot.intake.runConveyorPower(0.5);    
+        
     }
 
     @Override
@@ -31,8 +38,7 @@ public class DriveToBall implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if (Robot.limelight.get_distance_in() <= 6) return true;
-        else return false;
+        return !Robot.limelight.isTargetSpotted();
     }
 
 }
