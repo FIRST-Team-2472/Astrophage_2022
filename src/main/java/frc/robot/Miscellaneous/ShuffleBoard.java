@@ -24,8 +24,8 @@ public class ShuffleBoard {
       ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
 
         
-      //driverBoard.addCamera("camera 1", "camera1", "mjpeg:http://roboRIO-2016-FRC.local:1181/?action=stream");
-      //driverBoard.addCamera("camera 2", "camera2", "mjpeg:http://roboRIO-2016-FRC.local:1182/?action=stream");
+      driverBoard.addCamera("camera 1", "camera1", "mjpeg:http://roboRIO-2016-FRC.local:1181/?action=stream");
+      driverBoard.addCamera("camera 2", "camera2", "mjpeg:http://roboRIO-2016-FRC.local:1182/?action=stream");
       clLimitL = programmerBoard.add("Touching Bar Left", false).getEntry();
       clLimitR = programmerBoard.add("Touching Bar Right", false).getEntry();
       roLimitL = programmerBoard.add("Left Arm Vertical", false).getEntry();
