@@ -60,7 +60,6 @@ public class ActionQueue {
     public void clear() {
         while (!queue.isEmpty())
             queue.remove(0);
-        runningAction = null;
         start = true;
     }
 
@@ -71,6 +70,7 @@ public class ActionQueue {
     public void pause() {
         breakTime = true;
         start = true;
+        //ook snook
         Static.stopAll();
     }
 

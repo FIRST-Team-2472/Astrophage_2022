@@ -29,9 +29,9 @@ public class TeleopMethods
             teleopActions.addAction(new ZeroEncoders());
             teleopActions.addAction(new ZeroRotations());
             Robot.matchTimer.beginMatch();
-            if (teamColor) 
+           /* if (teamColor) 
                 Robot.limelight.setPipeLine(1);
-            else Robot.limelight.setPipeLine(1);
+            else Robot.limelight.setPipeLine(1);*/
         }
 
         flipInvert = false;
