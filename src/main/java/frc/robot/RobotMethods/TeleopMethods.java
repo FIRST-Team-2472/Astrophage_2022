@@ -63,14 +63,16 @@ public class TeleopMethods
             driveSpeed = Math.abs(driveSpeed) * -1;
         }
         
-        Robot.drive.tankDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed, Robot.rightJoystick.getY() *Math.abs(Robot.rightJoystick.getY()) *driveSpeed);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed, Robot.rightJoystick.getY() *Math.abs(Robot.rightJoystick.getY()) *driveSpeed);
     }
 
     public void climb() {
         if (Robot.matchTimer.matchTime() >= 120) climbTime = true;
 
-        if (Robot.xboxcontroller.getLeftBumper() && Robot.xboxcontroller.getRightBumper() && !teleopActions.isInProgress())
+        if (Robot.xboxcontroller.getLeftBumper() && Robot.xboxcontroller.getRightBumper() && !teleopActions.isInProgress()) {
             Robot.actionList.Climb(teleopActions);
+            Robot.matchTimer.beginMatch();
+        }
 
         if(Robot.xboxcontroller.getLeftTriggerAxis() > 0.9)
             teleopActions.addAction(new MoveClimberPower(17));
