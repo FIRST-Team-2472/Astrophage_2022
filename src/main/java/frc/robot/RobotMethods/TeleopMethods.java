@@ -63,7 +63,7 @@ public class TeleopMethods
             driveSpeed = Math.abs(driveSpeed) * -1;
         }
         
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed, Robot.rightJoystick.getY() *Math.abs(Robot.rightJoystick.getY()) *driveSpeed);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed, -Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed);
     }
 
     public void climb() {
@@ -84,8 +84,9 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getXButton()) {
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
-            Robot.shooter.runFlyWheelVelocity(0.75);
-            if(Robot.shooter.getSpeed() < -45000) Robot.intake.runConveyorPower(.75);
+            Robot.shooter.runFlyWheelVelocity(0.5);
+            //Robot.intake.runConveyorPower(.75);
+            if(Robot.shooter.getSpeed() < -30000) Robot.intake.runConveyorPower(.75);
             else Robot.intake.runConveyorPower(0);
         }
         
