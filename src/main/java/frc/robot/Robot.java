@@ -90,9 +90,9 @@ public class Robot extends TimedRobot {
 
     actionList.InitialAutonomous(autoActions);
 
-    if (getTeamColor.getBoolean(true)) 
+    /*if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);
-    else limelight.setPipeLine(1);
+    else limelight.setPipeLine(1);*/
     matchTimer.beginMatch();
     enabled = true;
 

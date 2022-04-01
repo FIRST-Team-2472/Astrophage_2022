@@ -17,7 +17,7 @@ public class ShuffleBoard {
     private Timer record = new Timer(1);
     private NetworkTableEntry clLimitL, clLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
      roEcoderR, exSpeedL, exSpeedR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
-     shSpeed, cameraSelection, limelightDistance, matchTime;
+     shSpeed, cameraSelection, limelightDistance, matchTime, getTeam;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     private UsbCamera camera1;
@@ -26,12 +26,13 @@ public class ShuffleBoard {
 
     String temp;
 
+    //ook snook does the oogie boogie shoogie snoogie
     public ShuffleBoard() {
       ShuffleboardTab driverBoard = Shuffleboard.getTab("Driver Board");
       ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
 
       camera1 = CameraServer.startAutomaticCapture(0);
-      limelightFeed = CameraServer.addAxisCamera("mjpeg:http://10.24.72.17:5800");
+      limelightFeed = CameraServer.addAxisCamera("limelight", "mjpeg:http://10.24.72.17:5800");
 
       cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
@@ -59,6 +60,8 @@ public class ShuffleBoard {
       IMU_Z = programmerBoard.add("IMU Z", -1).getEntry(); 
       pressure = programmerBoard.add("Pressure", -1).getEntry(); 
 
+      getTeam = driverBoard.add("Toggle Team", false).getEntry();
+
       actionNameD = driverBoard.add("Current Action", "nein").getEntry();
       actionNameP = programmerBoard.add("Current Action", "nein").getEntry();
 
@@ -66,6 +69,8 @@ public class ShuffleBoard {
     }
 
     public void update() {
+      if(getTeam.getBoolean(false)) Robot.limelight.setPipeLine(0);
+      else Robot.limelight.setPipeLine(1);
       //limitSwtiches
       clLimitL.setBoolean(Robot.climberClamp.isClampedL());
       clLimitR.setBoolean(Robot.climberClamp.isClampedR());
