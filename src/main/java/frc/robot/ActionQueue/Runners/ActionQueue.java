@@ -53,6 +53,7 @@ public class ActionQueue {
             if (breakTime) Robot.shuffleBoard.setAction("paused");
             else Robot.shuffleBoard.setAction("done");
             inProgress = false;
+            start = true;
         }
     }
 

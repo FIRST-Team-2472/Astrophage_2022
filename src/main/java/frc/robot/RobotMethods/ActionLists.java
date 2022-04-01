@@ -39,8 +39,10 @@ public class ActionLists
         //for finding bar
         action.addAction(new RotateClimber(2950000));
         action.addAction(new PullToTilt());
-        //action.addAction(new RotateClimber(3000000));
-        //action.addAction(new PullToTilt(-8));
+        action.addAction(new RotateClimber(3100000));
+        action.addAction(new PullToTilt(-7));
+        action.addAction(new RotateClimber(3620000));
+        action.addAction(new PullToTilt(-11));
         action.addAction(new ClampOff());
         action.addAction(new MoveClimberPower(22));
         action.addAction(new ClimbInAndGo90());
