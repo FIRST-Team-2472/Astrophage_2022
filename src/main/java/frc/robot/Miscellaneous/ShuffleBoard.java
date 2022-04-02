@@ -17,7 +17,7 @@ public class ShuffleBoard {
     private Timer record = new Timer(1);
     private NetworkTableEntry clLimitL, clLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
      roEcoderR, exSpeedL, exSpeedR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
-     shSpeed, cameraSelection, limelightDistance, matchTime, getTeam;
+     shSpeed, cameraSelection, limelightDistance, matchTime, getTeam, showInvert;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     private UsbCamera camera1;
@@ -32,7 +32,8 @@ public class ShuffleBoard {
       ShuffleboardTab programmerBoard = Shuffleboard.getTab("Programmer Board");
 
       camera1 = CameraServer.startAutomaticCapture(0);
-      limelightFeed = CameraServer.addAxisCamera("limelight", "mjpeg:http://10.24.72.17:5800");
+      limelightFeed = CameraServer.addAxisCamera("10.24.72.17");
+      
 
       cameraSelection = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry("CameraSelection");
 
@@ -62,6 +63,7 @@ public class ShuffleBoard {
       pressure = programmerBoard.add("Pressure", -1).getEntry(); 
 
       getTeam = driverBoard.add("Toggle Team", false).getEntry();
+      showInvert = driverBoard.add("Inverto", false).getEntry();
 
       actionNameD = driverBoard.add("Current Action", "nein").getEntry();
       actionNameP = programmerBoard.add("Current Action", "nein").getEntry();
@@ -72,6 +74,7 @@ public class ShuffleBoard {
     public void update() {
       if(getTeam.getBoolean(false)) Robot.limelight.setPipeLine(0);
       else Robot.limelight.setPipeLine(1);
+
       //limitSwtiches
       clLimitL.setBoolean(Robot.climberClamp.isClampedL());
       clLimitR.setBoolean(Robot.climberClamp.isClampedR());
@@ -115,6 +118,11 @@ public class ShuffleBoard {
     public void setCamera(int toggle) {
       if(toggle == 0) server.setSource(camera1);
       else if (toggle == 1) server.setSource(limelightFeed);
+    }
+
+    public void setInvert(int oooooo) {
+      if(oooooo == 1) showInvert.setBoolean(false);
+      else if (oooooo == -1) showInvert.setBoolean(true);
     }
 }
 
