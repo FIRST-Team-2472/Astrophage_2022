@@ -1,5 +1,6 @@
 package frc.robot.RobotMethods;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Climbing.MoveClimberPower;
