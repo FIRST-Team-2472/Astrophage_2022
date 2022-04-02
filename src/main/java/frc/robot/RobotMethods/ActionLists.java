@@ -31,6 +31,7 @@ public class ActionLists
     ////What the robot does when it's time to climb the monkey bars.
     public void Climb(ActionQueue action) {
         action.addAction(new ZeroRotations());
+        //action.addAction(new RotateClimber(10000));
         action.addAction(new ClampOff());
         action.addAction(new ClimberIn());
         action.addAction(new ClampOn());
@@ -43,17 +44,20 @@ public class ActionLists
         action.addAction(new PullToTilt(-7));
         action.addAction(new RotateClimber(3620000));
         action.addAction(new PullToTilt(-11));
+        action.addAction(new RotateClimber(4020000));
+        action.addAction(new PullToTilt(-17));
         action.addAction(new ClampOff());
-        action.addAction(new MoveClimberPower(22));
+        action.addAction(new RotateClimber(2950000));
         action.addAction(new ClimbInAndGo90());
         action.addAction(new ClampOn());
-
+        action.addAction(new STOPswing());
         //transveal bar
         action.addAction(new MoveClimberPower(3));
+        action.addAction(new RotateClimber(2000000));
         action.addAction(new ExtendAndRotateClimber(24, 3650000));
         //for finding bar
         action.addAction(new RotateClimber(2950000));
-        action.addAction(new STOPswing());
+        
         action.addAction(new PullToTilt());
         //action.addAction(new ClampOff());
     }
