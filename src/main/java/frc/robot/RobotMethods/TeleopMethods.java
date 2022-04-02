@@ -54,18 +54,19 @@ public class TeleopMethods
         else if (Robot.rightJoystick.getRawButtonReleased(1)) driveSpeed = 1;
         
 
-        if (Robot.rightJoystick.getRawButtonPressed(3) && flipInvert) {
-            //System.out.println("Setting camera 2");
-            //Robot.shuffleBoard.setCamera(1);
-            flipInvert = false;
-            invert = Math.abs(invert);
-            Robot.shuffleBoard.setInvert(invert);
-        } else if (Robot.rightJoystick.getRawButtonPressed(3) && !flipInvert) {
-            //System.out.println("Setting camera 1");
-            //Robot.shuffleBoard.setCamera(0);
-            flipInvert = false;
-            invert = Math.abs(invert);
-            Robot.shuffleBoard.setInvert(invert);
+        if (Robot.rightJoystick.getRawButtonPressed(3)) {
+            if (flipInvert) {
+                Robot.shuffleBoard.setCamera(1);
+                flipInvert = false;
+                invert = 1;
+                Robot.shuffleBoard.setInvert(invert);
+            }
+            else {
+                Robot.shuffleBoard.setCamera(0);
+                flipInvert = true;
+                invert = -1;
+                Robot.shuffleBoard.setInvert(invert);
+            }
         }
         
         Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, -Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed*invert);
