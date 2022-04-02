@@ -17,7 +17,7 @@ public class ShuffleBoard {
     private Timer record = new Timer(1);
     private NetworkTableEntry clLimitL, clLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
      roEcoderR, exSpeedL, exSpeedR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
-     shSpeed, cameraSelection, limelightDistance, matchTime, getTeam;
+     shSpeed, cameraSelection, limelightDistance, matchTime, getTeam, showInvert;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     private UsbCamera camera1;

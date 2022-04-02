@@ -17,7 +17,8 @@ public class TeleopMethods
     private Timer abortTimer = new Timer(2);
 
     private ActionQueue teleopActions;
-    private double driveSpeed = 1;
+    private double driveSpeed;
+    private int invert;
 
 
 
@@ -38,6 +39,8 @@ public class TeleopMethods
         breakSwitch = false;
         TwoB = false;
         climbTime = false;
+        driveSpeed = 1;
+        invert = 1;
     }
 
     public void update()
@@ -48,22 +51,25 @@ public class TeleopMethods
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
         if (Robot.rightJoystick.getRawButton(1)) driveSpeed = 0.5;
-        else driveSpeed = 1;
+        else if (Robot.rightJoystick.getRawButtonReleased(1)) driveSpeed = 1;
         
 
-        if (Robot.rightJoystick.getRawButtonPressed(3) && flipInvert) {
-            System.out.println("Setting camera 2");
-            Robot.shuffleBoard.setCamera(1);
-            flipInvert = false;
-            driveSpeed = Math.abs(driveSpeed);
-        } else if (Robot.rightJoystick.getRawButtonPressed(3) && !flipInvert) {
-            System.out.println("Setting camera 1");
-            Robot.shuffleBoard.setCamera(0);
-            flipInvert = true;
-            driveSpeed = Math.abs(driveSpeed) * -1;
+        if (Robot.rightJoystick.getRawButtonPressed(3)) {
+            if (flipInvert) {
+                //System.out.println("Setting camera 2");
+                //Robot.shuffleBoard.setCamera(1);
+                flipInvert = false;
+                invert = Math.abs(invert);
+            }
+            else {
+                //System.out.println("Setting camera 1");
+                //Robot.shuffleBoard.setCamera(0);
+                flipInvert = true;
+                invert = Math.abs(invert) * -1;
+            }
         }
         
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed, -Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, -Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed*invert);
     }
 
     public void climb() {
