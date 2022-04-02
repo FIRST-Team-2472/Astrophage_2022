@@ -54,19 +54,18 @@ public class TeleopMethods
         else if (Robot.rightJoystick.getRawButtonReleased(1)) driveSpeed = 1;
         
 
-        if (Robot.rightJoystick.getRawButtonPressed(3)) {
-            if (flipInvert) {
-                //System.out.println("Setting camera 2");
-                //Robot.shuffleBoard.setCamera(1);
-                flipInvert = false;
-                invert = Math.abs(invert);
-            }
-            else {
-                //System.out.println("Setting camera 1");
-                //Robot.shuffleBoard.setCamera(0);
-                flipInvert = true;
-                invert = Math.abs(invert) * -1;
-            }
+        if (Robot.rightJoystick.getRawButtonPressed(3) && flipInvert) {
+            //System.out.println("Setting camera 2");
+            //Robot.shuffleBoard.setCamera(1);
+            flipInvert = false;
+            invert = Math.abs(invert);
+            Robot.shuffleBoard.setInvert(invert);
+        } else if (Robot.rightJoystick.getRawButtonPressed(3) && !flipInvert) {
+            //System.out.println("Setting camera 1");
+            //Robot.shuffleBoard.setCamera(0);
+            flipInvert = false;
+            invert = Math.abs(invert);
+            Robot.shuffleBoard.setInvert(invert);
         }
         
         Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, -Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed*invert);
@@ -75,10 +74,8 @@ public class TeleopMethods
     public void climb() {
         if (Robot.matchTimer.matchTime() >= 120) climbTime = true;
 
-        if (Robot.xboxcontroller.getLeftBumper() && Robot.xboxcontroller.getRightBumper() && !teleopActions.isInProgress()) {
+        if (Robot.xboxcontroller.getLeftBumper() && Robot.xboxcontroller.getRightBumper() && !teleopActions.isInProgress())
             Robot.actionList.Climb(teleopActions);
-            Robot.matchTimer.beginMatch();
-        }
 
         if(Robot.xboxcontroller.getLeftTriggerAxis() > 0.9)
             teleopActions.addAction(new MoveClimberPower(17));
@@ -90,9 +87,8 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getXButton()) {
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
-            Robot.shooter.runFlyWheelVelocity(0.5);
-            //Robot.intake.runConveyorPower(.75);
-            if(Robot.shooter.getSpeed() < -30000) Robot.intake.runConveyorPower(.75);
+            Robot.shooter.runFlyWheelVelocity(0.75);
+            if(Robot.shooter.getSpeed() < -45000) Robot.intake.runConveyorPower(.75);
             else Robot.intake.runConveyorPower(0);
         }
         
