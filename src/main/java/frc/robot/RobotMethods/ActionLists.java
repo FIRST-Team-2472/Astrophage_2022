@@ -9,8 +9,11 @@ public class ActionLists
     //What the robot does in the first 15 seconds of autonomous
     public void InitialAutonomous(ActionQueue action)
     {
-        action.addAction(new ShootBall(2));
-        action.addAction(new DriveStraightTime(-0.5, 4));
+        //action.addAction(new DriveStraightTime(0.25, 2));
+        action.addAction(new ShootBall(5));
+        LimelightGrab(action);
+        action.addAction(new DriveStraightTime(-0.15, 2));
+        action.addAction(new ShootBall(5));
     }
 
     //If the drivers decide that driving is too hard.
@@ -24,7 +27,7 @@ public class ActionLists
     public void LimelightGrab(ActionQueue action)
     {
         action.addAction(new DriveToBall());
-        action.addAction(new EndDriveToBall(1.5));
+        action.addAction(new EndDriveToBall(1));
     }
     
 
@@ -36,6 +39,7 @@ public class ActionLists
         action.addAction(new ClimberIn());
         action.addAction(new ClampOn());
         action.addAction(new MoveClimberPower(2));
+        action.addAction(new RotateClimber(1000000));
         action.addAction(new ExtendAndRotateClimber(24, 3650000));
         //for finding bar
         action.addAction(new RotateClimber(2950000));
@@ -59,7 +63,9 @@ public class ActionLists
         action.addAction(new RotateClimber(2950000));
         
         action.addAction(new PullToTilt());
-        //action.addAction(new ClampOff());
+        action.addAction(new ClampOff());
+        action.addAction(new MoveClimberPower(17));
+        action.addAction(new ZeroRotations());
     }
 
     public void ClimbTest(ActionQueue action){

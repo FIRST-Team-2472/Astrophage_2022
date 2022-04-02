@@ -6,7 +6,7 @@ import frc.robot.Miscellaneous.Timer;
 
 public class STOPswing implements Actionable {
     //Not currently used
-    Timer bruh = new Timer(1.25);
+    Timer bruh = new Timer(3);
 
     @Override
     public void startAction() 

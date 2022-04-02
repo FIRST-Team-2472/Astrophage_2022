@@ -6,6 +6,7 @@ import frc.robot.ActionQueue.Actions.Climbing.MoveClimberPower;
 import frc.robot.ActionQueue.Actions.Misc.ZeroEncoders;
 import frc.robot.ActionQueue.Actions.Misc.ZeroRotations;
 import frc.robot.ActionQueue.Runners.ActionQueue;
+import frc.robot.Miscellaneous.Static;
 import frc.robot.Miscellaneous.Timer;
 
 
@@ -39,7 +40,7 @@ public class TeleopMethods
         breakSwitch = false;
         TwoB = false;
         climbTime = false;
-        driveSpeed = 1;
+        driveSpeed = 0.5;
         invert = 1;
     }
 
@@ -50,26 +51,26 @@ public class TeleopMethods
 
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        if (Robot.rightJoystick.getRawButton(1)) driveSpeed = 0.5;
-        else if (Robot.rightJoystick.getRawButtonReleased(1)) driveSpeed = 1;
+        if (Robot.rightJoystick.getRawButton(1)) driveSpeed = 0.25;
+        else if (Robot.rightJoystick.getRawButtonReleased(1)) driveSpeed = 0.5;
         
 
         if (Robot.rightJoystick.getRawButtonPressed(3)) {
             if (flipInvert) {
-                Robot.shuffleBoard.setCamera(1);
+                //Robot.shuffleBoard.setCamera(1);
                 flipInvert = false;
                 invert = 1;
                 Robot.shuffleBoard.setInvert(invert);
             }
             else {
-                Robot.shuffleBoard.setCamera(0);
+                //Robot.shuffleBoard.setCamera(0);
                 flipInvert = true;
                 invert = -1;
                 Robot.shuffleBoard.setInvert(invert);
             }
         }
         
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, -Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed*invert);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed*invert);
     }
 
     public void climb() {
@@ -78,8 +79,10 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getLeftBumper() && Robot.xboxcontroller.getRightBumper() && !teleopActions.isInProgress())
             Robot.actionList.Climb(teleopActions);
 
-        if(Robot.xboxcontroller.getLeftTriggerAxis() > 0.9)
+        if(Robot.xboxcontroller.getLeftTriggerAxis() > 0.9) {
+            Static.stopAll();
             teleopActions.addAction(new MoveClimberPower(17));
+        }
     }
 
     public void shoot() {
@@ -88,8 +91,9 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getXButton()) {
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
-            Robot.shooter.runFlyWheelVelocity(0.75);
-            if(Robot.shooter.getSpeed() < -45000) Robot.intake.runConveyorPower(.75);
+            Robot.shooter.runFlyWheelVelocity(0.4);
+           // Robot.intake.runConveyorPower(0.5);
+            if(Robot.shooter.getSpeed() < -50000) Robot.intake.runConveyorPower(.75);
             else Robot.intake.runConveyorPower(0);
         }
         
@@ -138,7 +142,7 @@ public class TeleopMethods
 
     public void seeBall() {
         if (Robot.leftJoystick.getRawButton(1)) {
-            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY()*-.5, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
+            Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
             Robot.intake.runConveyorPower(0.5);
         }
 
