@@ -9,6 +9,7 @@ public class ZeroEncoders implements Actionable {
     public void startAction() {
         Robot.drive.zeroEncoders();
         Robot.superClimber.zeroExtenderEncoders();
+        Robot.superClimber.zeroRotationEncoders();
     }
 
     @Override

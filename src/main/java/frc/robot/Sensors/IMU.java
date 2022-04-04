@@ -13,7 +13,6 @@ public class IMU {
     }
 
     public int getCurrentXAngle() {
-
         return (int)pigeon.getYaw();
     }
 
@@ -27,5 +26,13 @@ public class IMU {
         return (int)pigeon.getRoll();
     }
 
+    public int getRealXAngle() {
+        int temp = getCurrentXAngle()%360;
+
+        if (temp >= 0)
+            return temp;
+        else 
+            return 360+temp;
+    }
 }
 
