@@ -144,19 +144,19 @@ public class TeleopMethods
     public void seeBall() {
         if (Robot.leftJoystick.getRawButton(1)) {
             Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
-            Robot.intake.runConveyorPower(0.5);
+            //Robot.intake.runConveyorPower(0.5);
         }
 
-        if (Robot.leftJoystick.getRawButtonReleased(1)) Robot.intake.runConveyorPower(0);
+        //if (Robot.leftJoystick.getRawButtonReleased(1)) Robot.intake.runConveyorPower(0);
     }
 
 
     public void gimmeBall() {
         if (Robot.rightJoystick.getRawButton(2)) {
             Robot.drive.arcadeDrivePower(0.4, (-0.4 * (0.01 * Robot.limelight.targetXAngleFromCenter())));
-            Robot.intake.runConveyorPower(0.5);  
+            //Robot.intake.runConveyorPower(0.5);  
         }
-        if (Robot.rightJoystick.getRawButtonReleased(2)) Robot.intake.runConveyorPower(0);
+        //if (Robot.rightJoystick.getRawButtonReleased(2)) Robot.intake.runConveyorPower(0);
     }
 
     public void manualClimb() {
