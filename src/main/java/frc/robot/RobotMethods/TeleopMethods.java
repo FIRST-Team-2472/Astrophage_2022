@@ -48,6 +48,9 @@ public class TeleopMethods
     public void update()
     {
         teleopActions.step();
+
+        if(Robot.rightJoystick.getRawButton(10))  Robot.limelight.setPipeLine(0);
+        if(Robot.rightJoystick.getRawButton(11))  Robot.limelight.setPipeLine(1);
     }
 
     //All three of these are for drivers communicating with the subsystems.

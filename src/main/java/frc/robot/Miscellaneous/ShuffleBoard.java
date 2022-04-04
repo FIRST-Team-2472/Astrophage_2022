@@ -72,8 +72,8 @@ public class ShuffleBoard {
     }
 
     public void update() {
-      if(false) Robot.limelight.setPipeLine(0);
-      else Robot.limelight.setPipeLine(1);
+      //if(false) Robot.limelight.setPipeLine(0);
+      //else Robot.limelight.setPipeLine(1);
 
       //limitSwtiches
       clLimitL.setBoolean(Robot.climberClamp.isClampedL());
