@@ -12,6 +12,7 @@ public class ActionLists
         //action.addAction(new DriveStraightTime(0.25, 2));
         action.addAction(new ShootBall(5));
         LimelightGrab(action);
+        action.addAction(new TurnToDegree(0));
         action.addAction(new DriveStraightTime(-0.15, 2));
         action.addAction(new ShootBall(5));
     }
@@ -75,5 +76,12 @@ public class ActionLists
         action.addAction(new MoveClimberPower(0));
         action.addAction(new MoveClimberPower(10));
         action.addAction(new MoveClimberPower(-10));
+    }
+
+    public void test(ActionQueue action){
+        action.addAction(new TurnToDegree(100));
+        action.addAction(new TurnToDegree(0));
+        action.addAction(new TurnToDegree(-100));
+        action.addAction(new TurnToDegree(0));
     }
 }
