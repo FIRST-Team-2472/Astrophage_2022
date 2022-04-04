@@ -95,7 +95,7 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getXButton()) {
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
-            Robot.shooter.runFlyWheelVelocity(0.4);
+            Robot.shooter.runFlyWheelVelocity(0.5);
            // Robot.intake.runConveyorPower(0.5);
             if(Robot.shooter.getSpeed() < -50000) Robot.intake.runConveyorPower(.75);
             else Robot.intake.runConveyorPower(0);
