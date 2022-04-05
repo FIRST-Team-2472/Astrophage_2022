@@ -37,7 +37,7 @@ public class DriveToBall implements Actionable {
     @Override
     public boolean isFinished()
     {
-        return Robot.limelight.get_distance_in() <= 15;
+        return Robot.limelight.get_distance_in() <= 40;
     }
 
 }
