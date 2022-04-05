@@ -8,16 +8,10 @@ public class MaxTurnToDegree0 implements Actionable{
     
     public MaxTurnToDegree0() {
         if (Robot.imu.getCurrentXAngle() > 0) {
-            if (Robot.imu.getRealXAngle() >= 180)
-                clockwise = false;
-            else 
-                clockwise = true;
+            clockwise = false;
         }
         else {
-            if (Robot.imu.getRealXAngle() <= -180)
-                clockwise = true;
-            else 
-                clockwise = false;
+            clockwise = true;
         }
         
     }
@@ -38,8 +32,7 @@ public class MaxTurnToDegree0 implements Actionable{
     }
 
 	public boolean isFinished() {
-        return Robot.imu.getCurrentXAngle() == 0;
-       // return Robot.imu.getRealXAngle() >= (360-(2-degree)) || Robot.imu.getRealXAngle() <= (degree +2);
-       // return 0 <= Math.abs(Robot.imu.getCurrentXAngle() - 360)
+        return Math.abs(Robot.imu.getCurrentXAngle()) <= 2;
+
     }
 }
