@@ -2,7 +2,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -88,7 +87,7 @@ public class Robot extends TimedRobot {
     autoActions.addAction(new ZeroEncoders());
     autoActions.addAction(new ZeroRotations());
 
-    actionList.test(autoActions);
+    actionList.InitialAutonomous(autoActions);
 
     /*if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);
