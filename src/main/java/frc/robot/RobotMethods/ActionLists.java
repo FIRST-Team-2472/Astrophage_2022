@@ -28,7 +28,7 @@ public class ActionLists
     public void LimelightGrab(ActionQueue action)
     {
         action.addAction(new DriveToBall());
-        action.addAction(new EndDriveToBall(1));
+        action.addAction(new EndDriveToBall(2));
     }
     
 

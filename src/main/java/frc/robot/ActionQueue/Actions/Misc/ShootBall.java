@@ -16,7 +16,7 @@ public class ShootBall extends TimerBase
     public void startAction()
     {
         super.startAction();
-        Robot.shooter.runFlyWheelVelocity(0.35);
+        Robot.shooter.runFlyWheelVelocity(0.37);
     }
 
     @Override
