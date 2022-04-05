@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
     autoActions.addAction(new ZeroEncoders());
     autoActions.addAction(new ZeroRotations());
 
-    actionList.test(autoActions);
+    actionList.InitialAutonomous(autoActions);
 
     /*if (getTeamColor.getBoolean(true)) 
       limelight.setPipeLine(0);
@@ -124,7 +124,7 @@ public class Robot extends TimedRobot {
 
       teleopMethods.convey();
 
-      teleopMethods.gimmeBall();
+     // teleopMethods.gimmeBall();
 
       teleopMethods.manualClimb();
 
