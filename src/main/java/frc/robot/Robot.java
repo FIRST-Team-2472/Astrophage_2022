@@ -80,6 +80,7 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when starting "autonomous" mode
   public void autonomousInit() {
+    imu.zero();
     autoActions = new ActionQueue();
 
     robotState.setString("Autonomous");

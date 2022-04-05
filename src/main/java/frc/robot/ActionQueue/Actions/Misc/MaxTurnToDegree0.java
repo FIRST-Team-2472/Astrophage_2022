@@ -8,10 +8,10 @@ public class MaxTurnToDegree0 implements Actionable{
     
     public MaxTurnToDegree0() {
         if (Robot.imu.getCurrentXAngle() > 0) {
-            clockwise = true;
+            clockwise = false;
         }
         else {
-            clockwise = false;
+            clockwise = true;
         }
         
     }
