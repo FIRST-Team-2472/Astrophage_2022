@@ -6,7 +6,7 @@ import frc.robot.Miscellaneous.Timer;
 
 public class STOPswing implements Actionable {
     //Not currently used
-    Timer bruh = new Timer(3);
+    Timer bruh = new Timer(2);
 
     @Override
     public void startAction() 
@@ -19,7 +19,7 @@ public class STOPswing implements Actionable {
     @Override
     public void periodic() 
     {
-        if(Robot.imu.getCurrentZAngle() < -10) bruh.reset();
+        if(Robot.imu.getCurrentZAngle() < -17) bruh.reset();
     }
 
     @Override
