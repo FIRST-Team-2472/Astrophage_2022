@@ -75,7 +75,7 @@ public class Shooter {
     }
 
     public void runFlyWheelVelocity(double speed) {
-        flyWheel.set(ControlMode.Velocity, speed * 60000);
+        flyWheel.set(ControlMode.Velocity, speed * 70000);
     }
     
 }
