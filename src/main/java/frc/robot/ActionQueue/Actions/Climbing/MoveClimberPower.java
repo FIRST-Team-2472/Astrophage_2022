@@ -10,35 +10,39 @@ public class MoveClimberPower implements Actionable{
 
     public MoveClimberPower(double inches) {
         distance = inches;
-        if (distance > Robot.superClimber.getExtenderLHeight()) upDog = true;
-        else upDog = false; /*:(*/
     }
     
     @Override
-    public void startAction() 
-    {
-        double correction = -(Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *6;
-
-        if (upDog) {
-            if (distance >= Robot.superClimber.getExtenderRHeight())
-                Robot.superClimber.runExtenderPowerR(.6);
-            if (distance >= Robot.superClimber.getExtenderLHeight()) 
-                Robot.superClimber.runExtenderPowerL(.6+correction);
-        }
-        else {
-            if (distance <= Robot.superClimber.getExtenderRHeight())
-                Robot.superClimber.runExtenderPowerR(-.6);
-            if (distance <= Robot.superClimber.getExtenderLHeight()) 
-                Robot.superClimber.runExtenderPowerL(-.6+correction);
-        }
+    public void startAction() {
+        if (distance > Robot.superClimber.getExtenderLHeight()) upDog = true;
+        else upDog = false; /*:(*/
     }
+
 
 
 
     @Override
     public void periodic() 
     {
+        double correction = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *.5;
 
+        if (upDog) {
+            if (distance >= Robot.superClimber.getExtenderRHeight())
+                Robot.superClimber.runExtenderPowerR(.5+correction);
+            else Robot.superClimber.runExtenderPowerR(0);
+            if (distance >= Robot.superClimber.getExtenderLHeight()) 
+                Robot.superClimber.runExtenderPowerL(.5);
+            else Robot.superClimber.runExtenderPowerL(0);
+        }
+        else {
+            if (distance <= Robot.superClimber.getExtenderRHeight())
+                Robot.superClimber.runExtenderPowerR(-.5+correction);
+            else Robot.superClimber.runExtenderPowerR(0);
+            if (distance <= Robot.superClimber.getExtenderLHeight()) 
+                Robot.superClimber.runExtenderPowerL(-.5);
+            else Robot.superClimber.runExtenderPowerL(0);
+        }
+    
     }
 
     @Override

@@ -2,14 +2,16 @@ package frc.robot.ActionQueue.Actions.Climbing;
 
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
+import frc.robot.Miscellaneous.Timer;
 
-public class FindBar implements Actionable {
+public class STOPswing implements Actionable {
     //Not currently used
+    Timer bruh = new Timer(2);
 
     @Override
     public void startAction() 
     {
-        Robot.superClimber.runBothRotations(0.3);
+        bruh.reset();
     }
 
 
@@ -17,20 +19,18 @@ public class FindBar implements Actionable {
     @Override
     public void periodic() 
     {
-
+        if(Robot.imu.getCurrentZAngle() < -17) bruh.reset();
     }
 
     @Override
     public void endAction() 
     {
-        Robot.superClimber.runBothRotations(0);
+
     }
 
     @Override
     public boolean isFinished()
     {
-        if (Math.abs(Robot.imu.getCurrentXAngle()) >= 2) 
-            return true;
-        else return false;
+        return bruh.isTimedOut();
     }
 }

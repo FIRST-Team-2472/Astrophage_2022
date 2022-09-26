@@ -4,11 +4,20 @@ import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
 public class PullToTilt implements Actionable {
-    
+    int angle;
+
+    public PullToTilt() {
+        this.angle = 4;
+    }
+
+    public PullToTilt(int angle) {
+        this.angle = angle;
+    }
+
     @Override
     public void startAction() 
     {
-        Robot.superClimber.runBothExtenders(-0.3);
+        Robot.superClimber.runBothExtendersPower(-0.5,-0.5);
     }
 
 
@@ -28,7 +37,7 @@ public class PullToTilt implements Actionable {
     @Override
     public boolean isFinished()
     {
-        if (Math.abs(Robot.imu.getCurrentXAngle()) >= 5) 
+        if (Robot.imu.getCurrentZAngle() <= -Math.abs(angle)) 
             return true;
         else return false;
     }

@@ -12,7 +12,7 @@ public class ClimberIn implements Actionable{
     @Override
     public void startAction() 
     {
-        Robot.superClimber.runBothExtenders(-0.3);
+        Robot.superClimber.runBothExtendersPower(-0.5, -0.5);
     }
 
 
@@ -20,19 +20,20 @@ public class ClimberIn implements Actionable{
     @Override
     public void periodic() 
     {
-
+        if(Robot.climberClamp.isClampedL()) Robot.superClimber.runExtenderPowerL(0);
+        if(Robot.climberClamp.isClampedR()) Robot.superClimber.runExtenderPowerR(0);
     }
 
     @Override
     public void endAction() 
     {
-        Robot.superClimber.runBothExtenders(0);
+        Robot.superClimber.runBothExtendersPower(0, 0);
     }
 
     @Override
     public boolean isFinished()
     {
-        if(Robot.climberClamp.isFullyClamped()) return true;
+        if((Robot.climberClamp.isClampedL() && Robot.climberClamp.isClampedR()) || Robot.xboxcontroller.getAButtonPressed()) return true;
         else return false;
     }
 

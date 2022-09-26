@@ -8,41 +8,42 @@ public class RotateClimber implements Actionable {
     public double angle;
     public boolean forward;
 
-    public RotateClimber(double angle) {
+    public RotateClimber (double angle) {
         this.angle = angle;
-        if (angle > Robot.superClimber.getRotationRAngle()) forward = true;
-        else forward = false;
     }
     
     @Override
-    public void startAction() 
-    {
+    public void startAction() {
+        if (angle > Robot.superClimber.getRotationRAngle()) forward = true;
+        else forward = false;
     }
 
     @Override
     public void periodic() 
     {
-        double correction = -(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) *4;
+        double correction = -(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) *0.0000007;
 
         if (forward) {
-            if (angle >= Robot.superClimber.getExtenderRHeight())
-                Robot.superClimber.runRotationPowerL(.5);
+            if (angle >= Robot.superClimber.getRotationLAngle())
+                Robot.superClimber.runRotationPowerL(.7);
             else 
                 Robot.superClimber.runRotationPowerL(0);
-            if (angle >= Robot.superClimber.getExtenderLHeight()) 
-                Robot.superClimber.runRotationPowerR(.5+correction);
+            
+            if (angle >= Robot.superClimber.getRotationRAngle())
+                Robot.superClimber.runRotationPowerR(.7+correction);
             else 
                 Robot.superClimber.runRotationPowerR(0);
         }
         else {
-            if (angle <= Robot.superClimber.getExtenderRHeight())
-                Robot.superClimber.runRotationPowerL(-.5);
+            if (angle <= Robot.superClimber.getRotationLAngle())
+                Robot.superClimber.runRotationPowerL(-.7);
             else 
                 Robot.superClimber.runRotationPowerL(0);
-            if (angle <= Robot.superClimber.getExtenderLHeight()) 
-                Robot.superClimber.runRotationPowerR(-.5+correction);
+
+            if (angle <= Robot.superClimber.getRotationRAngle()) 
+                Robot.superClimber.runRotationPowerR(-.7+correction);
             else 
-                Robot.superClimber.runRotationPowerL(0);
+                Robot.superClimber.runRotationPowerR(0);
         }
     }
 

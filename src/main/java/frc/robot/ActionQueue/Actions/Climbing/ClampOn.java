@@ -12,6 +12,7 @@ public class ClampOn extends TimerBase{
     @Override
     public void startAction() 
     {
+        super.startAction();
         Robot.climberClamp.setClamps();
     }
 

@@ -3,7 +3,7 @@ package frc.robot.Sensors;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class limelight {
+public class Limelight {
 
     private final static NetworkTable limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
@@ -18,7 +18,7 @@ public class limelight {
 
     // pipelines
     public static final int PIPLINE_REDBALL = 0;
-    public static final int PIPELINE_BLUEBALL = 3;
+    public static final int PIPELINE_BLUEBALL = 1;
 
     // stream modes
     public static final int STANDARD_STREAM = 0;
@@ -64,7 +64,7 @@ public class limelight {
     }
 
     public void setPipeLine(int pipelineMode) {
-        limelight.getEntry("pipeLine").setNumber(pipelineMode);
+        limelight.getEntry("pipeline").setNumber(pipelineMode);
     }
 
     public void setStream(int streamMode) {
@@ -74,15 +74,15 @@ public class limelight {
 
 
     public void setSnapshot(int snapshotMode) {
-        limelight.getEntry("pipeLine").setNumber(snapshotMode);
+        limelight.getEntry("pipeline").setNumber(snapshotMode);
     }
 
     public double get_distance_in() {
         double targetAngle = targetYAngleFromCenter();
-        double cameraHeight = 22;
-        double targetHeight = 9;
-        double cameraAngle = -20;
-        double d = (targetHeight-cameraHeight) / (Math.tan(Math.toRadians(cameraAngle+targetAngle)));
+        double cameraHeight = 6.5;
+        double targetHeight = 5;
+        double cameraAngle = 0;
+        double d = Math.abs((targetHeight-cameraHeight) / (Math.tan(Math.toRadians(cameraAngle+targetAngle))));
         //The equation: d = (h2-h1) / tan(a1+a2)
         return d;
     }

@@ -2,7 +2,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -37,19 +36,20 @@ public class Robot extends TimedRobot {
   public static Compressor compressor = new Compressor(Constants.COMPRESSOR, PneumaticsModuleType.CTREPCM);
   //public static ColorSensor colorSensor = new ColorSensor();
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
-  public static limelight limelight = new limelight();
+  public static Limelight limelight = new Limelight();
   public static IMU imu = new IMU(Constants.pigeonID);
   //private DigitalInput switchOne = new DigitalInput(1);
   //private DigitalOutput Arduino  = new DigitalOutput(4);
   public static MatchTimer matchTimer = new MatchTimer();
   public static ShuffleBoard shuffleBoard = new ShuffleBoard();
   public static AnalogInput pressureReader = new AnalogInput(3);
-
   public static ActionLists actionList = new ActionLists();
   public TeleopMethods teleopMethods = new TeleopMethods();
   public TestMethods testMethods = new TestMethods();
 
-  public ActionQueue autoActions = new ActionQueue();
+
+  public ActionQueue autoActions;
+  
   private NetworkTableEntry getTeamColor, robotState;
   private NetworkTableInstance inst;
 
@@ -65,10 +65,6 @@ public class Robot extends TimedRobot {
     //declare a default instance of to access FMSInfo
     inst = NetworkTableInstance.getDefault();
     getTeamColor = inst.getTable("FMSInfo").getEntry("IsRedAlliance");
-    
-    if (getTeamColor.getBoolean(true)) 
-      limelight.setPipeLine(3);
-    else limelight.setPipeLine(0);
 
     //runs the compressor
     compressor.enabled();
@@ -84,14 +80,22 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when starting "autonomous" mode
   public void autonomousInit() {
+    //limelight.setPipeLine(0);
+    if (getTeamColor.getBoolean(true)) 
+      limelight.setPipeLine(0);
+    else limelight.setPipeLine(1);
+
+    imu.zero();
+    autoActions = new ActionQueue();
+
     robotState.setString("Autonomous");
 
     autoActions.addAction(new ZeroEncoders());
     autoActions.addAction(new ZeroRotations());
 
-    //actionList.InitialAutonomous(autoActions);
-    actionList.ClimbTest(autoActions);
+    actionList.InitialAutonomous(autoActions);
 
+    
     matchTimer.beginMatch();
     enabled = true;
 
@@ -109,26 +113,30 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     robotState.setString("Teleop");
 
-    teleopMethods.init(enabled);
+    teleopMethods.init(enabled, getTeamColor.getBoolean(true));
   }
 
   @Override
   //Robot does this constantly when in "teleop" (human controlled) mode
   public void teleopPeriodic() {
 
-    teleopMethods.drive();
+    if(!teleopMethods.isActionGoing()){
+      teleopMethods.drive();
 
-    teleopMethods.shoot();
+      teleopMethods.shoot();
 
-    teleopMethods.convey();
+      teleopMethods.convey();
 
-    teleopMethods.gimmeBall();
+     // teleopMethods.gimmeBall();
 
-    teleopMethods.manualClimb();
+      teleopMethods.manualClimb();
 
-    teleopMethods.seeBall();
+      teleopMethods.climb();
 
-    //teleopMethods.autoStop();
+      teleopMethods.seeBall();
+    }
+
+    teleopMethods.autoStop();
 
     teleopMethods.update();
   }
@@ -159,5 +167,9 @@ public class Robot extends TimedRobot {
   //Robot does this when starting "disabled" mode
   public void disabledInit() {
     robotState.setString("Off");
+    enabled = false;
+    Static.stopAll();
   }
+
+
 }

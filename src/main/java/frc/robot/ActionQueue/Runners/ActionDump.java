@@ -30,7 +30,7 @@ public class ActionDump {
         }
     }
 
-    public boolean dumpEmpty() {
-        return dump.size() == 0;
+    public boolean isEmpty() {
+        return dump.isEmpty();
     }
 }

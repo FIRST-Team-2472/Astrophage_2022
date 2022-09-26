@@ -3,7 +3,7 @@ package frc.robot.ActionQueue.Runners;
 public abstract class TimerBase implements Actionable{
 	
 	private long endTime;
-	private final double lifetime;
+	private double lifetime;
 	
 	public TimerBase (double getLifetime) {
 		lifetime = getLifetime;
@@ -22,16 +22,14 @@ public abstract class TimerBase implements Actionable{
 
 	@Override
 	public boolean isFinished() {
-		if (System.currentTimeMillis() >= endTime) {
+		if (System.currentTimeMillis() >= endTime) 
 			return true;
-		} else {
+		else 
 			return false;
-		}
 	}
 	
 	//returns how much time is left
 	public String toString() {
-		return "Action life:"+lifetime;
-		
+		return "Action life: "+lifetime;
 	}
 }

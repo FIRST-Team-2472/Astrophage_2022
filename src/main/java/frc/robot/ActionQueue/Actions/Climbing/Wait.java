@@ -1,19 +1,17 @@
 package frc.robot.ActionQueue.Actions.Climbing;
 
-import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.TimerBase;
 
-public class ClampOff extends TimerBase{
+public class Wait extends TimerBase{
 
-    public ClampOff() {
-        super(.1);
+    public Wait(double seconds) {
+        super(seconds);
     }
     
     @Override
     public void startAction() 
     {
         super.startAction();
-        Robot.climberClamp.disengageClamps();
     }
 
 
@@ -27,8 +25,5 @@ public class ClampOff extends TimerBase{
     @Override
     public void endAction() 
     {
-        
     }
-
-
 }
