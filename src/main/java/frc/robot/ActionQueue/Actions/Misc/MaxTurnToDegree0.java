@@ -8,19 +8,19 @@ public class MaxTurnToDegree0 implements Actionable{
     
     public MaxTurnToDegree0() {
         if (Robot.imu.getCurrentXAngle() > 0) {
-            clockwise = true;
+            clockwise = false;
         }
         else {
-            clockwise = false;
+            clockwise = true;
         }
         
     }
 
     public void startAction() {
         if (clockwise) 
-            Robot.drive.tankDrivePower(.2, -.2);
+            Robot.drive.tankDrivePower(.1, -.1);
         else
-            Robot.drive.tankDrivePower(-.2, .2);
+            Robot.drive.tankDrivePower(-.1, .1);
     }
 	
 	public void periodic() {
@@ -32,7 +32,7 @@ public class MaxTurnToDegree0 implements Actionable{
     }
 
 	public boolean isFinished() {
-        return Math.abs(Robot.imu.getCurrentXAngle()) <= 2;
+        return Math.abs(Robot.imu.getCurrentXAngle()) <= 4;
 
     }
 }

@@ -31,6 +31,5 @@ public abstract class TimerBase implements Actionable{
 	//returns how much time is left
 	public String toString() {
 		return "Action life: "+lifetime;
-		
 	}
 }

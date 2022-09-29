@@ -4,7 +4,7 @@ import frc.robot.Robot;
 import frc.robot.ActionQueue.Runners.Actionable;
 
 public class ZeroRotations implements Actionable {
-    double correction = -(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) *0.0000007;
+    double correction;
 
     @Override
     public void startAction() {
@@ -12,6 +12,8 @@ public class ZeroRotations implements Actionable {
 
     @Override
     public void periodic() {
+        correction = -(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) *0.0000007;
+
         if (!Robot.superClimber.isLeftVertical()) Robot.superClimber.runRotationPowerL(-.7);
         else Robot.superClimber.runRotationPowerL(0);
 

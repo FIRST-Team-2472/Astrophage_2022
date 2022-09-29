@@ -34,5 +34,9 @@ public class IMU {
         else 
             return 360+temp;
     }
+
+    public void zero() {
+        pigeon.setYaw(0);
+    }
 }
 

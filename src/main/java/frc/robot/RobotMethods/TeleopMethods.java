@@ -27,6 +27,7 @@ public class TeleopMethods
 
     public void init(boolean enabled, boolean teamColor) {
         teleopActions = new ActionQueue();        
+        Static.stopAll();
 
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
@@ -41,7 +42,7 @@ public class TeleopMethods
         breakSwitch = false;
         TwoB = false;
         climbTime = false;
-        driveSpeed = 0.5;
+        driveSpeed = 0.25;
         invert = 1;
     }
 
@@ -55,9 +56,16 @@ public class TeleopMethods
 
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        if (Robot.rightJoystick.getRawButton(1)) driveSpeed = 0.25;
-        else if (Robot.rightJoystick.getRawButtonReleased(1)) driveSpeed = 0.5;
-        
+        boolean bruh80 = true;
+        driveSpeed = 0.25;
+        if (Robot.rightJoystick.getRawButtonPressed(1) && bruh80 == false) {
+            driveSpeed = 0.125;
+            bruh80 = true;
+        }
+        if (Robot.rightJoystick.getRawButtonPressed(1) && bruh80 == true) {
+            driveSpeed = 0.25;
+            bruh80 = false;
+        }
 
         if (Robot.rightJoystick.getRawButtonPressed(3)) {
             if (flipInvert) {
@@ -74,7 +82,7 @@ public class TeleopMethods
             }
         }
         
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed*invert);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *0.125*invert);
     }
 
     public void climb() {
@@ -163,10 +171,10 @@ public class TeleopMethods
     }
 
     public void manualClimb() {
-        //if (Robot.xboxcontroller.getYButtonPressed()) Robot.climberClamp.setClamps();
+        //if (Robot.xboxcontroller.getAButtonPressed()) Robot.climberClamp.toggleClamps();
 
         //if (climbTime)  {
-            double correctionEx = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *1.6;
+            double correctionEx = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *.5;
             double correctionRo = -(Robot.superClimber.getRotationLAngle() - Robot.superClimber.getRotationRAngle()) *0.0000007;
             if(Math.abs(Robot.xboxcontroller.getLeftY()) > 0.1)Robot.superClimber.runBothExtendersPower(-Robot.xboxcontroller.getLeftY()*0.4, -Robot.xboxcontroller.getLeftY()*0.4 + correctionEx);
             else Robot.superClimber.runBothExtendersPower(0, 0);

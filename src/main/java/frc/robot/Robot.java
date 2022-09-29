@@ -80,6 +80,12 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this when starting "autonomous" mode
   public void autonomousInit() {
+    //limelight.setPipeLine(0);
+    if (getTeamColor.getBoolean(true)) 
+      limelight.setPipeLine(0);
+    else limelight.setPipeLine(1);
+
+    imu.zero();
     autoActions = new ActionQueue();
 
     robotState.setString("Autonomous");
@@ -89,9 +95,7 @@ public class Robot extends TimedRobot {
 
     actionList.InitialAutonomous(autoActions);
 
-    /*if (getTeamColor.getBoolean(true)) 
-      limelight.setPipeLine(0);
-    else limelight.setPipeLine(1);*/
+    
     matchTimer.beginMatch();
     enabled = true;
 

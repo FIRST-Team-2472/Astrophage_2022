@@ -18,7 +18,7 @@ public class EndDriveToBall extends TimerBase
     {
         super.startAction();
         Robot.drive.tankDrivePower(0.1, 0.1);
-        Robot.intake.runConveyorPower(0.5);
+        Robot.intake.runConveyorPower(0.2);
     }
 
     @Override

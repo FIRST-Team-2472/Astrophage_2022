@@ -17,7 +17,7 @@ public class ShuffleBoard {
     private Timer record = new Timer(1);
     private NetworkTableEntry clLimitL, clLimitR, roLimitL, roLimitR, exEcoderL, exEcoderR, roEcoderL,
      roEcoderR, exSpeedL, exSpeedR, IMU_X, IMU_Y, IMU_Z, pressure, actionNameP, actionNameD,
-     shSpeed, cameraSelection, limelightDistance, matchTime, getTeam, showInvert;
+     shSpeed, cameraSelection, limelightDistance, limelightArea, matchTime, getTeam, showInvert;
     private ComplexWidget cameraDisplay1, cameraDisplay2;
 
     private UsbCamera camera1;
@@ -55,6 +55,7 @@ public class ShuffleBoard {
       exSpeedR = programmerBoard.add("Arm Speed Right", -1).getEntry(); 
       shSpeed = programmerBoard.add("Shooter Speed", -1).getEntry();
       limelightDistance = programmerBoard.add("Limelight Distance", -1).getEntry();
+      limelightArea = programmerBoard.add("Ball Area", -1).getEntry();
 
 
       IMU_X = programmerBoard.add("IMU X", -1).getEntry(); 
@@ -92,6 +93,7 @@ public class ShuffleBoard {
 
       //Limelight
       limelightDistance.setNumber(Robot.limelight.get_distance_in());
+      limelightArea.setNumber(Robot.limelight.targetArea());
 
       //IMU
       IMU_X.setNumber(Robot.imu.getCurrentXAngle());

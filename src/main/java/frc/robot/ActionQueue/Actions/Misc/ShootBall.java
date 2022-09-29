@@ -16,13 +16,13 @@ public class ShootBall extends TimerBase
     public void startAction()
     {
         super.startAction();
-        Robot.shooter.runFlyWheelVelocity(0.37);
+        Robot.shooter.runFlyWheelVelocity(0.41);
     }
 
     @Override
     public void periodic()
     {
-        if(Robot.shooter.getSpeed() < -40000) Robot.intake.runConveyorPower(.75);
+        if(Robot.shooter.getSpeed() < -30000) Robot.intake.runConveyorPower(.75);
         else Robot.intake.runConveyorPower(0);
     }
 

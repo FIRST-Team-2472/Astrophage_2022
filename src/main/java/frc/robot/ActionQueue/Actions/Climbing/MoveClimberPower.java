@@ -24,7 +24,7 @@ public class MoveClimberPower implements Actionable{
     @Override
     public void periodic() 
     {
-        double correction = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *1.6;
+        double correction = (Robot.superClimber.getExtenderLHeight() - Robot.superClimber.getExtenderRHeight()) *.5;
 
         if (upDog) {
             if (distance >= Robot.superClimber.getExtenderRHeight())

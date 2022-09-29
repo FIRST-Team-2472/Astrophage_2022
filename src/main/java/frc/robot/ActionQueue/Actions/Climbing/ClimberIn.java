@@ -33,7 +33,7 @@ public class ClimberIn implements Actionable{
     @Override
     public boolean isFinished()
     {
-        if(Robot.climberClamp.isFullyClamped()) return true;
+        if((Robot.climberClamp.isClampedL() && Robot.climberClamp.isClampedR()) || Robot.xboxcontroller.getAButtonPressed()) return true;
         else return false;
     }
 
