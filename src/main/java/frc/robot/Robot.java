@@ -131,7 +131,7 @@ public class Robot extends TimedRobot {
 
       teleopMethods.manualClimb();
 
-      teleopMethods.climb();
+      //teleopMethods.climb();
 
       teleopMethods.seeBall();
     }
