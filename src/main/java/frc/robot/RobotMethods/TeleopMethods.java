@@ -31,7 +31,7 @@ public class TeleopMethods
 
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
-            teleopActions.addAction(new ZeroRotations());
+            //teleopActions.addAction(new ZeroRotations());
             Robot.matchTimer.beginMatch();
            /* if (teamColor) 
                 Robot.limelight.setPipeLine(1);
@@ -54,17 +54,12 @@ public class TeleopMethods
         if(Robot.rightJoystick.getRawButton(11))  Robot.limelight.setPipeLine(1);
     }
 
+
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        boolean bruh80 = true;
         driveSpeed = 0.25;
-        if (Robot.rightJoystick.getRawButtonPressed(1) && bruh80 == false) {
+        if (Robot.rightJoystick.getRawButton(1)) {
             driveSpeed = 0.125;
-            bruh80 = true;
-        }
-        if (Robot.rightJoystick.getRawButtonPressed(1) && bruh80 == true) {
-            driveSpeed = 0.25;
-            bruh80 = false;
         }
 
         if (Robot.rightJoystick.getRawButtonPressed(3)) {
@@ -82,12 +77,10 @@ public class TeleopMethods
             }
         }
         
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *0.125*invert);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *0.125*-1);
     }
 
     public void climb() {
-        if (Robot.matchTimer.matchTime() >= 120) climbTime = true;
-
         if (Robot.xboxcontroller.getLeftBumper() && Robot.xboxcontroller.getRightBumper() && !teleopActions.isInProgress())
             Robot.actionList.Climb(teleopActions);
 

@@ -24,8 +24,8 @@ public class Drive {
         rightMaster = new TalonFX(backRightID);
         rightSlave = new TalonFX(frontRightID);
 
-        leftMaster = new TalonFX(frontLeftID);
-        leftSlave = new TalonFX(backLeftID);
+        leftMaster = new TalonFX(backLeftID);
+        leftSlave = new TalonFX(frontLeftID);
 
         setUpMotionMagicFX(leftMaster, KF, KP, KI);
         setUpMotionMagicFX(rightMaster, KF, KP, KI);
@@ -49,12 +49,12 @@ public class Drive {
         if (Math.abs(x) < .1)
             x = 0;
 
-        if (Math.abs(x) + Math.abs(y) < .75) {
+        if (Math.abs(x) + Math.abs(y) < 1) {
             tankDrive(y - x, y + x);
         } else {
             // limits the motors from ever going over 75% speed
-            double betterX = (x / (Math.abs(x) + Math.abs(y))) * .75;
-            double betterY = (y / (Math.abs(x) + Math.abs(y))) * .75;
+            double betterX = (x / (Math.abs(x) + Math.abs(y)));
+            double betterY = (y / (Math.abs(x) + Math.abs(y)));
             tankDrive(betterY - betterX, betterY + betterX);
         }
     }
