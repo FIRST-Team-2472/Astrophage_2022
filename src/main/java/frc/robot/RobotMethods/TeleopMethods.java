@@ -1,6 +1,5 @@
 package frc.robot.RobotMethods;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frc.robot.Robot;
 import frc.robot.ActionQueue.Actions.Climbing.MoveClimberPower;
@@ -15,7 +14,7 @@ import frc.robot.Miscellaneous.Timer;
 public class TeleopMethods 
 {
 
-    private boolean breakSwitch, TwoB, climbTime, flipInvert;
+    private boolean breakSwitch, TwoB, flipInvert;
     private Timer abortTimer = new Timer(2);
 
     private ActionQueue teleopActions;
@@ -31,17 +30,16 @@ public class TeleopMethods
 
         if (!enabled)  {
             teleopActions.addAction(new ZeroEncoders());
-            //teleopActions.addAction(new ZeroRotations());
+            teleopActions.addAction(new ZeroRotations());
             Robot.matchTimer.beginMatch();
-           /* if (teamColor) 
-                Robot.limelight.setPipeLine(1);
-            else Robot.limelight.setPipeLine(1);*/
+            if (teamColor) 
+                Robot.limelight.setPipeLine(0);
+            else Robot.limelight.setPipeLine(1);
         }
 
         flipInvert = false;
         breakSwitch = false;
         TwoB = false;
-        climbTime = false;
         driveSpeed = 0.25;
         invert = 1;
     }
@@ -59,7 +57,7 @@ public class TeleopMethods
     public void drive() {
         driveSpeed = 0.25;
         if (Robot.rightJoystick.getRawButton(1)) {
-            driveSpeed = 0.125;
+            driveSpeed = driveSpeed/2;
         }
 
         if (Robot.rightJoystick.getRawButtonPressed(3)) {
