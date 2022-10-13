@@ -9,8 +9,8 @@ import frc.robot.Miscellaneous.Static;
 
 public class ActionQueue {
     private ArrayList<Actionable> queue;
-    private boolean inProgress, start, breakTime;
-    private Actionable runningAction;
+    boolean inProgress, start, breakTime;
+    Actionable runningAction;
 
     public ActionQueue() {
         queue = new ArrayList<Actionable>();
@@ -25,37 +25,35 @@ public class ActionQueue {
 
     public void step() {
         if (!queue.isEmpty() && !breakTime) {
-            if (breakTime)
-                Robot.shuffleBoard.setAction("paused");
-            else
-                Robot.shuffleBoard.setAction("done");
-            inProgress = false;
-            start = true;
-            return;
-        }
-
-        if (start) {
-            runningAction = queue.get(0);
-            runningAction.startAction();
-
-            start = false;
-        }
-
-        // add action's name to suffleboard
-        Robot.shuffleBoard.setAction(runningAction.getClass().getSimpleName());
-
-        runningAction.periodic();
-
-        inProgress = true;
-
-        if (runningAction.isFinished()) {
-            runningAction.endAction();
-            queue.remove(0);
-
-            if (!queue.isEmpty()) {
+            if (start) {
                 runningAction = queue.get(0);
                 runningAction.startAction();
+
+                start = false;
             }
+
+            // add action's name to suffleboard
+            Robot.shuffleBoard.setAction(runningAction.getClass().getSimpleName());
+
+            runningAction.periodic();
+
+            inProgress = true;
+
+            if (runningAction.isFinished()) {
+                runningAction.endAction();
+                queue.remove(0);
+
+                if (!queue.isEmpty()) {
+                    runningAction = queue.get(0);
+                    runningAction.startAction();
+                }
+            }
+        } 
+        else {
+            if (breakTime) Robot.shuffleBoard.setAction("paused");
+            else Robot.shuffleBoard.setAction("done");
+            inProgress = false;
+            start = true;
         }
     }
 
@@ -72,7 +70,7 @@ public class ActionQueue {
     public void pause() {
         breakTime = true;
         start = true;
-        // ook snook
+        //ook snook
         Static.stopAll();
     }
 

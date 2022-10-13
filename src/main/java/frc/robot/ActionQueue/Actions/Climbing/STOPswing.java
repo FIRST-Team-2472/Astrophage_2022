@@ -19,7 +19,7 @@ public class STOPswing implements Actionable {
     @Override
     public void periodic() 
     {
-        if(Robot.imu.getCurrentZAngle() < -17) bruh.reset();
+        if(Robot.imu.getCurrentZAngle() < -10) bruh.reset();
     }
 
     @Override

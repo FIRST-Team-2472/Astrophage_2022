@@ -103,10 +103,7 @@ public class ShuffleBoard {
       //Compresser
       pressure.setNumber(Robot.pressureReader.getAverageValue());
 
-      if (Robot.matchTimer.matchTime() >= 10000) 
-        matchTime.setNumber(Robot.matchTimer.matchTime());
-      else 
-        matchTime.setNumber(0);
+      matchTime.setNumber(Robot.matchTimer.matchTime());
 
       /*if (record.isTimedOut()) {
         System.out.println(temp + ": " + Robot.superClimber.getExtenderRSpeed() + " " + Robot.superClimber.getExtenderLSpeed());
