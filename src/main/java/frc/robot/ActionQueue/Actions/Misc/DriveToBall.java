@@ -20,7 +20,7 @@ public class DriveToBall implements Actionable {
     public void periodic() 
     {
         //if (Robot.limelight.get_distance_in() >=1)
-            Robot.drive.arcadeDrivePower(.2, (-0.4 * (0.015 * Robot.limelight.targetXAngleFromCenter())));
+            Robot.drive.arcadeDrivePower(.25, (-0.4 * (0.015 * Robot.limelight.targetXAngleFromCenter())));
         //else Robot.drive.arcadeDrivePower(0, 0);
 
         Robot.intake.runConveyorPower(0.5);    

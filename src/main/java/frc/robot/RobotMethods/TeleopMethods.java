@@ -40,7 +40,7 @@ public class TeleopMethods
         flipInvert = false;
         breakSwitch = false;
         TwoB = false;
-        driveSpeed = 0.25;
+        driveSpeed = 0.5;
         invert = 1;
     }
 
@@ -55,7 +55,7 @@ public class TeleopMethods
 
     //All three of these are for drivers communicating with the subsystems.
     public void drive() {
-        driveSpeed = 0.25;
+        driveSpeed = 0.5;
         if (Robot.rightJoystick.getRawButton(1)) {
             driveSpeed = driveSpeed/2;
         }
@@ -75,7 +75,7 @@ public class TeleopMethods
             }
         }
         
-        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *0.125*-1);
+        Robot.drive.arcadeDrivePower(Robot.leftJoystick.getY() *Math.abs(Robot.leftJoystick.getY()) * driveSpeed *invert, Robot.rightJoystick.getX() *Math.abs(Robot.rightJoystick.getX()) *driveSpeed*-1);
     }
 
     public void climb() {
@@ -94,9 +94,9 @@ public class TeleopMethods
         if (Robot.xboxcontroller.getXButton()) {
             Robot.xboxcontroller.setRumble(RumbleType.kLeftRumble, 1);
             Robot.xboxcontroller.setRumble(RumbleType.kRightRumble, 1);
-            Robot.shooter.runFlyWheelVelocity(0.5);
+            Robot.shooter.runFlyWheelVelocity(1);
            // Robot.intake.runConveyorPower(0.5);
-            if(Robot.shooter.getSpeed() < -50000) Robot.intake.runConveyorPower(.75);
+            if(Robot.shooter.getSpeed() < -65000) Robot.intake.runConveyorPower(.75);
             else Robot.intake.runConveyorPower(0);
         }
         

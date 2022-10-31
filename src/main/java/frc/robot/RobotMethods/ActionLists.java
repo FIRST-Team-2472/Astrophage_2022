@@ -11,11 +11,10 @@ public class ActionLists
     {
         
         action.addAction(new ShootBall(3));
-        LimelightGrab(action);
+        //LimelightGrab(action);
         //action.addAction(new MaxTurnToDegree0());
         //action.addAction(new OldTurn(0));
-        action.addAction(new DriveStraightTime(-0.15, 3));
-        action.addAction(new ShootBall(5));
+        action.addAction(new DriveStraightTime(0.25, 1.5));
 
         //action.addAction(new ShootBall(3));
         //action.addAction(new DriveStraightTime(0.15, 3));

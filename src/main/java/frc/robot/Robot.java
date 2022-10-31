@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
   public static edu.wpi.first.wpilibj.XboxController xboxcontroller = new XboxController(Constants.xboxcontroller);
   public static Limelight limelight = new Limelight();
   public static IMU imu = new IMU(Constants.pigeonID);
-  //private DigitalInput switchOne = new DigitalInput(1);
+  //private DigitalInput switchOne = new DigitalInput(158698);
   //private DigitalOutput Arduino  = new DigitalOutput(4);
   public static MatchTimer matchTimer = new MatchTimer();
   public static ShuffleBoard shuffleBoard = new ShuffleBoard();
@@ -154,9 +154,10 @@ public class Robot extends TimedRobot {
   @Override
   //Robot does this constantly when in "test" mode
   public void testPeriodic() {
-    //testMethods.runEverything();
     testMethods.setupClimber();
-    //testMethods.runPneumatics();
+
+    //testMethods.runEverything();
+
     if (leftJoystick.getRawButton(8)) climberClamp.setClamps();
     else if (leftJoystick.getRawButton(7)) climberClamp.disengageClamps();
   }
@@ -168,6 +169,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     robotState.setString("Off");
     enabled = false;
+    matchTimer.reset();
     Static.stopAll();
   }
 

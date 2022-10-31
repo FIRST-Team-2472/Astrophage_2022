@@ -10,4 +10,8 @@ public class MatchTimer {
     public int matchTime() {
         return (int)((System.currentTimeMillis() - matchStart)/1000);
     }
+
+    public void reset() {
+        matchStart = 0;
+    }
 }
